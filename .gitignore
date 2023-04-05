@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Distribution folder
+dist/*
+
+# Logs files
+*.log
