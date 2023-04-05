@@ -43,6 +43,7 @@ bool App::Init()
         // Log("Unable to Init hinting: %s", SDL_GetError());
         Log::GetInstance()->Error("App::Init", "Unable to Init hinting: %s", SDL_GetError());
     }
+
     // Log("Init hinting Completed");
 
     if ((Window = SDL_CreateWindow(
@@ -218,6 +219,13 @@ void App::PollEvents()
                 Running = false;
         }
         */
+}
+
+float App::GetFPS()
+{
+    float elapsedTimeFromStart = std::chrono::duration_cast<chrono::milliseconds>(lastTimeOfLoop - startTime).count();
+
+    return totalFrames / elapsedTimeFromStart * 1000.0f;
 }
 
 void App::Physics()

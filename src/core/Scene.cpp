@@ -32,6 +32,7 @@ void Scene::Render()
         object->Render();
     }
 
+    // Triggers the double buffers
     SDL_RenderPresent(renderer);
 }
 

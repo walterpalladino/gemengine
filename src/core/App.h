@@ -52,6 +52,8 @@ protected:
     // Free up resources
     void Cleanup();
 
+    float GetFPS();
+
 protected:
     // Logic loop
     virtual void Loop(float time) {}

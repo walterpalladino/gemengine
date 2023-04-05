@@ -69,8 +69,8 @@ void Image::Render()
 {
     // printf("Image::Render\n");
     //  Update Destination Rectangle based on Position and Scale
-    destRect.x = 0;
-    destRect.y = 0;
+    destRect.x = position.x;
+    destRect.y = position.y;
     destRect.w = sourceRect.w * scale.x;
     destRect.h = sourceRect.h * scale.y;
 
@@ -79,28 +79,18 @@ void Image::Render()
         SDL_RenderCopy(renderer, image, &sourceRect, &destRect);
     }
     else
-    {
-        SDL_Point center = SDL_Point();
-        center.x = destRect.x + destRect.w / 2;
-        center.y = destRect.y + destRect.h / 2;
-
+    { /*
+         SDL_Point center = SDL_Point();
+         center.x = destRect.x + destRect.w / 2;
+         center.y = destRect.y + destRect.h / 2;
+ */
         SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE;
         SDL_RenderCopyEx(renderer,
                          image,
                          &sourceRect,
                          &destRect,
                          rotation.z,
-                         &center,
+                         NULL, //&center,
                          flip);
     }
-
-    /*
-    int SDL_RenderCopyEx(SDL_Renderer*          renderer,
-                 SDL_Texture*           texture,
-                 const SDL_Rect*        srcrect,
-                 const SDL_Rect*        dstrect,
-                 const double           angle,
-                 const SDL_Point*       center,
-                 const SDL_RendererFlip flip)
-                 */
 }

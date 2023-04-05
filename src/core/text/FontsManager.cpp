@@ -28,14 +28,14 @@ void FontsManager::Clean()
     TTF_Quit();
 }
 
-string FontsManager::AddFont(string fontFileName, int size)
+TTF_Font *FontsManager::AddFont(string fontFileName, int size)
 {
     Log::GetInstance()->Info("FontsManager::AddFont", "Adding font %s size %i", fontFileName.c_str(), size);
 
     string key = GetKey(fontFileName, size);
     if (fonts.count(key) != 0)
     {
-        return key;
+        return fonts[key];
     }
     TTF_Font *font = TTF_OpenFont(fontFileName.c_str(), size);
 
@@ -49,7 +49,7 @@ string FontsManager::AddFont(string fontFileName, int size)
     }
 
     fonts[key] = font;
-    return key;
+    return font;
 }
 
 string FontsManager::GetKey(string fontFileName, int size)

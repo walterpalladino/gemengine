@@ -4,6 +4,7 @@
 #include "Game.h"
 
 #include "core/image/Image.h"
+#include "core/text/Text.h"
 #include "utils/Log.h"
 #include "input/InputHandler.h"
 #include "core/text/FontsManager.h"
@@ -27,6 +28,16 @@ void Game::LoadScenes()
     newImage->name = string("resources/logo.png");
     //  Add Image to Scene
     newScene->objects.push_back(newImage);
+
+    //  Add text
+    Text *newText = new Text(Renderer);
+    newText->Init("SDL2 text", "resources/fonts/Commodore-64-v6.3.TTF", 24);
+    newText->position = Vector3d(200, 200, 0);
+    newText->scale = Vector3d(2, 2, 1);
+
+    //  Add Text to Scene
+    newScene->objects.push_back(newText);
+
     newScene->name = string("Start Scene");
     //  Add Scene to Scenes list
     scenes.push_back(newScene);
@@ -69,4 +80,17 @@ void Game::Loop(float time)
         rotation.z = rotation.z + 360;
 
     activeScene->objects[0]->rotation = rotation;
+
+    rotation = activeScene->objects[1]->rotation;
+    rotation.z += 1;
+    if (rotation.z > 360)
+        rotation.z = rotation.z - 360;
+    if (rotation.z < 0)
+        rotation.z = rotation.z + 360;
+
+    activeScene->objects[1]->rotation = rotation;
+
+    char *text = new char[64];
+    sprintf(text, "%.2f FPS", GetFPS());
+    ((Text *)(activeScene->objects[1]))->SetText(text);
 }

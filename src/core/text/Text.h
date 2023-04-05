@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <SDL2/SDL.h>
 #include <SDL2_ttf/SDL_ttf.h>
 
 #include "core/Object.h"
@@ -11,7 +12,7 @@ class Text : public Object
 {
 private:
     string text;
-    string fontKey;
+    TTF_Font *font;
 
     SDL_Rect sourceRect;
     SDL_Rect destRect;
@@ -26,5 +27,6 @@ public:
 
     virtual void Render();
 
-    void Set(const string, const char *fileName, const int fontSize);
+    void Init(const string, const char *fileName, const int fontSize);
+    void SetText(string text) { this->text = text; }
 };
