@@ -28,7 +28,7 @@ void FontsManager::Clean()
     TTF_Quit();
 }
 
-TTF_Font *FontsManager::AddFont(string fontFileName, int size)
+TTF_Font *FontsManager::Add(string fontFileName, int size)
 {
     Log::GetInstance()->Info("FontsManager::AddFont", "Adding font %s size %i", fontFileName.c_str(), size);
 

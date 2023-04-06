@@ -4,6 +4,7 @@
 #include "utils/Log.h"
 #include "input/InputHandler.h"
 #include "core/graphics/text/FontsManager.h"
+#include "core/graphics/textures/TextureManager.h"
 
 using namespace std;
 
@@ -63,6 +64,7 @@ bool App::Init()
 
     InputHandler::Instance()->Init();
     FontsManager::Instance()->Init();
+    TextureManager::Instance()->Init(Renderer);
 
     Log::GetInstance()->Info("App::Init", "Initialization Completed");
 
@@ -101,6 +103,7 @@ void App::Cleanup()
     SDL_Quit();
 
     FontsManager::Instance()->Clean();
+    TextureManager::Instance()->Clean();
 
     Log::GetInstance()->Info("App::Cleanup", "SDL_Quit Completed");
 

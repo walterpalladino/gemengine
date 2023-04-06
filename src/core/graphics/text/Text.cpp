@@ -32,7 +32,7 @@ void Text::Cleanup()
 
 void Text::Init(const string text, const char *fileName, const int fontSize)
 {
-    this->font = FontsManager::Instance()->AddFont(fileName, fontSize);
+    this->font = FontsManager::Instance()->Add(fileName, fontSize);
 
     this->text = text;
 }

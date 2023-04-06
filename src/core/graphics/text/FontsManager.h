@@ -25,7 +25,7 @@ public:
     void Init();
     void Clean();
 
-    TTF_Font *AddFont(string fontFileName, int size);
+    TTF_Font *Add(string fontFileName, int size);
 
 private:
     FontsManager() {}
