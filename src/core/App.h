@@ -25,9 +25,12 @@ protected:
     vector<Scene *> scenes;
     Scene *activeScene;
 
-    std::chrono::steady_clock::time_point startTime;
-    std::chrono::steady_clock::time_point lastTimeOfLoop;
+    // std::chrono::steady_clock::time_point startTime;
+    // std::chrono::steady_clock::time_point lastTimeOfLoop;
+    uint32_t firstRenderTime;
+    uint32_t lastRenderTime;
 
+    float targetFPS = 60.0f;
     double totalFrames;
 
 protected:

@@ -1,0 +1,25 @@
+[06/04/2023 12:09:32] [App::App]App Constructor
+[06/04/2023 12:09:32] [App::Init]Init Framework
+[06/04/2023 12:09:32] [FontsManager::Init]FontsManager Initializing
+[06/04/2023 12:09:32] [App::Init]Initialization Completed
+[06/04/2023 12:09:32] [Game::LoadScenes]Load Scenes
+[06/04/2023 12:09:32] [Scene::Scene]Constructor
+[06/04/2023 12:09:32] [Image::Image]Constructor
+[06/04/2023 12:09:32] [Text::Text]Constructor
+[06/04/2023 12:09:32] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[06/04/2023 12:25:42] [App::Execute]Totl Frames: 55231 FPS : 56.95
+[06/04/2023 12:25:42] [App::Cleanup]Cleanup
+[06/04/2023 12:25:42] [App::Cleanup]DestroyRenderer Completed
+[06/04/2023 12:25:42] [App::Cleanup]DestroyWindow Completed
+[06/04/2023 12:25:42] [FontsManager::Clean]FontsManager Shutting Down
+[06/04/2023 12:25:42] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[06/04/2023 12:25:42] [App::Cleanup]SDL_Quit Completed
+[06/04/2023 12:25:42] [App::~App]Deleting scene: Start Scene
+[06/04/2023 12:25:42] [Scene::Cleanup]Cleanup
+[06/04/2023 12:25:42] [Scene::Cleanup]Deleting object: resources/logo.png
+[06/04/2023 12:25:42] [Image::Cleanup]Cleanup
+[06/04/2023 12:25:42] [Scene::Cleanup]Deleting object: 
+[06/04/2023 12:25:42] [Text::Cleanup]Cleanup
+[06/04/2023 12:25:42] [Scene::~Scene]Destructor
+[06/04/2023 12:25:42] [App::Execute]Good Bye!
+[06/04/2023 12:25:42] [App::~App]App Destructor
