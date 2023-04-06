@@ -3,7 +3,7 @@
 #include "core/App.h"
 #include "utils/Log.h"
 #include "input/InputHandler.h"
-#include "core/text/FontsManager.h"
+#include "core/graphics/text/FontsManager.h"
 
 using namespace std;
 

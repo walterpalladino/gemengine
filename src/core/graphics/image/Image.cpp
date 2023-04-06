@@ -1,4 +1,4 @@
-#include "core/image/Image.h"
+#include "core/graphics/image/Image.h"
 
 #include "utils/Log.h"
 #include "exceptions/ResourceLoadException.h"

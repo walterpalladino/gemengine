@@ -1,6 +1,6 @@
-#include "core/text/Text.h"
+#include "core/graphics/text/Text.h"
+#include "core/graphics/text/FontsManager.h"
 #include "utils/Log.h"
-#include "core/text/FontsManager.h"
 #include "math/Math.h"
 
 Text::Text(SDL_Renderer *renderer)

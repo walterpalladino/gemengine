@@ -1,7 +1,7 @@
 
 #include <SDL2_ttf/SDL_ttf.h>
 
-#include "core/text/FontsManager.h"
+#include "core/graphics/text/FontsManager.h"
 #include "utils/Log.h"
 #include "exceptions/ResourceLoadException.h"
 

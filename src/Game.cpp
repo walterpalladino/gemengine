@@ -3,11 +3,11 @@
 
 #include "Game.h"
 
-#include "core/image/Image.h"
-#include "core/text/Text.h"
+#include "core/graphics/image/Image.h"
+#include "core/graphics/text/Text.h"
 #include "utils/Log.h"
 #include "input/InputHandler.h"
-#include "core/text/FontsManager.h"
+#include "core/graphics/text/FontsManager.h"
 
 Game::Game() : App()
 {
