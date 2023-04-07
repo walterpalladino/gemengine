@@ -23,7 +23,7 @@ public:
     Scene(SDL_Renderer *renderer);
     ~Scene();
 
-    void Render();
+    void Render(float time);
 
     void Cleanup();
 };

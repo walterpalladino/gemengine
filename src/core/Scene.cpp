@@ -17,7 +17,7 @@ Scene::~Scene()
     Log::GetInstance()->Info("Scene::~Scene", "Destructor");
 }
 
-void Scene::Render()
+void Scene::Render(float time)
 {
 
     SDL_RenderClear(renderer);
@@ -29,7 +29,7 @@ void Scene::Render()
     //  Clean up objects
     for (auto object : objects)
     {
-        object->Render();
+        object->Render(time);
     }
 
     // Triggers the double buffers

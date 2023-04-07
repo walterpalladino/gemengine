@@ -36,7 +36,7 @@ void Text::Init(const string text, const char *fileName, const int fontSize)
     this->text = text;
 }
 
-void Text::Render()
+void Text::Render(float time)
 {
     // printf("Text::Render\n");
 

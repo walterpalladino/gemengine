@@ -1,131 +1,672 @@
-[06/04/2023 12:09:32] [App::App]App Constructor
-[06/04/2023 12:09:32] [App::Init]Init Framework
-[06/04/2023 12:09:32] [FontsManager::Init]FontsManager Initializing
-[06/04/2023 12:09:32] [App::Init]Initialization Completed
-[06/04/2023 12:09:32] [Game::LoadScenes]Load Scenes
-[06/04/2023 12:09:32] [Scene::Scene]Constructor
-[06/04/2023 12:09:32] [Image::Image]Constructor
-[06/04/2023 12:09:32] [Text::Text]Constructor
-[06/04/2023 12:09:32] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
-[06/04/2023 12:25:42] [App::Execute]Totl Frames: 55231 FPS : 56.95
-[06/04/2023 12:25:42] [App::Cleanup]Cleanup
-[06/04/2023 12:25:42] [App::Cleanup]DestroyRenderer Completed
-[06/04/2023 12:25:42] [App::Cleanup]DestroyWindow Completed
-[06/04/2023 12:25:42] [FontsManager::Clean]FontsManager Shutting Down
-[06/04/2023 12:25:42] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
-[06/04/2023 12:25:42] [App::Cleanup]SDL_Quit Completed
-[06/04/2023 12:25:42] [App::~App]Deleting scene: Start Scene
-[06/04/2023 12:25:42] [Scene::Cleanup]Cleanup
-[06/04/2023 12:25:42] [Scene::Cleanup]Deleting object: resources/logo.png
-[06/04/2023 12:25:42] [Image::Cleanup]Cleanup
-[06/04/2023 12:25:42] [Scene::Cleanup]Deleting object: 
-[06/04/2023 12:25:42] [Text::Cleanup]Cleanup
-[06/04/2023 12:25:42] [Scene::~Scene]Destructor
-[06/04/2023 12:25:42] [App::Execute]Good Bye!
-[06/04/2023 12:25:42] [App::~App]App Destructor
-[06/04/2023 12:39:46] [App::App]App Constructor
-[06/04/2023 12:39:46] [App::Init]Init Framework
-[06/04/2023 12:39:46] [FontsManager::Init]FontsManager Initializing
-[06/04/2023 12:39:46] [App::Init]Initialization Completed
-[06/04/2023 12:39:46] [Game::LoadScenes]Load Scenes
-[06/04/2023 12:39:46] [Scene::Scene]Constructor
-[06/04/2023 12:39:46] [Image::Image]Constructor
-[06/04/2023 12:39:46] [Text::Text]Constructor
-[06/04/2023 12:39:46] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
-[06/04/2023 12:39:50] [App::Execute]Totl Frames: 181 FPS : 50.81
-[06/04/2023 12:39:50] [App::Cleanup]Cleanup
-[06/04/2023 12:39:50] [App::Cleanup]DestroyRenderer Completed
-[06/04/2023 12:39:50] [App::Cleanup]DestroyWindow Completed
-[06/04/2023 12:39:50] [FontsManager::Clean]FontsManager Shutting Down
-[06/04/2023 12:39:50] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
-[06/04/2023 12:39:50] [App::Cleanup]SDL_Quit Completed
-[06/04/2023 12:39:50] [App::~App]Deleting scene: Start Scene
-[06/04/2023 12:39:50] [Scene::Cleanup]Cleanup
-[06/04/2023 12:39:50] [Scene::Cleanup]Deleting object: resources/logo.png
-[06/04/2023 12:39:50] [Image::Cleanup]Cleanup
-[06/04/2023 12:39:50] [Scene::Cleanup]Deleting object: 
-[06/04/2023 12:39:50] [Text::Cleanup]Cleanup
-[06/04/2023 12:39:50] [Scene::~Scene]Destructor
-[06/04/2023 12:39:50] [App::Execute]Good Bye!
-[06/04/2023 12:39:50] [App::~App]App Destructor
-[06/04/2023 12:46:26] [App::App]App Constructor
-[06/04/2023 12:46:26] [App::Init]Init Framework
-[06/04/2023 12:46:26] [FontsManager::Init]FontsManager Initializing
-[06/04/2023 12:46:26] [App::Init]Initialization Completed
-[06/04/2023 12:46:26] [Game::LoadScenes]Load Scenes
-[06/04/2023 12:46:26] [Scene::Scene]Constructor
-[06/04/2023 12:46:26] [Image::Image]Constructor
-[06/04/2023 12:46:26] [Text::Text]Constructor
-[06/04/2023 12:46:26] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
-[06/04/2023 12:46:28] [App::Execute]Totl Frames: 111 FPS : 48.37
-[06/04/2023 12:46:28] [App::Cleanup]Cleanup
-[06/04/2023 12:46:28] [App::Cleanup]DestroyRenderer Completed
-[06/04/2023 12:46:28] [App::Cleanup]DestroyWindow Completed
-[06/04/2023 12:46:28] [FontsManager::Clean]FontsManager Shutting Down
-[06/04/2023 12:46:28] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
-[06/04/2023 12:46:28] [App::Cleanup]SDL_Quit Completed
-[06/04/2023 12:46:28] [App::~App]Deleting scene: Start Scene
-[06/04/2023 12:46:28] [Scene::Cleanup]Cleanup
-[06/04/2023 12:46:28] [Scene::Cleanup]Deleting object: resources/logo.png
-[06/04/2023 12:46:28] [Image::Cleanup]Cleanup
-[06/04/2023 12:46:28] [Scene::Cleanup]Deleting object: 
-[06/04/2023 12:46:28] [Text::Cleanup]Cleanup
-[06/04/2023 12:46:28] [Scene::~Scene]Destructor
-[06/04/2023 12:46:28] [App::Execute]Good Bye!
-[06/04/2023 12:46:28] [App::~App]App Destructor
-[06/04/2023 13:19:30] [App::App]App Constructor
-[06/04/2023 13:19:30] [App::Init]Init Framework
-[06/04/2023 13:19:31] [FontsManager::Init]FontsManager Initializing
-[06/04/2023 13:19:31] [TextureManager::Init]TextureManager Initializing
-[06/04/2023 13:19:31] [App::Init]Initialization Completed
-[06/04/2023 13:19:31] [Game::LoadScenes]Load Scenes
-[06/04/2023 13:19:31] [Scene::Scene]Constructor
-[06/04/2023 13:19:31] [Image::Image]Constructor
-[06/04/2023 13:19:31] [Text::Text]Constructor
-[06/04/2023 13:19:31] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
-[06/04/2023 13:19:36] [App::Execute]Totl Frames: 301 FPS : 52.98
-[06/04/2023 13:19:36] [App::Cleanup]Cleanup
-[06/04/2023 13:19:36] [App::Cleanup]DestroyRenderer Completed
-[06/04/2023 13:19:36] [App::Cleanup]DestroyWindow Completed
-[06/04/2023 13:19:36] [FontsManager::Clean]FontsManager Shutting Down
-[06/04/2023 13:19:36] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
-[06/04/2023 13:19:36] [TextureManager::Clean]TextureManager Shutting Down
-[06/04/2023 13:19:36] [TextureManager::Cleanup]Deleting texture: resources/logo.png
-[06/04/2023 13:19:36] [App::Cleanup]SDL_Quit Completed
-[06/04/2023 13:19:36] [App::~App]Deleting scene: Start Scene
-[06/04/2023 13:19:36] [Scene::Cleanup]Cleanup
-[06/04/2023 13:19:36] [Scene::Cleanup]Deleting object: resources/logo.png
-[06/04/2023 13:19:36] [Image::Cleanup]Cleanup
-[06/04/2023 13:19:36] [Scene::Cleanup]Deleting object: 
-[06/04/2023 13:19:36] [Text::Cleanup]Cleanup
-[06/04/2023 13:19:36] [Scene::~Scene]Destructor
-[06/04/2023 13:19:36] [App::Execute]Good Bye!
-[06/04/2023 13:19:36] [App::~App]App Destructor
-[06/04/2023 13:57:39] [App::App]App Constructor
-[06/04/2023 13:57:39] [App::Init]Init Framework
-[06/04/2023 13:57:39] [FontsManager::Init]FontsManager Initializing
-[06/04/2023 13:57:39] [TextureManager::Init]TextureManager Initializing
-[06/04/2023 13:57:39] [App::Init]Initialization Completed
-[06/04/2023 13:57:39] [Game::LoadScenes]Load Scenes
-[06/04/2023 13:57:39] [Scene::Scene]Constructor
-[06/04/2023 13:57:39] [Image::Image]Constructor
-[06/04/2023 13:57:39] [Text::Text]Constructor
-[06/04/2023 13:57:39] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
-[06/04/2023 13:57:43] [App::Execute]Totl Frames: 191 FPS : 51.08
-[06/04/2023 13:57:43] [App::Cleanup]Cleanup
-[06/04/2023 13:57:43] [App::Cleanup]DestroyRenderer Completed
-[06/04/2023 13:57:43] [App::Cleanup]DestroyWindow Completed
-[06/04/2023 13:57:43] [FontsManager::Clean]FontsManager Shutting Down
-[06/04/2023 13:57:43] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
-[06/04/2023 13:57:43] [TextureManager::Clean]TextureManager Shutting Down
-[06/04/2023 13:57:43] [TextureManager::Cleanup]Deleting texture: resources/logo.png
-[06/04/2023 13:57:43] [App::Cleanup]SDL_Quit Completed
-[06/04/2023 13:57:43] [App::~App]Deleting scene: Start Scene
-[06/04/2023 13:57:43] [Scene::Cleanup]Cleanup
-[06/04/2023 13:57:43] [Scene::Cleanup]Deleting object: resources/logo.png
-[06/04/2023 13:57:43] [Image::Cleanup]Cleanup
-[06/04/2023 13:57:43] [Scene::Cleanup]Deleting object: 
-[06/04/2023 13:57:43] [Text::Cleanup]Cleanup
-[06/04/2023 13:57:43] [Scene::~Scene]Destructor
-[06/04/2023 13:57:43] [App::Execute]Good Bye!
-[06/04/2023 13:57:43] [App::~App]App Destructor
+[07/04/2023 16:51:55] [App::App]App Constructor
+[07/04/2023 16:51:55] [App::Init]Init Framework
+[07/04/2023 16:51:55] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 16:51:55] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 16:51:55] [App::Init]Initialization Completed
+[07/04/2023 16:51:55] [Game::LoadScenes]Load Scenes
+[07/04/2023 16:51:55] [Scene::Scene]Constructor
+[07/04/2023 16:51:55] [Image::Image]Constructor
+[07/04/2023 16:51:55] [Text::Text]Constructor
+[07/04/2023 16:51:55] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 16:51:58] [App::Execute]Totl Frames: 151 FPS : 51.45
+[07/04/2023 16:51:58] [App::Cleanup]Cleanup
+[07/04/2023 16:51:58] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 16:51:58] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 16:51:58] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 16:51:58] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 16:51:58] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 16:51:58] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 16:51:58] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 16:51:58] [App::~App]Deleting scene: Start Scene
+[07/04/2023 16:51:58] [Scene::Cleanup]Cleanup
+[07/04/2023 16:51:58] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 16:51:58] [Image::Cleanup]Cleanup
+[07/04/2023 16:51:58] [Scene::Cleanup]Deleting object: 
+[07/04/2023 16:51:58] [Text::Cleanup]Cleanup
+[07/04/2023 16:51:58] [Scene::~Scene]Destructor
+[07/04/2023 16:51:58] [App::Execute]Good Bye!
+[07/04/2023 16:51:58] [App::~App]App Destructor
+[07/04/2023 17:33:27] [App::App]App Constructor
+[07/04/2023 17:33:27] [App::Init]Init Framework
+[07/04/2023 17:33:27] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:33:27] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:33:27] [App::Init]Initialization Completed
+[07/04/2023 17:33:27] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:33:27] [Scene::Scene]Constructor
+[07/04/2023 17:33:27] [Image::Image]Constructor
+[07/04/2023 17:33:27] [Text::Text]Constructor
+[07/04/2023 17:33:27] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:33:27] [Sprite::Sprite]Constructor
+[07/04/2023 17:33:50] [App::Execute]Totl Frames: 1311 FPS : 57.61
+[07/04/2023 17:33:50] [App::Cleanup]Cleanup
+[07/04/2023 17:33:50] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:33:50] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:33:50] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:33:50] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:33:50] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:33:50] [TextureManager::Cleanup]Deleting texture: resources/caped/Batman.png
+[07/04/2023 17:33:50] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:33:50] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:33:50] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:33:50] [Scene::Cleanup]Cleanup
+[07/04/2023 17:33:50] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:33:50] [Image::Cleanup]Cleanup
+[07/04/2023 17:33:50] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:33:50] [Text::Cleanup]Cleanup
+[07/04/2023 17:33:50] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:33:50] [Image::Cleanup]Cleanup
+[07/04/2023 17:33:50] [Scene::~Scene]Destructor
+[07/04/2023 17:33:50] [App::Execute]Good Bye!
+[07/04/2023 17:33:50] [App::~App]App Destructor
+[07/04/2023 17:34:15] [App::App]App Constructor
+[07/04/2023 17:34:15] [App::Init]Init Framework
+[07/04/2023 17:34:15] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:34:15] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:34:15] [App::Init]Initialization Completed
+[07/04/2023 17:34:15] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:34:15] [Scene::Scene]Constructor
+[07/04/2023 17:34:15] [Image::Image]Constructor
+[07/04/2023 17:34:15] [Text::Text]Constructor
+[07/04/2023 17:34:15] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:34:15] [Sprite::Sprite]Constructor
+[07/04/2023 17:34:19] [App::Execute]Totl Frames: 211 FPS : 53.81
+[07/04/2023 17:34:19] [App::Cleanup]Cleanup
+[07/04/2023 17:34:19] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:34:19] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:34:19] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:34:19] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:34:19] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:34:19] [TextureManager::Cleanup]Deleting texture: resources/caped/Batman.png
+[07/04/2023 17:34:19] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:34:19] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:34:19] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:34:19] [Scene::Cleanup]Cleanup
+[07/04/2023 17:34:19] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:34:19] [Image::Cleanup]Cleanup
+[07/04/2023 17:34:19] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:34:19] [Text::Cleanup]Cleanup
+[07/04/2023 17:34:19] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:34:19] [Image::Cleanup]Cleanup
+[07/04/2023 17:34:19] [Scene::~Scene]Destructor
+[07/04/2023 17:34:19] [App::Execute]Good Bye!
+[07/04/2023 17:34:19] [App::~App]App Destructor
+[07/04/2023 17:34:29] [App::App]App Constructor
+[07/04/2023 17:34:29] [App::Init]Init Framework
+[07/04/2023 17:34:29] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:34:29] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:34:29] [App::Init]Initialization Completed
+[07/04/2023 17:34:29] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:34:29] [Scene::Scene]Constructor
+[07/04/2023 17:34:29] [Image::Image]Constructor
+[07/04/2023 17:34:29] [Text::Text]Constructor
+[07/04/2023 17:34:29] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:34:29] [Sprite::Sprite]Constructor
+[07/04/2023 17:34:50] [App::Execute]Totl Frames: 1201 FPS : 58.00
+[07/04/2023 17:34:50] [App::Cleanup]Cleanup
+[07/04/2023 17:34:50] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:34:50] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:34:50] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:34:50] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:34:50] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:34:50] [TextureManager::Cleanup]Deleting texture: resources/caped/Batman.png
+[07/04/2023 17:34:50] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:34:50] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:34:50] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:34:50] [Scene::Cleanup]Cleanup
+[07/04/2023 17:34:50] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:34:50] [Image::Cleanup]Cleanup
+[07/04/2023 17:34:50] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:34:50] [Text::Cleanup]Cleanup
+[07/04/2023 17:34:50] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:34:50] [Image::Cleanup]Cleanup
+[07/04/2023 17:34:50] [Scene::~Scene]Destructor
+[07/04/2023 17:34:50] [App::Execute]Good Bye!
+[07/04/2023 17:34:50] [App::~App]App Destructor
+[07/04/2023 17:37:25] [App::App]App Constructor
+[07/04/2023 17:37:25] [App::Init]Init Framework
+[07/04/2023 17:37:25] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:37:25] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:37:25] [App::Init]Initialization Completed
+[07/04/2023 17:37:25] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:37:25] [Scene::Scene]Constructor
+[07/04/2023 17:37:25] [Image::Image]Constructor
+[07/04/2023 17:37:25] [Text::Text]Constructor
+[07/04/2023 17:37:25] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:37:25] [Sprite::Sprite]Constructor
+[07/04/2023 17:37:30] [App::Execute]Totl Frames: 241 FPS : 52.98
+[07/04/2023 17:37:30] [App::Cleanup]Cleanup
+[07/04/2023 17:37:30] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:37:30] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:37:30] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:37:30] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:37:30] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:37:30] [TextureManager::Cleanup]Deleting texture: resources/caped/Batman.png
+[07/04/2023 17:37:30] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:37:30] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:37:30] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:37:30] [Scene::Cleanup]Cleanup
+[07/04/2023 17:37:30] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:37:30] [Image::Cleanup]Cleanup
+[07/04/2023 17:37:30] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:37:30] [Text::Cleanup]Cleanup
+[07/04/2023 17:37:30] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:37:30] [Image::Cleanup]Cleanup
+[07/04/2023 17:37:30] [Scene::~Scene]Destructor
+[07/04/2023 17:37:30] [App::Execute]Good Bye!
+[07/04/2023 17:37:30] [App::~App]App Destructor
+[07/04/2023 17:38:22] [App::App]App Constructor
+[07/04/2023 17:38:22] [App::Init]Init Framework
+[07/04/2023 17:38:22] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:38:22] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:38:22] [App::Init]Initialization Completed
+[07/04/2023 17:38:22] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:38:22] [Scene::Scene]Constructor
+[07/04/2023 17:38:22] [Image::Image]Constructor
+[07/04/2023 17:38:22] [Text::Text]Constructor
+[07/04/2023 17:38:22] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:38:22] [Sprite::Sprite]Constructor
+[07/04/2023 17:38:35] [App::Execute]Totl Frames: 751 FPS : 57.46
+[07/04/2023 17:38:35] [App::Cleanup]Cleanup
+[07/04/2023 17:38:35] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:38:35] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:38:35] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:38:35] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:38:35] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:38:35] [TextureManager::Cleanup]Deleting texture: resources/caped/Batman.png
+[07/04/2023 17:38:35] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:38:35] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:38:35] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:38:35] [Scene::Cleanup]Cleanup
+[07/04/2023 17:38:35] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:38:35] [Image::Cleanup]Cleanup
+[07/04/2023 17:38:35] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:38:35] [Text::Cleanup]Cleanup
+[07/04/2023 17:38:35] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:38:35] [Image::Cleanup]Cleanup
+[07/04/2023 17:38:35] [Scene::~Scene]Destructor
+[07/04/2023 17:38:35] [App::Execute]Good Bye!
+[07/04/2023 17:38:35] [App::~App]App Destructor
+[07/04/2023 17:39:04] [App::App]App Constructor
+[07/04/2023 17:39:04] [App::Init]Init Framework
+[07/04/2023 17:39:04] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:39:04] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:39:04] [App::Init]Initialization Completed
+[07/04/2023 17:39:04] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:39:04] [Scene::Scene]Constructor
+[07/04/2023 17:39:04] [Image::Image]Constructor
+[07/04/2023 17:39:04] [Text::Text]Constructor
+[07/04/2023 17:39:04] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:39:04] [Sprite::Sprite]Constructor
+[07/04/2023 17:39:31] [App::Execute]Totl Frames: 1401 FPS : 53.51
+[07/04/2023 17:39:31] [App::Cleanup]Cleanup
+[07/04/2023 17:39:31] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:39:31] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:39:31] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:39:31] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:39:31] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:39:31] [TextureManager::Cleanup]Deleting texture: resources/caped/Batman.png
+[07/04/2023 17:39:31] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:39:31] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:39:31] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:39:31] [Scene::Cleanup]Cleanup
+[07/04/2023 17:39:31] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:39:31] [Image::Cleanup]Cleanup
+[07/04/2023 17:39:31] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:39:31] [Text::Cleanup]Cleanup
+[07/04/2023 17:39:31] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:39:31] [Image::Cleanup]Cleanup
+[07/04/2023 17:39:31] [Scene::~Scene]Destructor
+[07/04/2023 17:39:31] [App::Execute]Good Bye!
+[07/04/2023 17:39:31] [App::~App]App Destructor
+[07/04/2023 17:40:52] [App::App]App Constructor
+[07/04/2023 17:40:52] [App::Init]Init Framework
+[07/04/2023 17:40:52] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:40:52] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:40:52] [App::Init]Initialization Completed
+[07/04/2023 17:40:52] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:40:52] [Scene::Scene]Constructor
+[07/04/2023 17:40:52] [Image::Image]Constructor
+[07/04/2023 17:40:52] [Text::Text]Constructor
+[07/04/2023 17:40:52] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:40:52] [Sprite::Sprite]Constructor
+[07/04/2023 17:41:23] [App::Execute]Totl Frames: 1761 FPS : 56.20
+[07/04/2023 17:41:23] [App::Cleanup]Cleanup
+[07/04/2023 17:41:23] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:41:23] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:41:23] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:41:23] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:41:23] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:41:23] [TextureManager::Cleanup]Deleting texture: resources/caped/Batman.png
+[07/04/2023 17:41:23] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:41:23] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:41:23] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:41:23] [Scene::Cleanup]Cleanup
+[07/04/2023 17:41:23] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:41:23] [Image::Cleanup]Cleanup
+[07/04/2023 17:41:23] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:41:23] [Text::Cleanup]Cleanup
+[07/04/2023 17:41:23] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:41:23] [Image::Cleanup]Cleanup
+[07/04/2023 17:41:23] [Scene::~Scene]Destructor
+[07/04/2023 17:41:23] [App::Execute]Good Bye!
+[07/04/2023 17:41:23] [App::~App]App Destructor
+[07/04/2023 17:47:24] [App::App]App Constructor
+[07/04/2023 17:47:24] [App::Init]Init Framework
+[07/04/2023 17:47:24] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:47:24] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:47:24] [App::Init]Initialization Completed
+[07/04/2023 17:47:24] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:47:24] [Scene::Scene]Constructor
+[07/04/2023 17:47:24] [Image::Image]Constructor
+[07/04/2023 17:47:24] [Text::Text]Constructor
+[07/04/2023 17:47:24] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:47:24] [Sprite::Sprite]Constructor
+[07/04/2023 17:47:29] [App::Execute]Totl Frames: 281 FPS : 54.18
+[07/04/2023 17:47:29] [App::Cleanup]Cleanup
+[07/04/2023 17:47:29] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:47:29] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:47:29] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:47:29] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:47:29] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:47:29] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png
+[07/04/2023 17:47:29] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:47:29] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:47:29] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:47:29] [Scene::Cleanup]Cleanup
+[07/04/2023 17:47:29] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:47:29] [Image::Cleanup]Cleanup
+[07/04/2023 17:47:29] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:47:29] [Text::Cleanup]Cleanup
+[07/04/2023 17:47:29] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:47:29] [Image::Cleanup]Cleanup
+[07/04/2023 17:47:29] [Scene::~Scene]Destructor
+[07/04/2023 17:47:29] [App::Execute]Good Bye!
+[07/04/2023 17:47:29] [App::~App]App Destructor
+[07/04/2023 17:48:25] [App::App]App Constructor
+[07/04/2023 17:48:25] [App::Init]Init Framework
+[07/04/2023 17:48:25] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:48:25] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:48:25] [App::Init]Initialization Completed
+[07/04/2023 17:48:25] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:48:25] [Scene::Scene]Constructor
+[07/04/2023 17:48:25] [Image::Image]Constructor
+[07/04/2023 17:48:25] [Text::Text]Constructor
+[07/04/2023 17:48:25] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:48:25] [Sprite::Sprite]Constructor
+[07/04/2023 17:48:30] [App::Execute]Totl Frames: 291 FPS : 55.25
+[07/04/2023 17:48:30] [App::Cleanup]Cleanup
+[07/04/2023 17:48:30] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:48:30] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:48:30] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:48:30] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:48:30] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:48:30] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png
+[07/04/2023 17:48:30] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:48:30] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:48:30] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:48:30] [Scene::Cleanup]Cleanup
+[07/04/2023 17:48:30] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:48:30] [Image::Cleanup]Cleanup
+[07/04/2023 17:48:30] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:48:30] [Text::Cleanup]Cleanup
+[07/04/2023 17:48:30] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:48:30] [Image::Cleanup]Cleanup
+[07/04/2023 17:48:30] [Scene::~Scene]Destructor
+[07/04/2023 17:48:30] [App::Execute]Good Bye!
+[07/04/2023 17:48:30] [App::~App]App Destructor
+[07/04/2023 17:48:47] [App::App]App Constructor
+[07/04/2023 17:48:47] [App::Init]Init Framework
+[07/04/2023 17:48:47] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:48:47] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:48:47] [App::Init]Initialization Completed
+[07/04/2023 17:48:47] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:48:47] [Scene::Scene]Constructor
+[07/04/2023 17:48:47] [Image::Image]Constructor
+[07/04/2023 17:48:47] [Text::Text]Constructor
+[07/04/2023 17:48:47] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:48:47] [Sprite::Sprite]Constructor
+[07/04/2023 17:49:00] [App::Execute]Totl Frames: 741 FPS : 57.48
+[07/04/2023 17:49:00] [App::Cleanup]Cleanup
+[07/04/2023 17:49:00] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:49:00] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:49:00] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:49:00] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:49:00] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:49:00] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png
+[07/04/2023 17:49:00] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:49:00] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:49:00] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:49:00] [Scene::Cleanup]Cleanup
+[07/04/2023 17:49:00] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:49:00] [Image::Cleanup]Cleanup
+[07/04/2023 17:49:00] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:49:00] [Text::Cleanup]Cleanup
+[07/04/2023 17:49:00] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:49:00] [Image::Cleanup]Cleanup
+[07/04/2023 17:49:00] [Scene::~Scene]Destructor
+[07/04/2023 17:49:00] [App::Execute]Good Bye!
+[07/04/2023 17:49:00] [App::~App]App Destructor
+[07/04/2023 17:49:14] [App::App]App Constructor
+[07/04/2023 17:49:14] [App::Init]Init Framework
+[07/04/2023 17:49:15] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:49:15] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:49:15] [App::Init]Initialization Completed
+[07/04/2023 17:49:15] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:49:15] [Scene::Scene]Constructor
+[07/04/2023 17:49:15] [Image::Image]Constructor
+[07/04/2023 17:49:15] [Text::Text]Constructor
+[07/04/2023 17:49:15] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:49:15] [Sprite::Sprite]Constructor
+[07/04/2023 17:49:20] [App::Execute]Totl Frames: 321 FPS : 55.58
+[07/04/2023 17:49:20] [App::Cleanup]Cleanup
+[07/04/2023 17:49:20] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:49:20] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:49:20] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:49:20] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:49:20] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:49:20] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png
+[07/04/2023 17:49:20] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:49:20] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:49:20] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:49:20] [Scene::Cleanup]Cleanup
+[07/04/2023 17:49:20] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:49:20] [Image::Cleanup]Cleanup
+[07/04/2023 17:49:20] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:49:20] [Text::Cleanup]Cleanup
+[07/04/2023 17:49:20] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:49:20] [Image::Cleanup]Cleanup
+[07/04/2023 17:49:20] [Scene::~Scene]Destructor
+[07/04/2023 17:49:20] [App::Execute]Good Bye!
+[07/04/2023 17:49:20] [App::~App]App Destructor
+[07/04/2023 17:49:36] [App::App]App Constructor
+[07/04/2023 17:49:36] [App::Init]Init Framework
+[07/04/2023 17:49:36] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:49:36] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:49:36] [App::Init]Initialization Completed
+[07/04/2023 17:49:36] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:49:36] [Scene::Scene]Constructor
+[07/04/2023 17:49:36] [Image::Image]Constructor
+[07/04/2023 17:49:36] [Text::Text]Constructor
+[07/04/2023 17:49:36] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:49:36] [Sprite::Sprite]Constructor
+[07/04/2023 17:49:41] [App::Execute]Totl Frames: 281 FPS : 54.97
+[07/04/2023 17:49:41] [App::Cleanup]Cleanup
+[07/04/2023 17:49:41] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:49:41] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:49:41] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:49:41] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:49:41] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:49:41] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png
+[07/04/2023 17:49:41] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:49:41] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:49:41] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:49:41] [Scene::Cleanup]Cleanup
+[07/04/2023 17:49:41] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:49:41] [Image::Cleanup]Cleanup
+[07/04/2023 17:49:41] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:49:41] [Text::Cleanup]Cleanup
+[07/04/2023 17:49:41] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:49:41] [Image::Cleanup]Cleanup
+[07/04/2023 17:49:41] [Scene::~Scene]Destructor
+[07/04/2023 17:49:41] [App::Execute]Good Bye!
+[07/04/2023 17:49:41] [App::~App]App Destructor
+[07/04/2023 17:50:35] [App::App]App Constructor
+[07/04/2023 17:50:35] [App::Init]Init Framework
+[07/04/2023 17:50:35] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:50:35] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:50:35] [App::Init]Initialization Completed
+[07/04/2023 17:50:35] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:50:35] [Scene::Scene]Constructor
+[07/04/2023 17:50:35] [Image::Image]Constructor
+[07/04/2023 17:50:35] [Text::Text]Constructor
+[07/04/2023 17:50:35] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:50:35] [Sprite::Sprite]Constructor
+[07/04/2023 17:50:48] [App::Execute]Totl Frames: 691 FPS : 56.91
+[07/04/2023 17:50:48] [App::Cleanup]Cleanup
+[07/04/2023 17:50:48] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:50:48] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:50:48] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:50:48] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:50:48] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:50:48] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png
+[07/04/2023 17:50:48] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:50:48] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:50:48] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:50:48] [Scene::Cleanup]Cleanup
+[07/04/2023 17:50:48] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:50:48] [Image::Cleanup]Cleanup
+[07/04/2023 17:50:48] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:50:48] [Text::Cleanup]Cleanup
+[07/04/2023 17:50:48] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:50:48] [Image::Cleanup]Cleanup
+[07/04/2023 17:50:48] [Scene::~Scene]Destructor
+[07/04/2023 17:50:48] [App::Execute]Good Bye!
+[07/04/2023 17:50:48] [App::~App]App Destructor
+[07/04/2023 17:53:26] [App::App]App Constructor
+[07/04/2023 17:53:26] [App::Init]Init Framework
+[07/04/2023 17:53:26] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:53:26] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:53:26] [App::Init]Initialization Completed
+[07/04/2023 17:53:26] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:53:26] [Scene::Scene]Constructor
+[07/04/2023 17:53:26] [Image::Image]Constructor
+[07/04/2023 17:53:26] [Text::Text]Constructor
+[07/04/2023 17:53:26] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:53:26] [Sprite::Sprite]Constructor
+[07/04/2023 17:53:34] [App::Execute]Totl Frames: 441 FPS : 56.40
+[07/04/2023 17:53:34] [App::Cleanup]Cleanup
+[07/04/2023 17:53:34] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:53:34] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:53:34] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:53:34] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:53:34] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:53:34] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png
+[07/04/2023 17:53:34] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:53:34] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:53:34] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:53:34] [Scene::Cleanup]Cleanup
+[07/04/2023 17:53:34] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:53:34] [Image::Cleanup]Cleanup
+[07/04/2023 17:53:34] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:53:34] [Text::Cleanup]Cleanup
+[07/04/2023 17:53:34] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:53:34] [Image::Cleanup]Cleanup
+[07/04/2023 17:53:34] [Scene::~Scene]Destructor
+[07/04/2023 17:53:34] [App::Execute]Good Bye!
+[07/04/2023 17:53:34] [App::~App]App Destructor
+[07/04/2023 17:53:48] [App::App]App Constructor
+[07/04/2023 17:53:48] [App::Init]Init Framework
+[07/04/2023 17:53:48] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:53:48] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:53:48] [App::Init]Initialization Completed
+[07/04/2023 17:53:48] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:53:48] [Scene::Scene]Constructor
+[07/04/2023 17:53:48] [Image::Image]Constructor
+[07/04/2023 17:53:48] [Text::Text]Constructor
+[07/04/2023 17:53:48] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:53:48] [Sprite::Sprite]Constructor
+[07/04/2023 17:54:12] [App::Execute]Totl Frames: 1361 FPS : 58.09
+[07/04/2023 17:54:12] [App::Cleanup]Cleanup
+[07/04/2023 17:54:12] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:54:12] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:54:12] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:54:12] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:54:12] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:54:12] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png
+[07/04/2023 17:54:12] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:54:12] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:54:12] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:54:12] [Scene::Cleanup]Cleanup
+[07/04/2023 17:54:12] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:54:12] [Image::Cleanup]Cleanup
+[07/04/2023 17:54:12] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:54:12] [Text::Cleanup]Cleanup
+[07/04/2023 17:54:12] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:54:12] [Image::Cleanup]Cleanup
+[07/04/2023 17:54:12] [Scene::~Scene]Destructor
+[07/04/2023 17:54:12] [App::Execute]Good Bye!
+[07/04/2023 17:54:12] [App::~App]App Destructor
+[07/04/2023 17:54:25] [App::App]App Constructor
+[07/04/2023 17:54:25] [App::Init]Init Framework
+[07/04/2023 17:54:25] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:54:25] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:54:25] [App::Init]Initialization Completed
+[07/04/2023 17:54:25] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:54:25] [Scene::Scene]Constructor
+[07/04/2023 17:54:25] [Image::Image]Constructor
+[07/04/2023 17:54:25] [Text::Text]Constructor
+[07/04/2023 17:54:25] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:54:25] [Sprite::Sprite]Constructor
+[07/04/2023 17:54:54] [App::Execute]Totl Frames: 1681 FPS : 58.13
+[07/04/2023 17:54:54] [App::Cleanup]Cleanup
+[07/04/2023 17:54:54] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:54:54] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:54:54] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:54:54] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:54:54] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:54:54] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png
+[07/04/2023 17:54:54] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:54:54] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:54:54] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:54:54] [Scene::Cleanup]Cleanup
+[07/04/2023 17:54:54] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:54:54] [Image::Cleanup]Cleanup
+[07/04/2023 17:54:54] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:54:54] [Text::Cleanup]Cleanup
+[07/04/2023 17:54:54] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:54:54] [Image::Cleanup]Cleanup
+[07/04/2023 17:54:54] [Scene::~Scene]Destructor
+[07/04/2023 17:54:54] [App::Execute]Good Bye!
+[07/04/2023 17:54:54] [App::~App]App Destructor
+[07/04/2023 17:57:03] [App::App]App Constructor
+[07/04/2023 17:57:03] [App::Init]Init Framework
+[07/04/2023 17:57:04] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:57:04] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:57:04] [App::Init]Initialization Completed
+[07/04/2023 17:57:04] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:57:04] [Scene::Scene]Constructor
+[07/04/2023 17:57:04] [Image::Image]Constructor
+[07/04/2023 17:57:04] [Text::Text]Constructor
+[07/04/2023 17:57:04] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:57:04] [Sprite::Sprite]Constructor
+[07/04/2023 17:57:09] [App::Execute]Totl Frames: 321 FPS : 55.50
+[07/04/2023 17:57:09] [App::Cleanup]Cleanup
+[07/04/2023 17:57:09] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:57:09] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:57:09] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:57:09] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:57:09] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:57:09] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png
+[07/04/2023 17:57:09] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:57:09] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:57:09] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:57:09] [Scene::Cleanup]Cleanup
+[07/04/2023 17:57:09] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:57:09] [Image::Cleanup]Cleanup
+[07/04/2023 17:57:09] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:57:09] [Text::Cleanup]Cleanup
+[07/04/2023 17:57:09] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:57:09] [Image::Cleanup]Cleanup
+[07/04/2023 17:57:09] [Scene::~Scene]Destructor
+[07/04/2023 17:57:09] [App::Execute]Good Bye!
+[07/04/2023 17:57:09] [App::~App]App Destructor
+[07/04/2023 17:57:22] [App::App]App Constructor
+[07/04/2023 17:57:22] [App::Init]Init Framework
+[07/04/2023 17:57:22] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 17:57:22] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 17:57:22] [App::Init]Initialization Completed
+[07/04/2023 17:57:22] [Game::LoadScenes]Load Scenes
+[07/04/2023 17:57:22] [Scene::Scene]Constructor
+[07/04/2023 17:57:22] [Image::Image]Constructor
+[07/04/2023 17:57:22] [Text::Text]Constructor
+[07/04/2023 17:57:22] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 17:57:22] [Sprite::Sprite]Constructor
+[07/04/2023 17:57:43] [App::Execute]Totl Frames: 1191 FPS : 57.66
+[07/04/2023 17:57:43] [App::Cleanup]Cleanup
+[07/04/2023 17:57:43] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 17:57:43] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 17:57:43] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 17:57:43] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 17:57:43] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 17:57:43] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png
+[07/04/2023 17:57:43] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 17:57:43] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 17:57:43] [App::~App]Deleting scene: Start Scene
+[07/04/2023 17:57:43] [Scene::Cleanup]Cleanup
+[07/04/2023 17:57:43] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 17:57:43] [Image::Cleanup]Cleanup
+[07/04/2023 17:57:43] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:57:43] [Text::Cleanup]Cleanup
+[07/04/2023 17:57:43] [Scene::Cleanup]Deleting object: 
+[07/04/2023 17:57:43] [Image::Cleanup]Cleanup
+[07/04/2023 17:57:43] [Scene::~Scene]Destructor
+[07/04/2023 17:57:43] [App::Execute]Good Bye!
+[07/04/2023 17:57:43] [App::~App]App Destructor
+[07/04/2023 18:02:00] [App::App]App Constructor
+[07/04/2023 18:02:00] [App::Init]Init Framework
+[07/04/2023 18:02:00] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 18:02:00] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 18:02:00] [App::Init]Initialization Completed
+[07/04/2023 18:02:00] [Game::LoadScenes]Load Scenes
+[07/04/2023 18:02:00] [Scene::Scene]Constructor
+[07/04/2023 18:02:00] [Image::Image]Constructor
+[07/04/2023 18:02:00] [Text::Text]Constructor
+[07/04/2023 18:02:00] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 18:02:00] [Sprite::Sprite]Constructor
+[07/04/2023 18:02:04] [App::Execute]Totl Frames: 241 FPS : 54.02
+[07/04/2023 18:02:04] [App::Cleanup]Cleanup
+[07/04/2023 18:02:04] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 18:02:04] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 18:02:04] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 18:02:04] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 18:02:04] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 18:02:04] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png
+[07/04/2023 18:02:04] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 18:02:04] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 18:02:04] [App::~App]Deleting scene: Start Scene
+[07/04/2023 18:02:04] [Scene::Cleanup]Cleanup
+[07/04/2023 18:02:04] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 18:02:04] [Image::Cleanup]Cleanup
+[07/04/2023 18:02:04] [Scene::Cleanup]Deleting object: 
+[07/04/2023 18:02:04] [Text::Cleanup]Cleanup
+[07/04/2023 18:02:04] [Scene::Cleanup]Deleting object: 
+[07/04/2023 18:02:04] [Image::Cleanup]Cleanup
+[07/04/2023 18:02:04] [Scene::~Scene]Destructor
+[07/04/2023 18:02:04] [App::Execute]Good Bye!
+[07/04/2023 18:02:04] [App::~App]App Destructor
+[07/04/2023 18:04:24] [App::App]App Constructor
+[07/04/2023 18:04:24] [App::Init]Init Framework
+[07/04/2023 18:04:24] [FontsManager::Init]FontsManager Initializing
+[07/04/2023 18:04:24] [TextureManager::Init]TextureManager Initializing
+[07/04/2023 18:04:24] [App::Init]Initialization Completed
+[07/04/2023 18:04:24] [Game::LoadScenes]Load Scenes
+[07/04/2023 18:04:24] [Scene::Scene]Constructor
+[07/04/2023 18:04:24] [Image::Image]Constructor
+[07/04/2023 18:04:24] [Text::Text]Constructor
+[07/04/2023 18:04:24] [FontsManager::AddFont]Adding font resources/fonts/Commodore-64-v6.3.TTF size 24
+[07/04/2023 18:04:24] [Sprite::Sprite]Constructor
+[07/04/2023 18:04:24] [Sprite::Sprite]Constructor
+[07/04/2023 18:04:59] [App::Execute]Totl Frames: 2071 FPS : 58.31
+[07/04/2023 18:04:59] [App::Cleanup]Cleanup
+[07/04/2023 18:04:59] [App::Cleanup]DestroyRenderer Completed
+[07/04/2023 18:04:59] [App::Cleanup]DestroyWindow Completed
+[07/04/2023 18:04:59] [FontsManager::Clean]FontsManager Shutting Down
+[07/04/2023 18:04:59] [FontsManager::Cleanup]Deleting font: resources/fonts/Commodore-64-v6.3.TTF::24
+[07/04/2023 18:04:59] [TextureManager::Clean]TextureManager Shutting Down
+[07/04/2023 18:04:59] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png
+[07/04/2023 18:04:59] [TextureManager::Cleanup]Deleting texture: /Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png
+[07/04/2023 18:04:59] [TextureManager::Cleanup]Deleting texture: resources/logo.png
+[07/04/2023 18:04:59] [App::Cleanup]SDL_Quit Completed
+[07/04/2023 18:04:59] [App::~App]Deleting scene: Start Scene
+[07/04/2023 18:04:59] [Scene::Cleanup]Cleanup
+[07/04/2023 18:04:59] [Scene::Cleanup]Deleting object: resources/logo.png
+[07/04/2023 18:04:59] [Image::Cleanup]Cleanup
+[07/04/2023 18:04:59] [Scene::Cleanup]Deleting object: 
+[07/04/2023 18:04:59] [Text::Cleanup]Cleanup
+[07/04/2023 18:04:59] [Scene::Cleanup]Deleting object: 
+[07/04/2023 18:04:59] [Image::Cleanup]Cleanup
+[07/04/2023 18:04:59] [Scene::Cleanup]Deleting object: 
+[07/04/2023 18:04:59] [Image::Cleanup]Cleanup
+[07/04/2023 18:04:59] [Scene::~Scene]Destructor
+[07/04/2023 18:04:59] [App::Execute]Good Bye!
+[07/04/2023 18:04:59] [App::~App]App Destructor

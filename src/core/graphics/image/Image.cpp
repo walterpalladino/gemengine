@@ -37,7 +37,7 @@ void Image::Load(const char *fileName)
     SDL_QueryTexture(image, NULL, NULL, &sourceRect.w, &sourceRect.h);
 }
 
-void Image::Render()
+void Image::Render(float time)
 {
 
     // printf("Image::Render\n");

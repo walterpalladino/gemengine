@@ -30,32 +30,63 @@ void Sprite::Cleanup()
     Log::GetInstance()->Info("Image::Cleanup", "Cleanup");
 }
 
-void Sprite::Load(const char *fileName)
+void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
 {
+    offset.x = offsetX;
+    offset.y = offsetY;
+
+    size.x = width;
+    size.y = height;
+
+    animationFrames = frames;
+    animationSpeed = speed;
+
     image = TextureManager::Instance()->Add(fileName);
     //  Get texture information
     SDL_QueryTexture(image, NULL, NULL, &sourceRect.w, &sourceRect.h);
+
+    actualFrame = 0;
+    animationStartTime = -1;
 }
 
-void Sprite::Render()
+void Sprite::Render(float time)
 {
+
+    if (animationStartTime == -1)
+    {
+        //  First call
+        animationStartTime = time;
+    }
+
+    //  Calculate the ctual frame based on speed of animation and number of frames
+    actualFrame = time - animationStartTime;
+    actualFrame *= animationSpeed;
+    actualFrame /= 1000;
+    actualFrame %= animationFrames;
+
+    //  Adjust source of the sprite to draw
+    SDL_Rect spriteSourceRect = SDL_Rect();
+    spriteSourceRect.x = offset.x + actualFrame * size.x;
+    spriteSourceRect.y = offset.y;
+    spriteSourceRect.w = size.x;
+    spriteSourceRect.h = size.y;
 
     //  Update Destination Rectangle based on Position and Scale
     destRect.x = position.x;
     destRect.y = position.y;
-    destRect.w = sourceRect.w * scale.x;
-    destRect.h = sourceRect.h * scale.y;
+    destRect.w = size.x * scale.x;
+    destRect.h = size.y * scale.y;
 
     if (Math::IsZero(rotation.z))
     {
-        SDL_RenderCopy(renderer, image, &sourceRect, &destRect);
+        SDL_RenderCopy(renderer, image, &spriteSourceRect, &destRect);
     }
     else
     {
         SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE;
         SDL_RenderCopyEx(renderer,
                          image,
-                         &sourceRect,
+                         &spriteSourceRect,
                          &destRect,
                          rotation.z,
                          NULL, //&center,

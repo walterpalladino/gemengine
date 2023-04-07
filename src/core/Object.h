@@ -17,7 +17,7 @@ public:
 
     virtual void Init() {}
     virtual void Update() {}
-    virtual void Render() {}
+    virtual void Render(float time) {}
     virtual void Cleanup() {}
 
     // void SetPosition(Vector3d position) { this->position = position; }

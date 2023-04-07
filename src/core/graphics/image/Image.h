@@ -20,7 +20,7 @@ public:
     virtual void Update();
     virtual void Cleanup();
 
-    virtual void Render();
+    virtual void Render(float time);
 
     void Load(const char *fileName);
 };

@@ -4,6 +4,7 @@
 #include "Game.h"
 
 #include "core/graphics/image/Image.h"
+#include "core/graphics/sprites/Sprite.h"
 #include "core/graphics/text/Text.h"
 #include "utils/Log.h"
 #include "input/InputHandler.h"
@@ -37,6 +38,23 @@ void Game::LoadScenes()
 
     //  Add Text to Scene
     newScene->objects.push_back(newText);
+
+    //  Add Sprites
+    Sprite *spriteIdle = new Sprite(Renderer);
+    //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
+    spriteIdle->Load("/Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png", 0, 0, 38, 48, 4, 4);
+    spriteIdle->position = Vector3d(400, 300, 0);
+    spriteIdle->scale = Vector3d(4, 4, 1);
+
+    newScene->objects.push_back(spriteIdle);
+
+    Sprite *spriteWalk = new Sprite(Renderer);
+    //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
+    spriteWalk->Load("/Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png", 0, 0, 66, 48, 12, 12);
+    spriteWalk->position = Vector3d(400, 400, 0);
+    spriteWalk->scale = Vector3d(4, 4, 1);
+
+    newScene->objects.push_back(spriteWalk);
 
     newScene->name = string("Start Scene");
     //  Add Scene to Scenes list

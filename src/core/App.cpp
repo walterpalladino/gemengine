@@ -37,7 +37,14 @@ bool App::Init()
         return false;
     }
 
-    if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
+    //  TODO : Change to parameter to select when use or not antialiasing
+    //  SDL_HINT_RENDER_SCALE_QUALITY
+    //  0 or nearest / nearest pixel sampling
+    //  1 or linear / linear filtering (supported by OpenGL and Direct3D)
+    //  2 or best / anisotropic filtering (supported by Direct3D)
+    char *scaleQualityValue = new char[2];
+    sprintf(scaleQualityValue, "%i", scaleQuality);
+    if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, scaleQualityValue))
     {
         Log::GetInstance()->Error("App::Init", "Unable to Init hinting: %s", SDL_GetError());
     }
@@ -74,10 +81,10 @@ bool App::Init()
 }
 
 //------------------------------------------------------------------------------
-void App::Render()
+void App::Render(float time)
 {
     // SDL_RenderClear(Renderer);
-    activeScene->Render();
+    activeScene->Render(time);
     // SDL_RenderPresent(Renderer);
 }
 
@@ -127,8 +134,6 @@ int App::Execute(int argc, char *argv[])
     if (!Init())
         return 0;
 
-    // startTime = std::chrono::steady_clock::now();
-    // lastTimeOfLoop = std::chrono::steady_clock::now();
     firstRenderTime = SDL_GetTicks();
     lastRenderTime = SDL_GetTicks();
 
@@ -140,14 +145,7 @@ int App::Execute(int argc, char *argv[])
     while (Running)
     {
         //  Get Time
-        // std::chrono::steady_clock::time_point timeOfLoop = std::chrono::steady_clock::now();
         uint32_t frameStart = SDL_GetTicks();
-
-        //        float elapsedMilliseconds = std::chrono::duration_cast<chrono::milliseconds>(timeOfLoop - lastTimeOfLoop).count();
-        // float elapsedMilliseconds = timeOfLoopTicks - lastTimeOfLoopTicks;
-        /*
-        std::cout << "Elapsed time in milliseconds: " << elapsedMilliseconds << " ms" << std::endl;
-        */
 
         //   TODO : Check this hardcoded value to calculate it based on target fps
         if (eventCounter % 10 == 0)
@@ -156,15 +154,13 @@ int App::Execute(int argc, char *argv[])
         }
         eventCounter++;
 
-        // float elapsedTimeFromStart = std::chrono::duration_cast<chrono::milliseconds>(timeOfLoop - startTime).count();
         float elapsedTimeFromStart = frameStart - firstRenderTime;
         Loop(elapsedTimeFromStart);
 
         Physics();
 
-        Render();
+        Render(elapsedTimeFromStart);
 
-        // float elapsedTimeLoop = std::chrono::duration_cast<chrono::milliseconds>(std::chrono::steady_clock::now() - timeOfLoop).count();
         float frameTime = SDL_GetTicks() - frameStart;
 
         if (frameTime >= targetFrameTime)
@@ -174,18 +170,9 @@ int App::Execute(int argc, char *argv[])
 
         totalFrames = totalFrames + 1;
 
-        //        cout << (elapsedTimeFromStart / frames) << endl;
-
-        // lastTimeOfLoop = timeOfLoop;
         lastRenderTime = SDL_GetTicks();
     }
-    /*
-        // std::chrono::steady_clock::time_point timeNow = std::chrono::steady_clock::now();
-        uint32_t timeNow = SDL_GetTicks();
-        // float elapsedTimeFromStart = std::chrono::duration_cast<chrono::milliseconds>(timeNow - startTime).count();
-        float elapsedTimeFromStart = timeNow - startTimeTicks;
-        std::cout << (totalFrames / (elapsedTimeFromStart / 1000.0f)) << std::endl;
-    */
+
     Log::GetInstance()->Info("App::Execute", "Totl Frames: %.0f FPS : %.2f", totalFrames, GetFPS());
 
     Cleanup();
@@ -207,7 +194,6 @@ void App::PollEvents()
 
 float App::GetFPS()
 {
-    // float elapsedTimeFromStart = std::chrono::duration_cast<chrono::milliseconds>(lastTimeOfLoop - startTime).count();
     float elapsedTimeFromStart = lastRenderTime - firstRenderTime;
     return totalFrames / elapsedTimeFromStart * 1000.0f;
 }

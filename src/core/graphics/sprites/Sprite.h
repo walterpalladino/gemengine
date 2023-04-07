@@ -14,9 +14,13 @@ private:
     SDL_Rect destRect;
     SDL_Renderer *renderer;
 
+    Point2dInt offset = Point2dInt(0, 0);
     Point2dInt size = Point2dInt(0, 0);
-    int frames = 0;
+    int animationFrames = 0;
     int animationSpeed = 30; // FPS
+
+    int actualFrame;
+    int animationStartTime;
 
 public:
     Sprite(SDL_Renderer *renderer);
@@ -25,7 +29,7 @@ public:
     virtual void Update();
     virtual void Cleanup();
 
-    virtual void Render();
+    virtual void Render(float time);
 
-    void Load(const char *fileName);
+    void Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed);
 };

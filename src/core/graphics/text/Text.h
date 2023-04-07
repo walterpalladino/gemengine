@@ -25,7 +25,7 @@ public:
     virtual void Update();
     virtual void Cleanup();
 
-    virtual void Render();
+    virtual void Render(float time);
 
     void Init(const string, const char *fileName, const int fontSize);
     void SetText(string text) { this->text = text; }
