@@ -52,7 +52,7 @@ void Game::LoadScenes()
     //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
     spriteWalk->Load("/Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png", 0, 0, 66, 48, 12, 12);
     spriteWalk->position = Vector3d(400, 400, 0);
-    spriteWalk->scale = Vector3d(4, 4, 1);
+    spriteWalk->scale = Vector3d(-4, 4, 1);
 
     newScene->objects.push_back(spriteWalk);
 

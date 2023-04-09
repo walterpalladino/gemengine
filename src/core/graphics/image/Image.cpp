@@ -44,26 +44,24 @@ void Image::Render(float time)
     //  Update Destination Rectangle based on Position and Scale
     destRect.x = position.x;
     destRect.y = position.y;
-    destRect.w = sourceRect.w * scale.x;
-    destRect.h = sourceRect.h * scale.y;
+    destRect.w = sourceRect.w * abs(scale.x);
+    destRect.h = sourceRect.h * abs(scale.y);
 
-    if (Math::IsZero(rotation.z))
+    SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE;
+    if (scale.x < 0)
     {
-        SDL_RenderCopy(renderer, image, &sourceRect, &destRect);
+        flip = (SDL_RendererFlip)(flip | SDL_RendererFlip::SDL_FLIP_HORIZONTAL);
     }
-    else
-    { /*
-         SDL_Point center = SDL_Point();
-         center.x = destRect.x + destRect.w / 2;
-         center.y = destRect.y + destRect.h / 2;
- */
-        SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE;
-        SDL_RenderCopyEx(renderer,
-                         image,
-                         &sourceRect,
-                         &destRect,
-                         rotation.z,
-                         NULL, //&center,
-                         flip);
+    if (scale.y < 0)
+    {
+        flip = (SDL_RendererFlip)(flip | SDL_RendererFlip::SDL_FLIP_VERTICAL);
     }
+
+    SDL_RenderCopyEx(renderer,
+                     image,
+                     &sourceRect,
+                     &destRect,
+                     rotation.z,
+                     NULL, //&center,
+                     flip);
 }

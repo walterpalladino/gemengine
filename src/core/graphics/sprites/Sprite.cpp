@@ -74,22 +74,24 @@ void Sprite::Render(float time)
     //  Update Destination Rectangle based on Position and Scale
     destRect.x = position.x;
     destRect.y = position.y;
-    destRect.w = size.x * scale.x;
-    destRect.h = size.y * scale.y;
+    destRect.w = size.x * abs(scale.x);
+    destRect.h = size.y * abs(scale.y);
 
-    if (Math::IsZero(rotation.z))
+    SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE;
+    if (scale.x < 0)
     {
-        SDL_RenderCopy(renderer, image, &spriteSourceRect, &destRect);
+        flip = (SDL_RendererFlip)(flip | SDL_RendererFlip::SDL_FLIP_HORIZONTAL);
     }
-    else
+    if (scale.y < 0)
     {
-        SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE;
-        SDL_RenderCopyEx(renderer,
-                         image,
-                         &spriteSourceRect,
-                         &destRect,
-                         rotation.z,
-                         NULL, //&center,
-                         flip);
+        flip = (SDL_RendererFlip)(flip | SDL_RendererFlip::SDL_FLIP_VERTICAL);
     }
+
+    SDL_RenderCopyEx(renderer,
+                     image,
+                     &spriteSourceRect,
+                     &destRect,
+                     rotation.z,
+                     NULL, //&center,
+                     flip);
 }
