@@ -20,21 +20,24 @@ void App::LoadScenes()
 
     //  TODO : Replace for assets loader
     //  Create Scene
-    Scene *newScene = new Scene(Renderer);
-    //  Craete Image
+    // Scene *newScene = new Scene(Renderer);
+    Scene *newScene = new Scene();
+
+    //  Create Image
     Image *newImage = new Image(Renderer);
     newImage->Init();
     //  Load Image
     newImage->Load("resources/logo.png");
     newImage->name = string("resources/logo.png");
-    //  Add Image to Scene
+    // newImage->scale = Vector3d(1, 1, 1);
+    //   Add Image to Scene
     newScene->objects.push_back(newImage);
 
     //  Add text
     Text *newText = new Text(Renderer);
     newText->Init("SDL2 text", "resources/fonts/Commodore-64-v6.3.TTF", 24);
-    newText->position = Vector3d(200, 200, 0);
-    newText->scale = Vector3d(2, 2, 1);
+    newText->position = Vector3d(100, 100, 0);
+    newText->scale = Vector3d(1, 1, 1);
 
     //  Add Text to Scene
     newScene->objects.push_back(newText);
@@ -43,16 +46,16 @@ void App::LoadScenes()
     Sprite *spriteIdle = new Sprite(Renderer);
     //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
     spriteIdle->Load("resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png", 0, 0, 38, 48, 4, 4);
-    spriteIdle->position = Vector3d(400, 300, 0);
-    spriteIdle->scale = Vector3d(4, 4, 1);
+    spriteIdle->position = Vector3d(100, 50, 0);
+    spriteIdle->scale = Vector3d(1, 1, 1);
 
     newScene->objects.push_back(spriteIdle);
 
     Sprite *spriteWalk = new Sprite(Renderer);
     //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
     spriteWalk->Load("resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png", 0, 0, 66, 48, 12, 12);
-    spriteWalk->position = Vector3d(400, 400, 0);
-    spriteWalk->scale = Vector3d(-4, 4, 1);
+    spriteWalk->position = Vector3d(200, 100, 0);
+    spriteWalk->scale = Vector3d(-1, 1, 1);
 
     newScene->objects.push_back(spriteWalk);
 
@@ -70,8 +73,8 @@ void App::Loop(float time)
 
     //  Scale the image
     Vector3d scale = activeScene->objects[0]->scale;
-    scale.x = 0.5f;
-    scale.y = 0.5f;
+    scale.x = 0.25f;
+    scale.y = 0.25f;
     activeScene->objects[0]->scale = scale;
 
     //  Rotate logo image

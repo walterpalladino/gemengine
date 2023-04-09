@@ -53,7 +53,7 @@ bool GemEngine::Init()
              "Gem Engine",
              SDL_WINDOWPOS_CENTERED,
              SDL_WINDOWPOS_CENTERED,
-             WindowWidth, WindowHeight,
+             windowSize.x, windowSize.y,
              SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL)) == NULL)
     {
         Log::GetInstance()->Error("GemEngine::Init", "Unable to create SDL Window: %s", SDL_GetError());
@@ -69,6 +69,9 @@ bool GemEngine::Init()
 
     SDL_SetRenderDrawColor(Renderer, 0x00, 0x00, 0x00, 0xFF);
 
+    virtualWindowTexture = SDL_CreateTexture(Renderer, SDL_GetWindowPixelFormat(Window), SDL_TEXTUREACCESS_TARGET, virtualWindowSize.x, virtualWindowSize.y);
+    windowTexture = SDL_CreateTexture(Renderer, SDL_GetWindowPixelFormat(Window), SDL_TEXTUREACCESS_TARGET, windowSize.x, windowSize.y);
+
     InputHandler::Instance()->Init();
     FontsManager::Instance()->Init();
     TextureManager::Instance()->Init(Renderer);
@@ -83,9 +86,18 @@ bool GemEngine::Init()
 //------------------------------------------------------------------------------
 void GemEngine::Render(float time)
 {
-    // SDL_RenderClear(Renderer);
+
+    // SDL_SetRenderTarget(Renderer, virtualWindowTexture);
+
+    SDL_RenderClear(Renderer);
+
     activeScene->Render(time);
-    // SDL_RenderPresent(Renderer);
+
+    // SDL_SetRenderTarget(Renderer, NULL);
+
+    // SDL_RenderCopyEx(Renderer, virtualWindowTexture, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
+
+    SDL_RenderPresent(Renderer);
 }
 
 //------------------------------------------------------------------------------
@@ -106,6 +118,9 @@ void GemEngine::Cleanup()
         Window = NULL;
         Log::GetInstance()->Info("GemEngine::Cleanup", "DestroyWindow Completed");
     }
+
+    SDL_DestroyTexture(virtualWindowTexture);
+    SDL_DestroyTexture(windowTexture);
 
     SDL_Quit();
 

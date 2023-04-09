@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 
 #include "core/Scene.h"
+#include "math/Point2dInt.h"
 
 using namespace std;
 
@@ -18,8 +19,12 @@ protected:
     SDL_Window *Window = NULL;
     SDL_Renderer *Renderer = NULL;
 
-    int WindowWidth = 1024;
-    int WindowHeight = 768;
+    SDL_Texture *virtualWindowTexture = NULL;
+    SDL_Texture *windowTexture = NULL;
+
+    Point2dInt windowSize = Point2dInt(1024, 768);
+
+    Point2dInt virtualWindowSize = Point2dInt(384, 216);
 
     vector<Scene *> scenes;
     Scene *activeScene;
@@ -64,6 +69,5 @@ protected:
 public:
     int Execute(int argc, char *argv[]);
 
-    int GetWindowWidth() { return WindowWidth; }
-    int GetWindowHeight() { return WindowHeight; }
+    Point2dInt GetWindowSize() { return windowSize; }
 };

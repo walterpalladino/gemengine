@@ -5,10 +5,11 @@
 
 #include "utils/Log.h"
 
-Scene::Scene(SDL_Renderer *renderer)
+// Scene::Scene(SDL_Renderer *renderer)
+Scene::Scene()
 {
     Log::GetInstance()->Info("Scene::Scene", "Constructor");
-    this->renderer = renderer;
+    // this->renderer = renderer;
     objects.reserve(MAX_OBJECTS_PER_SCENE);
 }
 
@@ -20,7 +21,7 @@ Scene::~Scene()
 void Scene::Render(float time)
 {
 
-    SDL_RenderClear(renderer);
+    // SDL_RenderClear(renderer);
 
     // renderizar imagenes, etc.
     // SDL_RenderCopy(_renderer, _logoTexture, &_sourceLogoRect, &_destLogoRect);
@@ -33,7 +34,7 @@ void Scene::Render(float time)
     }
 
     // Triggers the double buffers
-    SDL_RenderPresent(renderer);
+    // SDL_RenderPresent(renderer);
 }
 
 void Scene::Cleanup()

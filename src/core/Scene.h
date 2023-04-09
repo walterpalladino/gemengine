@@ -14,13 +14,14 @@ using namespace std;
 class Scene
 {
 private:
-    SDL_Renderer *renderer;
+    // SDL_Renderer *renderer;
 
 public:
     string name;
     vector<GemObject *> objects;
 
-    Scene(SDL_Renderer *renderer);
+    // Scene(SDL_Renderer *renderer);
+    Scene();
     ~Scene();
 
     void Render(float time);
