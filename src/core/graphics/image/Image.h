@@ -2,9 +2,9 @@
 
 #include <SDL2_image/SDL_image.h>
 
-#include "core/Object.h"
+#include "core/GemObject.h"
 
-class Image : public Object
+class Image : public GemObject
 {
 
 private:

@@ -2,10 +2,10 @@
 
 #include <SDL2_image/SDL_image.h>
 
-#include "core/Object.h"
+#include "core/GemObject.h"
 #include "math/Point2dInt.h"
 
-class Sprite : public Object
+class Sprite : public GemObject
 {
 
 private:

@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "core/App.h"
+#include "core/GemEngine.h"
 #include "utils/Log.h"
 #include "input/InputHandler.h"
 #include "core/graphics/text/FontsManager.h"
@@ -9,31 +9,31 @@
 using namespace std;
 
 //==============================================================================
-App::App()
+GemEngine::GemEngine()
 {
-    Log::GetInstance()->Info("App::App", "App Constructor");
+    Log::GetInstance()->Info("GemEngine::GemEngine", "GemEngine Constructor");
     scenes.reserve(MAX_SCENES_PER_APP);
     activeScene = NULL;
 }
 
-App::~App()
+GemEngine::~GemEngine()
 {
-    Log::GetInstance()->Info("App::~App", "App Destructor");
+    Log::GetInstance()->Info("GemEngine::~GemEngine", "GemEngine Destructor");
 }
 
 //------------------------------------------------------------------------------
-void App::OnEvent(SDL_Event *Event)
+void GemEngine::OnEvent(SDL_Event *Event)
 {
 }
 
 //------------------------------------------------------------------------------
-bool App::Init()
+bool GemEngine::Init()
 {
-    Log::GetInstance()->Info("App::Init", "Init Framework");
+    Log::GetInstance()->Info("GemEngine::Init", "Init Framework");
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
-        Log::GetInstance()->Error("App::Init", "Unable to Init SDL: %s", SDL_GetError());
+        Log::GetInstance()->Error("GemEngine::Init", "Unable to Init SDL: %s", SDL_GetError());
         return false;
     }
 
@@ -46,7 +46,7 @@ bool App::Init()
     sprintf(scaleQualityValue, "%i", scaleQuality);
     if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, scaleQualityValue))
     {
-        Log::GetInstance()->Error("App::Init", "Unable to Init hinting: %s", SDL_GetError());
+        Log::GetInstance()->Error("GemEngine::Init", "Unable to Init hinting: %s", SDL_GetError());
     }
 
     if ((Window = SDL_CreateWindow(
@@ -56,14 +56,14 @@ bool App::Init()
              WindowWidth, WindowHeight,
              SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL)) == NULL)
     {
-        Log::GetInstance()->Error("App::Init", "Unable to create SDL Window: %s", SDL_GetError());
+        Log::GetInstance()->Error("GemEngine::Init", "Unable to create SDL Window: %s", SDL_GetError());
         return false;
     }
 
     if ((Renderer = SDL_CreateRenderer(Window, -1, SDL_RendererFlags::SDL_RENDERER_ACCELERATED)) == NULL)
     //| SDL_RENDERER_PRESENTVSYNC
     {
-        Log::GetInstance()->Error("App::Init", "Unable to create renderer: %s", SDL_GetError());
+        Log::GetInstance()->Error("GemEngine::Init", "Unable to create renderer: %s", SDL_GetError());
         return false;
     }
 
@@ -73,7 +73,7 @@ bool App::Init()
     FontsManager::Instance()->Init();
     TextureManager::Instance()->Init(Renderer);
 
-    Log::GetInstance()->Info("App::Init", "Initialization Completed");
+    Log::GetInstance()->Info("GemEngine::Init", "Initialization Completed");
 
     LoadScenes();
 
@@ -81,7 +81,7 @@ bool App::Init()
 }
 
 //------------------------------------------------------------------------------
-void App::Render(float time)
+void GemEngine::Render(float time)
 {
     // SDL_RenderClear(Renderer);
     activeScene->Render(time);
@@ -89,22 +89,22 @@ void App::Render(float time)
 }
 
 //------------------------------------------------------------------------------
-void App::Cleanup()
+void GemEngine::Cleanup()
 {
-    Log::GetInstance()->Info("App::Cleanup", "Cleanup");
+    Log::GetInstance()->Info("GemEngine::Cleanup", "Cleanup");
 
     if (Renderer)
     {
         SDL_DestroyRenderer(Renderer);
         Renderer = NULL;
-        Log::GetInstance()->Info("App::Cleanup", "DestroyRenderer Completed");
+        Log::GetInstance()->Info("GemEngine::Cleanup", "DestroyRenderer Completed");
     }
 
     if (Window)
     {
         SDL_DestroyWindow(Window);
         Window = NULL;
-        Log::GetInstance()->Info("App::Cleanup", "DestroyWindow Completed");
+        Log::GetInstance()->Info("GemEngine::Cleanup", "DestroyWindow Completed");
     }
 
     SDL_Quit();
@@ -112,12 +112,12 @@ void App::Cleanup()
     FontsManager::Instance()->Clean();
     TextureManager::Instance()->Clean();
 
-    Log::GetInstance()->Info("App::Cleanup", "SDL_Quit Completed");
+    Log::GetInstance()->Info("GemEngine::Cleanup", "SDL_Quit Completed");
 
     //  Clean up scenes
     for (auto scene : scenes)
     {
-        Log::GetInstance()->Info("App::~App", "Deleting scene: %s", scene->name.c_str());
+        Log::GetInstance()->Info("GemEngine::~App", "Deleting scene: %s", scene->name.c_str());
         scene->Cleanup();
         delete scene;
     }
@@ -125,7 +125,7 @@ void App::Cleanup()
 }
 
 //------------------------------------------------------------------------------
-int App::Execute(int argc, char *argv[])
+int GemEngine::Execute(int argc, char *argv[])
 {
 
     // for (int i = 0; i < argc; ++i)
@@ -173,16 +173,16 @@ int App::Execute(int argc, char *argv[])
         lastRenderTime = SDL_GetTicks();
     }
 
-    Log::GetInstance()->Info("App::Execute", "Totl Frames: %.0f FPS : %.2f", totalFrames, GetFPS());
+    Log::GetInstance()->Info("GemEngine::Execute", "Totl Frames: %.0f FPS : %.2f", totalFrames, GetFPS());
 
     Cleanup();
 
-    Log::GetInstance()->Info("App::Execute", "Good Bye!");
+    Log::GetInstance()->Info("GemEngine::Execute", "Good Bye!");
 
     return 1;
 }
 
-void App::PollEvents()
+void GemEngine::PollEvents()
 {
 
     bool quit = InputHandler::Instance()->Update();
@@ -192,12 +192,12 @@ void App::PollEvents()
     }
 }
 
-float App::GetFPS()
+float GemEngine::GetFPS()
 {
     float elapsedTimeFromStart = lastRenderTime - firstRenderTime;
     return totalFrames / elapsedTimeFromStart * 1000.0f;
 }
 
-void App::Physics()
+void GemEngine::Physics()
 {
 }

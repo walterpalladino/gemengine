@@ -5,7 +5,7 @@
 
 #include <SDL2/SDL.h>
 
-#include "core/Object.h"
+#include "core/GemObject.h"
 
 using namespace std;
 
@@ -18,7 +18,7 @@ private:
 
 public:
     string name;
-    vector<Object *> objects;
+    vector<GemObject *> objects;
 
     Scene(SDL_Renderer *renderer);
     ~Scene();

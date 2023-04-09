@@ -1,7 +1,7 @@
 
 #include <iostream>
 
-#include "Game.h"
+#include "App.h"
 
 #include "core/graphics/image/Image.h"
 #include "core/graphics/sprites/Sprite.h"
@@ -10,13 +10,13 @@
 #include "input/InputHandler.h"
 #include "core/graphics/text/FontsManager.h"
 
-Game::Game() : App()
+App::App() : GemEngine()
 {
 }
 
-void Game::LoadScenes()
+void App::LoadScenes()
 {
-    Log::GetInstance()->Info("Game::LoadScenes", "Load Scenes");
+    Log::GetInstance()->Info("App::LoadScenes", "Load Scenes");
 
     //  TODO : Replace for assets loader
     //  Create Scene
@@ -64,9 +64,9 @@ void Game::LoadScenes()
 }
 
 // Logic loop
-void Game::Loop(float time)
+void App::Loop(float time)
 {
-    // Log::GetInstance()->Info("Game::Loop", "Running the Logic Loop");
+    // Log::GetInstance()->Info("App::Loop", "Running the Logic Loop");
 
     //  Scale the image
     Vector3d scale = activeScene->objects[0]->scale;

@@ -10,7 +10,7 @@ using namespace std;
 
 #define MAX_SCENES_PER_APP 1024
 
-class App
+class GemEngine
 {
 protected:
     bool Running = true;
@@ -33,8 +33,8 @@ protected:
     int scaleQuality = 1;
 
 protected:
-    App();
-    ~App();
+    GemEngine();
+    ~GemEngine();
 
     // Capture SDL Events
     void OnEvent(SDL_Event *Event);

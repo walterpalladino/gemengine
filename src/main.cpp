@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Game.h"
+#include "App.h"
 
 using namespace std;
 
@@ -20,12 +20,12 @@ int main(int argc, char *argv[])
 			cout << argv[i] << '\n';
 	*/
 
-	Game game = Game();
+	App app = App();
 
 	int status = -1;
 	try
 	{
-		status = game.Execute(argc, argv);
+		status = app.Execute(argc, argv);
 	}
 	catch (const std::exception &e)
 	{

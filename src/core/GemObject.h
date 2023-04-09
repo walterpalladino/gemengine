@@ -5,7 +5,7 @@
 
 #include "math/Vector3d.h"
 
-class Object
+class GemObject
 {
 
 public:

@@ -1,9 +1,9 @@
-#include "core/App.h"
+#include "core/GemEngine.h"
 
-class Game : public App
+class App : public GemEngine
 {
 public:
-    Game();
+    App();
     virtual void LoadScenes();
     // Logic loop
     virtual void Loop(float time);

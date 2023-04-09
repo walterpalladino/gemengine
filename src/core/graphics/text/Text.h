@@ -4,11 +4,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2_ttf/SDL_ttf.h>
 
-#include "core/Object.h"
+#include "core/GemObject.h"
 
 using namespace std;
 
-class Text : public Object
+class Text : public GemObject
 {
 private:
     string text;
