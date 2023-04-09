@@ -42,7 +42,7 @@ void Game::LoadScenes()
     //  Add Sprites
     Sprite *spriteIdle = new Sprite(Renderer);
     //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
-    spriteIdle->Load("/Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png", 0, 0, 38, 48, 4, 4);
+    spriteIdle->Load("resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png", 0, 0, 38, 48, 4, 4);
     spriteIdle->position = Vector3d(400, 300, 0);
     spriteIdle->scale = Vector3d(4, 4, 1);
 
@@ -50,7 +50,7 @@ void Game::LoadScenes()
 
     Sprite *spriteWalk = new Sprite(Renderer);
     //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
-    spriteWalk->Load("/Users/walterpalladino/prg/sdl2-ws/gemengine/resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png", 0, 0, 66, 48, 12, 12);
+    spriteWalk->Load("resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png", 0, 0, 66, 48, 12, 12);
     spriteWalk->position = Vector3d(400, 400, 0);
     spriteWalk->scale = Vector3d(-4, 4, 1);
 
