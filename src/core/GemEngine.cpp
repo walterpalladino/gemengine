@@ -48,13 +48,13 @@ bool GemEngine::Init()
     {
         Log::GetInstance()->Error("GemEngine::Init", "Unable to Init hinting: %s", SDL_GetError());
     }
-
+    // SDL_WindowFlags::SDL_WINDOW_RESIZABLE
     if ((Window = SDL_CreateWindow(
              "Gem Engine",
              SDL_WINDOWPOS_CENTERED,
              SDL_WINDOWPOS_CENTERED,
              windowSize.x, windowSize.y,
-             SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL)) == NULL)
+             SDL_WINDOW_OPENGL)) == NULL)
     {
         Log::GetInstance()->Error("GemEngine::Init", "Unable to create SDL Window: %s", SDL_GetError());
         return false;
@@ -87,15 +87,53 @@ bool GemEngine::Init()
 void GemEngine::Render(float time)
 {
 
-    // SDL_SetRenderTarget(Renderer, virtualWindowTexture);
+    if (renderToVirtualWindow)
+    {
+        SDL_SetRenderTarget(Renderer, virtualWindowTexture);
+    }
 
     SDL_RenderClear(Renderer);
 
     activeScene->Render(time);
 
-    // SDL_SetRenderTarget(Renderer, NULL);
+    if (renderToVirtualWindow)
+    {
+        int width = virtualWindowSize.x;
+        int height = virtualWindowSize.y;
 
-    // SDL_RenderCopyEx(Renderer, virtualWindowTexture, NULL, NULL, 0, NULL, SDL_FLIP_NONE);
+        float targetRatio = (float)virtualWindowSize.x / (float)virtualWindowSize.y;
+        float windowRatio = (float)windowSize.x / (float)windowSize.y;
+
+        if (targetRatio > windowRatio)
+        {
+            width = windowSize.x;
+            height = width / targetRatio;
+        }
+        else
+        {
+            height = windowSize.y;
+            width = height * targetRatio;
+        }
+        printf("%f x %f\n", targetRatio, windowRatio);
+        printf("%i x %i\n", width, height);
+
+        SDL_Rect srcRec = SDL_Rect();
+        srcRec.x = 0;
+        srcRec.y = 0;
+        srcRec.w = width;
+        srcRec.h = height;
+
+        SDL_Rect destRec = SDL_Rect();
+        destRec.x = (windowSize.x - width) / 2;
+        destRec.y = (windowSize.y - height) / 2;
+        destRec.w = width;
+        destRec.h = height;
+
+        SDL_SetRenderTarget(Renderer, NULL);
+        SDL_RenderClear(Renderer);
+
+        SDL_RenderCopyEx(Renderer, virtualWindowTexture, &srcRec, &destRec, 0, NULL, SDL_FLIP_NONE);
+    }
 
     SDL_RenderPresent(Renderer);
 }

@@ -22,7 +22,7 @@ protected:
     SDL_Texture *virtualWindowTexture = NULL;
     SDL_Texture *windowTexture = NULL;
 
-    Point2dInt windowSize = Point2dInt(1024, 768);
+    Point2dInt windowSize = Point2dInt(1280, 720);
 
     Point2dInt virtualWindowSize = Point2dInt(384, 216);
 
@@ -35,7 +35,8 @@ protected:
     float targetFPS = 60.0f;
     double totalFrames;
 
-    int scaleQuality = 1;
+    int scaleQuality = 0;
+    bool renderToVirtualWindow = true;
 
 protected:
     GemEngine();
