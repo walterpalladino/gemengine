@@ -6,6 +6,7 @@
 
 #include "core/Scene.h"
 #include "math/Point2dInt.h"
+#include "math/Point3dInt.h"
 
 using namespace std;
 
@@ -38,6 +39,8 @@ protected:
 
     int scaleQuality = 0;
     bool renderToVirtualWindow = true;
+
+    Point3dInt backgroundColor;
 
 protected:
     GemEngine();

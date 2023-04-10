@@ -28,6 +28,8 @@ void Console::Init(SDL_Renderer *renderer, int x, int y, int width, int height, 
 
     consoleBuffer = new char[width * height];
 
+    color = Point3dInt(255, 255, 255);
+
     Clear();
 
     // sprintf(consoleBuffer, "GemEngine running...");
@@ -73,8 +75,8 @@ void Console::DrawCharacterAt(int x, int y, char c)
     // buffer[0] = c;
     //  buffer[1] = '\0';
 
-    SDL_Color color = {255, 255, 255};
-    // SDL_Surface *surface = TTF_RenderText_Solid(font, buffer, color);
+    // SDL_Color color = {255, 255, 255};
+    //  SDL_Surface *surface = TTF_RenderText_Solid(font, buffer, color);
     SDL_Rect srcRect;
     SDL_Rect destRect;
 
@@ -95,6 +97,9 @@ void Console::DrawCharacterAt(int x, int y, char c)
     destRect.y = y * characterSize.y;
     destRect.w = characterSize.x;
     destRect.h = characterSize.y;
+
+    SDL_SetTextureColorMod(fontTexture,
+                           color.x, color.y, color.z);
 
     SDL_RenderCopyEx(renderer,
                      fontTexture,
@@ -159,4 +164,16 @@ void Console::Print(const char *text)
     {
         SetCharacterAndUpdateCursor(text[i]);
     }
+}
+
+void Console::SetColor(int x, int y, int z)
+{
+    color.x = x;
+    color.y = y;
+    color.z = z;
+}
+
+const Point3dInt Console::GetColor()
+{
+    return color;
 }

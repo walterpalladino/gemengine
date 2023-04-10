@@ -15,6 +15,7 @@ GemEngine::GemEngine()
     Log::GetInstance()->Info("GemEngine::GemEngine", "GemEngine Constructor");
     scenes.reserve(MAX_SCENES_PER_APP);
     activeScene = NULL;
+    backgroundColor = Point3dInt(0, 0, 0);
 }
 
 GemEngine::~GemEngine()
@@ -87,6 +88,12 @@ bool GemEngine::Init()
 //------------------------------------------------------------------------------
 void GemEngine::Render(float time)
 {
+
+    SDL_SetRenderDrawColor(Renderer,
+                           backgroundColor.x,
+                           backgroundColor.y,
+                           backgroundColor.z,
+                           255);
 
     if (renderToVirtualWindow)
     {

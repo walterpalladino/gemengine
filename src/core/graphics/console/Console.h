@@ -6,6 +6,7 @@
 
 #include "core/GemObject.h"
 #include "math/Point2dInt.h"
+#include "math/Point3dInt.h"
 
 class Console
 {
@@ -33,6 +34,8 @@ private:
     Point2dInt characterSize;
     char *consoleBuffer = NULL;
 
+    Point3dInt color;
+
     void LoadFont(const char *fileName);
     void DrawCharacterAt(int x, int y, char c);
 
@@ -50,6 +53,9 @@ public:
     void Print(const char *text);
     void SetCursorAt(int x, int y);
     const Point2dInt GetCursorPosition();
+
+    void SetColor(int x, int y, int z);
+    const Point3dInt GetColor();
 
     bool enabled;
 

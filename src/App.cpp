@@ -67,8 +67,11 @@ void App::LoadScenes()
     activeScene = scenes.front();
 
     //  Console
-    //    Console::Instance()->Init(Renderer, 0, 0, 48, 27, "resources/fonts/cga8-thin.png", 8);
+    // Console::Instance()->Init(Renderer, 0, 0, 48, 27, "resources/fonts/cga8-thin.png", 8);
+    // backgroundColor = Point3dInt(216, 216, 216);
+
     Console::Instance()->Init(Renderer, 0, 0, 48, 27, "resources/fonts/potash-8x8.png", 8);
+    backgroundColor = Point3dInt(80, 69, 155);
 }
 
 // Logic loop
@@ -122,6 +125,8 @@ void App::Loop(float time)
 
     // const char text[] = "GemEngine running...";
     // std::copy(text, text + sizeof(text), consoleBuffer);
+    // Console::Instance()->SetColor(0, 0, 0);
+    Console::Instance()->SetColor(136, 126, 203);
     Console::Instance()->SetCursorAt(0, 0);
     Console::Instance()->Print("GemEngine running...");
     Console::Instance()->SetCursorAt(25, 0);
