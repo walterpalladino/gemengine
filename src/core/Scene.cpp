@@ -5,6 +5,8 @@
 
 #include "utils/Log.h"
 
+#include "core/graphics/console/Console.h"
+
 // Scene::Scene(SDL_Renderer *renderer)
 Scene::Scene()
 {
@@ -20,6 +22,8 @@ Scene::~Scene()
 
 void Scene::Render(float time)
 {
+
+    Console::Instance()->Render(time);
 
     // SDL_RenderClear(renderer);
 

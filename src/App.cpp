@@ -9,6 +9,7 @@
 #include "utils/Log.h"
 #include "input/InputHandler.h"
 #include "core/graphics/text/FontsManager.h"
+#include "core/graphics/console/Console.h"
 
 App::App() : GemEngine()
 {
@@ -64,6 +65,9 @@ void App::LoadScenes()
     scenes.push_back(newScene);
 
     activeScene = scenes.front();
+
+    //  Console
+    Console::Instance()->Init(Renderer, 0, 0, 48, 27, "resources/fonts/Commodore-64-v6.3.TTF", 8);
 }
 
 // Logic loop

@@ -5,6 +5,7 @@
 #include "input/InputHandler.h"
 #include "core/graphics/text/FontsManager.h"
 #include "core/graphics/textures/TextureManager.h"
+#include "core/graphics/console/Console.h"
 
 using namespace std;
 
@@ -164,6 +165,8 @@ void GemEngine::Cleanup()
 
     FontsManager::Instance()->Clean();
     TextureManager::Instance()->Clean();
+
+    Console::Instance()->Cleanup();
 
     Log::GetInstance()->Info("GemEngine::Cleanup", "SDL_Quit Completed");
 

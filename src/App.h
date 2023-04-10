@@ -1,4 +1,5 @@
 #include "core/GemEngine.h"
+#include "core/graphics/console/Console.h"
 
 class App : public GemEngine
 {

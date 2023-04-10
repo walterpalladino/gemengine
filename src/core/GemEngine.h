@@ -24,6 +24,7 @@ protected:
 
     Point2dInt windowSize = Point2dInt(1280, 720);
 
+    // Virtual Screen Dimensions (pixels)
     Point2dInt virtualWindowSize = Point2dInt(384, 216);
 
     vector<Scene *> scenes;
