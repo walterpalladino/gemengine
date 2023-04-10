@@ -119,4 +119,11 @@ void App::Loop(float time)
     char *text = new char[64];
     sprintf(text, "%.2f FPS", GetFPS());
     ((Text *)(activeScene->objects[1]))->SetText(text);
+
+    // const char text[] = "GemEngine running...";
+    // std::copy(text, text + sizeof(text), consoleBuffer);
+    Console::Instance()->SetCursorAt(0, 0);
+    Console::Instance()->Print("GemEngine running...");
+    Console::Instance()->SetCursorAt(25, 0);
+    Console::Instance()->Print(text);
 }

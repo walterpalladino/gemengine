@@ -36,11 +36,20 @@ private:
     void LoadFont(const char *fileName);
     void DrawCharacterAt(int x, int y, char c);
 
+    void SetCharacterAt(int x, int y, char c);
+    void SetCharacterAndUpdateCursor(char c);
+
+    Point2dInt cursorPosition = Point2dInt(0, 0);
+
 public:
     void Init(SDL_Renderer *renderer, int x, int y, int width, int height, const char *fileName, const int fontSize);
     void Cleanup();
     void Render(float time);
     void Clear();
+    void PutCharacterAt(int x, int y, char c);
+    void Print(const char *text);
+    void SetCursorAt(int x, int y);
+    const Point2dInt GetCursorPosition();
 
     bool enabled;
 

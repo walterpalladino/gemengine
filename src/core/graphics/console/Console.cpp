@@ -31,8 +31,8 @@ void Console::Init(SDL_Renderer *renderer, int x, int y, int width, int height, 
     Clear();
 
     // sprintf(consoleBuffer, "GemEngine running...");
-    const char text[] = "GemEngine running...";
-    std::copy(text, text + sizeof(text), consoleBuffer);
+    // const char text[] = "GemEngine running...";
+    // std::copy(text, text + sizeof(text), consoleBuffer);
 
     enabled = true;
 }
@@ -108,4 +108,55 @@ void Console::DrawCharacterAt(int x, int y, char c)
 void Console::Clear()
 {
     std::fill(consoleBuffer, consoleBuffer + virtualConsoleSize.x * virtualConsoleSize.y, ' ');
+    SetCursorAt(0, 0);
+}
+
+void Console::SetCursorAt(int x, int y)
+{
+    cursorPosition = Point2dInt(x, y);
+}
+
+const Point2dInt Console::GetCursorPosition()
+{
+    return cursorPosition;
+}
+
+void Console::PutCharacterAt(int x, int y, char c)
+{
+    if (x >= 0 && x < virtualConsoleSize.x && y >= 0 && y < virtualConsoleSize.y)
+    {
+        SetCharacterAt(x, y, c);
+    }
+}
+
+void Console::SetCharacterAt(int x, int y, char c)
+{
+    consoleBuffer[x + y * virtualConsoleSize.x] = c;
+}
+
+void Console::SetCharacterAndUpdateCursor(char c)
+{
+    SetCharacterAt(cursorPosition.x++, cursorPosition.y, c);
+
+    if (cursorPosition.x >= virtualConsoleSize.x)
+    {
+        cursorPosition.x = 0;
+        cursorPosition.y++;
+    }
+    if (cursorPosition.y >= virtualConsoleSize.y)
+    {
+        cursorPosition.x = 0;
+        //  TODO : Maybe add vertical scroll?
+        cursorPosition.y = 0;
+    }
+}
+
+void Console::Print(const char *text)
+{
+    int len = strlen(text);
+    // printf("%i\n", len);
+    for (int i = 0; i < len; i++)
+    {
+        SetCharacterAndUpdateCursor(text[i]);
+    }
 }
