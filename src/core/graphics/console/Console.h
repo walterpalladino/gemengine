@@ -23,9 +23,8 @@ private:
     Console() {}
     ~Console() {}
 
-    TTF_Font *font;
-    SDL_Rect sourceRect;
-    SDL_Rect destRect;
+    SDL_Texture *fontTexture;
+    SDL_Rect textureRect;
     SDL_Renderer *renderer;
 
     //  Virtual Console Dimensions (8x8 characters)
@@ -34,12 +33,14 @@ private:
     Point2dInt characterSize;
     char *consoleBuffer = NULL;
 
+    void LoadFont(const char *fileName);
     void DrawCharacterAt(int x, int y, char c);
 
 public:
     void Init(SDL_Renderer *renderer, int x, int y, int width, int height, const char *fileName, const int fontSize);
     void Cleanup();
     void Render(float time);
+    void Clear();
 
     bool enabled;
 

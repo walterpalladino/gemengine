@@ -67,7 +67,8 @@ void App::LoadScenes()
     activeScene = scenes.front();
 
     //  Console
-    Console::Instance()->Init(Renderer, 0, 0, 48, 27, "resources/fonts/Commodore-64-v6.3.TTF", 8);
+    //    Console::Instance()->Init(Renderer, 0, 0, 48, 27, "resources/fonts/cga8-thin.png", 8);
+    Console::Instance()->Init(Renderer, 0, 0, 48, 27, "resources/fonts/potash-8x8.png", 8);
 }
 
 // Logic loop

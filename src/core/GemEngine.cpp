@@ -115,8 +115,8 @@ void GemEngine::Render(float time)
             height = windowSize.y;
             width = height * targetRatio;
         }
-        printf("%f x %f\n", targetRatio, windowRatio);
-        printf("%i x %i\n", width, height);
+        // printf("%f x %f\n", targetRatio, windowRatio);
+        // printf("%i x %i\n", width, height);
 
         SDL_Rect srcRec = SDL_Rect();
         srcRec.x = 0;
