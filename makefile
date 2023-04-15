@@ -9,7 +9,7 @@ LIBSDIR = libs
 INCLUDESDIR = src
 
 CXX = clang++ -v -Wc++11-extensions
-CXXFLAGS = -I$(INCLUDESDIR) -I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image.framework/Headers -I/Library/Frameworks/SDL2_mixer.framework/Headers  -I/Library/Frameworks/SDL2_ttf.framework/Headers -I../glad/include -F/Library/Frameworks
+CXXFLAGS = -I$(INCLUDESDIR) -I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image.framework/Headers -I/Library/Frameworks/SDL2_mixer.framework/Headers  -I/Library/Frameworks/SDL2_ttf.framework/Headers -I$(LIBSDIR)/glad/include -F/Library/Frameworks
 
 CC = clang++ -v
 CFLAGS = $(CXXFLAGS)
@@ -24,6 +24,7 @@ APP_NAME = GemEngine
 # Find all the C and C++ files we want to compile
 # Note the single quotes around the * expressions. The shell will incorrectly expand these otherwise, but we want to send the * directly to the find command.
 SOURCES := $(shell find $(SRCDIR) -name '*.cpp' -or -name '*.c')
+SOURCES += $(shell find $(LIBSDIR) -name '*.cpp' -or -name '*.c')
 
 #OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 
@@ -92,9 +93,11 @@ $(OBJDIR)/%.cpp.o: %.cpp
 	mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-$(OBJDIR)/glad.o: $(LIBSDIR)/glad/src/glad.c
+$(OBJDIR)/%.c.o: %.c
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c -o $@ $<
 	
 $(DISTDIR)/$(APP_NAME): $(OBJS)
+	mkdir -p $(dir $@)
 	$(CXX) -o $@ $^ $(CXXFLAGS) $(LIBS)
 
