@@ -59,6 +59,9 @@ void Console::Cleanup()
 
 void Console::Render(float time)
 {
+    if (!enabled)
+        return;
+
     for (int c = 0; c < virtualConsoleSize.x * virtualConsoleSize.y; c++)
     // for (int c = 0; c < 1; c++)
     {

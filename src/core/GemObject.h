@@ -11,6 +11,8 @@ class GemObject
 public:
     std::string name;
 
+    bool enabled;
+
     Vector3d position = Vector3d::Zero();
     Vector3d rotation = Vector3d::Zero();
     Vector3d scale = Vector3d::One();

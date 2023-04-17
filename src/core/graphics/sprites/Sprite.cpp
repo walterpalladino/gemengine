@@ -51,6 +51,8 @@ void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int
 
 void Sprite::Render(float time)
 {
+    if (!enabled)
+        return;
 
     if (animationStartTime == -1)
     {

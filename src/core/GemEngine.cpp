@@ -7,6 +7,8 @@
 #include "core/graphics/textures/TextureManager.h"
 #include "core/graphics/console/Console.h"
 
+#include "core/graphics/Draw.h"
+
 using namespace std;
 
 //==============================================================================
@@ -87,9 +89,9 @@ bool GemEngine::Init()
 }
 
 //------------------------------------------------------------------------------
-void GemEngine::Render(float time)
-{
 
+void GemEngine::PreRender(float time)
+{
     SDL_SetRenderDrawColor(Renderer,
                            backgroundColor.x,
                            backgroundColor.y,
@@ -102,9 +104,10 @@ void GemEngine::Render(float time)
     }
 
     SDL_RenderClear(Renderer);
+}
 
-    activeScene->Render(time);
-
+void GemEngine::PostRender(float time)
+{
     if (renderToVirtualWindow)
     {
         int width = virtualWindowSize.x;
@@ -145,6 +148,11 @@ void GemEngine::Render(float time)
     }
 
     SDL_RenderPresent(Renderer);
+}
+
+void GemEngine::Render(float time)
+{
+    activeScene->Render(time);
 }
 
 //------------------------------------------------------------------------------
@@ -223,7 +231,9 @@ int GemEngine::Execute(int argc, char *argv[])
 
         Physics();
 
+        PreRender(elapsedTimeFromStart);
         Render(elapsedTimeFromStart);
+        PostRender(elapsedTimeFromStart);
 
         float frameTime = SDL_GetTicks() - frameStart;
 

@@ -1,6 +1,7 @@
 #pragma once
 
-#include <vector>
+#include <unordered_map>
+// #include <vector>
 #include <string>
 
 #include <SDL2/SDL.h>
@@ -16,13 +17,20 @@ class Scene
 private:
     // SDL_Renderer *renderer;
 
+private:
+    unordered_map<string, GemObject *> objects;
+
 public:
     string name;
-    vector<GemObject *> objects;
+    //    vector<GemObject *> objects;
 
     // Scene(SDL_Renderer *renderer);
     Scene();
     ~Scene();
+
+    GemObject *Add(const char *name, GemObject *object);
+
+    GemObject *Get(const char *name);
 
     void Render(float time);
 

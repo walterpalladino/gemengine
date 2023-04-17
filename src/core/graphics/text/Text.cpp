@@ -40,6 +40,9 @@ void Text::Render(float time)
 {
     // printf("Text::Render\n");
 
+    if (!enabled)
+        return;
+
     SDL_Color color = {255, 255, 255};
     SDL_Surface *surface = TTF_RenderText_Solid(font, text.c_str(), color);
 

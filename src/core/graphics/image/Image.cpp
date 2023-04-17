@@ -39,6 +39,8 @@ void Image::Load(const char *fileName)
 
 void Image::Render(float time)
 {
+    if (!enabled)
+        return;
 
     // printf("Image::Render\n");
     //  Update Destination Rectangle based on Position and Scale

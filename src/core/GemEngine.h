@@ -42,6 +42,10 @@ protected:
 
     Point3dInt backgroundColor;
 
+private:
+    void PreRender(float time);
+    void PostRender(float time);
+
 protected:
     GemEngine();
     ~GemEngine();
@@ -58,9 +62,6 @@ protected:
     // Poll Events
     void PollEvents();
 
-    // Render loop (draw)
-    void Render(float time);
-
     // Free up resources
     void Cleanup();
 
@@ -70,6 +71,8 @@ protected:
     // Logic loop
     virtual void Loop(float time) {}
     virtual void LoadScenes() {}
+    // Render loop (draw)
+    virtual void Render(float time);
 
 public:
     int Execute(int argc, char *argv[]);
