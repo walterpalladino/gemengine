@@ -51,12 +51,13 @@ bool GemEngine::Init()
         Log::GetInstance()->Error("GemEngine::Init", "Unable to Init hinting: %s", SDL_GetError());
     }
     // SDL_WindowFlags::SDL_WINDOW_RESIZABLE
+    //  SDL_WINDOW_OPENGL
     if ((Window = SDL_CreateWindow(
              "Gem Engine",
              SDL_WINDOWPOS_CENTERED,
              SDL_WINDOWPOS_CENTERED,
              windowSize.x, windowSize.y,
-             SDL_WINDOW_OPENGL)) == NULL)
+             SDL_WINDOW_SHOWN)) == NULL)
     {
         Log::GetInstance()->Error("GemEngine::Init", "Unable to create SDL Window: %s", SDL_GetError());
         return false;
