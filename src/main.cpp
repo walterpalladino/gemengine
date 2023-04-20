@@ -25,7 +25,9 @@ int main(int argc, char *argv[])
 	int status = -1;
 	try
 	{
-		status = app.Execute(argc, argv);
+		//		status = app.Execute(argc, argv);
+		status = app.Start(1280, 720, 384, 216);
+		// status = app.Start(1280, 720);
 	}
 	catch (const std::exception &e)
 	{

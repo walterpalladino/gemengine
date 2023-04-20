@@ -197,7 +197,27 @@ void GemEngine::Cleanup()
 }
 
 //------------------------------------------------------------------------------
-int GemEngine::Execute(int argc, char *argv[])
+int GemEngine::Start(int windowWidth, int windowHeight, int virtualWindowWidth, int virtualWindowHeight)
+{
+    windowSize = Point2dInt(windowWidth, windowHeight);
+
+    // Virtual Screen Dimensions (pixels)
+    virtualWindowSize = Point2dInt(virtualWindowWidth, virtualWindowHeight);
+    renderToVirtualWindow = true;
+
+    return Start();
+}
+
+int GemEngine::Start(int windowWidth, int windowHeight)
+{
+    windowSize = Point2dInt(windowWidth, windowHeight);
+
+    renderToVirtualWindow = false;
+
+    return Start();
+}
+
+int GemEngine::Start()
 {
 
     // for (int i = 0; i < argc; ++i)
