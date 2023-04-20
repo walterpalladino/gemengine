@@ -7,7 +7,7 @@
 
 #include "core/graphics/console/Console.h"
 
-#include "exceptions/DuplicatedResourceIdentifier.h"
+#include "core/exceptions/DuplicatedResourceIdentifier.h"
 
 // Scene::Scene(SDL_Renderer *renderer)
 Scene::Scene()

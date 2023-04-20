@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "input/InputHandler.h"
+#include "core/input/InputHandler.h"
 
 InputHandler *InputHandler::instance = 0;
 

@@ -2,7 +2,7 @@
 
 #include "core/GemEngine.h"
 #include "utils/Log.h"
-#include "input/InputHandler.h"
+#include "core/input/InputHandler.h"
 #include "core/graphics/text/FontsManager.h"
 #include "core/graphics/textures/TextureManager.h"
 #include "core/graphics/console/Console.h"

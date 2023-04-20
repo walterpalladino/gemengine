@@ -5,7 +5,7 @@
 #include "core/graphics/text/FontsManager.h"
 
 #include "utils/Log.h"
-#include "exceptions/ResourceLoadException.h"
+#include "core/exceptions/ResourceLoadException.h"
 #include "math/Math.h"
 
 Console *Console::instance = 0;

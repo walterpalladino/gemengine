@@ -2,7 +2,7 @@
 #include "core/graphics/textures/TextureManager.h"
 
 #include "utils/Log.h"
-#include "exceptions/ResourceLoadException.h"
+#include "core/exceptions/ResourceLoadException.h"
 #include "math/Math.h"
 
 Sprite::Sprite(SDL_Renderer *renderer)

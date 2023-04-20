@@ -3,7 +3,7 @@
 
 #include "core/graphics/text/FontsManager.h"
 #include "utils/Log.h"
-#include "exceptions/ResourceLoadException.h"
+#include "core/exceptions/ResourceLoadException.h"
 
 FontsManager *FontsManager::instance = 0;
 
