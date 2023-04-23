@@ -8,7 +8,7 @@ SRCDIR = src
 LIBSDIR = libs
 INCLUDESDIR = src
 
-CXX = clang++ -v -Wc++11-extensions
+CXX = clang++ -v -std=c++11 -Wc++11-extensions
 CXXFLAGS = -I$(INCLUDESDIR) -I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image.framework/Headers -I/Library/Frameworks/SDL2_mixer.framework/Headers  -I/Library/Frameworks/SDL2_ttf.framework/Headers -F/Library/Frameworks
 
 CC = clang++ -v

@@ -17,8 +17,8 @@ class GemEngine
 protected:
     bool Running = true;
 
-    SDL_Window *Window = NULL;
-    SDL_Renderer *Renderer = NULL;
+    SDL_Window *window = NULL;
+    SDL_Renderer *renderer = NULL;
 
     SDL_Texture *virtualWindowTexture = NULL;
     SDL_Texture *windowTexture = NULL;

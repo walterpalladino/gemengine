@@ -28,7 +28,7 @@ void App::LoadScenes()
     Scene *newScene = new Scene();
 
     //  Create Image
-    Image *newImage = new Image(Renderer);
+    Image *newImage = new Image(renderer);
     newImage->Init();
     //  Load Image
     newImage->Load("resources/logo.png");
@@ -39,7 +39,7 @@ void App::LoadScenes()
     newScene->Add("logo", newImage);
 
     //  Add text
-    Text *newText = new Text(Renderer);
+    Text *newText = new Text(renderer);
     newText->Init("SDL2 text", "resources/fonts/Commodore-64-v6.3.TTF", 24);
     newText->position = Vector3d(100, 100, 0);
     newText->scale = Vector3d(1, 1, 1);
@@ -49,7 +49,7 @@ void App::LoadScenes()
     newScene->Add("text", newText);
 
     //  Add Sprites
-    Sprite *spriteIdle = new Sprite(Renderer);
+    Sprite *spriteIdle = new Sprite(renderer);
     //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
     spriteIdle->Load("resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png", 0, 0, 38, 48, 4, 4);
     spriteIdle->position = Vector3d(100, 50, 0);
@@ -57,7 +57,7 @@ void App::LoadScenes()
     spriteIdle->enabled = true;
     newScene->Add("spriteIdle", spriteIdle);
 
-    Sprite *spriteWalk = new Sprite(Renderer);
+    Sprite *spriteWalk = new Sprite(renderer);
     //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
     spriteWalk->Load("resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png", 0, 0, 66, 48, 12, 12);
     spriteWalk->position = Vector3d(200, 100, 0);
@@ -75,7 +75,7 @@ void App::LoadScenes()
     // Console::Instance()->Init(Renderer, 0, 0, 48, 27, "resources/fonts/cga8-thin.png", 8);
     // backgroundColor = Point3dInt(216, 216, 216);
 
-    Console::Instance()->Init(Renderer, 0, 0, 48, 27, "resources/fonts/potash-8x8.png", 8);
+    Console::Instance()->Init(renderer, 0, 0, 48, 27, "resources/fonts/potash-8x8.png", 8);
     backgroundColor = Point3dInt(80, 69, 155);
 }
 
@@ -142,6 +142,29 @@ void App::Loop(float time)
 void App::Render(float time)
 {
     GemEngine::Render(time);
-    SDL_SetRenderDrawColor(Renderer, 255, 0, 0, 255);
-    Draw::Line(Renderer, Point2d(10, 10), Point2d(50, 50));
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    Draw::Line(renderer, Point2d(10, 10), Point2d(50, 50));
+
+    vector<Point2d> triangle;
+    triangle.push_back(Point2d(50, 40));
+    triangle.push_back(Point2d(100, 50));
+    triangle.push_back(Point2d(80, 100));
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    Draw::PolygonFilled(renderer, triangle);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+    Draw::PolygonWired(renderer, triangle);
+
+    vector<Point2d> square;
+    square.push_back(Point2d(100, 100));
+    square.push_back(Point2d(150, 100));
+    square.push_back(Point2d(150, 150));
+    square.push_back(Point2d(100, 150));
+    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+    Draw::PolygonFilled(renderer, square);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+    Draw::PolygonWired(renderer, square);
+
+    // Draw::Line(renderer, Point2d(50, 50), Point2d(100, 50));
+    // Draw::Line(renderer, Point2d(100, 50), Point2d(80, 100));
+    // Draw::Line(renderer, Point2d(80, 100), Point2d(50, 50));
 }
