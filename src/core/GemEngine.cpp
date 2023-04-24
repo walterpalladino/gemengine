@@ -6,8 +6,9 @@
 #include "core/graphics/text/FontsManager.h"
 #include "core/graphics/textures/TextureManager.h"
 #include "core/graphics/console/Console.h"
-
+#include "core/graphics/WindowManager.h"
 #include "core/graphics/draw2d/Draw.h"
+#include "core/graphics/draw2d/Rect.h"
 
 using namespace std;
 
@@ -219,6 +220,15 @@ int GemEngine::Start(int windowWidth, int windowHeight)
 
 int GemEngine::Start()
 {
+
+    if (renderToVirtualWindow)
+    {
+        WindowManager::Instance()->boundaries = RectInt(0, 0, virtualWindowSize.x - 1, virtualWindowSize.y - 1);
+    }
+    else
+    {
+        WindowManager::Instance()->boundaries = RectInt(0, 0, windowSize.x - 1, windowSize.y - 1);
+    }
 
     // for (int i = 0; i < argc; ++i)
     //     cout << i << " - " << argv[i] << '\n';

@@ -8,10 +8,16 @@ RectInt::RectInt()
     this->bottom = 0;
 }
 
-RectInt::RectInt(int left, int right, int top, int bottom)
+RectInt::RectInt(int left, int top, int right, int bottom)
 {
     this->left = left;
     this->right = right;
     this->top = top;
     this->bottom = bottom;
+}
+
+ostream &operator<<(ostream &os, const RectInt &rect)
+{
+    os << rect.left << '/' << rect.top << '/' << rect.right << '/' << rect.bottom;
+    return os;
 }

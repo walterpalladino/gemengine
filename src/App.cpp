@@ -179,4 +179,18 @@ void App::Render(float time)
     // Draw::Line(renderer, Point2d(50, 50), Point2d(100, 50));
     // Draw::Line(renderer, Point2d(100, 50), Point2d(80, 100));
     // Draw::Line(renderer, Point2d(80, 100), Point2d(50, 50));
+
+    vector<Point2dInt> triangleTop;
+    triangleTop.push_back(Point2dInt(200, -50));
+    triangleTop.push_back(Point2dInt(150, 50));
+    triangleTop.push_back(Point2dInt(250, 50));
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    Draw::TriangleFilled(renderer, triangleTop);
+
+    vector<Point2dInt> triangleBottom;
+    triangleBottom.push_back(Point2dInt(200, 200));
+    triangleBottom.push_back(Point2dInt(150, 250));
+    triangleBottom.push_back(Point2dInt(250, 250));
+    SDL_SetRenderDrawColor(renderer, 128, 255, 128, 255);
+    Draw::TriangleFilled(renderer, triangleBottom);
 }
