@@ -31,12 +31,12 @@ void App::LoadScenes()
     Image *newImage = new Image(renderer);
     newImage->Init();
     //  Load Image
-    newImage->Load("resources/logo.png");
-    newImage->name = string("resources/logo.png");
+    newImage->Load("resources/led-arrow.png");
+    newImage->name = string("led-arrow");
     // newImage->scale = Vector3d(1, 1, 1);
     newImage->enabled = true;
     //   Add Image to Scene
-    newScene->Add("logo", newImage);
+    newScene->Add("led-arrow", newImage);
 
     //  Add text
     Text *newText = new Text(renderer);
@@ -86,10 +86,10 @@ void App::Loop(float time)
     // Log::GetInstance()->Info("App::Loop", "Running the Logic Loop");
 
     //  Scale the image
-    Vector3d scale = activeScene->Get("logo")->scale;
-    scale.x = 0.25f;
-    scale.y = 0.25f;
-    activeScene->Get("logo")->scale = scale;
+    Vector3d scale = activeScene->Get("led-arrow")->scale;
+    scale.x = 1.0f;
+    scale.y = 1.0f;
+    activeScene->Get("led-arrow")->scale = scale;
 
     //  Rotate logo image
     float rotationSpeed = 0.0f;
@@ -97,15 +97,15 @@ void App::Loop(float time)
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_A))
     {
         // std::cout << "SDL_SCANCODE_A" << std::endl;
-        rotationSpeed = -10.0f;
+        rotationSpeed = -5.0f;
     }
     else if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_D))
     {
         // std::cout << "SDL_SCANCODE_D" << std::endl;
-        rotationSpeed = 10.0f;
+        rotationSpeed = 5.0f;
     }
     // rotationSpeed = 10.0f;
-    Vector3d rotation = activeScene->Get("logo")->rotation;
+    Vector3d rotation = activeScene->Get("led-arrow")->rotation;
     // rotation.z = rotationSpeed * time / 1000.0f;
     rotation.z += rotationSpeed;
 
@@ -114,7 +114,7 @@ void App::Loop(float time)
     if (rotation.z < 0)
         rotation.z = rotation.z + 360;
 
-    activeScene->Get("logo")->rotation = rotation;
+    activeScene->Get("led-arrow")->rotation = rotation;
 
     rotation = activeScene->Get("text")->rotation;
     rotation.z += 1;

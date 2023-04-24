@@ -240,7 +240,7 @@ int GemEngine::Start()
         uint32_t frameStart = SDL_GetTicks();
 
         //   TODO : Check this hardcoded value to calculate it based on target fps
-        if (eventCounter % 10 == 0)
+        // if (eventCounter % 10 == 0)
         {
             PollEvents();
         }
