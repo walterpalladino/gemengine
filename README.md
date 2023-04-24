@@ -17,6 +17,8 @@ This is a pretty new project so I'm covering so far:
  - Text Console with methods to locate cursor on console and write bitmapped fonts.
  - Image load
  - Animated Sprites
+ - Wired Triangles
+ - Filled Triangles (with clipping)
 
 
 ## Whats comes next
