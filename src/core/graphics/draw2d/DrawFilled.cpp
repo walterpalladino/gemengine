@@ -393,31 +393,10 @@ void Draw::GenerateScanlinesForEdge(Point2dInt p1, Point2dInt p2, std::vector<Po
         t++;
     }
 }
-/*
-void Draw::RenderScanlines(SDL_Renderer *renderer, std::vector<Point2dInt> edges)
-{
-    //  Print scanlines verifying run from left to right
-    for (int n = 0; n < edges.size() - 1; n += 2)
-    {
-        int xl = edges[n].x;
-        int xr = edges[n + 1].x;
-
-        if (xl > xr)
-        {
-            xl = edges[n + 1].x;
-            xr = edges[n].x;
-        }
-
-        SDL_RenderDrawLine(renderer, xl, edges[n].y, xr, edges[n].y);
-    }
-}
-*/
 
 void Draw::RenderScanlines(SDL_Renderer *renderer, std::vector<Point2dInt> edges)
 {
     RectInt boundaries = WindowManager::Instance()->boundaries;
-
-    // std::cout << boundaries << std::endl;
 
     //  Print scanlines verifying run from left to right
     for (int n = 0; n < edges.size() - 1; n += 2)
@@ -450,7 +429,7 @@ void Draw::RenderScanlines(SDL_Renderer *renderer, std::vector<Point2dInt> edges
             xr = boundaries.right;
         }
 
-        // std::cout << y << '/' << xl << '/' << xr << std::endl;
+        // Draw the horizontal line from xl to xr at y
         SDL_RenderDrawLine(renderer, xl, y, xr, y);
     }
 }
