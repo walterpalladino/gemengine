@@ -2,7 +2,7 @@
 
 #include "core/graphics/draw2d/Draw.h"
 
-void Draw::PolygonFilled(SDL_Renderer *renderer, std::vector<Point2d> points)
+void Draw::PolygonFilled(SDL_Renderer *renderer, std::vector<Point2dInt> points)
 {
 
     int ydiff1, ydiff2,         // Difference between starting x and ending x
@@ -334,16 +334,16 @@ void Draw::PolygonFilled(SDL_Renderer *renderer, std::vector<Point2d> points)
     }
 }
 
-void Draw::TriangleFilled(SDL_Renderer *renderer, std::vector<Point2d> points)
+void Draw::TriangleFilled(SDL_Renderer *renderer, std::vector<Point2dInt> points)
 {
-    std::vector<Point2d> edges;
+    std::vector<Point2dInt> edges;
     GenerateScanlinesForEdge(points[0], points[1], &edges);
     GenerateScanlinesForEdge(points[1], points[2], &edges);
     GenerateScanlinesForEdge(points[2], points[0], &edges);
 
     //  Sort scanlines by y
     std::sort(edges.begin(), edges.end(),
-              [](const Point2d &lhs, const Point2d &rhs)
+              [](const Point2dInt &lhs, const Point2dInt &rhs)
               {
                   return lhs.y < rhs.y;
               });
@@ -357,23 +357,10 @@ void Draw::TriangleFilled(SDL_Renderer *renderer, std::vector<Point2d> points)
     //     std::cout << edges[n].y << "/" << edges[n].x << " - " << edges[n + 1].y << "/" << edges[n + 1].x << std::endl;
     // }
 
-    //  Print scanlines verifying run from left to right
-    for (int n = 0; n < edges.size() - 1; n += 2)
-    {
-        int xl = edges[n].x;
-        int xr = edges[n + 1].x;
-
-        if (xl > xr)
-        {
-            xl = edges[n + 1].x;
-            xr = edges[n].x;
-        }
-
-        SDL_RenderDrawLine(renderer, xl, edges[n].y, xr, edges[n].y);
-    }
+    RenderScanlines(renderer, edges);
 }
 
-void Draw::GenerateScanlinesForEdge(Point2d p1, Point2d p2, std::vector<Point2d> *edges)
+void Draw::GenerateScanlinesForEdge(Point2dInt p1, Point2dInt p2, std::vector<Point2dInt> *edges)
 {
     //  Check if it is a flat edge and skip it
     if (p1.y == p2.y)
@@ -401,7 +388,25 @@ void Draw::GenerateScanlinesForEdge(Point2d p1, Point2d p2, std::vector<Point2d>
     while (t < deltay)
     {
         int xt = x1 + round(step * (float)t);
-        edges->push_back(Point2d(xt, y1 + t));
+        edges->push_back(Point2dInt(xt, y1 + t));
         t++;
+    }
+}
+
+void Draw::RenderScanlines(SDL_Renderer *renderer, std::vector<Point2dInt> edges)
+{
+    //  Print scanlines verifying run from left to right
+    for (int n = 0; n < edges.size() - 1; n += 2)
+    {
+        int xl = edges[n].x;
+        int xr = edges[n + 1].x;
+
+        if (xl > xr)
+        {
+            xl = edges[n + 1].x;
+            xr = edges[n].x;
+        }
+
+        SDL_RenderDrawLine(renderer, xl, edges[n].y, xr, edges[n].y);
     }
 }

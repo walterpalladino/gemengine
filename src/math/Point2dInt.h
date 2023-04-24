@@ -13,4 +13,9 @@ public:
 		this->x = x;
 		this->y = y;
 	}
+	Point2dInt(const Point2dInt &p)
+	{
+		this->x = p.x;
+		this->y = p.y;
+	}
 };

@@ -11,9 +11,9 @@ void Draw::Line(SDL_Renderer *renderer, Point2d p1, Point2d p2)
 */
 
 //  OK
-void Draw::Line(SDL_Renderer *renderer, Point2d p1, Point2d p2)
+void Draw::Line(SDL_Renderer *renderer, Point2dInt p1, Point2dInt p2)
 {
-    Point2d p0 = Point2d(p1);
+    Point2dInt p0 = Point2dInt(p1);
 
     int dx = abs(p2.x - p1.x), sx = p1.x < p2.x ? 1 : -1;
     int dy = abs(p2.y - p1.y), sy = p1.y < p2.y ? 1 : -1;
@@ -131,7 +131,7 @@ void Draw::Line(SDL_Renderer *renderer, Point2d p1, Point2d p2)
     }
 }
 */
-void Draw::PolygonWired(SDL_Renderer *renderer, std::vector<Point2d> points)
+void Draw::PolygonWired(SDL_Renderer *renderer, std::vector<Point2dInt> points)
 {
     if (points.size() < 3)
     {

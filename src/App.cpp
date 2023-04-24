@@ -12,7 +12,7 @@
 #include "core/graphics/console/Console.h"
 #include "core/graphics/draw2d/Draw.h"
 
-#include "math/Point2d.h"
+#include "math/Point2dInt.h"
 
 App::App() : GemEngine()
 {
@@ -143,34 +143,34 @@ void App::Render(float time)
 {
     GemEngine::Render(time);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    Draw::Line(renderer, Point2d(10, 10), Point2d(50, 50));
+    Draw::Line(renderer, Point2dInt(10, 10), Point2dInt(50, 50));
 
-    vector<Point2d> triangle;
+    vector<Point2dInt> triangle;
     // triangle.push_back(Point2d(50, 40));
     // triangle.push_back(Point2d(100, 50));
     //     triangle.push_back(Point2d(80, 100));
-    triangle.push_back(Point2d(50, 50));
-    triangle.push_back(Point2d(75, 75));
-    triangle.push_back(Point2d(50, 100));
+    triangle.push_back(Point2dInt(50, 50));
+    triangle.push_back(Point2dInt(75, 75));
+    triangle.push_back(Point2dInt(50, 100));
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     Draw::TriangleFilled(renderer, triangle);
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
     Draw::PolygonWired(renderer, triangle);
 
-    vector<Point2d> square;
-    square.push_back(Point2d(100, 100));
-    square.push_back(Point2d(150, 100));
-    square.push_back(Point2d(150, 150));
-    square.push_back(Point2d(100, 150));
+    vector<Point2dInt> square;
+    square.push_back(Point2dInt(100, 100));
+    square.push_back(Point2dInt(150, 100));
+    square.push_back(Point2dInt(150, 150));
+    square.push_back(Point2dInt(100, 150));
     SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
     Draw::PolygonFilled(renderer, square);
     SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
     Draw::PolygonWired(renderer, square);
 
-    vector<Point2d> triangle2;
-    triangle2.push_back(Point2d(200, 50));
-    triangle2.push_back(Point2d(201, 100));
-    triangle2.push_back(Point2d(199, 100));
+    vector<Point2dInt> triangle2;
+    triangle2.push_back(Point2dInt(200, 50));
+    triangle2.push_back(Point2dInt(201, 100));
+    triangle2.push_back(Point2dInt(199, 100));
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     Draw::TriangleFilled(renderer, triangle2);
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
