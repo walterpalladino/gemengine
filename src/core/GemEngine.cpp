@@ -7,7 +7,7 @@
 #include "core/graphics/textures/TextureManager.h"
 #include "core/graphics/console/Console.h"
 
-#include "core/graphics/Draw.h"
+#include "core/graphics/draw2d/Draw.h"
 
 using namespace std;
 

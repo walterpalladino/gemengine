@@ -10,7 +10,7 @@
 #include "core/input/InputHandler.h"
 #include "core/graphics/text/FontsManager.h"
 #include "core/graphics/console/Console.h"
-#include "core/graphics/Draw.h"
+#include "core/graphics/draw2d/Draw.h"
 
 #include "math/Point2d.h"
 
@@ -146,11 +146,14 @@ void App::Render(float time)
     Draw::Line(renderer, Point2d(10, 10), Point2d(50, 50));
 
     vector<Point2d> triangle;
-    triangle.push_back(Point2d(50, 40));
-    triangle.push_back(Point2d(100, 50));
-    triangle.push_back(Point2d(80, 100));
+    // triangle.push_back(Point2d(50, 40));
+    // triangle.push_back(Point2d(100, 50));
+    //     triangle.push_back(Point2d(80, 100));
+    triangle.push_back(Point2d(50, 50));
+    triangle.push_back(Point2d(75, 75));
+    triangle.push_back(Point2d(50, 100));
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    Draw::PolygonFilled(renderer, triangle);
+    Draw::TriangleFilled(renderer, triangle);
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
     Draw::PolygonWired(renderer, triangle);
 
@@ -163,6 +166,15 @@ void App::Render(float time)
     Draw::PolygonFilled(renderer, square);
     SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
     Draw::PolygonWired(renderer, square);
+
+    vector<Point2d> triangle2;
+    triangle2.push_back(Point2d(200, 50));
+    triangle2.push_back(Point2d(201, 100));
+    triangle2.push_back(Point2d(199, 100));
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    Draw::TriangleFilled(renderer, triangle2);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+    Draw::PolygonWired(renderer, triangle2);
 
     // Draw::Line(renderer, Point2d(50, 50), Point2d(100, 50));
     // Draw::Line(renderer, Point2d(100, 50), Point2d(80, 100));

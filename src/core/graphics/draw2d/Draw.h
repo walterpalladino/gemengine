@@ -10,5 +10,10 @@ class Draw
 public:
     static void Line(SDL_Renderer *renderer, Point2d p1, Point2d p2);
     static void PolygonWired(SDL_Renderer *renderer, std::vector<Point2d> points);
+
     static void PolygonFilled(SDL_Renderer *renderer, std::vector<Point2d> points);
+    static void TriangleFilled(SDL_Renderer *renderer, std::vector<Point2d> points);
+
+private:
+    static void GenerateScanlinesForEdge(Point2d p1, Point2d p2, std::vector<Point2d> *edges);
 };

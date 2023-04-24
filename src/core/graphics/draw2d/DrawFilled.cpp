@@ -1,111 +1,6 @@
-
 #include <iostream>
 
-#include "core/graphics/Draw.h"
-/*
-void Draw::Line(SDL_Renderer *renderer, Point2d p1, Point2d p2)
-{
-    SDL_RenderDrawLine(renderer, p1.x, p1.y, p2.x, p2.y);
-}
-*/
-void Draw::Line(SDL_Renderer *renderer, Point2d p1, Point2d p2)
-{
-    int y_unit, x_unit; // Variables for amount of change in x and y
-
-    int ydiff = p2.y - p1.y; // Calculate difference between y coordinates
-    if (ydiff < 0)
-    {                   // If the line moves in the negative direction
-        ydiff = -ydiff; // ...get absolute value of difference
-        y_unit = -1;    // ...and set negative unit in y dimension
-    }
-    else
-        y_unit = 1; // Else set positive unit in y dimension
-
-    int xdiff = p2.x - p1.x; // Calculate difference between x coordinates
-    if (xdiff < 0)
-    {                   // If the line moves in the negative direction
-        xdiff = -xdiff; // ...get absolute value of difference
-        x_unit = -1;    // ...and set negative unit in x dimension
-    }
-    else
-        x_unit = 1; // Else set positive unit in y dimension
-
-    Point2d p = Point2d(p1);
-
-    int error_term = 0; // Initialize error term
-
-    // If difference is bigger in x dimension prepare to count off in x direction
-    if (xdiff > ydiff)
-    {
-        int length = xdiff + 1;
-
-        // Loop through points  in x direction
-        for (int i = 0; i < length; i++)
-        {
-            // Set the next pixel in the line to COLOR
-            SDL_RenderDrawPoint(renderer, p.x, p.y);
-            p.x += x_unit; // Move offset to next pixel in x direction
-            error_term += ydiff;
-            // Check to see if move required in y direction
-            if (error_term > xdiff)
-            {                        // If so...
-                error_term -= xdiff; // ...reset error term
-                p.y += y_unit;       // ...and move offset to next pixel in y dir.
-            }
-        }
-    }
-    else
-    {
-        // If difference is bigger in y dimension
-        int length = ydiff + 1; // ...prepare to count off in y direction
-
-        // Loop through points in y direction
-        for (int i = 0; i < length; i++)
-        {
-            // Set the next pixel in the line to COLOR
-            SDL_RenderDrawPoint(renderer, p.x, p.y);
-
-            p.y += y_unit; // Move offset to next pixel in y direction
-
-            error_term += xdiff; // Check to see if move required in x direction
-            if (error_term > 0)
-            {                        // If so...
-                error_term -= ydiff; // ...reset error term
-                p.x += x_unit;       // ...and move offset to next pixel in x dir.
-            }
-        }
-    }
-}
-
-void Draw::PolygonWired(SDL_Renderer *renderer, std::vector<Point2d> points)
-{
-    if (points.size() < 3)
-    {
-        return;
-    }
-
-    for (int n = 0; n < points.size() - 1; n++)
-    {
-        Draw::Line(renderer, points[n], points[n + 1]);
-    }
-    Draw::Line(renderer, points[points.size() - 1], points[0]);
-}
-
-/*
-
-//  Sort points from top to bottom
-std::vector<Point2d> sortedPoints = points;
-std::sort(sortedPoints.begin(), sortedPoints.end(),
-          [](const Point2d &lhs, const Point2d &rhs)
-          {
-              return lhs.y < rhs.y;
-          });
-    std::cout << "===================" << std::endl;
-    for (Point2d point : sortedPoints)
-    {
-        std::cout << point.y << std::endl;
-    }
-*/
+#include "core/graphics/draw2d/Draw.h"
 
 void Draw::PolygonFilled(SDL_Renderer *renderer, std::vector<Point2d> points)
 {
@@ -115,9 +10,8 @@ void Draw::PolygonFilled(SDL_Renderer *renderer, std::vector<Point2d> points)
         start,                  // Starting offset of line between edges
         length,                 // Distance from edge 1 to edge 2
         errorterm1, errorterm2, // Error terms for edges 1 & 2
-        // offset1, offset2,       // Offset of current pixel in edges 1 & 2
-        count1, count2, // Increment count for edges 1 & 2
-        xunit1, xunit2; // Unit to advance x offset for edges 1 & 2
+        count1, count2,         // Increment count for edges 1 & 2
+        xunit1, xunit2;         // Unit to advance x offset for edges 1 & 2
 
     // Initialize count of number of edges drawn:
     int edgecount = points.size() - 1;
@@ -437,5 +331,77 @@ void Draw::PolygonFilled(SDL_Renderer *renderer, std::vector<Point2d> points)
             xend2 = points[endvert2].x; // Get x & y of new end vertex
             yend2 = points[endvert2].y;
         }
+    }
+}
+
+void Draw::TriangleFilled(SDL_Renderer *renderer, std::vector<Point2d> points)
+{
+    std::vector<Point2d> edges;
+    GenerateScanlinesForEdge(points[0], points[1], &edges);
+    GenerateScanlinesForEdge(points[1], points[2], &edges);
+    GenerateScanlinesForEdge(points[2], points[0], &edges);
+
+    //  Sort scanlines by y
+    std::sort(edges.begin(), edges.end(),
+              [](const Point2d &lhs, const Point2d &rhs)
+              {
+                  return lhs.y < rhs.y;
+              });
+    // std::cout << "===================" << std::endl;
+    //     for (Point2d point : edges)
+    //     {
+    //         std::cout << point.y << "/" << point.x << std::endl;
+    //     }
+    // for (int n = 0; n < edges.size(); n += 2)
+    //{
+    //     std::cout << edges[n].y << "/" << edges[n].x << " - " << edges[n + 1].y << "/" << edges[n + 1].x << std::endl;
+    // }
+
+    //  Print scanlines verifying run from left to right
+    for (int n = 0; n < edges.size() - 1; n += 2)
+    {
+        int xl = edges[n].x;
+        int xr = edges[n + 1].x;
+
+        if (xl > xr)
+        {
+            xl = edges[n + 1].x;
+            xr = edges[n].x;
+        }
+
+        SDL_RenderDrawLine(renderer, xl, edges[n].y, xr, edges[n].y);
+    }
+}
+
+void Draw::GenerateScanlinesForEdge(Point2d p1, Point2d p2, std::vector<Point2d> *edges)
+{
+    //  Check if it is a flat edge and skip it
+    if (p1.y == p2.y)
+    {
+        return;
+    }
+
+    int y1 = p1.y;
+    int y2 = p2.y;
+    int x1 = p1.x;
+    int x2 = p2.x;
+
+    if (p1.y > p2.y)
+    {
+        y1 = p2.y;
+        y2 = p1.y;
+        x1 = p2.x;
+        x2 = p1.x;
+    }
+    int deltax = x2 - x1;
+    int deltay = y2 - y1;
+
+    float step = (float)deltax / (float)deltay;
+    int t = 0;
+    while (t < deltay)
+    {
+        int xt = x1 + round(step * (float)t);
+        edges->push_back(Point2d(xt, y1 + t));
+        t++;
     }
 }
