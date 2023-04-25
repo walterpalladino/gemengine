@@ -202,7 +202,18 @@ void App::Render(float time)
     saw.push_back(Point2dInt(250, 150));
     saw.push_back(Point2dInt(200, 200));
     SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
-    Draw::PolygonFilled(renderer, saw);
+    // Draw::PolygonFilled(renderer, saw);
     SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
-    Draw::PolygonWired(renderer, saw);
+    // Draw::PolygonWired(renderer, saw);
+
+    vector<Point2dInt> star;
+    star.push_back(Point2dInt(300, 100));
+    star.push_back(Point2dInt(310, 130));
+    star.push_back(Point2dInt(340, 140));
+    star.push_back(Point2dInt(310, 150));
+    star.push_back(Point2dInt(300, 180));
+    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+    Draw::PolygonFilled(renderer, star);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+    Draw::PolygonWired(renderer, star);
 }

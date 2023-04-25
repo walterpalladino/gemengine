@@ -20,18 +20,24 @@ void Draw::PolygonFilled(SDL_Renderer *renderer, std::vector<Point2dInt> points)
         int idx2 = n;
         int idx3 = n + 1;
 
+        if (idx3 == points.size())
+        {
+            idx3 = 0;
+        }
+
         // std::cout << idx1 << "/" << idx2 << "/" << idx3 << std::endl;
 
+        //  Check if this 3 vertices makes a convex angle or not
         int cp = Point2dInt::Cross(points[idx1], points[idx2], points[idx3]);
         if (cp < 0)
         {
-            // std::cout << "not convex polygon" << std::endl;
+            // Not convex angle
             pivot++;
             n++;
         }
         else
         {
-            // std::cout << "convex polygon" << std::endl;
+            // Convex angle
             Draw::TriangleFilled(renderer, std::vector<Point2dInt>{points[idx1], points[idx2], points[idx3]});
             count++;
             n++;
@@ -392,15 +398,6 @@ void Draw::TriangleFilled(SDL_Renderer *renderer, std::vector<Point2dInt> points
               {
                   return lhs.y < rhs.y;
               });
-    // std::cout << "===================" << std::endl;
-    //     for (Point2d point : edges)
-    //     {
-    //         std::cout << point.y << "/" << point.x << std::endl;
-    //     }
-    // for (int n = 0; n < edges.size(); n += 2)
-    //{
-    //     std::cout << edges[n].y << "/" << edges[n].x << " - " << edges[n + 1].y << "/" << edges[n + 1].x << std::endl;
-    // }
 
     RenderScanlines(renderer, edges);
 }
