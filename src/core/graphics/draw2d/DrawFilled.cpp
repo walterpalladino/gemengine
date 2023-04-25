@@ -5,6 +5,43 @@
 
 void Draw::PolygonFilled(SDL_Renderer *renderer, std::vector<Point2dInt> points)
 {
+    if (points.size() < 3)
+    {
+        return;
+    }
+
+    int pivot = 0;
+    int n = 1;
+    int count = 0;
+    //    for (int n = 0; n < points.size() - 2; n++)
+    while (count < points.size() - 2)
+    {
+        int idx1 = pivot;
+        int idx2 = n;
+        int idx3 = n + 1;
+
+        // std::cout << idx1 << "/" << idx2 << "/" << idx3 << std::endl;
+
+        int cp = Point2dInt::Cross(points[idx1], points[idx2], points[idx3]);
+        if (cp < 0)
+        {
+            // std::cout << "not convex polygon" << std::endl;
+            pivot++;
+            n++;
+        }
+        else
+        {
+            // std::cout << "convex polygon" << std::endl;
+            Draw::TriangleFilled(renderer, std::vector<Point2dInt>{points[idx1], points[idx2], points[idx3]});
+            count++;
+            n++;
+        }
+    }
+}
+/*
+
+void Draw::PolygonFilled(SDL_Renderer *renderer, std::vector<Point2dInt> points)
+{
 
     int ydiff1, ydiff2,         // Difference between starting x and ending x
         xdiff1, xdiff2,         // Difference between starting y and ending y
@@ -334,9 +371,16 @@ void Draw::PolygonFilled(SDL_Renderer *renderer, std::vector<Point2dInt> points)
         }
     }
 }
+*/
 
 void Draw::TriangleFilled(SDL_Renderer *renderer, std::vector<Point2dInt> points)
 {
+
+    if (points.size() != 3)
+    {
+        return;
+    }
+
     std::vector<Point2dInt> edges;
     GenerateScanlinesForEdge(points[0], points[1], &edges);
     GenerateScanlinesForEdge(points[1], points[2], &edges);

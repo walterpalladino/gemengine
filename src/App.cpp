@@ -193,4 +193,16 @@ void App::Render(float time)
     triangleBottom.push_back(Point2dInt(250, 250));
     SDL_SetRenderDrawColor(renderer, 128, 255, 128, 255);
     Draw::TriangleFilled(renderer, triangleBottom);
+
+    //  Check non convex polygon
+    vector<Point2dInt> saw;
+    saw.push_back(Point2dInt(200, 100));
+    saw.push_back(Point2dInt(300, 100));
+    saw.push_back(Point2dInt(300, 200));
+    saw.push_back(Point2dInt(250, 150));
+    saw.push_back(Point2dInt(200, 200));
+    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+    Draw::PolygonFilled(renderer, saw);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+    Draw::PolygonWired(renderer, saw);
 }

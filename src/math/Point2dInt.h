@@ -29,7 +29,7 @@ public:
 		return diff;
 	}
 
-	int Cross(Point2dInt p1, Point2dInt p2, Point2dInt p3)
+	static int Cross(Point2dInt p1, Point2dInt p2, Point2dInt p3)
 	{
 		//	Get the vectors
 		Point2dInt v1 = p2 - p1;
