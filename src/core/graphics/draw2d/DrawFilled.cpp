@@ -13,7 +13,7 @@ void Draw::PolygonFilled(SDL_Renderer *renderer, std::vector<Point2dInt> points)
     int pivot = 0;
     int n = 1;
     int count = 0;
-    //    for (int n = 0; n < points.size() - 2; n++)
+
     while (count < points.size() - 2)
     {
         int idx1 = pivot;
