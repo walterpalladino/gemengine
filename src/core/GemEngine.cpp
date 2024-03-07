@@ -31,6 +31,16 @@ void GemEngine::OnEvent(SDL_Event *Event)
 {
 }
 
+void GemEngine::SetResourceFolder(string resourceFolder)
+{
+    this->resourceFolder = resourceFolder;
+}
+
+string GemEngine::GetResourceFolder()
+{
+    return resourceFolder;
+}
+
 //------------------------------------------------------------------------------
 bool GemEngine::Init()
 {
@@ -85,6 +95,7 @@ bool GemEngine::Init()
     Log::GetInstance()->Info("GemEngine::Init", "Initialization Completed");
 
     LoadScenes();
+    Log::GetInstance()->Info("GemEngine::Init", "Scenes Loaded");
 
     return true;
 }
@@ -220,6 +231,7 @@ int GemEngine::Start(int windowWidth, int windowHeight)
 
 int GemEngine::Start()
 {
+    Log::GetInstance()->Info("GemEngine::Start", "Start()");
 
     if (renderToVirtualWindow)
     {
@@ -234,7 +246,10 @@ int GemEngine::Start()
     //     cout << i << " - " << argv[i] << '\n';
 
     if (!Init())
+    {
+        Log::GetInstance()->Error("GemEngine::Start", "Initialization Failed");
         return 0;
+    }
 
     firstRenderTime = SDL_GetTicks();
     lastRenderTime = SDL_GetTicks();

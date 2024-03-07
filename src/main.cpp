@@ -1,10 +1,14 @@
 #include <iostream>
 #include "App.h"
+#include "utils/Log.h"
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
+
+	Log::GetInstance()->Info("main::main", "Starting app");
+
 	/*
 		// print all command line arguments
 		cout << "name of program: " << argv[0] << '\n';
@@ -18,9 +22,26 @@ int main(int argc, char *argv[])
 
 		for (int i = 0; i < argc; ++i)
 			cout << argv[i] << '\n';
+
+			const char *filename = argc > 1 ? argv[1] : "test.png";
+
+	SceneLoader::GetInstance()->Load("./resources/scenes/scene_1.txt");
 	*/
 
 	App app = App();
+
+	if (argc > 1)
+	{
+		app.SetResourceFolder(argv[1]);
+	}
+	else
+	{
+		app.SetResourceFolder("Resources");
+	}
+
+	cout << "Resources folder: " << app.GetResourceFolder() << endl;
+
+	// app.LoadScenes();
 
 	int status = -1;
 	try
@@ -33,6 +54,10 @@ int main(int argc, char *argv[])
 	{
 		std::cerr << e.what() << '\n';
 	}
+
+	app.Cleanup();
+
+	Log::GetInstance()->Info("main::main", "Exiting app");
 
 	return status;
 }

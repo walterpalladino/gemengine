@@ -28,19 +28,7 @@ void Log::Write(const char *moduleName, const char *logData)
 		hour,
 		minute,
 		second;
-	/*
-		// find out current date
-	__time64_t	long_time ;
-	errno_t		err ;
-	struct tm	currentdate ;
 
-		//	Get time as 64 bit integer
-		_time64( &long_time ) ;
-		//	Convert to localtime
-		err	= localtime_s ( &currentdate, &long_time );
-		if (err)
-			;
-	*/
 	time_t rawtime;
 	struct tm *currentdate;
 
@@ -55,11 +43,31 @@ void Log::Write(const char *moduleName, const char *logData)
 	minute = currentdate->tm_min;
 	second = currentdate->tm_sec;
 
-	//	fLog	= fopen ( "log.txt", "at") ;
-	fileLog.open("log.txt", ios::app);
-	//	fprintf( fLog, "[%02d/%02d/%4d %02d:%02d:%02d] [%s]%s\n", day, month, year, hour, minute, second, moduleName, logData ) ;
-	fileLog << StringPrintf("[%02d/%02d/%4d %02d:%02d:%02d] [%s]%s\n", day, month, year, hour, minute, second, moduleName, logData);
-	//	fclose( fLog ) ;
+#if defined(__APPLE__) && defined(__MACH__)
+	// string logFileFolder = StringPrintf("~/Library/Application Support/GemEngine");
+	string logFileFolder = StringPrintf("GemEngine");
+	string logFileName = StringPrintf("%s/log.txt", logFileFolder.c_str());
+#else
+	string logFileFolder = StringPrintf("GemEngine");
+	string logFileName = StringPrintf("%s/log.txt", logFileFolder.c_str());
+#endif
+
+	// Create log file inside User Home folder on Mac
+	if (!std::filesystem::exists(logFileFolder))
+	{
+		std::filesystem::create_directory(logFileFolder);
+	}
+
+	try
+	{
+		fileLog.open(logFileName, ios::app);
+		fileLog << StringPrintf("[%02d/%02d/%4d %02d:%02d:%02d] [%s]%s\n", day, month, year, hour, minute, second, moduleName, logData);
+	}
+	catch (std::ofstream::failure e)
+	{
+		cout << StringPrintf("Exception opening file %s/n %s", logFileName.c_str(), e.what()) << endl;
+	}
+
 	fileLog.close();
 }
 

@@ -3,6 +3,7 @@
 
 class App : public GemEngine
 {
+
 public:
     App();
     virtual void LoadScenes();

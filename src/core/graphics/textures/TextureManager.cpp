@@ -34,7 +34,7 @@ SDL_Texture *TextureManager::Add(const char *fileName)
 
     // Load image at specified path
     SDL_Surface *tmp = IMG_Load(fileName);
-    if (!tmp)
+    if (tmp == NULL)
     {
         printf("IMG_Load: %s\n", IMG_GetError());
         char *buffer = new char[512];

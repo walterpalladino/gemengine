@@ -15,6 +15,8 @@ using namespace std;
 class GemEngine
 {
 protected:
+    string resourceFolder;
+
     bool Running = true;
 
     SDL_Window *window = NULL;
@@ -63,9 +65,6 @@ protected:
     // Poll Events
     void PollEvents();
 
-    // Free up resources
-    void Cleanup();
-
     float GetFPS();
 
 protected:
@@ -76,6 +75,12 @@ protected:
     virtual void Render(float time);
 
 public:
+    void SetResourceFolder(string resourceFolder);
+    string GetResourceFolder();
+
+    // Free up resources
+    void Cleanup();
+
     int Start(int windowWidth, int windowHeight);
     int Start(int windowWidth, int windowHeight, int virtualWindowWidth, int virtualWindowHeight);
 

@@ -32,10 +32,13 @@
 *.app
 
 # Distribution folder
+bin/*
 dist/*
+GemEngine/*
 
 # Logs files
 *.log
 resources/.DS_Store
 .DS_Store
 log.txt
+src/.DS_Store

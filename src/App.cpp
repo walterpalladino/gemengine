@@ -6,6 +6,7 @@
 #include "core/graphics/image/Image.h"
 #include "core/graphics/sprites/Sprite.h"
 #include "core/graphics/text/Text.h"
+#include "utils/StringUtils.h"
 #include "utils/Log.h"
 #include "core/input/InputHandler.h"
 #include "core/graphics/text/FontsManager.h"
@@ -31,7 +32,7 @@ void App::LoadScenes()
     Image *newImage = new Image(renderer);
     newImage->Init();
     //  Load Image
-    newImage->Load("resources/led-arrow.png");
+    newImage->Load(StringPrintf("%s/led-arrow.png", resourceFolder.c_str()).c_str());
     newImage->name = string("led-arrow");
     // newImage->scale = Vector3d(1, 1, 1);
     newImage->enabled = true;
@@ -40,7 +41,7 @@ void App::LoadScenes()
 
     //  Add text
     Text *newText = new Text(renderer);
-    newText->Init("SDL2 text", "resources/fonts/Commodore-64-v6.3.TTF", 24);
+    newText->Init("SDL2 text", StringPrintf("%s/fonts/Commodore-64-v6.3.TTF", resourceFolder.c_str()).c_str(), 24);
     newText->position = Vector3d(100, 100, 0);
     newText->scale = Vector3d(1, 1, 1);
     newText->enabled = true;
@@ -51,7 +52,7 @@ void App::LoadScenes()
     //  Add Sprites
     Sprite *spriteIdle = new Sprite(renderer);
     //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
-    spriteIdle->Load("resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png", 0, 0, 38, 48, 4, 4);
+    spriteIdle->Load(StringPrintf("%s/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png", resourceFolder.c_str()).c_str(), 0, 0, 38, 48, 4, 4);
     spriteIdle->position = Vector3d(100, 50, 0);
     spriteIdle->scale = Vector3d(1, 1, 1);
     spriteIdle->enabled = true;
@@ -59,7 +60,7 @@ void App::LoadScenes()
 
     Sprite *spriteWalk = new Sprite(renderer);
     //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
-    spriteWalk->Load("resources/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png", 0, 0, 66, 48, 12, 12);
+    spriteWalk->Load(StringPrintf("%s/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png", resourceFolder.c_str()).c_str(), 0, 0, 66, 48, 12, 12);
     spriteWalk->position = Vector3d(200, 100, 0);
     spriteWalk->scale = Vector3d(-1, 1, 1);
     spriteWalk->enabled = true;
@@ -75,15 +76,17 @@ void App::LoadScenes()
     // Console::Instance()->Init(Renderer, 0, 0, 48, 27, "resources/fonts/cga8-thin.png", 8);
     // backgroundColor = Point3dInt(216, 216, 216);
 
-    Console::Instance()->Init(renderer, 0, 0, 48, 27, "resources/fonts/potash-8x8.png", 8);
-    backgroundColor = Point3dInt(80, 69, 155);
+    // Console::Instance()->Init(renderer, 0, 0, 48, 27, "resources/fonts/potash-8x8.png", 8);
+    // backgroundColor = Point3dInt(80, 69, 155);
+    Log::GetInstance()->Info("App::LoadScenes", "Load Scenes Completed");
 }
 
 // Logic loop
 void App::Loop(float time)
 {
-
     // Log::GetInstance()->Info("App::Loop", "Running the Logic Loop");
+    //  if (true)
+    //      return;
 
     //  Scale the image
     Vector3d scale = activeScene->Get("led-arrow")->scale;
@@ -132,16 +135,23 @@ void App::Loop(float time)
     // const char text[] = "GemEngine running...";
     // std::copy(text, text + sizeof(text), consoleBuffer);
     // Console::Instance()->SetColor(0, 0, 0);
+    /*
     Console::Instance()->SetColor(136, 126, 203);
     Console::Instance()->SetCursorAt(0, 0);
     Console::Instance()->Print("GemEngine running...");
     Console::Instance()->SetCursorAt(25, 0);
     Console::Instance()->Print(text);
+    */
 }
 
 void App::Render(float time)
 {
+    // if (true)
+    //     return;
+
     GemEngine::Render(time);
+
+    /*
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     Draw::Line(renderer, Point2dInt(10, 10), Point2dInt(50, 50));
 
@@ -216,4 +226,5 @@ void App::Render(float time)
     Draw::PolygonFilled(renderer, star);
     SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
     Draw::PolygonWired(renderer, star);
+    */
 }
