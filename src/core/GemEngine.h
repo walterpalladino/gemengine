@@ -45,7 +45,6 @@ protected:
     Point3dInt backgroundColor;
 
 private:
-    int Start();
     void PreRender(float time);
     void PostRender(float time);
 
@@ -81,8 +80,9 @@ public:
     // Free up resources
     void Cleanup();
 
-    int Start(int windowWidth, int windowHeight);
-    int Start(int windowWidth, int windowHeight, int virtualWindowWidth, int virtualWindowHeight);
+    // int Start(int windowWidth, int windowHeight);
+    // int Start(int windowWidth, int windowHeight, int virtualWindowWidth, int virtualWindowHeight);
+    int Start();
 
     Point2dInt GetWindowSize() { return windowSize; }
 };

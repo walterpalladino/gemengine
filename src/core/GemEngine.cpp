@@ -2,6 +2,7 @@
 
 #include "core/GemEngine.h"
 #include "utils/Log.h"
+#include "utils/StringUtils.h"
 #include "core/input/InputHandler.h"
 #include "core/graphics/text/FontsManager.h"
 #include "core/graphics/textures/TextureManager.h"
@@ -9,6 +10,7 @@
 #include "core/graphics/WindowManager.h"
 #include "core/graphics/draw2d/Draw.h"
 #include "core/graphics/draw2d/Rect.h"
+#include "core/Config.h"
 
 using namespace std;
 
@@ -34,6 +36,10 @@ void GemEngine::OnEvent(SDL_Event *Event)
 void GemEngine::SetResourceFolder(string resourceFolder)
 {
     this->resourceFolder = resourceFolder;
+
+    // Load config
+    string configFileName = StringPrintf("%s/%s", GetResourceFolder().c_str(), "config.json");
+    Config::Instance()->Load(configFileName);
 }
 
 string GemEngine::GetResourceFolder()
@@ -209,6 +215,7 @@ void GemEngine::Cleanup()
 }
 
 //------------------------------------------------------------------------------
+/*
 int GemEngine::Start(int windowWidth, int windowHeight, int virtualWindowWidth, int virtualWindowHeight)
 {
     windowSize = Point2dInt(windowWidth, windowHeight);
@@ -228,10 +235,16 @@ int GemEngine::Start(int windowWidth, int windowHeight)
 
     return Start();
 }
-
+*/
 int GemEngine::Start()
 {
     Log::GetInstance()->Info("GemEngine::Start", "Start()");
+
+    windowSize = Point2dInt(Config::Instance()->config_data.window_width, Config::Instance()->config_data.window_height);
+
+    // Virtual Screen Dimensions (pixels)
+    virtualWindowSize = Point2dInt(Config::Instance()->config_data.virtual_window_width, Config::Instance()->config_data.virtual_window_height);
+    renderToVirtualWindow = Config::Instance()->config_data.use_virtual_window;
 
     if (renderToVirtualWindow)
     {

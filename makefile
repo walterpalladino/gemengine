@@ -60,7 +60,7 @@ LIBSDIR = libs
 INCLUDESDIR = src
 
 CXX = clang++ -v -std=c++17 -Wc++17-extensions $(OSFLAG)
-CXXFLAGS = -I$(INCLUDESDIR) -I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image.framework/Headers -I/Library/Frameworks/SDL2_mixer.framework/Headers  -I/Library/Frameworks/SDL2_ttf.framework/Headers -F/Library/Frameworks
+CXXFLAGS = -I$(INCLUDESDIR) -I$(LIBSDIR)/json-develop/single_include -I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image.framework/Headers -I/Library/Frameworks/SDL2_mixer.framework/Headers  -I/Library/Frameworks/SDL2_ttf.framework/Headers -F/Library/Frameworks
 
 CC = clang++ -v
 CFLAGS = $(CXXFLAGS)
