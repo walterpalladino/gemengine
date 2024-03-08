@@ -33,8 +33,12 @@ protected:
     vector<Scene *> scenes;
     Scene *activeScene;
 
-    uint32_t firstRenderTime;
+    uint32_t firstRenderTick;
     uint32_t lastRenderTime;
+    uint32_t startFrameTick;
+    uint32_t endFrameTick;
+
+    uint32_t lastFrameTime;
 
     float targetFPS = 60.0f;
     double totalFrames;
@@ -65,6 +69,10 @@ protected:
     void PollEvents();
 
     float GetFPS();
+    uint32_t GetLastFrameTime()
+    {
+        return lastFrameTime;
+    }
 
 protected:
     // Logic loop

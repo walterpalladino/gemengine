@@ -12,6 +12,7 @@ struct Config_Data
     int virtual_window_height;
     bool use_virtual_window;
     float target_fps;
+    int aa_level;
 };
 
 class Config

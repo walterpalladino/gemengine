@@ -245,6 +245,8 @@ int GemEngine::Start()
     // Virtual Screen Dimensions (pixels)
     virtualWindowSize = Point2dInt(Config::Instance()->config_data.virtual_window_width, Config::Instance()->config_data.virtual_window_height);
     renderToVirtualWindow = Config::Instance()->config_data.use_virtual_window;
+    scaleQuality = Config::Instance()->config_data.aa_level;
+    targetFPS = Config::Instance()->config_data.target_fps;
 
     if (renderToVirtualWindow)
     {
@@ -264,18 +266,18 @@ int GemEngine::Start()
         return 0;
     }
 
-    firstRenderTime = SDL_GetTicks();
-    lastRenderTime = SDL_GetTicks();
+    firstRenderTick = SDL_GetTicks();
+    lastRenderTime = 0;
 
     totalFrames = 0;
 
     int eventCounter = 0;
-    int targetFrameTime = (1000.0f / targetFPS);
+    uint32_t targetFrameTime = (1000 / targetFPS);
 
     while (Running)
     {
         //  Get Time
-        uint32_t frameStart = SDL_GetTicks();
+        startFrameTick = SDL_GetTicks();
 
         //   TODO : Check this hardcoded value to calculate it based on target fps
         // if (eventCounter % 10 == 0)
@@ -284,7 +286,7 @@ int GemEngine::Start()
         }
         eventCounter++;
 
-        float elapsedTimeFromStart = frameStart - firstRenderTime;
+        float elapsedTimeFromStart = startFrameTick - firstRenderTick;
         Loop(elapsedTimeFromStart);
 
         Physics();
@@ -293,19 +295,21 @@ int GemEngine::Start()
         Render(elapsedTimeFromStart);
         PostRender(elapsedTimeFromStart);
 
-        float frameTime = SDL_GetTicks() - frameStart;
+        lastRenderTime = SDL_GetTicks() - startFrameTick;
 
-        if (frameTime >= targetFrameTime)
+        if (lastRenderTime >= targetFrameTime)
             SDL_Delay(1); // Breath
         else
-            SDL_Delay(targetFrameTime - frameTime); // Breath
+            SDL_Delay(targetFrameTime - lastRenderTime); // Breath
 
         totalFrames = totalFrames + 1;
 
-        lastRenderTime = SDL_GetTicks();
+        endFrameTick = SDL_GetTicks();
+
+        lastFrameTime = endFrameTick - startFrameTick;
     }
 
-    Log::GetInstance()->Info("GemEngine::Execute", "Totl Frames: %.0f FPS : %.2f", totalFrames, GetFPS());
+    Log::GetInstance()->Info("GemEngine::Execute", "Total Frames: %.0f FPS : %.2f", totalFrames, GetFPS());
 
     Cleanup();
 
@@ -326,10 +330,15 @@ void GemEngine::PollEvents()
 
 float GemEngine::GetFPS()
 {
-    float elapsedTimeFromStart = lastRenderTime - firstRenderTime;
-    return totalFrames / elapsedTimeFromStart * 1000.0f;
+    float elapsedTimeFromStart = endFrameTick - firstRenderTick;
+    return elapsedTimeFromStart > 0 ? (float)totalFrames / elapsedTimeFromStart * 1000.0f : 0.0;
 }
-
+/*
+uint32_t GemEngine::GetLastFrameTime()
+{
+    return lastFrameTime;
+}
+*/
 void GemEngine::Physics()
 {
 }

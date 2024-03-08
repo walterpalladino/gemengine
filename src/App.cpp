@@ -130,6 +130,8 @@ void App::Loop(float time)
 
     char *text = new char[64];
     sprintf(text, "%.2f FPS", GetFPS());
+    // sprintf(text, "%04d LFT", GetLastFrameTime());
+    // sprintf(text, "%.2f FPS", 1000.0f / GetLastFrameTime());
     ((Text *)(activeScene->Get("text")))->SetText(text);
 
     // const char text[] = "GemEngine running...";

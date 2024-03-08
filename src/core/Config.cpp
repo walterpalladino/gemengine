@@ -36,6 +36,7 @@ void Config::Load(const string fileName)
         config_data.virtual_window_height = 216;
         config_data.use_virtual_window = true;
         config_data.target_fps = 60;
+        config_data.aa_level = 0;
 
         if (data.contains("window"))
         {
@@ -73,6 +74,11 @@ void Config::Load(const string fileName)
             if (render_data.contains("target_fps"))
             {
                 config_data.target_fps = render_data.at("target_fps");
+            }
+            if (render_data.contains("aa_level"))
+            {
+                config_data.aa_level = render_data.at("aa_level");
+                config_data.aa_level = clamp(config_data.aa_level, 0, 2);
             }
         }
     }
