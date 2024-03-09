@@ -1,0 +1,115 @@
+{
+  "name": "Start Scene",
+  "objects": [
+    {
+      "type": "image",
+      "name": "led-arrow",
+      "enabled": true,
+      "src": "led-arrow.png",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "type": "text",
+      "name": "text",
+      "enabled": true,
+      "src": "fonts/Commodore-64-v6.3.TTF",
+      "position": {
+        "x": 100,
+        "y": 100,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "type": "sprite",
+      "name": "spriteIdle",
+      "enabled": true,
+
+      "src": "Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png",
+
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "x": 38,
+        "y": 48
+      },
+      "frames": 4,
+      "speed": 4,
+
+      "position": {
+        "x": 100,
+        "y": 50,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "type": "sprite",
+      "name": "spriteWalk",
+      "enabled": true,
+
+      "src": "Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png",
+
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "x": 66,
+        "y": 48
+      },
+      "frames": 12,
+      "speed": 12,
+
+      "position": {
+        "x": 200,
+        "y": 100,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": -1,
+        "y": 1,
+        "z": 1
+      }
+    }
+  ]
+}

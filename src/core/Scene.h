@@ -35,4 +35,6 @@ public:
     void Render(float time);
 
     void Cleanup();
+
+    int Load(string fileName, SDL_Renderer *renderer, string resourceFolder);
 };

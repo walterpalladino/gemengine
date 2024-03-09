@@ -88,7 +88,7 @@ void Config::Load(const string fileName)
         char *buffer = new char[512];
         sprintf(buffer, "Unable to load configuration file: %s.", fileName.c_str());
 
-        Log::GetInstance()->Error("FontsManager::AddFont", buffer);
+        Log::GetInstance()->Error("Config::Load", buffer);
         throw ResourceLoadException(buffer);
     }
 }

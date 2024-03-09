@@ -27,45 +27,46 @@ void App::LoadScenes()
     //  Create Scene
     // Scene *newScene = new Scene(Renderer);
     Scene *newScene = new Scene();
+    newScene->Load(StringPrintf("%s/scenes/scene1.json", resourceFolder.c_str()).c_str(), renderer, resourceFolder);
+    /*
+        //  Create Image
+        Image *newImage = new Image(renderer);
+        newImage->Init();
+        //  Load Image
+        newImage->Load(StringPrintf("%s/led-arrow.png", resourceFolder.c_str()).c_str());
+        newImage->name = string("led-arrow");
+        // newImage->scale = Vector3d(1, 1, 1);
+        newImage->enabled = true;
+        //   Add Image to Scene
+        newScene->Add("led-arrow", newImage);
 
-    //  Create Image
-    Image *newImage = new Image(renderer);
-    newImage->Init();
-    //  Load Image
-    newImage->Load(StringPrintf("%s/led-arrow.png", resourceFolder.c_str()).c_str());
-    newImage->name = string("led-arrow");
-    // newImage->scale = Vector3d(1, 1, 1);
-    newImage->enabled = true;
-    //   Add Image to Scene
-    newScene->Add("led-arrow", newImage);
+        //  Add text
+        Text *newText = new Text(renderer);
+        newText->Init("SDL2 text", StringPrintf("%s/fonts/Commodore-64-v6.3.TTF", resourceFolder.c_str()).c_str(), 24);
+        newText->position = Vector3d(100, 100, 0);
+        newText->scale = Vector3d(1, 1, 1);
+        newText->enabled = true;
 
-    //  Add text
-    Text *newText = new Text(renderer);
-    newText->Init("SDL2 text", StringPrintf("%s/fonts/Commodore-64-v6.3.TTF", resourceFolder.c_str()).c_str(), 24);
-    newText->position = Vector3d(100, 100, 0);
-    newText->scale = Vector3d(1, 1, 1);
-    newText->enabled = true;
+        //  Add Text to Scene
+        newScene->Add("text", newText);
 
-    //  Add Text to Scene
-    newScene->Add("text", newText);
+        //  Add Sprites
+        Sprite *spriteIdle = new Sprite(renderer);
+        //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
+        spriteIdle->Load(StringPrintf("%s/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png", resourceFolder.c_str()).c_str(), 0, 0, 38, 48, 4, 4);
+        spriteIdle->position = Vector3d(100, 50, 0);
+        spriteIdle->scale = Vector3d(1, 1, 1);
+        spriteIdle->enabled = true;
+        newScene->Add("spriteIdle", spriteIdle);
 
-    //  Add Sprites
-    Sprite *spriteIdle = new Sprite(renderer);
-    //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
-    spriteIdle->Load(StringPrintf("%s/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png", resourceFolder.c_str()).c_str(), 0, 0, 38, 48, 4, 4);
-    spriteIdle->position = Vector3d(100, 50, 0);
-    spriteIdle->scale = Vector3d(1, 1, 1);
-    spriteIdle->enabled = true;
-    newScene->Add("spriteIdle", spriteIdle);
-
-    Sprite *spriteWalk = new Sprite(renderer);
-    //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
-    spriteWalk->Load(StringPrintf("%s/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png", resourceFolder.c_str()).c_str(), 0, 0, 66, 48, 12, 12);
-    spriteWalk->position = Vector3d(200, 100, 0);
-    spriteWalk->scale = Vector3d(-1, 1, 1);
-    spriteWalk->enabled = true;
-    newScene->Add("spriteWalk", spriteWalk);
-
+        Sprite *spriteWalk = new Sprite(renderer);
+        //    void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
+        spriteWalk->Load(StringPrintf("%s/Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png", resourceFolder.c_str()).c_str(), 0, 0, 66, 48, 12, 12);
+        spriteWalk->position = Vector3d(200, 100, 0);
+        spriteWalk->scale = Vector3d(-1, 1, 1);
+        spriteWalk->enabled = true;
+        newScene->Add("spriteWalk", spriteWalk);
+    */
     newScene->name = string("Start Scene");
     //  Add Scene to Scenes list
     scenes.push_back(newScene);
@@ -84,9 +85,24 @@ void App::LoadScenes()
 // Logic loop
 void App::Loop(float time)
 {
+
+    // cout << "App::Loop"
+    //      << " Actual Scene : " << activeScene->name << endl;
+
     // Log::GetInstance()->Info("App::Loop", "Running the Logic Loop");
     //  if (true)
     //      return;
+
+    if (activeScene == NULL)
+    {
+        Log::GetInstance()->Info("App::Loop", "activeScene == NULL");
+        return;
+    }
+
+    if (activeScene->name != string("Start Scene"))
+    {
+        return;
+    }
 
     //  Scale the image
     Vector3d scale = activeScene->Get("led-arrow")->scale;

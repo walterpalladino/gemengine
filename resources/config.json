@@ -9,6 +9,7 @@
   },
   "render": {
     "use_virtual_window": true,
-    "target_fps": 60
+    "target_fps": 60,
+    "aa_level": 0
   }
 }
