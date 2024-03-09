@@ -4,6 +4,7 @@
 #include <nlohmann/json.hpp>
 
 #include "core/Scene.h"
+#include "core/Config.h"
 
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
@@ -80,9 +81,10 @@ void Scene::Cleanup()
     objects.clear();
 }
 
-int Scene::Load(string fileName, SDL_Renderer *renderer, string resourceFolder)
+int Scene::Load(string fileName, SDL_Renderer *renderer)
 {
 
+    string resourceFolder = Config::Instance()->config_data.resource_folder;
     try
     {
 

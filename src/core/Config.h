@@ -13,6 +13,7 @@ struct Config_Data
     bool use_virtual_window;
     float target_fps;
     int aa_level;
+    string resource_folder;
 };
 
 class Config

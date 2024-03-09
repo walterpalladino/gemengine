@@ -15,8 +15,6 @@ using namespace std;
 class GemEngine
 {
 protected:
-    string resourceFolder;
-
     bool Running = true;
 
     SDL_Window *window = NULL;
@@ -53,7 +51,7 @@ private:
     void PostRender(float time);
 
 protected:
-    GemEngine();
+    GemEngine(string resourceFolder);
     ~GemEngine();
 
     // Capture SDL Events
@@ -82,9 +80,6 @@ protected:
     virtual void Render(float time);
 
 public:
-    void SetResourceFolder(string resourceFolder);
-    string GetResourceFolder();
-
     // Free up resources
     void Cleanup();
 

@@ -15,12 +15,15 @@
 using namespace std;
 
 //==============================================================================
-GemEngine::GemEngine()
+GemEngine::GemEngine(string resourceFolder)
 {
     Log::GetInstance()->Info("GemEngine::GemEngine", "GemEngine Constructor");
     scenes.reserve(MAX_SCENES_PER_APP);
     activeScene = NULL;
     backgroundColor = Point3dInt(0, 0, 0);
+
+    Config::Instance()->config_data.resource_folder = resourceFolder;
+    Config::Instance()->Load("config.json");
 }
 
 GemEngine::~GemEngine()
@@ -31,20 +34,6 @@ GemEngine::~GemEngine()
 //------------------------------------------------------------------------------
 void GemEngine::OnEvent(SDL_Event *Event)
 {
-}
-
-void GemEngine::SetResourceFolder(string resourceFolder)
-{
-    this->resourceFolder = resourceFolder;
-
-    // Load config
-    string configFileName = StringPrintf("%s/%s", GetResourceFolder().c_str(), "config.json");
-    Config::Instance()->Load(configFileName);
-}
-
-string GemEngine::GetResourceFolder()
-{
-    return resourceFolder;
 }
 
 //------------------------------------------------------------------------------

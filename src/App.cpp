@@ -12,10 +12,11 @@
 #include "core/graphics/text/FontsManager.h"
 #include "core/graphics/console/Console.h"
 #include "core/graphics/draw2d/Draw.h"
+#include "core/Config.h"
 
 #include "math/Point2dInt.h"
 
-App::App() : GemEngine()
+App::App(string resourceFolder) : GemEngine(resourceFolder)
 {
 }
 
@@ -23,11 +24,12 @@ void App::LoadScenes()
 {
     Log::GetInstance()->Info("App::LoadScenes", "Load Scenes");
 
+    string resourceFolder = Config::Instance()->config_data.resource_folder;
     //  TODO : Replace for assets loader
     //  Create Scene
     // Scene *newScene = new Scene(Renderer);
     Scene *newScene = new Scene();
-    newScene->Load(StringPrintf("%s/scenes/scene1.json", resourceFolder.c_str()).c_str(), renderer, resourceFolder);
+    newScene->Load(StringPrintf("%s/scenes/scene1.json", resourceFolder.c_str()).c_str(), renderer);
     /*
         //  Create Image
         Image *newImage = new Image(renderer);

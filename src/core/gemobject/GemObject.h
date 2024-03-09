@@ -3,7 +3,11 @@
 #include <string>
 #include <SDL2/SDL.h>
 
+#include <nlohmann/json.hpp>
+
 #include "math/Vector3d.h"
+
+using json = nlohmann::json;
 
 class GemObject
 {
@@ -25,5 +29,5 @@ public:
     virtual void Render(float time) {}
     virtual void Cleanup() {}
 
-    // void SetPosition(Vector3d position) { this->position = position; }
+    virtual void JSONParse(json data);
 };

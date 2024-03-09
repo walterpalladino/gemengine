@@ -1,3 +1,6 @@
+
+#include "core/Config.h"
+
 #include "core/graphics/image/Image.h"
 #include "core/graphics/textures/TextureManager.h"
 
@@ -66,4 +69,17 @@ void Image::Render(float time)
                      rotation.z,
                      NULL, //&center,
                      flip);
+}
+
+void Image::JSONParse(json data)
+{
+    GemObject::JSONParse(data);
+
+    Init();
+
+    //  Load Image
+    string src = data.at("src");
+    // Load(StringPrintf("%s/%s", resourceFolder.c_str(), src.c_str()).c_str());
+    string src_file = Config::Instance()->config_data.resource_folder + "/" + src;
+    Load(src.c_str());
 }

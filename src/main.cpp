@@ -2,6 +2,7 @@
 #include "App.h"
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
+#include "core/Config.h"
 
 using namespace std;
 
@@ -10,16 +11,12 @@ int main(int argc, char *argv[])
 
 	Log::GetInstance()->Info("main::main", "Starting app");
 
-	App app = App();
-
+	string resource_folder = "Resources";
 	if (argc > 1)
 	{
-		app.SetResourceFolder(argv[1]);
+		resource_folder = argv[1];
 	}
-	else
-	{
-		app.SetResourceFolder("Resources");
-	}
+	App app = App(resource_folder);
 
 	int status = -1;
 	try

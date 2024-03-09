@@ -36,5 +36,5 @@ public:
 
     void Cleanup();
 
-    int Load(string fileName, SDL_Renderer *renderer, string resourceFolder);
+    int Load(string fileName, SDL_Renderer *renderer);
 };

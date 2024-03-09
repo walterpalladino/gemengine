@@ -26,7 +26,9 @@ void Config::Load(const string fileName)
     try
     {
 
-        json data = json::parse(ifstream(fileName.c_str()));
+        string configFileName = config_data.resource_folder + "/" + fileName;
+        cout << configFileName << endl;
+        json data = json::parse(ifstream(configFileName.c_str()));
         // cout << config_data << endl;
 
         //  Default values
@@ -91,4 +93,5 @@ void Config::Load(const string fileName)
         Log::GetInstance()->Error("Config::Load", buffer);
         throw ResourceLoadException(buffer);
     }
+    Log::GetInstance()->Info("Config::Load", "Config loaded");
 }
