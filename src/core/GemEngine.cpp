@@ -69,6 +69,8 @@ bool GemEngine::Init()
     {
         Log::GetInstance()->Error("GemEngine::Init", "Unable to Init hinting: %s", SDL_GetError());
     }
+    delete scaleQualityValue;
+
     // SDL_WindowFlags::SDL_WINDOW_RESIZABLE
     //  SDL_WINDOW_OPENGL
     if ((window = SDL_CreateWindow(

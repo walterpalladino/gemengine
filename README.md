@@ -33,6 +33,10 @@ You can still run the binary accessing the relative folders including those reso
 For the binary you need to enable access to the system Frameworks using the command:
 install_name_tool -add_rpath /Library/Frameworks ./bin/GemEngine
 
+Leaks Test
+
+leaks --atExit -- ./bin/GemEngine resources > leaks.txt
+
 ### Edited using
 
 https://stackedit.io/app#

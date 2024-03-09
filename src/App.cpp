@@ -149,6 +149,7 @@ void App::Loop(float time)
     // sprintf(text, "%04d LFT", GetLastFrameTime());
     // sprintf(text, "%.2f FPS", 1000.0f / GetLastFrameTime());
     ((Text *)(activeScene->Get("text")))->SetText(text);
+    delete[] text;
 
     // const char text[] = "GemEngine running...";
     // std::copy(text, text + sizeof(text), consoleBuffer);

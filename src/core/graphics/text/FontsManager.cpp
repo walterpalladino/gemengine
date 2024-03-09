@@ -45,6 +45,7 @@ TTF_Font *FontsManager::Add(string fontFileName, int size)
         sprintf(buffer, "Unable to load font: %s. TTF Error: %s", fontFileName.c_str(), TTF_GetError());
 
         Log::GetInstance()->Error("FontsManager::AddFont", buffer);
+        delete buffer;
         throw ResourceLoadException(buffer);
     }
 
@@ -53,9 +54,11 @@ TTF_Font *FontsManager::Add(string fontFileName, int size)
 }
 
 string FontsManager::GetKey(string fontFileName, int size)
-{
-    char *buffer = new char[512];
-    sprintf(buffer, "%s::%i", fontFileName.c_str(), size);
+{ /*
+     char *buffer = new char[512];
+     sprintf(buffer, "%s::%i", fontFileName.c_str(), size);
 
-    return string(buffer);
+     return string(buffer);
+     */
+    return fontFileName + "::" + std::to_string(size);
 }
