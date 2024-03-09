@@ -6,7 +6,7 @@
 
 #include <SDL2/SDL.h>
 
-#include "core/GemObject.h"
+#include "core/gemobject/GemObject.h"
 
 using namespace std;
 

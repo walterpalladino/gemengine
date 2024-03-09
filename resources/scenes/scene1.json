@@ -5,6 +5,8 @@
       "type": "image",
       "name": "led-arrow",
       "enabled": true,
+      "z_order": 0,
+      "layer": 0,
       "src": "led-arrow.png",
       "position": {
         "x": 0,
@@ -26,6 +28,8 @@
       "type": "text",
       "name": "text",
       "enabled": true,
+      "z_order": 0,
+      "layer": 0,
       "src": "fonts/Commodore-64-v6.3.TTF",
       "position": {
         "x": 100,
@@ -47,6 +51,8 @@
       "type": "sprite",
       "name": "spriteIdle",
       "enabled": true,
+      "z_order": 0,
+      "layer": 0,
 
       "src": "Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png",
 
@@ -81,6 +87,8 @@
       "type": "sprite",
       "name": "spriteWalk",
       "enabled": true,
+      "z_order": 0,
+      "layer": 0,
 
       "src": "Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png",
 

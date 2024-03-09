@@ -2,7 +2,7 @@
 
 #include <SDL2_image/SDL_image.h>
 
-#include "core/GemObject.h"
+#include "core/gemobject/GemObject.h"
 
 class Image : public GemObject
 {

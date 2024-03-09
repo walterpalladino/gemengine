@@ -17,6 +17,9 @@ public:
     Vector3d rotation = Vector3d::Zero();
     Vector3d scale = Vector3d::One();
 
+    int zOrder = 0;
+    int layer = 0;
+
     virtual void Init() {}
     virtual void Update() {}
     virtual void Render(float time) {}

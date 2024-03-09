@@ -122,6 +122,9 @@ int Scene::Load(string fileName, SDL_Renderer *renderer, string resourceFolder)
 
                         newImage->enabled = scene_object.at("enabled");
 
+                        newImage->zOrder = scene_object.at("z_order");
+                        newImage->layer = scene_object.at("layer");
+
                         json json_position = scene_object.at("position");
                         newImage->position = Vector3d(json_position.at("x"), json_position.at("y"), json_position.at("z"));
 
@@ -148,6 +151,9 @@ int Scene::Load(string fileName, SDL_Renderer *renderer, string resourceFolder)
                         newText->Init("SDL2 text", StringPrintf("%s/%s", resourceFolder.c_str(), src.c_str()).c_str(), 24);
 
                         newText->enabled = scene_object.at("enabled");
+
+                        newText->zOrder = scene_object.at("z_order");
+                        newText->layer = scene_object.at("layer");
 
                         json json_position = scene_object.at("position");
                         newText->position = Vector3d(json_position.at("x"), json_position.at("y"), json_position.at("z"));
@@ -186,6 +192,9 @@ int Scene::Load(string fileName, SDL_Renderer *renderer, string resourceFolder)
                         newSprite->Load(StringPrintf("%s/%s", resourceFolder.c_str(), src.c_str()).c_str(), offsetX, offsetY, width, height, frames, speed);
 
                         newSprite->enabled = scene_object.at("enabled");
+
+                        newSprite->zOrder = scene_object.at("z_order");
+                        newSprite->layer = scene_object.at("layer");
 
                         json json_position = scene_object.at("position");
                         newSprite->position = Vector3d(json_position.at("x"), json_position.at("y"), json_position.at("z"));

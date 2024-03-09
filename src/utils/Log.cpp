@@ -3,6 +3,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <time.h>
+// #include <format>
 
 #include "utils/StringUtils.h"
 #include "utils/Log.h"
@@ -45,11 +46,11 @@ void Log::Write(const char *moduleName, const char *logData)
 
 #if defined(__APPLE__) && defined(__MACH__)
 	// string logFileFolder = StringPrintf("~/Library/Application Support/GemEngine");
-	string logFileFolder = StringPrintf("GemEngine");
-	string logFileName = StringPrintf("%s/log.txt", logFileFolder.c_str());
+	string logFileFolder = "GemEngine";
+	string logFileName = logFileFolder + "/log.txt";
 #else
-	string logFileFolder = StringPrintf("GemEngine");
-	string logFileName = StringPrintf("%s/log.txt", logFileFolder.c_str());
+	string logFileFolder = "GemEngine";
+	string logFileName = logFileFolder + "/log.txt";
 #endif
 
 	// Create log file inside User Home folder on Mac
@@ -62,10 +63,12 @@ void Log::Write(const char *moduleName, const char *logData)
 	{
 		fileLog.open(logFileName, ios::app);
 		fileLog << StringPrintf("[%02d/%02d/%4d %02d:%02d:%02d] [%s]%s\n", day, month, year, hour, minute, second, moduleName, logData);
+		// fileLog << format("[{:02d}/{:02d}/{:04d} {:02d}:{:02d}:{:02d}] [{:s}]{:s}\n", day, month, year, hour, minute, second, moduleName, logData);
 	}
 	catch (std::ofstream::failure e)
 	{
-		cout << StringPrintf("Exception opening file %s/n %s", logFileName.c_str(), e.what()) << endl;
+		cout << "Exception opening file " << logFileName << endl
+			 << e.what() << endl;
 	}
 
 	fileLog.close();

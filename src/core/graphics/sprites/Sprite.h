@@ -2,7 +2,7 @@
 
 #include <SDL2_image/SDL_image.h>
 
-#include "core/GemObject.h"
+#include "core/gemobject/GemObject.h"
 #include "math/Point2dInt.h"
 
 class Sprite : public GemObject
