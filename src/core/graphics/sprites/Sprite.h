@@ -32,4 +32,6 @@ public:
     virtual void Render(float time);
 
     void Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed);
+
+    virtual void JSONParse(json data);
 };

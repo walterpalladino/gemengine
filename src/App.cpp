@@ -105,8 +105,8 @@ void App::Loop(float time)
     {
         return;
     }
-
-    //  Scale the image
+    // cout << "activeScene->Get(led-arrow) == NULL = " << (activeScene->Get("led-arrow") == NULL) << endl;
+    //   Scale the image
     Vector3d scale = activeScene->Get("led-arrow")->scale;
     scale.x = 1.0f;
     scale.y = 1.0f;

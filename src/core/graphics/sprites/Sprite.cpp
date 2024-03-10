@@ -1,8 +1,8 @@
 #include "core/graphics/sprites/Sprite.h"
 #include "core/graphics/textures/TextureManager.h"
+#include "core/Config.h"
 
 #include "utils/Log.h"
-#include "core/exceptions/ResourceLoadException.h"
 #include "math/Math.h"
 
 Sprite::Sprite(SDL_Renderer *renderer)
@@ -96,4 +96,27 @@ void Sprite::Render(float time)
                      rotation.z,
                      NULL, //&center,
                      flip);
+}
+
+void Sprite::JSONParse(json data)
+{
+    GemObject::JSONParse(data);
+
+    Init();
+
+    string src = data.at("src");
+    string src_file = Config::Instance()->config_data.resource_folder + "/" + src;
+
+    json json_offset = data.at("offset");
+    int offsetX = json_offset.at("x");
+    int offsetY = json_offset.at("y");
+
+    json json_size = data.at("size");
+    int width = json_size.at("x");
+    int height = json_size.at("y");
+
+    int frames = data.at("frames");
+    int speed = data.at("speed");
+
+    Load(src_file.c_str(), offsetX, offsetY, width, height, frames, speed);
 }

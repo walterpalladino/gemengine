@@ -29,4 +29,6 @@ public:
 
     void Init(const string, const char *fileName, const int fontSize);
     void SetText(string text) { this->text = text; }
+
+    virtual void JSONParse(json data);
 };

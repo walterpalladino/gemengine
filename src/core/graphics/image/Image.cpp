@@ -5,7 +5,6 @@
 #include "core/graphics/textures/TextureManager.h"
 
 #include "utils/Log.h"
-#include "core/exceptions/ResourceLoadException.h"
 #include "math/Math.h"
 
 Image::Image(SDL_Renderer *renderer)
@@ -77,9 +76,8 @@ void Image::JSONParse(json data)
 
     Init();
 
-    //  Load Image
     string src = data.at("src");
-    // Load(StringPrintf("%s/%s", resourceFolder.c_str(), src.c_str()).c_str());
     string src_file = Config::Instance()->config_data.resource_folder + "/" + src;
-    Load(src.c_str());
+
+    Load(src_file.c_str());
 }

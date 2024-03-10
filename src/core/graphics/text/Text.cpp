@@ -1,5 +1,7 @@
 #include "core/graphics/text/Text.h"
 #include "core/graphics/text/FontsManager.h"
+#include "core/Config.h"
+
 #include "utils/Log.h"
 #include "math/Math.h"
 
@@ -76,4 +78,16 @@ void Text::Render(float time)
 
     SDL_DestroyTexture(texture);
     SDL_FreeSurface(surface);
+}
+
+void Text::JSONParse(json data)
+{
+    GemObject::JSONParse(data);
+
+    Init();
+
+    string src = data.at("src");
+    string src_file = Config::Instance()->config_data.resource_folder + "/" + src;
+
+    Init("SDL2 text", src_file.c_str(), 24);
 }
