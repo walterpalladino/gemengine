@@ -11,5 +11,6 @@
     "use_virtual_window": true,
     "target_fps": 60,
     "aa_level": 0
-  }
+  },
+  "scenes": ["scenes/scene1.json"]
 }

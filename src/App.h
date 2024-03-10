@@ -6,8 +6,6 @@ class App : public GemEngine
 
 public:
     App(string resourceFolder);
-    virtual void LoadScenes();
-    // Logic loop
     virtual void Loop(float time);
     virtual void Render(float time);
 };

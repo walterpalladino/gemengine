@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -14,6 +15,7 @@ struct Config_Data
     float target_fps;
     int aa_level;
     string resource_folder;
+    vector<string> scenes;
 };
 
 class Config

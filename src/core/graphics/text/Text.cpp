@@ -40,7 +40,6 @@ void Text::Init(const string text, const char *fileName, const int fontSize)
 
 void Text::Render(float time)
 {
-    // printf("Text::Render\n");
 
     if (!enabled)
         return;
@@ -61,11 +60,7 @@ void Text::Render(float time)
         SDL_RenderCopy(renderer, texture, NULL, &destRect);
     }
     else
-    { /*
-         SDL_Point center = SDL_Point();
-         center.x = destRect.x + destRect.w / 2;
-         center.y = destRect.y + destRect.h / 2;
- */
+    {
         SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE;
         SDL_RenderCopyEx(renderer,
                          texture,

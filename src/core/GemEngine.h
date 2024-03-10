@@ -75,7 +75,7 @@ protected:
 protected:
     // Logic loop
     virtual void Loop(float time) {}
-    virtual void LoadScenes() {}
+    virtual void LoadScenes();
     // Render loop (draw)
     virtual void Render(float time);
 

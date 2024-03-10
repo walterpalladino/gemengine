@@ -44,7 +44,6 @@ void Image::Render(float time)
     if (!enabled)
         return;
 
-    // printf("Image::Render\n");
     //  Update Destination Rectangle based on Position and Scale
     destRect.x = position.x;
     destRect.y = position.y;

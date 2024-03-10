@@ -1,26 +1,27 @@
 resources/config.json
-Process:         GemEngine [13490]
+scenes/scene1.json
+Process:         GemEngine [35798]
 Path:            /Users/USER/*/GemEngine
-Load Address:    0x102310000
+Load Address:    0x10489c000
 Identifier:      GemEngine
 Version:         0
 Code Type:       ARM64
 Platform:        macOS
-Parent Process:  leaks [13489]
+Parent Process:  leaks [35797]
 
-Date/Time:       2024-03-10 17:06:50.211 -0300
-Launch Time:     2024-03-10 17:06:45.809 -0300
+Date/Time:       2024-03-10 17:37:56.949 -0300
+Launch Time:     2024-03-10 17:37:53.341 -0300
 OS Version:      macOS 14.3.1 (23D60)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
 Analysis Tool Version:  Xcode 15.3 (15E204a)
 
-Physical footprint:         31.6M
-Physical footprint (peak):  41.4M
+Physical footprint:         31.4M
+Physical footprint (peak):  41.2M
 Idle exit:                  untracked
 ----
 
 leaks Report Version: 4.0, multi-line stacks
-Process 13490: 26142 nodes malloced for 4683 KB
-Process 13490: 0 leaks for 0 total leaked bytes.
+Process 35798: 26108 nodes malloced for 4680 KB
+Process 35798: 0 leaks for 0 total leaked bytes.
 

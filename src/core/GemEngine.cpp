@@ -206,27 +206,7 @@ void GemEngine::Cleanup()
 }
 
 //------------------------------------------------------------------------------
-/*
-int GemEngine::Start(int windowWidth, int windowHeight, int virtualWindowWidth, int virtualWindowHeight)
-{
-    windowSize = Point2dInt(windowWidth, windowHeight);
 
-    // Virtual Screen Dimensions (pixels)
-    virtualWindowSize = Point2dInt(virtualWindowWidth, virtualWindowHeight);
-    renderToVirtualWindow = true;
-
-    return Start();
-}
-
-int GemEngine::Start(int windowWidth, int windowHeight)
-{
-    windowSize = Point2dInt(windowWidth, windowHeight);
-
-    renderToVirtualWindow = false;
-
-    return Start();
-}
-*/
 int GemEngine::Start()
 {
     Log::GetInstance()->Info("GemEngine::Start", "Start()");
@@ -247,9 +227,6 @@ int GemEngine::Start()
     {
         WindowManager::Instance()->boundaries = RectInt(0, 0, windowSize.x - 1, windowSize.y - 1);
     }
-
-    // for (int i = 0; i < argc; ++i)
-    //     cout << i << " - " << argv[i] << '\n';
 
     if (!Init())
     {
@@ -324,12 +301,31 @@ float GemEngine::GetFPS()
     float elapsedTimeFromStart = endFrameTick - firstRenderTick;
     return elapsedTimeFromStart > 0 ? (float)totalFrames / elapsedTimeFromStart * 1000.0f : 0.0;
 }
-/*
-uint32_t GemEngine::GetLastFrameTime()
-{
-    return lastFrameTime;
-}
-*/
+
 void GemEngine::Physics()
 {
+}
+
+void GemEngine::LoadScenes()
+{
+    Log::GetInstance()->Info("GemEngine::LoadScenes", "Load Scenes");
+
+    string resourceFolder = Config::Instance()->config_data.resource_folder;
+
+    for (auto &&scene_name : Config::Instance()->config_data.scenes)
+    {
+        std::cout << scene_name << "\n";
+
+        //  Create & Load Scene
+        Scene *newScene = new Scene();
+        newScene->Load(StringPrintf("%s/%s", resourceFolder.c_str(), scene_name.c_str()).c_str(), renderer);
+        newScene->name = scene_name;
+
+        //  Add Scene to Scenes list
+        scenes.push_back(newScene);
+    }
+
+    activeScene = scenes.front();
+
+    Log::GetInstance()->Info("GemEngine::LoadScenes", "Load Scenes Completed");
 }

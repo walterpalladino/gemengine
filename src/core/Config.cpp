@@ -83,6 +83,17 @@ void Config::Load(const string fileName)
                 config_data.aa_level = clamp(config_data.aa_level, 0, 2);
             }
         }
+
+        if (data.contains("scenes"))
+        {
+            json scenes_data = data.at("scenes");
+
+            for (auto &[key, val] : scenes_data.items())
+            {
+                json scene_name = val;
+                config_data.scenes.push_back(scene_name.get<string>());
+            }
+        }
     }
     catch (std::exception &e)
     {
