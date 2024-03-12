@@ -7,5 +7,5 @@ class App : public GemEngine
 public:
     App(string resourceFolder);
     virtual void Loop(float time);
-    virtual void Render(float time);
+    // virtual void Render(float time);
 };

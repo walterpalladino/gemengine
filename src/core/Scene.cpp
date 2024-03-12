@@ -9,7 +9,7 @@
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
 
-#include "core/graphics/console/Console.h"
+// #include "core/graphics/console/Console.h"
 
 #include "core/exceptions/DuplicatedResourceIdentifier.h"
 #include "core/exceptions/ResourceLoadException.h"
@@ -59,7 +59,7 @@ GemObject *Scene::Get(const char *name)
 void Scene::Render(float time)
 {
 
-    Console::Instance()->Render(time);
+    // Console::Instance()->Render(time);
 
     //  Render scene objects
     for (auto &[name, object] : objects)

@@ -44,8 +44,10 @@ private:
 
     Point2dInt cursorPosition = Point2dInt(0, 0);
 
-public:
     void Init(SDL_Renderer *renderer, int x, int y, int width, int height, const char *fileName, const int fontSize);
+
+public:
+    void Init(SDL_Renderer *renderer);
     void Cleanup();
     void Render(float time);
     void Clear();

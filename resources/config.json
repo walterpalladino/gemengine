@@ -12,5 +12,14 @@
     "target_fps": 60,
     "aa_level": 0
   },
+  "console": {
+    "enabled": true,
+    "font": "fonts/potash-8x8.png",
+    "x": 0,
+    "y": 0,
+    "width": 48,
+    "height": 27,
+    "font_size": 8
+  },
   "scenes": ["scenes/scene1.json"]
 }

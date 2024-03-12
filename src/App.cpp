@@ -93,96 +93,102 @@ void App::Loop(float time)
     // const char text[] = "GemEngine running...";
     // std::copy(text, text + sizeof(text), consoleBuffer);
     // Console::Instance()->SetColor(0, 0, 0);
-    /*
+
+    // cout << "App::Loop Console operation here..." << endl;
+    backgroundColor = Point3dInt(216, 216, 216);
+    backgroundColor = Point3dInt(80, 69, 155);
+    Console::Instance()->SetColor(0, 0, 0);
     Console::Instance()->SetColor(136, 126, 203);
     Console::Instance()->SetCursorAt(0, 0);
     Console::Instance()->Print("GemEngine running...");
     Console::Instance()->SetCursorAt(25, 0);
-    Console::Instance()->Print(text);
-    */
+    Console::Instance()->Print("still running...");
+    // Console::Instance()->Print(text);
+
+    // cout << "App::Loop end" << endl;
 }
 
-void App::Render(float time)
-{
-    // if (true)
-    //     return;
+// void App::Render(float time)
+// {
+//     // if (true)
+//     //     return;
 
-    GemEngine::Render(time);
+//     GemEngine::Render(time);
 
-    /*
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    Draw::Line(renderer, Point2dInt(10, 10), Point2dInt(50, 50));
+//     /*
+//     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+//     Draw::Line(renderer, Point2dInt(10, 10), Point2dInt(50, 50));
 
-    vector<Point2dInt> triangle;
-    // triangle.push_back(Point2d(50, 40));
-    // triangle.push_back(Point2d(100, 50));
-    //     triangle.push_back(Point2d(80, 100));
-    triangle.push_back(Point2dInt(50, 50));
-    triangle.push_back(Point2dInt(75, 75));
-    triangle.push_back(Point2dInt(50, 100));
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    Draw::TriangleFilled(renderer, triangle);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-    Draw::PolygonWired(renderer, triangle);
+//     vector<Point2dInt> triangle;
+//     // triangle.push_back(Point2d(50, 40));
+//     // triangle.push_back(Point2d(100, 50));
+//     //     triangle.push_back(Point2d(80, 100));
+//     triangle.push_back(Point2dInt(50, 50));
+//     triangle.push_back(Point2dInt(75, 75));
+//     triangle.push_back(Point2dInt(50, 100));
+//     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+//     Draw::TriangleFilled(renderer, triangle);
+//     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+//     Draw::PolygonWired(renderer, triangle);
 
-    vector<Point2dInt> square;
-    square.push_back(Point2dInt(100, 100));
-    square.push_back(Point2dInt(150, 100));
-    square.push_back(Point2dInt(150, 150));
-    square.push_back(Point2dInt(100, 150));
-    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
-    Draw::PolygonFilled(renderer, square);
-    SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
-    Draw::PolygonWired(renderer, square);
+//     vector<Point2dInt> square;
+//     square.push_back(Point2dInt(100, 100));
+//     square.push_back(Point2dInt(150, 100));
+//     square.push_back(Point2dInt(150, 150));
+//     square.push_back(Point2dInt(100, 150));
+//     SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+//     Draw::PolygonFilled(renderer, square);
+//     SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+//     Draw::PolygonWired(renderer, square);
 
-    vector<Point2dInt> triangle2;
-    triangle2.push_back(Point2dInt(200, 50));
-    triangle2.push_back(Point2dInt(201, 100));
-    triangle2.push_back(Point2dInt(199, 100));
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    Draw::TriangleFilled(renderer, triangle2);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-    Draw::PolygonWired(renderer, triangle2);
+//     vector<Point2dInt> triangle2;
+//     triangle2.push_back(Point2dInt(200, 50));
+//     triangle2.push_back(Point2dInt(201, 100));
+//     triangle2.push_back(Point2dInt(199, 100));
+//     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+//     Draw::TriangleFilled(renderer, triangle2);
+//     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+//     Draw::PolygonWired(renderer, triangle2);
 
-    // Draw::Line(renderer, Point2d(50, 50), Point2d(100, 50));
-    // Draw::Line(renderer, Point2d(100, 50), Point2d(80, 100));
-    // Draw::Line(renderer, Point2d(80, 100), Point2d(50, 50));
+//     // Draw::Line(renderer, Point2d(50, 50), Point2d(100, 50));
+//     // Draw::Line(renderer, Point2d(100, 50), Point2d(80, 100));
+//     // Draw::Line(renderer, Point2d(80, 100), Point2d(50, 50));
 
-    vector<Point2dInt> triangleTop;
-    triangleTop.push_back(Point2dInt(200, -50));
-    triangleTop.push_back(Point2dInt(150, 50));
-    triangleTop.push_back(Point2dInt(250, 50));
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    Draw::TriangleFilled(renderer, triangleTop);
+//     vector<Point2dInt> triangleTop;
+//     triangleTop.push_back(Point2dInt(200, -50));
+//     triangleTop.push_back(Point2dInt(150, 50));
+//     triangleTop.push_back(Point2dInt(250, 50));
+//     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+//     Draw::TriangleFilled(renderer, triangleTop);
 
-    vector<Point2dInt> triangleBottom;
-    triangleBottom.push_back(Point2dInt(200, 200));
-    triangleBottom.push_back(Point2dInt(150, 250));
-    triangleBottom.push_back(Point2dInt(250, 250));
-    SDL_SetRenderDrawColor(renderer, 128, 255, 128, 255);
-    Draw::TriangleFilled(renderer, triangleBottom);
+//     vector<Point2dInt> triangleBottom;
+//     triangleBottom.push_back(Point2dInt(200, 200));
+//     triangleBottom.push_back(Point2dInt(150, 250));
+//     triangleBottom.push_back(Point2dInt(250, 250));
+//     SDL_SetRenderDrawColor(renderer, 128, 255, 128, 255);
+//     Draw::TriangleFilled(renderer, triangleBottom);
 
-    //  Check non convex polygon
-    vector<Point2dInt> saw;
-    saw.push_back(Point2dInt(200, 100));
-    saw.push_back(Point2dInt(300, 100));
-    saw.push_back(Point2dInt(300, 200));
-    saw.push_back(Point2dInt(250, 150));
-    saw.push_back(Point2dInt(200, 200));
-    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
-    // Draw::PolygonFilled(renderer, saw);
-    SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
-    // Draw::PolygonWired(renderer, saw);
+//     //  Check non convex polygon
+//     vector<Point2dInt> saw;
+//     saw.push_back(Point2dInt(200, 100));
+//     saw.push_back(Point2dInt(300, 100));
+//     saw.push_back(Point2dInt(300, 200));
+//     saw.push_back(Point2dInt(250, 150));
+//     saw.push_back(Point2dInt(200, 200));
+//     SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+//     // Draw::PolygonFilled(renderer, saw);
+//     SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+//     // Draw::PolygonWired(renderer, saw);
 
-    vector<Point2dInt> star;
-    star.push_back(Point2dInt(300, 100));
-    star.push_back(Point2dInt(310, 130));
-    star.push_back(Point2dInt(340, 140));
-    star.push_back(Point2dInt(310, 150));
-    star.push_back(Point2dInt(300, 180));
-    SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
-    Draw::PolygonFilled(renderer, star);
-    SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
-    Draw::PolygonWired(renderer, star);
-    */
-}
+//     vector<Point2dInt> star;
+//     star.push_back(Point2dInt(300, 100));
+//     star.push_back(Point2dInt(310, 130));
+//     star.push_back(Point2dInt(340, 140));
+//     star.push_back(Point2dInt(310, 150));
+//     star.push_back(Point2dInt(300, 180));
+//     SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+//     Draw::PolygonFilled(renderer, star);
+//     SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+//     Draw::PolygonWired(renderer, star);
+//     */
+// }

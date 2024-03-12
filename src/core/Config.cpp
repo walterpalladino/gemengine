@@ -40,6 +40,15 @@ void Config::Load(const string fileName)
         config_data.target_fps = 60;
         config_data.aa_level = 0;
 
+        //  Console
+        config_data.console_x;
+        config_data.console_y;
+        config_data.console_width;
+        config_data.console_height;
+        config_data.console_font;
+        config_data.console_font_size;
+        config_data.console_enabled = false;
+
         if (data.contains("window"))
         {
             json window_data = data.at("window");
@@ -93,6 +102,20 @@ void Config::Load(const string fileName)
                 json scene_name = val;
                 config_data.scenes.push_back(scene_name.get<string>());
             }
+        }
+
+        if (data.contains("console"))
+        {
+            cout << "Loading Console Configuration" << endl;
+            json console_data = data.at("console");
+
+            config_data.console_x = console_data.at("x");
+            config_data.console_y = console_data.at("y");
+            config_data.console_width = console_data.at("width");
+            config_data.console_height = console_data.at("height");
+            config_data.console_font = console_data.at("font");
+            config_data.console_font_size = console_data.at("font_size");
+            config_data.console_enabled = console_data.at("enabled");
         }
     }
     catch (std::exception &e)

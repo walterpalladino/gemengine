@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 
 #include "core/graphics/console/Console.h"
@@ -5,12 +6,42 @@
 #include "core/graphics/text/FontsManager.h"
 
 #include "utils/Log.h"
+#include "core/Config.h"
 #include "core/exceptions/ResourceLoadException.h"
 #include "math/Math.h"
+
+using namespace std;
 
 Console *Console::instance = 0;
 
 //  Point2dInt(48, 27);
+
+void Console::Init(SDL_Renderer *renderer)
+{
+    cout << "Console::Init" << endl;
+
+    this->renderer = renderer;
+
+    enabled = Config::Instance()->config_data.console_enabled;
+
+    if (enabled)
+    {
+        cout << "Console::Init enabled" << endl;
+
+        string resourceFolder = Config::Instance()->config_data.resource_folder;
+        string fontFileName = resourceFolder + "/" + Config::Instance()->config_data.console_font;
+
+        Init(renderer, Config::Instance()->config_data.console_x,
+             Config::Instance()->config_data.console_y,
+             Config::Instance()->config_data.console_width,
+             Config::Instance()->config_data.console_height,
+             fontFileName.c_str(),
+             Config::Instance()->config_data.console_font_size);
+
+        cout << "Console::Init Configured" << endl;
+    }
+}
+
 void Console::Init(SDL_Renderer *renderer, int x, int y, int width, int height, const char *fileName, const int fontSize)
 {
     Log::GetInstance()->Info("Console::Init", "Initializing");
@@ -41,10 +72,12 @@ void Console::Init(SDL_Renderer *renderer, int x, int y, int width, int height, 
 
 void Console::LoadFont(const char *fileName)
 {
+    Log::GetInstance()->Info("Console::LoadFont", "Loading font : %s", fileName);
     fontTexture = TextureManager::Instance()->Add(fileName);
     //  Get texture information
     SDL_QueryTexture(fontTexture, NULL, NULL, &textureRect.w, &textureRect.h);
     // printf("%i - %i\n", textureRect.w, textureRect.h);
+    // cout << "Console font width : " << textureRect.w << " / height : " << textureRect.h << endl;
 }
 
 void Console::Cleanup()
@@ -54,6 +87,7 @@ void Console::Cleanup()
     if (consoleBuffer != NULL)
     {
         delete (consoleBuffer);
+        consoleBuffer = NULL;
     }
 }
 
@@ -65,10 +99,13 @@ void Console::Render(float time)
     for (int c = 0; c < virtualConsoleSize.x * virtualConsoleSize.y; c++)
     // for (int c = 0; c < 1; c++)
     {
+        // cout << consoleBuffer[c];
         int x = c % virtualConsoleSize.x;
         int y = c / virtualConsoleSize.x;
         DrawCharacterAt(x, y, consoleBuffer[c]);
+        // DrawCharacterAt(x, y, 'a');
     }
+    // cout << endl;
 }
 
 void Console::DrawCharacterAt(int x, int y, char c)

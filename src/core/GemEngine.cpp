@@ -91,6 +91,9 @@ bool GemEngine::Init()
 
     Log::GetInstance()->Info("GemEngine::Init", "Initialization Completed");
 
+    Console::Instance()->Init(renderer);
+    Log::GetInstance()->Info("GemEngine::Init", "Console Configured");
+
     LoadScenes();
     Log::GetInstance()->Info("GemEngine::Init", "Scenes Loaded");
 
@@ -161,6 +164,7 @@ void GemEngine::PostRender(float time)
 
 void GemEngine::Render(float time)
 {
+    Console::Instance()->Render(time);
     activeScene->Render(time);
 }
 
