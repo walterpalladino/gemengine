@@ -10,6 +10,7 @@
 #include "core/graphics/WindowManager.h"
 #include "core/graphics/draw2d/Draw.h"
 #include "core/graphics/draw2d/Rect.h"
+#include "core/sound/SoundManager.h"
 #include "core/Config.h"
 
 using namespace std;
@@ -41,7 +42,7 @@ bool GemEngine::Init()
 {
     Log::GetInstance()->Info("GemEngine::Init", "Init Framework");
 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
     {
         Log::GetInstance()->Error("GemEngine::Init", "Unable to Init SDL: %s", SDL_GetError());
         return false;
@@ -88,6 +89,7 @@ bool GemEngine::Init()
     InputHandler::Instance()->Init();
     FontsManager::Instance()->Init();
     TextureManager::Instance()->Init(renderer);
+    SoundManager::Instance()->Init();
 
     Log::GetInstance()->Info("GemEngine::Init", "Initialization Completed");
 
@@ -194,6 +196,7 @@ void GemEngine::Cleanup()
 
     FontsManager::Instance()->Clean();
     TextureManager::Instance()->Clean();
+    SoundManager::Instance()->Clean();
 
     Console::Instance()->Cleanup();
 
