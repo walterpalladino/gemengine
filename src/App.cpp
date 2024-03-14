@@ -108,24 +108,58 @@ void App::Loop(float time)
 
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_1))
     {
-        cout << "WasKeyReleased SDL_SCANCODE_1" << endl;
+        cout << "Play Music Track" << endl;
         SoundManager::Instance()->PlayTrack("SlingerSwaggerLoop");
     }
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_2))
     {
-        cout << "WasKeyReleased SDL_SCANCODE_2" << endl;
+        cout << "Stop Music Track" << endl;
         SoundManager::Instance()->StopTrack("SlingerSwaggerLoop");
     }
 
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_3))
     {
-        cout << "WasKeyReleased SDL_SCANCODE_3" << endl;
+        cout << "Play Sound" << endl;
         SoundManager::Instance()->PlaySound("ScussesSound1");
     }
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_4))
     {
-        cout << "WasKeyReleased SDL_SCANCODE_4" << endl;
+        cout << "Stop Sound" << endl;
         SoundManager::Instance()->StopSound("ScussesSound1");
+    }
+
+    if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_7))
+    {
+        cout << "Reduce Music Track Volume" << endl;
+        int musicVolume = SoundManager::Instance()->SetTrackVolume(-1);
+        cout << "musicVolume = " << musicVolume << endl;
+        musicVolume = SoundManager::Instance()->SetTrackVolume(musicVolume - 1);
+        cout << "musicVolume = " << musicVolume << endl;
+    }
+    if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_8))
+    {
+        cout << "Increase Music Track Volume" << endl;
+        int musicVolume = SoundManager::Instance()->SetTrackVolume(-1);
+        cout << "musicVolume = " << musicVolume << endl;
+        musicVolume = SoundManager::Instance()->SetTrackVolume(musicVolume + 1);
+        cout << "musicVolume = " << musicVolume << endl;
+    }
+
+    if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_9))
+    {
+        cout << "Reduce Master Channels Volume" << endl;
+        int masterVolume = SoundManager::Instance()->SetMasterVolume(-1);
+        cout << "masterVolume = " << masterVolume << endl;
+        masterVolume = SoundManager::Instance()->SetMasterVolume(masterVolume - 1);
+        cout << "masterVolume = " << masterVolume << endl;
+    }
+    if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_0))
+    {
+        cout << "Increase Master Channels Volume" << endl;
+        int masterVolume = SoundManager::Instance()->SetMasterVolume(-1);
+        cout << "masterVolume = " << masterVolume << endl;
+        masterVolume = SoundManager::Instance()->SetMasterVolume(masterVolume + 1);
+        cout << "masterVolume = " << masterVolume << endl;
     }
 
     // cout << "App::Loop end" << endl;

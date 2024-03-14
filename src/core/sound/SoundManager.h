@@ -41,6 +41,10 @@ public:
     void StopTrack(string trackName);
     void StopSound(string soundName);
 
+    int SetMasterVolume(int volume);
+    int SetTrackVolume(int volume);
+    int SetSoundChannelVolume(int channel, int volume);
+
 private:
     SoundManager() {}
     ~SoundManager() {}

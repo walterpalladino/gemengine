@@ -174,3 +174,18 @@ void SoundManager::JSONParseTrack(json data)
     string sampleFileName = Config::Instance()->config_data.resource_folder + "/" + src;
     AddTrack(name, sampleFileName);
 }
+
+int SoundManager::SetMasterVolume(int volume)
+{
+    return Mix_MasterVolume(volume); // 0 - 128
+}
+
+int SoundManager::SetTrackVolume(int volume)
+{
+    return Mix_VolumeMusic(volume);
+}
+
+int SoundManager::SetSoundChannelVolume(int channel, int volume)
+{
+    return Mix_Volume(channel, volume);
+}
