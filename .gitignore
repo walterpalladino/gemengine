@@ -41,4 +41,5 @@ GemEngine/*
 resources/.DS_Store
 .DS_Store
 log.txt
+leaks.*
 src/.DS_Store
