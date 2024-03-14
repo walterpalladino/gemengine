@@ -38,6 +38,7 @@ public:
     unordered_map<SDL_Keycode, bool> keymap;
     bool IsKeyDown(SDL_Scancode key);
     bool WasKeyPressed(SDL_Scancode key);
+    bool WasKeyReleased(SDL_Scancode key);
 
     // Mouse //
 

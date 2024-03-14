@@ -18,6 +18,7 @@
 #include "core/graphics/image/Image.h"
 #include "core/graphics/sprites/Sprite.h"
 #include "core/graphics/text/Text.h"
+#include "core/sound/SoundManager.h"
 
 using json = nlohmann::json;
 using namespace std;
@@ -128,6 +129,14 @@ int Scene::Load(string fileName, SDL_Renderer *renderer)
                         Sprite *newSprite = new Sprite(renderer);
                         newSprite->JSONParse(scene_object);
                         Add(newSprite->name.c_str(), newSprite);
+                    }
+                    else if (type == "sound")
+                    {
+                        SoundManager::Instance()->JSONParseSound(scene_object);
+                    }
+                    else if (type == "track")
+                    {
+                        SoundManager::Instance()->JSONParseTrack(scene_object);
                     }
                     else
                     {

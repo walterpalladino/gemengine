@@ -118,6 +118,18 @@
         "y": 1,
         "z": 1
       }
+    },
+    {
+      "type": "sound",
+      "name": "ScussesSound1",
+
+      "src": "soundfx/ScussesSound1.mp3"
+    },
+    {
+      "type": "track",
+      "name": "SlingerSwaggerLoop",
+
+      "src": "tracks/Slinger Swagger (loop).mp3"
     }
   ]
 }

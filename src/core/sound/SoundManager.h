@@ -6,7 +6,10 @@
 
 #include <SDL2_mixer/SDL_mixer.h>
 
+#include <nlohmann/json.hpp>
+
 using namespace std;
+using json = nlohmann::json;
 
 #define MAX_SOUNDS_PER_APP 256
 #define MAX_TRACKS_PER_APP 256
@@ -26,8 +29,17 @@ public:
     void Init();
     void Clean();
 
-    Mix_Music *AddTrack(string sampleFileName, int size);
-    Mix_Chunk *AddSound(string sampleFileName, int size);
+    Mix_Music *AddTrack(string name, string sampleFileName);
+    Mix_Chunk *AddSound(string name, string sampleFileName);
+
+    void JSONParseSound(json data);
+    void JSONParseTrack(json data);
+
+    void PlayTrack(string trackName, int loops = -1);
+    int PlaySound(string soundName, int loops = 0);
+
+    void StopTrack(string trackName);
+    void StopSound(string soundName);
 
 private:
     SoundManager() {}
@@ -38,6 +50,9 @@ private:
     unordered_map<string, Mix_Music *> tracks;
     unordered_map<string, Mix_Chunk *> sounds;
 
-    string GetTrackKey(string sampleFileName, int size);
-    string GetSoundKey(string sampleFileName, int size);
+    string trackPlaying = "";
+    unordered_map<string, int> soundChannels;
+
+    string GetTrackKey(string sampleFileName);
+    string GetSoundKey(string sampleFileName);
 };

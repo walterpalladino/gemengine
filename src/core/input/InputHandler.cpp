@@ -18,8 +18,8 @@ bool InputHandler::Update()
 {
     SDL_Event event;
 
-    keymapPrev = keymap;
-    // keymap.clear();
+    // keymapPrev = keymap;
+    //  keymap.clear();
 
     bool quit = false;
 
@@ -117,20 +117,16 @@ void InputHandler::Reset()
 
 void InputHandler::OnKeyDown(SDL_Event *event)
 {
-    if (keymap.count(event->key.keysym.sym) != 0)
-    {
-    }
     keymap[event->key.keysym.sym] = true;
-    // std::cout << "Key Pressed: " << SDL_GetKeyName(event->key.keysym.sym) << std::endl;
+    keymapPrev[event->key.keysym.sym] = false;
+    // std::cout << "Key Pressed: " << SDL_GetKeyName(event->key.keysym.sym) << " key : " << event->key.keysym.sym << " scancode : " << SDL_GetScancodeFromKey(event->key.keysym.sym) << std::endl;
 }
 
 void InputHandler::OnKeyUp(SDL_Event *event)
 {
-    if (keymap.count(event->key.keysym.sym) != 0)
-    {
-    }
+    keymapPrev[event->key.keysym.sym] = true;
     keymap[event->key.keysym.sym] = false;
-    // std::cout << "Key Released: " << SDL_GetKeyName(event->key.keysym.sym) << std::endl;
+    // std::cout << "Key Released: " << SDL_GetKeyName(event->key.keysym.sym) << " key : " << event->key.keysym.sym << " scancode : " << SDL_GetScancodeFromKey(event->key.keysym.sym) << std::endl;
 }
 
 bool InputHandler::IsKeyDown(SDL_Scancode key)
@@ -155,7 +151,23 @@ bool InputHandler::IsKeyDown(SDL_Scancode key)
 
 bool InputHandler::WasKeyPressed(SDL_Scancode key)
 {
-    return (keymapPrev.count(key) == 0) && (keymap.count(key) != 0);
+    // std::cout << "WasKeyPressed : " << key << std::endl;
+    // std::cout << "keymapPrev.count(key) : " << keymapPrev.count(key) << std::endl;
+    // std::cout << "keymap.count(key) : " << keymap.count(key) << std::endl;
+
+    return (keymapPrev.count(SDL_GetKeyFromScancode(key)) == 0) && (keymap.count(SDL_GetKeyFromScancode(key)) != 0);
+}
+
+bool InputHandler::WasKeyReleased(SDL_Scancode key)
+{
+    int keyCode = SDL_GetKeyFromScancode(key);
+    // std::cout << "WasKeyPressed : " << keyCode << " keymapPrev.count(key) : " << keymapPrev.count(keyCode) << " keymap.count(key) : " << keymap.count(keyCode) << std::endl;
+
+    bool wasReleased = (keymapPrev.count(keyCode) != 0) && (keymapPrev[keyCode] == true) && (keymap.count(keyCode) != 0) && (keymap[keyCode] == false);
+
+    keymapPrev[keyCode] = false;
+
+    return wasReleased;
 }
 
 void InputHandler::Clean()
