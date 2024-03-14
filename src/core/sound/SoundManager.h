@@ -38,8 +38,8 @@ public:
     void PlayTrack(string trackName, int loops = -1);
     int PlaySound(string soundName, int loops = 0);
 
-    void StopTrack(string trackName);
-    void StopSound(string soundName);
+    void StopTrack();
+    void StopSound(int channel);
 
     int SetMasterVolume(int volume);
     int SetTrackVolume(int volume);
@@ -53,9 +53,6 @@ private:
 
     unordered_map<string, Mix_Music *> tracks;
     unordered_map<string, Mix_Chunk *> sounds;
-
-    string trackPlaying = "";
-    unordered_map<string, int> soundChannels;
 
     string GetTrackKey(string sampleFileName);
     string GetSoundKey(string sampleFileName);

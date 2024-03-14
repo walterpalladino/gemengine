@@ -24,6 +24,7 @@ App::App(string resourceFolder) : GemEngine(resourceFolder)
 // Logic loop
 void App::Loop(float time)
 {
+    static int sound_channel = 0;
 
     // cout << "App::Loop"
     //      << " Actual Scene : " << activeScene->name << endl;
@@ -114,18 +115,18 @@ void App::Loop(float time)
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_2))
     {
         cout << "Stop Music Track" << endl;
-        SoundManager::Instance()->StopTrack("SlingerSwaggerLoop");
+        SoundManager::Instance()->StopTrack();
     }
 
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_3))
     {
-        cout << "Play Sound" << endl;
-        SoundManager::Instance()->PlaySound("ScussesSound1");
+        sound_channel = SoundManager::Instance()->PlaySound("ScussesSound1");
+        cout << "Playing Sound : " << sound_channel << endl;
     }
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_4))
     {
-        cout << "Stop Sound" << endl;
-        SoundManager::Instance()->StopSound("ScussesSound1");
+        cout << "Stop Sound : " << sound_channel << endl;
+        SoundManager::Instance()->StopSound(sound_channel);
     }
 
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_7))

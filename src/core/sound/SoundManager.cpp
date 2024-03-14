@@ -83,7 +83,7 @@ Mix_Music *SoundManager::AddTrack(string name, string sampleFileName)
         Log::GetInstance()->Error("SoundManager::AddTrack", error_message.c_str());
         throw ResourceLoadException(error_message.c_str());
     }
-    cout << "Track [" << sampleFileName << "][" << key << "] added" << endl;
+    // cout << "Track [" << sampleFileName << "][" << key << "] added" << endl;
     tracks[key] = track;
     return track;
 }
@@ -99,28 +99,14 @@ void SoundManager::PlayTrack(string trackName, int loops)
         Log::GetInstance()->Error("SoundManager::PlayTrack", "Track [%s] not found", trackName.c_str());
         return;
     }
-    if (Mix_PlayingMusic() == 0) //  If no music is playing
-    {
-        int status = Mix_PlayMusic(tracks[key], loops);
 
-        if (status == -1)
-        {
-            // cout << "Track [" << trackName << "][" << key << "] not found" << endl;
-            // cout << "SDL2_mixer Error: " << SDL_GetError() << endl;
-            // cout << tracks[key] << endl;
-            Log::GetInstance()->Error("SoundManager::PlayTrack", "Unable to play track: %s. SDL2_mixer Error: %s", trackName.c_str(), SDL_GetError());
-            trackPlaying = "";
-        }
-        else
-        {
-            trackPlaying = key;
-        }
-    }
-    else
+    if (Mix_PlayMusic(tracks[key], loops) == -1)
     {
-        cout << "Already playing track" << endl;
+        // cout << "Track [" << trackName << "][" << key << "] not found" << endl;
+        // cout << "SDL2_mixer Error: " << SDL_GetError() << endl;
+        // cout << tracks[key] << endl;
+        Log::GetInstance()->Error("SoundManager::PlayTrack", "Unable to play track: %s. SDL2_mixer Error: %s", trackName.c_str(), SDL_GetError());
     }
-    //  TODO : Now just ignoring. Should I cancel and play a new one?
 }
 
 int SoundManager::PlaySound(string soundName, int loops)
@@ -131,32 +117,20 @@ int SoundManager::PlaySound(string soundName, int loops)
         Log::GetInstance()->Error("SoundManager::PlaySound", "Sound [%s] not found", soundName.c_str());
         return -1;
     }
-    //  TODO : If sound is already playing, should I cancel and play a new one?
-    if (soundChannels.count(key) == 0)
-    {
-        soundChannels[key] = Mix_PlayChannel(-1, sounds[key], loops);
-    }
-    return soundChannels[key];
+    return Mix_PlayChannel(-1, sounds[key], loops);
 }
 
-void SoundManager::StopSound(string soundName)
+void SoundManager::StopSound(int channel)
 {
-    string key = GetSoundKey(soundName);
-    if (soundChannels.count(key) != 0)
-    {
-        Mix_HaltChannel(soundChannels[key]);
-        soundChannels.erase(key);
-    }
+    Mix_HaltChannel(channel);
 }
 
-void SoundManager::StopTrack(string trackName)
+void SoundManager::StopTrack()
 {
-    string key = GetTrackKey(trackName);
     if (Mix_PlayingMusic() != 0)
     {
         Mix_HaltMusic();
     }
-    trackPlaying = "";
 }
 
 void SoundManager::JSONParseSound(json data)
