@@ -16,10 +16,21 @@
 using namespace std;
 
 //==============================================================================
+/**
+ * Constructor for the GemEngine class.
+ *
+ * @param resourceFolder The folder path where the resources are located.
+ *
+ * @return None
+ *
+ * @throws None
+ */
 GemEngine::GemEngine(string resourceFolder)
 {
     Log::GetInstance()->Info("GemEngine::GemEngine", "GemEngine Constructor");
-    scenes.reserve(MAX_SCENES_PER_APP);
+    Log::GetInstance()->Info("GemEngine::GemEngine", "Resource Folder: %s", resourceFolder.c_str());
+
+    // scenes.reserve(MAX_SCENES_PER_APP);
     activeScene = NULL;
     backgroundColor = Point3dInt(0, 0, 0);
 
@@ -175,6 +186,15 @@ void GemEngine::Cleanup()
 {
     Log::GetInstance()->Info("GemEngine::Cleanup", "Cleanup");
 
+    //  Clean up scenes
+    for (auto scene : scenes)
+    {
+        Log::GetInstance()->Info("GemEngine::~App", "Deleting scene: %s", scene->name.c_str());
+        scene->Cleanup();
+        delete scene;
+    }
+    scenes.clear();
+
     if (renderer)
     {
         SDL_DestroyRenderer(renderer);
@@ -201,15 +221,6 @@ void GemEngine::Cleanup()
     Console::Instance()->Cleanup();
 
     Log::GetInstance()->Info("GemEngine::Cleanup", "SDL_Quit Completed");
-
-    //  Clean up scenes
-    for (auto scene : scenes)
-    {
-        Log::GetInstance()->Info("GemEngine::~App", "Deleting scene: %s", scene->name.c_str());
-        scene->Cleanup();
-        delete scene;
-    }
-    scenes.clear();
 }
 
 //------------------------------------------------------------------------------
@@ -321,7 +332,7 @@ void GemEngine::LoadScenes()
 
     for (auto &&scene_name : Config::Instance()->config_data.scenes)
     {
-        std::cout << scene_name << "\n";
+        Log::GetInstance()->Info("GemEngine::LoadScenes", "Loading Scene: %s", scene_name.c_str());
 
         //  Create & Load Scene
         Scene *newScene = new Scene();

@@ -12,7 +12,15 @@ SoundManager *SoundManager::instance = 0;
 void SoundManager::Init()
 {
     Log::GetInstance()->Info("SoundManager::Init", "SoundManager Initializing");
-    //  TODO : Change to parameter to config file settings
+    //  int Mix_OpenAudio(int frequency, Uint16 format, int channels, int chunksize);
+    //      frequency	the frequency to playback audio at (in Hz).
+    //                  22050 good for games
+    //                  44100 better for audio tracks.
+    //      format	    audio format, one of SDL's AUDIO_* values.
+    //      channels	number of channels (1 is mono, 2 is stereo, etc).
+    //      chunksize	audio buffer size in sample FRAMES (total samples divided by channel count).
+    //  Return Value
+    //      Returns 0 if successful, -1 on error.
     if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
     {
         Log::GetInstance()->Info("SoundManager::Init", "SDL2_mixer could not be initialized. SDL_Error: %s", SDL_GetError());
@@ -39,6 +47,7 @@ void SoundManager::Clean()
     tracks.clear();
 
     Mix_CloseAudio();
+    Mix_Quit();
 }
 
 string SoundManager::GetTrackKey(string sampleFileName)
@@ -83,28 +92,21 @@ Mix_Music *SoundManager::AddTrack(string name, string sampleFileName)
         Log::GetInstance()->Error("SoundManager::AddTrack", error_message.c_str());
         throw ResourceLoadException(error_message.c_str());
     }
-    // cout << "Track [" << sampleFileName << "][" << key << "] added" << endl;
     tracks[key] = track;
     return track;
 }
 
 void SoundManager::PlayTrack(string trackName, int loops)
 {
-
     string key = GetTrackKey(trackName);
-
     if (tracks.count(key) == 0)
     {
-        // cout << "Track [" << trackName << "][" << key << "] not found" << endl;
         Log::GetInstance()->Error("SoundManager::PlayTrack", "Track [%s] not found", trackName.c_str());
         return;
     }
 
     if (Mix_PlayMusic(tracks[key], loops) == -1)
     {
-        // cout << "Track [" << trackName << "][" << key << "] not found" << endl;
-        // cout << "SDL2_mixer Error: " << SDL_GetError() << endl;
-        // cout << tracks[key] << endl;
         Log::GetInstance()->Error("SoundManager::PlayTrack", "Unable to play track: %s. SDL2_mixer Error: %s", trackName.c_str(), SDL_GetError());
     }
 }

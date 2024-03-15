@@ -27,9 +27,10 @@ void Config::Load(const string fileName)
     {
 
         string configFileName = config_data.resource_folder + "/" + fileName;
-        cout << configFileName << endl;
+
+        Log::GetInstance()->Info("Config::Load", "File: %s", configFileName.c_str());
+
         json data = json::parse(ifstream(configFileName.c_str()));
-        // cout << config_data << endl;
 
         //  Default values
         config_data.window_width = 1280;
@@ -41,12 +42,6 @@ void Config::Load(const string fileName)
         config_data.aa_level = 0;
 
         //  Console
-        config_data.console_x;
-        config_data.console_y;
-        config_data.console_width;
-        config_data.console_height;
-        config_data.console_font;
-        config_data.console_font_size;
         config_data.console_enabled = false;
 
         if (data.contains("window"))
@@ -106,7 +101,7 @@ void Config::Load(const string fileName)
 
         if (data.contains("console"))
         {
-            cout << "Loading Console Configuration" << endl;
+            // cout << "Loading Console Configuration" << endl;
             json console_data = data.at("console");
 
             config_data.console_x = console_data.at("x");
@@ -120,7 +115,6 @@ void Config::Load(const string fileName)
     }
     catch (std::exception &e)
     {
-        //        cout << e.what() << endl;
         char *buffer = new char[512];
         sprintf(buffer, "Unable to load configuration file: %s.", fileName.c_str());
 

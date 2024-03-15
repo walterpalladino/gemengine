@@ -105,6 +105,8 @@ all: $(BINDIR)/$(APP_NAME)
 # Generate Application Bundle
 .PHONY: package
 package:
+	#rm -Rf $(DISTDIR)
+	#mkdir $(DISTDIR)
 	rm -Rf $(DISTDIR)/$(APP_NAME).app
 	mkdir $(DISTDIR)/$(APP_NAME).app
 	mkdir $(DISTDIR)/$(APP_NAME).app/Contents
@@ -114,9 +116,12 @@ package:
 	mkdir $(DISTDIR)/$(APP_NAME).app/Contents/Frameworks/SDL2_image.framework
 	mkdir $(DISTDIR)/$(APP_NAME).app/Contents/Frameworks/SDL2_mixer.framework
 	mkdir $(DISTDIR)/$(APP_NAME).app/Contents/MacOS
+	mkdir $(DISTDIR)/$(APP_NAME).app/Contents/MacOS/resources
 	mkdir $(DISTDIR)/$(APP_NAME).app/Contents/Resources
-	mkdir $(DISTDIR)/$(APP_NAME).app/Contents/Resources/lib
-	mkdir $(DISTDIR)/$(APP_NAME).app/Contents/Resources/examples
+	#mkdir $(DISTDIR)/$(APP_NAME).app/Contents/Resources/lib
+	#mkdir $(DISTDIR)/$(APP_NAME).app/Contents/Resources/examples
+
+	cp -R resources/* $(DISTDIR)/$(APP_NAME).app/Contents/MacOS/resources
 
 	cp -R /Library/Frameworks/SDL2.framework/* $(DISTDIR)/$(APP_NAME).app/Contents/Frameworks/SDL2.framework/
 	cp -R /Library/Frameworks/SDL2_ttf.framework/* $(DISTDIR)/$(APP_NAME).app/Contents/Frameworks/SDL2_ttf.framework/
@@ -130,6 +135,7 @@ package:
 	install_name_tool -change @rpath/SDL2_mixer.framework/Versions/A/SDL2_mixer @executable_path/../Frameworks/SDL2_mixer.framework/Versions/A/SDL2_mixer $(DISTDIR)/$(APP_NAME).app/Contents/MacOS/GemEngine
 	install_name_tool -change @rpath/SDL2_ttf.framework/Versions/A/SDL2_ttf @executable_path/../Frameworks/SDL2_ttf.framework/Versions/A/SDL2_ttf $(DISTDIR)/$(APP_NAME).app/Contents/MacOS/GemEngine
 
+	#install_name_tool -change @rpath/Resources @executable_path/../Resources $(DISTDIR)/$(APP_NAME).app/Contents/MacOS/GemEngine
 
 .PHONY: clean
 clean:

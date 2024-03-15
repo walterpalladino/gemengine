@@ -9,8 +9,6 @@
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
 
-// #include "core/graphics/console/Console.h"
-
 #include "core/exceptions/DuplicatedResourceIdentifier.h"
 #include "core/exceptions/ResourceLoadException.h"
 #include "core/exceptions/JSONParseException.h"
@@ -41,7 +39,7 @@ GemObject *Scene::Add(const char *name, GemObject *object)
     //  Check if there is an object with the same name
     if (objects.count(name) != 0)
     {
-        printf("Scene::Add - Duplicate Identifier %s\n", name);
+        // printf("Scene::Add - Duplicate Identifier %s\n", name);
         char *buffer = new char[512];
         sprintf(buffer, "Duplicate Identifier: %s.", name);
 
@@ -59,8 +57,6 @@ GemObject *Scene::Get(const char *name)
 
 void Scene::Render(float time)
 {
-
-    // Console::Instance()->Render(time);
 
     //  Render scene objects
     for (auto &[name, object] : objects)
@@ -158,7 +154,7 @@ int Scene::Load(string fileName, SDL_Renderer *renderer)
     }
     catch (std::exception &e)
     {
-        cout << e.what() << endl;
+        // cout << e.what() << endl;
         char *buffer = new char[512];
         sprintf(buffer, "Unable to load scene file: %s.", fileName.c_str());
 

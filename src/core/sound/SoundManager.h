@@ -11,9 +11,6 @@
 using namespace std;
 using json = nlohmann::json;
 
-#define MAX_SOUNDS_PER_APP 256
-#define MAX_TRACKS_PER_APP 256
-
 class SoundManager
 {
 public:

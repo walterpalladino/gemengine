@@ -26,13 +26,6 @@ void App::Loop(float time)
 {
     static int sound_channel = 0;
 
-    // cout << "App::Loop"
-    //      << " Actual Scene : " << activeScene->name << endl;
-
-    // Log::GetInstance()->Info("App::Loop", "Running the Logic Loop");
-    //  if (true)
-    //      return;
-
     if (activeScene == NULL)
     {
         Log::GetInstance()->Info("App::Loop", "activeScene == NULL");
@@ -44,7 +37,6 @@ void App::Loop(float time)
             return;
         }
         */
-    // cout << "activeScene->Get(led-arrow) == NULL = " << (activeScene->Get("led-arrow") == NULL) << endl;
     //   Scale the image
     Vector3d scale = activeScene->Get("led-arrow")->scale;
     scale.x = 1.0f;
@@ -91,10 +83,6 @@ void App::Loop(float time)
     // sprintf(text, "%.2f FPS", 1000.0f / GetLastFrameTime());
     ((Text *)(activeScene->Get("text")))->SetText(text);
     delete[] text;
-
-    // const char text[] = "GemEngine running...";
-    // std::copy(text, text + sizeof(text), consoleBuffer);
-    // Console::Instance()->SetColor(0, 0, 0);
 
     // cout << "App::Loop Console operation here..." << endl;
     backgroundColor = Point3dInt(216, 216, 216);

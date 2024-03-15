@@ -3,6 +3,7 @@
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
 #include "core/Config.h"
+#include <fstream> // File io header
 
 using namespace std;
 
@@ -11,7 +12,12 @@ int main(int argc, char *argv[])
 
 	Log::GetInstance()->Info("main::main", "Starting app");
 
-	string resource_folder = "Resources";
+#if defined(__APPLE__) && defined(__MACH__)
+	string resource_folder = string(filesystem::path(string(argv[0])).remove_filename()) + "/" + "resources";
+#else
+	string resource_folder = "resources";
+#endif
+
 	if (argc > 1)
 	{
 		resource_folder = argv[1];
@@ -27,8 +33,6 @@ int main(int argc, char *argv[])
 	{
 		std::cerr << e.what() << '\n';
 	}
-
-	app.Cleanup();
 
 	Log::GetInstance()->Info("main::main", "Exiting app");
 

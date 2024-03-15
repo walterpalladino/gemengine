@@ -10,7 +10,7 @@
 
 #include <iostream> // Standard in/out header
 #include <fstream>	// File io header
-
+#include <pwd.h>
 using namespace std;
 
 Log::Log()
@@ -44,9 +44,24 @@ void Log::Write(const char *moduleName, const char *logData)
 	minute = currentdate->tm_min;
 	second = currentdate->tm_sec;
 
+	//	cout << "current_path().parent_path() : " << std::filesystem::current_path().parent_path() << endl;
+	// cout << "current_path() : " << std::filesystem::current_path() << endl;
+
 #if defined(__APPLE__) && defined(__MACH__)
-	// string logFileFolder = StringPrintf("~/Library/Application Support/GemEngine");
-	string logFileFolder = "GemEngine";
+
+	const char *homedir;
+
+	if ((homedir = getenv("HOME")) == NULL)
+	{
+		// cout << "HOME not set" << endl;
+	}
+	// cout << "homedir : " << homedir << endl;
+
+	//	string logFileFolder = StringPrintf("/Library/Application Support/GemEngine");
+	//	string logFileFolder = StringPrintf("/Users/walterpalladino/Library/Application Support/GemEngine");
+	string logFileFolder = string(homedir) + "/Library/Application Support/GemEngine";
+	// string logFileFolder = std::filesystem::current_path().u8string() + "/GemEngine";
+	//  logFileFolder = "/Users/walterpalladino/prg/sdl2-ws/gemengine/GemEngine";
 	string logFileName = logFileFolder + "/log.txt";
 #else
 	string logFileFolder = "GemEngine";

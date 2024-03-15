@@ -10,7 +10,7 @@
 
 using namespace std;
 
-#define MAX_SCENES_PER_APP 1024
+// #define MAX_SCENES_PER_APP 1024
 
 class GemEngine
 {
