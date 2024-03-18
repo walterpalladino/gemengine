@@ -57,7 +57,6 @@ GemObject *Scene::Get(const char *name)
 
 void Scene::Render(float time)
 {
-
     //  Render scene objects
     for (auto &[name, object] : objects)
     {

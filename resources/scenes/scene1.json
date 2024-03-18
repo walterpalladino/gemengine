@@ -81,6 +81,22 @@
         "x": 1,
         "y": 1,
         "z": 1
+      },
+
+      "collider": {
+        "enabled": true,
+        "type": "box",
+        "offset": {
+          "x": 6,
+          "y": 6,
+          "z": 0
+        },
+        "size": {
+          "x": 28,
+          "y": 42,
+          "z": 0
+        },
+        "mask": 0
       }
     },
     {
@@ -117,6 +133,22 @@
         "x": -1,
         "y": 1,
         "z": 1
+      },
+
+      "collider": {
+        "enabled": true,
+        "type": "box",
+        "offset": {
+          "x": 12,
+          "y": 6,
+          "z": 0
+        },
+        "size": {
+          "x": 28,
+          "y": 42,
+          "z": 0
+        },
+        "mask": 0
       }
     },
     {

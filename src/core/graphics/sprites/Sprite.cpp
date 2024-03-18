@@ -96,6 +96,17 @@ void Sprite::Render(float time)
                      rotation.z,
                      NULL, //&center,
                      flip);
+    /*
+        if (colliderEnabled)
+        {
+            //  Draw collider
+            SDL_Rect colliderRect = GetColliderRect();
+
+            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+            SDL_RenderDrawRect(renderer, &colliderRect);
+        }
+        */
+    RenderCollider(renderer, {255, 255, 0, 255});
 }
 
 void Sprite::JSONParse(json data)

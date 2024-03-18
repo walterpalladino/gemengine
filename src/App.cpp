@@ -151,5 +151,23 @@ void App::Loop(float time)
         cout << "masterVolume = " << masterVolume << endl;
     }
 
+    //  Sprite Movement
+    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_LEFT))
+    {
+        activeScene->Get("spriteWalk")->position.x -= 1;
+    }
+    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_RIGHT))
+    {
+        activeScene->Get("spriteWalk")->position.x += 1;
+    }
+    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_UP))
+    {
+        activeScene->Get("spriteWalk")->position.y -= 1;
+    }
+    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_DOWN))
+    {
+        activeScene->Get("spriteWalk")->position.y += 1;
+    }
+
     // cout << "App::Loop end" << endl;
 }

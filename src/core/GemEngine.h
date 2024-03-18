@@ -49,6 +49,11 @@ protected:
 private:
     void PreRender(float time);
     void PostRender(float time);
+    // Physics loop
+    void Physics(float time);
+    void DebugRender(float time);
+
+    vector<GemObject *> GetColliderEnabledObjects(unordered_map<string, GemObject *> objects);
 
 protected:
     GemEngine(string resourceFolder);
@@ -59,9 +64,6 @@ protected:
 
     // Initialize our SDL game / app
     bool Init();
-
-    // Physics loop
-    void Physics();
 
     // Poll Events
     void PollEvents();

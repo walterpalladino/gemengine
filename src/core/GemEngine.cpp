@@ -273,12 +273,17 @@ int GemEngine::Start()
         eventCounter++;
 
         float elapsedTimeFromStart = startFrameTick - firstRenderTick;
+
+        // Logic loop
         Loop(elapsedTimeFromStart);
 
-        Physics();
+        Physics(elapsedTimeFromStart);
 
         PreRender(elapsedTimeFromStart);
         Render(elapsedTimeFromStart);
+
+        DebugRender(elapsedTimeFromStart);
+
         PostRender(elapsedTimeFromStart);
 
         lastRenderTime = SDL_GetTicks() - startFrameTick;
@@ -320,8 +325,59 @@ float GemEngine::GetFPS()
     return elapsedTimeFromStart > 0 ? (float)totalFrames / elapsedTimeFromStart * 1000.0f : 0.0;
 }
 
-void GemEngine::Physics()
+void GemEngine::Physics(float time)
 {
+
+    Scene activeScene = *this->activeScene;
+    unordered_map<string, GemObject *> objects = activeScene.GetObjects();
+
+    vector<GemObject *> objects_vector = GetColliderEnabledObjects(objects);
+
+    for (int i = 0; i < objects_vector.size() - 1; i++)
+    {
+        // cout << "Checking collisions for gemobject: " << objects_vector[i]->name << endl;
+        objects_vector[i]->collisions.clear();
+
+        for (int j = i + 1; j < objects_vector.size(); j++)
+        {
+            SDL_Rect AABBi = objects_vector[i]->GetColliderRect();
+            SDL_Rect AABBj = objects_vector[j]->GetColliderRect();
+            SDL_Rect *AABBcollision = new SDL_Rect();
+
+            // cout << AABBi.x << " " << AABBi.y << " " << AABBi.w << " " << AABBi.h << endl;
+            // cout << AABBj.x << " " << AABBj.y << " " << AABBj.w << " " << AABBj.h << endl;
+
+            bool status = SDL_IntersectRect(&AABBi, &AABBj, AABBcollision);
+            if (status)
+            {
+                // cout << "   with gemobject: " << objects_vector[j]->name << endl;
+                // cout << "   collision area: " << AABBcollision->x << " " << AABBcollision->y << " " << AABBcollision->w << " " << AABBcollision->h << endl;
+
+                objects_vector[i]->collisions[objects_vector[j]->name] = *AABBcollision;
+                objects_vector[j]->collisions[objects_vector[i]->name] = *AABBcollision;
+            } /*
+             else
+             {
+                 cout << "   NOT COLLIDED!!! " << endl;
+             }*/
+        }
+    }
+}
+
+vector<GemObject *> GemEngine::GetColliderEnabledObjects(unordered_map<string, GemObject *> objects)
+{
+
+    vector<GemObject *> objects_vector;
+
+    for (auto &[name, object] : objects)
+    {
+        if (object->enabled && object->colliderEnabled)
+        {
+            objects_vector.push_back(object);
+        }
+    }
+
+    return objects_vector;
 }
 
 void GemEngine::LoadScenes()
@@ -346,4 +402,29 @@ void GemEngine::LoadScenes()
     activeScene = scenes.front();
 
     Log::GetInstance()->Info("GemEngine::LoadScenes", "Load Scenes Completed");
+}
+
+void GemEngine::DebugRender(float time)
+{
+    // cout << "Render debug" << endl;
+    Scene activeScene = *this->activeScene;
+    unordered_map<string, GemObject *> objects = activeScene.GetObjects();
+
+    //  Render scene objects
+    for (auto &[name, object] : objects)
+    {
+        if (object->enabled && object->colliderEnabled)
+        {
+            // cout << "Checking : " << object->collisions.size() << " collisions for gemobject: " << object->name << endl;
+            if (object->collisions.size() > 0)
+            {
+                // cout << "Drawing collisions for gemobject: " << object->name << endl;
+                //   Render collisions
+                for (auto &[name, collision] : object->collisions)
+                {
+                    object->RenderCollisionRect(renderer, name, {255, 0, 0, 255});
+                }
+            }
+        }
+    }
 }

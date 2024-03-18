@@ -14,17 +14,13 @@ using namespace std;
 
 class Scene
 {
-private:
-    // SDL_Renderer *renderer;
 
 private:
     unordered_map<string, GemObject *> objects;
 
 public:
     string name;
-    //    vector<GemObject *> objects;
 
-    // Scene(SDL_Renderer *renderer);
     Scene();
     ~Scene();
 
@@ -37,4 +33,9 @@ public:
     void Cleanup();
 
     int Load(string fileName, SDL_Renderer *renderer);
+
+    const unordered_map<string, GemObject *> GetObjects()
+    {
+        return objects;
+    }
 };
