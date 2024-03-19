@@ -20,6 +20,8 @@
 #include "core/scenes/SceneManager.h"
 #include "core/scenes/Scene.h"
 
+#include "core/renderer/RenderManager.h"
+
 App::App(string resourceFolder) : GemEngine(resourceFolder)
 {
 }
@@ -106,8 +108,8 @@ Scene *App::Loop(float time)
         delete[] text;
 
         // cout << "App::Loop Console operation here..." << endl;
-        backgroundColor = Point3dInt(216, 216, 216);
-        backgroundColor = Point3dInt(80, 69, 155);
+        RenderManager::Instance()->backgroundColor = Point3dInt(216, 216, 216);
+        RenderManager::Instance()->backgroundColor = Point3dInt(80, 69, 155);
         Console::Instance()->SetColor(0, 0, 0);
         Console::Instance()->SetColor(136, 126, 203);
         Console::Instance()->SetCursorAt(0, 0);

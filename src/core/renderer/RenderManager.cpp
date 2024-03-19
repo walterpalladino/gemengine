@@ -1,5 +1,7 @@
 
 #include "core/renderer/RenderManager.h"
+#include "core/graphics/WindowManager.h"
+
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
 #include "core/Config.h"
@@ -10,6 +12,8 @@ SDL_Renderer *RenderManager::Init()
 {
     Log::Instance()->Info("RenderManager::Init", "Init Framework");
 
+    backgroundColor = Point3dInt(0, 0, 0);
+
     //  Cache some configuration values
     windowSize = Point2dInt(Config::Instance()->config_data.window_width, Config::Instance()->config_data.window_height);
 
@@ -17,7 +21,15 @@ SDL_Renderer *RenderManager::Init()
     virtualWindowSize = Point2dInt(Config::Instance()->config_data.virtual_window_width, Config::Instance()->config_data.virtual_window_height);
     renderToVirtualWindow = Config::Instance()->config_data.use_virtual_window;
     scaleQuality = Config::Instance()->config_data.aa_level;
-    //    targetFPS = Config::Instance()->config_data.target_fps;
+
+    if (renderToVirtualWindow)
+    {
+        WindowManager::Instance()->boundaries = RectInt(0, 0, virtualWindowSize.x - 1, virtualWindowSize.y - 1);
+    }
+    else
+    {
+        WindowManager::Instance()->boundaries = RectInt(0, 0, windowSize.x - 1, windowSize.y - 1);
+    }
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
     {

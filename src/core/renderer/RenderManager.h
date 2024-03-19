@@ -44,6 +44,7 @@ private:
     int scaleQuality = 0;
     bool renderToVirtualWindow = true;
 
+public:
     Point3dInt backgroundColor;
 
 public:
@@ -51,4 +52,5 @@ public:
     void Cleanup();
     void PreRender(float time);
     void PostRender(float time);
+    Point2dInt GetWindowSize() { return windowSize; }
 };
