@@ -13,6 +13,7 @@
 #include "core/sound/SoundManager.h"
 #include "core/Config.h"
 #include "core/scenes/SceneManager.h"
+#include "core/renderer/RenderManager.h"
 
 using namespace std;
 
@@ -265,7 +266,7 @@ int GemEngine::Start()
         {
             SceneManager::Instance()->activeScene = newScene;
             newScene = NULL;
-            cout << "Switching to scene: " << SceneManager::Instance()->activeScene->name << endl;
+            // cout << "Switching to scene: " << SceneManager::Instance()->activeScene->name << endl;
         }
 
         //  Get Time

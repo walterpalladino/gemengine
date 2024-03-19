@@ -10,6 +10,7 @@
 #include "core/Config.h"
 #include "core/sound/SoundManager.h"
 #include "core/scenes/Scene.h"
+#include "core/scenes/SceneManager.h"
 
 Scene *Scene1Loop(Scene *scene, SDL_Renderer *renderer)
 { /*
@@ -158,7 +159,7 @@ Scene *Scene1Loop(Scene *scene, SDL_Renderer *renderer)
          //  Next Scene
          string newSceneName = "Second Scene";
          cout << "Next Scene : " << newSceneName << endl;
-         return GetScene(newSceneName);
+         return SceneManager::Instance()->GetScene(newSceneName);
      }*/
     return scene;
 }

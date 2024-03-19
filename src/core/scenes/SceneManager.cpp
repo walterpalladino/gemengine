@@ -105,30 +105,20 @@ void SceneManager::Physics(float time)
     //  Check collisions
     for (int i = 0; i < objects_vector.size() - 1; i++)
     {
-        // cout << "Checking collisions for gemobject: " << objects_vector[i]->name << endl;
-
         for (int j = i + 1; j < objects_vector.size(); j++)
         {
             SDL_Rect AABBi = objects_vector[i]->GetColliderRect();
             SDL_Rect AABBj = objects_vector[j]->GetColliderRect();
             SDL_Rect *AABBcollision = new SDL_Rect();
 
-            // cout << AABBi.x << " " << AABBi.y << " " << AABBi.w << " " << AABBi.h << endl;
-            // cout << AABBj.x << " " << AABBj.y << " " << AABBj.w << " " << AABBj.h << endl;
-
             bool status = SDL_IntersectRect(&AABBi, &AABBj, AABBcollision);
             if (status)
             {
-                // cout << "   with gemobject: " << objects_vector[j]->name << endl;
-                // cout << "   collision area: " << AABBcollision->x << " " << AABBcollision->y << " " << AABBcollision->w << " " << AABBcollision->h << endl;
-
                 objects_vector[i]->collisions[objects_vector[j]->name] = *AABBcollision;
                 objects_vector[j]->collisions[objects_vector[i]->name] = *AABBcollision;
-            } /*
-             else
-             {
-                 cout << "   NOT COLLIDED!!! " << endl;
-             }*/
+            }
+
+            delete AABBcollision;
         }
     }
 }
