@@ -12,6 +12,7 @@
 #include "core/graphics/draw2d/Rect.h"
 #include "core/sound/SoundManager.h"
 #include "core/Config.h"
+#include "core/scenes/SceneManager.h"
 
 using namespace std;
 
@@ -30,8 +31,6 @@ GemEngine::GemEngine(string resourceFolder)
     Log::Instance()->Info("GemEngine::GemEngine", "GemEngine Constructor");
     Log::Instance()->Info("GemEngine::GemEngine", "Resource Folder: %s", resourceFolder.c_str());
 
-    // scenes.reserve(MAX_SCENES_PER_APP);
-    activeScene = NULL;
     backgroundColor = Point3dInt(0, 0, 0);
 
     Config::Instance()->config_data.resource_folder = resourceFolder;
@@ -107,7 +106,7 @@ bool GemEngine::Init()
     Console::Instance()->Init(renderer);
     Log::Instance()->Info("GemEngine::Init", "Console Configured");
 
-    LoadScenes();
+    SceneManager::Instance()->LoadScenes(renderer);
     Log::Instance()->Info("GemEngine::Init", "Scenes Loaded");
 
     return true;
@@ -178,7 +177,7 @@ void GemEngine::PostRender(float time)
 void GemEngine::Render(float time)
 {
     Console::Instance()->Render(time);
-    activeScene->Render(time);
+    SceneManager::Instance()->RenderActiveScene(time);
 }
 
 //------------------------------------------------------------------------------
@@ -186,14 +185,7 @@ void GemEngine::Cleanup()
 {
     Log::Instance()->Info("GemEngine::Cleanup", "Cleanup");
 
-    //  Clean up scenes
-    for (auto scene : scenes)
-    {
-        Log::Instance()->Info("GemEngine::~App", "Deleting scene: %s", scene->name.c_str());
-        scene->Cleanup();
-        delete scene;
-    }
-    scenes.clear();
+    SceneManager::Instance()->Clean();
 
     if (renderer)
     {
@@ -264,16 +256,16 @@ int GemEngine::Start()
 
     Log::Instance()->Info("GemEngine::Start", "Starting Game Loop");
 
-    Scene *newScene = activeScene;
+    Scene *newScene = SceneManager::Instance()->activeScene;
 
     while (Running)
     {
 
-        if ((newScene != NULL) && (activeScene != newScene))
+        if ((newScene != NULL) && (SceneManager::Instance()->activeScene != newScene))
         {
-            activeScene = newScene;
+            SceneManager::Instance()->activeScene = newScene;
             newScene = NULL;
-            cout << "Switching to scene: " << activeScene->name << endl;
+            cout << "Switching to scene: " << SceneManager::Instance()->activeScene->name << endl;
         }
 
         //  Get Time
@@ -291,12 +283,12 @@ int GemEngine::Start()
         // Logic loop
         newScene = Loop(elapsedTimeFromStart);
 
-        Physics(elapsedTimeFromStart);
+        SceneManager::Instance()->Physics(elapsedTimeFromStart);
 
         PreRender(elapsedTimeFromStart);
         Render(elapsedTimeFromStart);
 
-        DebugRender(elapsedTimeFromStart);
+        SceneManager::Instance()->DebugRender(renderer, elapsedTimeFromStart);
 
         PostRender(elapsedTimeFromStart);
 
@@ -337,131 +329,4 @@ float GemEngine::GetFPS()
 {
     float elapsedTimeFromStart = endFrameTick - firstRenderTick;
     return elapsedTimeFromStart > 0 ? (float)totalFrames / elapsedTimeFromStart * 1000.0f : 0.0;
-}
-
-void GemEngine::Physics(float time)
-{
-
-    unordered_map<string, GemObject *> objects = activeScene->GetObjects();
-
-    vector<GemObject *> objects_vector = GetColliderEnabledObjects(objects);
-
-    if (objects_vector.size() == 0)
-    {
-        return;
-    }
-
-    //  Clear collisions
-    for (int i = 0; i < objects_vector.size(); i++)
-    {
-        objects_vector[i]->collisions.clear();
-    }
-
-    //  Check collisions
-    for (int i = 0; i < objects_vector.size() - 1; i++)
-    {
-        // cout << "Checking collisions for gemobject: " << objects_vector[i]->name << endl;
-
-        for (int j = i + 1; j < objects_vector.size(); j++)
-        {
-            SDL_Rect AABBi = objects_vector[i]->GetColliderRect();
-            SDL_Rect AABBj = objects_vector[j]->GetColliderRect();
-            SDL_Rect *AABBcollision = new SDL_Rect();
-
-            // cout << AABBi.x << " " << AABBi.y << " " << AABBi.w << " " << AABBi.h << endl;
-            // cout << AABBj.x << " " << AABBj.y << " " << AABBj.w << " " << AABBj.h << endl;
-
-            bool status = SDL_IntersectRect(&AABBi, &AABBj, AABBcollision);
-            if (status)
-            {
-                // cout << "   with gemobject: " << objects_vector[j]->name << endl;
-                // cout << "   collision area: " << AABBcollision->x << " " << AABBcollision->y << " " << AABBcollision->w << " " << AABBcollision->h << endl;
-
-                objects_vector[i]->collisions[objects_vector[j]->name] = *AABBcollision;
-                objects_vector[j]->collisions[objects_vector[i]->name] = *AABBcollision;
-            } /*
-             else
-             {
-                 cout << "   NOT COLLIDED!!! " << endl;
-             }*/
-        }
-    }
-}
-
-vector<GemObject *> GemEngine::GetColliderEnabledObjects(unordered_map<string, GemObject *> objects)
-{
-
-    vector<GemObject *> objects_vector;
-
-    for (auto &[name, object] : objects)
-    {
-        if (object->enabled && object->colliderEnabled)
-        {
-            objects_vector.push_back(object);
-        }
-    }
-
-    return objects_vector;
-}
-
-void GemEngine::LoadScenes()
-{
-    Log::Instance()->Info("GemEngine::LoadScenes", "Load Scenes");
-
-    string resourceFolder = Config::Instance()->config_data.resource_folder;
-
-    for (auto &&scene_name : Config::Instance()->config_data.scenes)
-    {
-        Log::Instance()->Info("GemEngine::LoadScenes", "Loading Scene: %s", scene_name.c_str());
-
-        //  Create & Load Scene
-        Scene *newScene = new Scene();
-        newScene->Load(StringPrintf("%s/%s", resourceFolder.c_str(), scene_name.c_str()).c_str(), renderer);
-        // newScene->name = scene_name;
-
-        //  Add Scene to Scenes list
-        scenes.push_back(newScene);
-    }
-
-    activeScene = scenes.front();
-
-    Log::Instance()->Info("GemEngine::LoadScenes", "Load Scenes Completed");
-}
-
-void GemEngine::DebugRender(float time)
-{
-    // cout << "Render debug" << endl;
-    unordered_map<string, GemObject *> objects = activeScene->GetObjects();
-
-    //  Render scene objects
-    for (auto &[name, object] : objects)
-    {
-        if (object->enabled && object->colliderEnabled)
-        {
-            // cout << "Checking : " << object->collisions.size() << " collisions for gemobject: " << object->name << endl;
-            if (object->collisions.size() > 0)
-            {
-                // cout << "Drawing collisions for gemobject: " << object->name << endl;
-                //   Render collisions
-                for (auto &[name, collision] : object->collisions)
-                {
-                    object->RenderCollisionRect(renderer, name, {255, 0, 0, 255});
-                }
-            }
-        }
-    }
-}
-
-Scene *GemEngine::GetScene(const string name)
-{
-    for (auto &&scene : scenes)
-    {
-        cout << "Checking scene: " << scene->name << endl;
-        if (scene->name == name)
-        {
-            cout << "Found scene: " << name << endl;
-            return scene;
-        }
-    }
-    return NULL;
 }

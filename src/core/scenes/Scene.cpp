@@ -3,7 +3,7 @@
 #include <chrono>
 #include <nlohmann/json.hpp>
 
-#include "core/Scene.h"
+#include "core/scenes/Scene.h"
 #include "core/Config.h"
 
 #include "utils/Log.h"

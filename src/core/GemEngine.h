@@ -4,7 +4,7 @@
 
 #include <SDL2/SDL.h>
 
-#include "core/Scene.h"
+#include "core/scenes/Scene.h"
 #include "math/Point2dInt.h"
 #include "math/Point3dInt.h"
 
@@ -28,9 +28,6 @@ protected:
     // Virtual Screen Dimensions (pixels)
     Point2dInt virtualWindowSize = Point2dInt(384, 216);
 
-    vector<Scene *> scenes;
-    Scene *activeScene;
-
     uint32_t firstRenderTick;
     uint32_t lastRenderTime;
     uint32_t startFrameTick;
@@ -49,11 +46,6 @@ protected:
 private:
     void PreRender(float time);
     void PostRender(float time);
-    // Physics loop
-    void Physics(float time);
-    void DebugRender(float time);
-
-    vector<GemObject *> GetColliderEnabledObjects(unordered_map<string, GemObject *> objects);
 
 protected:
     GemEngine(string resourceFolder);
@@ -74,13 +66,10 @@ protected:
         return lastFrameTime;
     }
 
-    Scene *GetScene(const string name);
-
 protected:
     // Logic loop
     virtual void LoopInit() {}
     virtual Scene *Loop(float time) {}
-    virtual void LoadScenes();
     // Render loop (draw)
     virtual void Render(float time);
 

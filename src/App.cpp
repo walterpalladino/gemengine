@@ -17,12 +17,16 @@
 
 #include "math/Point2dInt.h"
 
+#include "core/scenes/SceneManager.h"
+#include "core/scenes/Scene.h"
+
 App::App(string resourceFolder) : GemEngine(resourceFolder)
 {
 }
 
 void App::LoopInit()
 {
+    Scene *activeScene = SceneManager::Instance()->activeScene;
 
     if (activeScene == NULL)
     {
@@ -42,6 +46,7 @@ void App::LoopInit()
 // Logic loop
 Scene *App::Loop(float time)
 {
+    Scene *activeScene = SceneManager::Instance()->activeScene;
 
     if (activeScene == NULL)
     {
@@ -189,8 +194,8 @@ Scene *App::Loop(float time)
         {
             //  Next Scene
             string newSceneName = "Second Scene";
-            cout << "Next Scene : " << newSceneName << endl;
-            return GetScene(newSceneName);
+            // cout << "Next Scene : " << newSceneName << endl;
+            return SceneManager::Instance()->GetScene(newSceneName);
         }
     }
 
@@ -200,8 +205,8 @@ Scene *App::Loop(float time)
         {
             //  Next Scene
             string newSceneName = "Third Scene";
-            cout << "Next Scene : " << newSceneName << endl;
-            return GetScene(newSceneName);
+            // cout << "Next Scene : " << newSceneName << endl;
+            return SceneManager::Instance()->GetScene(newSceneName);
         }
     }
 
@@ -211,8 +216,8 @@ Scene *App::Loop(float time)
         {
             //  Next Scene
             string newSceneName = "Start Scene";
-            cout << "Next Scene : " << newSceneName << endl;
-            return GetScene(newSceneName);
+            // cout << "Next Scene : " << newSceneName << endl;
+            return SceneManager::Instance()->GetScene(newSceneName);
         }
     }
 
