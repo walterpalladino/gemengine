@@ -74,9 +74,12 @@ protected:
         return lastFrameTime;
     }
 
+    Scene *GetScene(const string name);
+
 protected:
     // Logic loop
-    virtual void Loop(float time) {}
+    virtual void LoopInit() {}
+    virtual Scene *Loop(float time) {}
     virtual void LoadScenes();
     // Render loop (draw)
     virtual void Render(float time);

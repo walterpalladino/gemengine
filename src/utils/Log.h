@@ -1,42 +1,38 @@
 
 #pragma once
 
-#include	<string>
+#include <string>
 
-using namespace std ;
+using namespace std;
 
 enum LogLevel
 {
-	LOG_LEVEL_ERROR		= 0,
+	LOG_LEVEL_ERROR = 0,
 	LOG_LEVEL_INFO,
 	LOG_LEVEL_DEBUG
-} ;
+};
 
-#define	LOG_MESSAGE_SIZE	16384
+#define LOG_MESSAGE_SIZE 16384
 
 class Log
 {
 
 private:
-
-	void				Write( const char* moduleName, const char * logData );
-	LogLevel			logLevel ;
+	void Write(const char *moduleName, const char *logData);
+	LogLevel logLevel;
 
 public:
-    Log();
-	static Log *	GetInstance()
+	Log();
+	static Log *Instance()
 	{
-	    static Log instance ;
-		return &instance ;
+		static Log instance;
+		return &instance;
 	};
 
-	void				Info( const char* moduleName, const char* text, ... );
-	void				Error( const char* moduleName, const char* text, ... );
-	void				Debug( const char* moduleName, const char* text, ... );
+	void Info(const char *moduleName, const char *text, ...);
+	void Error(const char *moduleName, const char *text, ...);
+	void Debug(const char *moduleName, const char *text, ...);
 
-	void				SetLogLevel ( LogLevel pLogLevel ) ;
-	LogLevel			GetLogLevel ( void ) { return logLevel ; } ;
-
+	void SetLogLevel(LogLevel pLogLevel);
+	LogLevel GetLogLevel(void) { return logLevel; };
 };
-
-

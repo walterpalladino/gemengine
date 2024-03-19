@@ -10,7 +10,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 
-	Log::GetInstance()->Info("main::main", "Starting app");
+	Log::Instance()->Info("main::main", "Starting app");
 
 #if defined(__APPLE__) && defined(__MACH__)
 	string resource_folder = string(filesystem::path(string(argv[0])).remove_filename()) + "/" + "resources";
@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 		std::cerr << e.what() << '\n';
 	}
 
-	Log::GetInstance()->Info("main::main", "Exiting app");
+	Log::Instance()->Info("main::main", "Exiting app");
 
 	return status;
 }

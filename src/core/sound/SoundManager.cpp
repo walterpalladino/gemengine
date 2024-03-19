@@ -11,7 +11,7 @@ SoundManager *SoundManager::instance = 0;
 
 void SoundManager::Init()
 {
-    Log::GetInstance()->Info("SoundManager::Init", "SoundManager Initializing");
+    Log::Instance()->Info("SoundManager::Init", "SoundManager Initializing");
     //  int Mix_OpenAudio(int frequency, Uint16 format, int channels, int chunksize);
     //      frequency	the frequency to playback audio at (in Hz).
     //                  22050 good for games
@@ -23,25 +23,25 @@ void SoundManager::Init()
     //      Returns 0 if successful, -1 on error.
     if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
     {
-        Log::GetInstance()->Info("SoundManager::Init", "SDL2_mixer could not be initialized. SDL_Error: %s", SDL_GetError());
+        Log::Instance()->Info("SoundManager::Init", "SDL2_mixer could not be initialized. SDL_Error: %s", SDL_GetError());
         throw CoreInitializationException(SDL_GetError());
     }
 }
 
 void SoundManager::Clean()
 {
-    Log::GetInstance()->Info("SoundManager::Clean", "SoundManager Shutting Down");
+    Log::Instance()->Info("SoundManager::Clean", "SoundManager Shutting Down");
 
     for (auto &[soundName, soundPointer] : sounds)
     {
-        Log::GetInstance()->Info("SoundManager::Cleanup", "Deleting sound: %s", soundName.c_str());
+        Log::Instance()->Info("SoundManager::Cleanup", "Deleting sound: %s", soundName.c_str());
         Mix_FreeChunk(soundPointer);
     }
     sounds.clear();
 
     for (auto &[trackName, trackPointer] : tracks)
     {
-        Log::GetInstance()->Info("SoundManager::Cleanup", "Deleting track: %s", trackName.c_str());
+        Log::Instance()->Info("SoundManager::Cleanup", "Deleting track: %s", trackName.c_str());
         Mix_FreeMusic(trackPointer);
     }
     tracks.clear();
@@ -71,7 +71,7 @@ Mix_Chunk *SoundManager::AddSound(string name, string sampleFileName)
     if (sound == NULL)
     {
         string error_message = "Unable to load sound: " + sampleFileName + ". SDL2_mixer Error: " + SDL_GetError();
-        Log::GetInstance()->Error("SoundManager::AddSound", error_message.c_str());
+        Log::Instance()->Error("SoundManager::AddSound", error_message.c_str());
         throw ResourceLoadException(error_message.c_str());
     }
     sounds[key] = sound;
@@ -89,7 +89,7 @@ Mix_Music *SoundManager::AddTrack(string name, string sampleFileName)
     if (track == NULL)
     {
         string error_message = "Unable to load track: " + sampleFileName + ". SDL2_mixer Error: " + SDL_GetError();
-        Log::GetInstance()->Error("SoundManager::AddTrack", error_message.c_str());
+        Log::Instance()->Error("SoundManager::AddTrack", error_message.c_str());
         throw ResourceLoadException(error_message.c_str());
     }
     tracks[key] = track;
@@ -101,13 +101,13 @@ void SoundManager::PlayTrack(string trackName, int loops)
     string key = GetTrackKey(trackName);
     if (tracks.count(key) == 0)
     {
-        Log::GetInstance()->Error("SoundManager::PlayTrack", "Track [%s] not found", trackName.c_str());
+        Log::Instance()->Error("SoundManager::PlayTrack", "Track [%s] not found", trackName.c_str());
         return;
     }
 
     if (Mix_PlayMusic(tracks[key], loops) == -1)
     {
-        Log::GetInstance()->Error("SoundManager::PlayTrack", "Unable to play track: %s. SDL2_mixer Error: %s", trackName.c_str(), SDL_GetError());
+        Log::Instance()->Error("SoundManager::PlayTrack", "Unable to play track: %s. SDL2_mixer Error: %s", trackName.c_str(), SDL_GetError());
     }
 }
 
@@ -116,7 +116,7 @@ int SoundManager::PlaySound(string soundName, int loops)
     string key = GetSoundKey(soundName);
     if (sounds.count(key) == 0)
     {
-        Log::GetInstance()->Error("SoundManager::PlaySound", "Sound [%s] not found", soundName.c_str());
+        Log::Instance()->Error("SoundManager::PlaySound", "Sound [%s] not found", soundName.c_str());
         return -1;
     }
     return Mix_PlayChannel(-1, sounds[key], loops);

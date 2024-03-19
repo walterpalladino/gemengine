@@ -24,14 +24,14 @@ using namespace std;
 // Scene::Scene(SDL_Renderer *renderer)
 Scene::Scene()
 {
-    Log::GetInstance()->Info("Scene::Scene", "Constructor");
+    Log::Instance()->Info("Scene::Scene", "Constructor");
     // this->renderer = renderer;
     // objects.reserve(MAX_OBJECTS_PER_SCENE);
 }
 
 Scene::~Scene()
 {
-    Log::GetInstance()->Info("Scene::~Scene", "Destructor");
+    Log::Instance()->Info("Scene::~Scene", "Destructor");
 }
 
 GemObject *Scene::Add(const char *name, GemObject *object)
@@ -43,7 +43,7 @@ GemObject *Scene::Add(const char *name, GemObject *object)
         char *buffer = new char[512];
         sprintf(buffer, "Duplicate Identifier: %s.", name);
 
-        Log::GetInstance()->Error("Scene::Add", buffer);
+        Log::Instance()->Error("Scene::Add", buffer);
         throw DuplicatedResourceIdentifier(buffer);
     }
 
@@ -66,12 +66,12 @@ void Scene::Render(float time)
 
 void Scene::Cleanup()
 {
-    Log::GetInstance()->Info("Scene::Cleanup", "Cleanup");
+    Log::Instance()->Info("Scene::Cleanup", "Cleanup");
 
     //  Clean up scene objects
     for (auto &[name, object] : objects)
     {
-        Log::GetInstance()->Info("Scene::Cleanup", "Deleting object: %s", object->name.c_str());
+        Log::Instance()->Info("Scene::Cleanup", "Deleting object: %s", object->name.c_str());
         object->Cleanup();
         delete object;
     }
@@ -93,7 +93,7 @@ int Scene::Load(string fileName, SDL_Renderer *renderer)
         }
         else
         {
-            Log::GetInstance()->Error("Scene::Load", "Malformed scene file definition. Missing 'name' tag.");
+            Log::Instance()->Error("Scene::Load", "Malformed scene file definition. Missing 'name' tag.");
             throw JSONParseException("Malformed scene file definition. Missing 'name' tag.");
         }
 
@@ -139,7 +139,7 @@ int Scene::Load(string fileName, SDL_Renderer *renderer)
                         char *buffer = new char[512];
                         sprintf(buffer, "Unknown type: %s.", type.c_str());
 
-                        Log::GetInstance()->Error("Scene::Load", buffer);
+                        Log::Instance()->Error("Scene::Load", buffer);
                         throw ResourceLoadException(buffer);
                     }
                 }
@@ -147,7 +147,7 @@ int Scene::Load(string fileName, SDL_Renderer *renderer)
         }
         else
         {
-            Log::GetInstance()->Error("Scene::Load", "Malformed scene file definition. Missing 'objects' tag.");
+            Log::Instance()->Error("Scene::Load", "Malformed scene file definition. Missing 'objects' tag.");
             throw JSONParseException("Malformed scene file definition. Missing 'objects' tag.");
         }
     }
@@ -157,7 +157,7 @@ int Scene::Load(string fileName, SDL_Renderer *renderer)
         char *buffer = new char[512];
         sprintf(buffer, "Unable to load scene file: %s.", fileName.c_str());
 
-        Log::GetInstance()->Error("Scene::Load", buffer);
+        Log::Instance()->Error("Scene::Load", buffer);
         throw JSONParseException(buffer);
     }
 

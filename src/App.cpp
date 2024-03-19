@@ -21,153 +21,201 @@ App::App(string resourceFolder) : GemEngine(resourceFolder)
 {
 }
 
-// Logic loop
-void App::Loop(float time)
+void App::LoopInit()
 {
-    static int sound_channel = 0;
 
     if (activeScene == NULL)
     {
-        Log::GetInstance()->Info("App::Loop", "activeScene == NULL");
+        Log::Instance()->Info("App::LoopInit", "activeScene == NULL");
         return;
     }
-    /*
-        if (activeScene->name != string("Start Scene"))
+
+    sound_channel = 0;
+
+    ledArrow = (Image *)(activeScene->Get("led-arrow"));
+
+    fpsText = (Text *)(activeScene->Get("text"));
+
+    spriteWalk = (Sprite *)(activeScene->Get("spriteWalk"));
+}
+
+// Logic loop
+Scene *App::Loop(float time)
+{
+
+    if (activeScene == NULL)
+    {
+        Log::Instance()->Info("App::Loop", "activeScene == NULL");
+        return NULL;
+    }
+
+    // cout << activeScene->name << endl;
+
+    if (activeScene->name == string("Start Scene"))
+    {
+        //   Scale the image
+        Vector3d scale = ledArrow->scale;
+        scale.x = 1.0f;
+        scale.y = 1.0f;
+        ledArrow->scale = scale;
+
+        //  Rotate logo image
+        float rotationSpeed = 0.0f;
+
+        if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_A))
         {
-            return;
+            // std::cout << "SDL_SCANCODE_A" << std::endl;
+            rotationSpeed = -5.0f;
         }
-        */
-    //   Scale the image
-    Vector3d scale = activeScene->Get("led-arrow")->scale;
-    scale.x = 1.0f;
-    scale.y = 1.0f;
-    activeScene->Get("led-arrow")->scale = scale;
+        else if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_D))
+        {
+            // std::cout << "SDL_SCANCODE_D" << std::endl;
+            rotationSpeed = 5.0f;
+        }
+        // rotationSpeed = 10.0f;
+        Vector3d rotation = ledArrow->rotation;
+        // rotation.z = rotationSpeed * time / 1000.0f;
+        rotation.z += rotationSpeed;
 
-    //  Rotate logo image
-    float rotationSpeed = 0.0f;
+        if (rotation.z > 360)
+            rotation.z = rotation.z - 360;
+        if (rotation.z < 0)
+            rotation.z = rotation.z + 360;
 
-    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_A))
-    {
-        // std::cout << "SDL_SCANCODE_A" << std::endl;
-        rotationSpeed = -5.0f;
-    }
-    else if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_D))
-    {
-        // std::cout << "SDL_SCANCODE_D" << std::endl;
-        rotationSpeed = 5.0f;
-    }
-    // rotationSpeed = 10.0f;
-    Vector3d rotation = activeScene->Get("led-arrow")->rotation;
-    // rotation.z = rotationSpeed * time / 1000.0f;
-    rotation.z += rotationSpeed;
+        ledArrow->rotation = rotation;
 
-    if (rotation.z > 360)
-        rotation.z = rotation.z - 360;
-    if (rotation.z < 0)
-        rotation.z = rotation.z + 360;
+        rotation = fpsText->rotation;
+        rotation.z += 1;
+        if (rotation.z > 360)
+            rotation.z = rotation.z - 360;
+        if (rotation.z < 0)
+            rotation.z = rotation.z + 360;
 
-    activeScene->Get("led-arrow")->rotation = rotation;
+        fpsText->rotation = rotation;
 
-    rotation = activeScene->Get("text")->rotation;
-    rotation.z += 1;
-    if (rotation.z > 360)
-        rotation.z = rotation.z - 360;
-    if (rotation.z < 0)
-        rotation.z = rotation.z + 360;
+        char *text = new char[64];
+        sprintf(text, "%.2f FPS", GetFPS());
+        // sprintf(text, "%04d LFT", GetLastFrameTime());
+        // sprintf(text, "%.2f FPS", 1000.0f / GetLastFrameTime());
+        fpsText->SetText(text);
+        delete[] text;
 
-    activeScene->Get("text")->rotation = rotation;
+        // cout << "App::Loop Console operation here..." << endl;
+        backgroundColor = Point3dInt(216, 216, 216);
+        backgroundColor = Point3dInt(80, 69, 155);
+        Console::Instance()->SetColor(0, 0, 0);
+        Console::Instance()->SetColor(136, 126, 203);
+        Console::Instance()->SetCursorAt(0, 0);
+        Console::Instance()->Print("GemEngine running...");
+        Console::Instance()->SetCursorAt(25, 0);
+        Console::Instance()->Print("still running...");
+        // Console::Instance()->Print(text);
 
-    char *text = new char[64];
-    sprintf(text, "%.2f FPS", GetFPS());
-    // sprintf(text, "%04d LFT", GetLastFrameTime());
-    // sprintf(text, "%.2f FPS", 1000.0f / GetLastFrameTime());
-    ((Text *)(activeScene->Get("text")))->SetText(text);
-    delete[] text;
+        if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_1))
+        {
+            // cout << "Play Music Track" << endl;
+            SoundManager::Instance()->PlayTrack("SlingerSwaggerLoop");
+        }
+        if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_2))
+        {
+            // cout << "Stop Music Track" << endl;
+            SoundManager::Instance()->StopTrack();
+        }
 
-    // cout << "App::Loop Console operation here..." << endl;
-    backgroundColor = Point3dInt(216, 216, 216);
-    backgroundColor = Point3dInt(80, 69, 155);
-    Console::Instance()->SetColor(0, 0, 0);
-    Console::Instance()->SetColor(136, 126, 203);
-    Console::Instance()->SetCursorAt(0, 0);
-    Console::Instance()->Print("GemEngine running...");
-    Console::Instance()->SetCursorAt(25, 0);
-    Console::Instance()->Print("still running...");
-    // Console::Instance()->Print(text);
+        if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_3))
+        {
+            sound_channel = SoundManager::Instance()->PlaySound("ScussesSound1");
+            // cout << "Playing Sound : " << sound_channel << endl;
+        }
+        if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_4))
+        {
+            // cout << "Stop Sound : " << sound_channel << endl;
+            SoundManager::Instance()->StopSound(sound_channel);
+        }
 
-    if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_1))
-    {
-        cout << "Play Music Track" << endl;
-        SoundManager::Instance()->PlayTrack("SlingerSwaggerLoop");
-    }
-    if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_2))
-    {
-        cout << "Stop Music Track" << endl;
-        SoundManager::Instance()->StopTrack();
+        if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_7))
+        {
+            // cout << "Reduce Music Track Volume" << endl;
+            int musicVolume = SoundManager::Instance()->SetTrackVolume(-1);
+            // cout << "musicVolume = " << musicVolume << endl;
+            musicVolume = SoundManager::Instance()->SetTrackVolume(musicVolume - 1);
+            // cout << "musicVolume = " << musicVolume << endl;
+        }
+        if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_8))
+        {
+            // cout << "Increase Music Track Volume" << endl;
+            int musicVolume = SoundManager::Instance()->SetTrackVolume(-1);
+            // cout << "musicVolume = " << musicVolume << endl;
+            musicVolume = SoundManager::Instance()->SetTrackVolume(musicVolume + 1);
+            // cout << "musicVolume = " << musicVolume << endl;
+        }
+
+        if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_9))
+        {
+            // cout << "Reduce Master Channels Volume" << endl;
+            int masterVolume = SoundManager::Instance()->SetMasterVolume(-1);
+            // cout << "masterVolume = " << masterVolume << endl;
+            masterVolume = SoundManager::Instance()->SetMasterVolume(masterVolume - 1);
+            // cout << "masterVolume = " << masterVolume << endl;
+        }
+        if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_0))
+        {
+            // cout << "Increase Master Channels Volume" << endl;
+            int masterVolume = SoundManager::Instance()->SetMasterVolume(-1);
+            // cout << "masterVolume = " << masterVolume << endl;
+            masterVolume = SoundManager::Instance()->SetMasterVolume(masterVolume + 1);
+            // cout << "masterVolume = " << masterVolume << endl;
+        }
+
+        //  Sprite Movement
+        if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_LEFT))
+        {
+            spriteWalk->position.x -= 1;
+        }
+        if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_RIGHT))
+        {
+            spriteWalk->position.x += 1;
+        }
+        if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_UP))
+        {
+            spriteWalk->position.y -= 1;
+        }
+        if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_DOWN))
+        {
+            spriteWalk->position.y += 1;
+        }
+
+        if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_N))
+        {
+            //  Next Scene
+            string newSceneName = "Second Scene";
+            cout << "Next Scene : " << newSceneName << endl;
+            return GetScene(newSceneName);
+        }
     }
 
-    if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_3))
+    if (activeScene->name == string("Second Scene"))
     {
-        sound_channel = SoundManager::Instance()->PlaySound("ScussesSound1");
-        cout << "Playing Sound : " << sound_channel << endl;
-    }
-    if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_4))
-    {
-        cout << "Stop Sound : " << sound_channel << endl;
-        SoundManager::Instance()->StopSound(sound_channel);
-    }
-
-    if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_7))
-    {
-        cout << "Reduce Music Track Volume" << endl;
-        int musicVolume = SoundManager::Instance()->SetTrackVolume(-1);
-        cout << "musicVolume = " << musicVolume << endl;
-        musicVolume = SoundManager::Instance()->SetTrackVolume(musicVolume - 1);
-        cout << "musicVolume = " << musicVolume << endl;
-    }
-    if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_8))
-    {
-        cout << "Increase Music Track Volume" << endl;
-        int musicVolume = SoundManager::Instance()->SetTrackVolume(-1);
-        cout << "musicVolume = " << musicVolume << endl;
-        musicVolume = SoundManager::Instance()->SetTrackVolume(musicVolume + 1);
-        cout << "musicVolume = " << musicVolume << endl;
+        if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_N))
+        {
+            //  Next Scene
+            string newSceneName = "Third Scene";
+            cout << "Next Scene : " << newSceneName << endl;
+            return GetScene(newSceneName);
+        }
     }
 
-    if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_9))
+    if (activeScene->name == string("Third Scene"))
     {
-        cout << "Reduce Master Channels Volume" << endl;
-        int masterVolume = SoundManager::Instance()->SetMasterVolume(-1);
-        cout << "masterVolume = " << masterVolume << endl;
-        masterVolume = SoundManager::Instance()->SetMasterVolume(masterVolume - 1);
-        cout << "masterVolume = " << masterVolume << endl;
-    }
-    if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_0))
-    {
-        cout << "Increase Master Channels Volume" << endl;
-        int masterVolume = SoundManager::Instance()->SetMasterVolume(-1);
-        cout << "masterVolume = " << masterVolume << endl;
-        masterVolume = SoundManager::Instance()->SetMasterVolume(masterVolume + 1);
-        cout << "masterVolume = " << masterVolume << endl;
-    }
-
-    //  Sprite Movement
-    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_LEFT))
-    {
-        activeScene->Get("spriteWalk")->position.x -= 1;
-    }
-    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_RIGHT))
-    {
-        activeScene->Get("spriteWalk")->position.x += 1;
-    }
-    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_UP))
-    {
-        activeScene->Get("spriteWalk")->position.y -= 1;
-    }
-    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_DOWN))
-    {
-        activeScene->Get("spriteWalk")->position.y += 1;
+        if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_N))
+        {
+            //  Next Scene
+            string newSceneName = "Start Scene";
+            cout << "Next Scene : " << newSceneName << endl;
+            return GetScene(newSceneName);
+        }
     }
 
     // cout << "App::Loop end" << endl;
+    return activeScene;
 }

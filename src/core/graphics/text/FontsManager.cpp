@@ -9,18 +9,18 @@ FontsManager *FontsManager::instance = 0;
 
 void FontsManager::Init()
 {
-    Log::GetInstance()->Info("FontsManager::Init", "FontsManager Initializing");
+    Log::Instance()->Info("FontsManager::Init", "FontsManager Initializing");
     // fonts.reserve(MAX_FONTS_PER_APP);
     TTF_Init();
 }
 
 void FontsManager::Clean()
 {
-    Log::GetInstance()->Info("FontsManager::Clean", "FontsManager Shutting Down");
+    Log::Instance()->Info("FontsManager::Clean", "FontsManager Shutting Down");
 
     for (auto &[fontName, fontPointer] : fonts)
     {
-        Log::GetInstance()->Info("FontsManager::Cleanup", "Deleting font: %s", fontName.c_str());
+        Log::Instance()->Info("FontsManager::Cleanup", "Deleting font: %s", fontName.c_str());
         TTF_CloseFont(fontPointer);
     }
     fonts.clear();
@@ -30,7 +30,7 @@ void FontsManager::Clean()
 
 TTF_Font *FontsManager::Add(string fontFileName, int size)
 {
-    Log::GetInstance()->Info("FontsManager::AddFont", "Adding font %s size %i", fontFileName.c_str(), size);
+    Log::Instance()->Info("FontsManager::AddFont", "Adding font %s size %i", fontFileName.c_str(), size);
 
     string key = GetKey(fontFileName, size);
     if (fonts.count(key) != 0)
@@ -44,8 +44,8 @@ TTF_Font *FontsManager::Add(string fontFileName, int size)
         char *buffer = new char[512];
         sprintf(buffer, "Unable to load font: %s. TTF Error: %s", fontFileName.c_str(), TTF_GetError());
 
-        Log::GetInstance()->Error("FontsManager::AddFont", buffer);
-        // Log::GetInstance()->Error("FontsManager::AddFont", "Unable to load font: " + fontFileName + ". TTF Error: " + TTF_GetError());
+        Log::Instance()->Error("FontsManager::AddFont", buffer);
+        // Log::Instance()->Error("FontsManager::AddFont", "Unable to load font: " + fontFileName + ". TTF Error: " + TTF_GetError());
 
         delete buffer;
         throw ResourceLoadException(buffer);

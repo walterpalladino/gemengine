@@ -28,7 +28,7 @@ void Config::Load(const string fileName)
 
         string configFileName = config_data.resource_folder + "/" + fileName;
 
-        Log::GetInstance()->Info("Config::Load", "File: %s", configFileName.c_str());
+        Log::Instance()->Info("Config::Load", "File: %s", configFileName.c_str());
 
         json data = json::parse(ifstream(configFileName.c_str()));
 
@@ -118,8 +118,8 @@ void Config::Load(const string fileName)
         char *buffer = new char[512];
         sprintf(buffer, "Unable to load configuration file: %s.", fileName.c_str());
 
-        Log::GetInstance()->Error("Config::Load", buffer);
+        Log::Instance()->Error("Config::Load", buffer);
         throw ResourceLoadException(buffer);
     }
-    Log::GetInstance()->Info("Config::Load", "Config loaded");
+    Log::Instance()->Info("Config::Load", "Config loaded");
 }

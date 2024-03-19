@@ -8,17 +8,17 @@ TextureManager *TextureManager::instance = 0;
 
 void TextureManager::Init(SDL_Renderer *renderer)
 {
-    Log::GetInstance()->Info("TextureManager::Init", "TextureManager Initializing");
+    Log::Instance()->Info("TextureManager::Init", "TextureManager Initializing");
     this->renderer = renderer;
 }
 
 void TextureManager::Clean()
 {
-    Log::GetInstance()->Info("TextureManager::Clean", "TextureManager Shutting Down");
+    Log::Instance()->Info("TextureManager::Clean", "TextureManager Shutting Down");
 
     for (auto &[name, pointer] : textures)
     {
-        Log::GetInstance()->Info("TextureManager::Cleanup", "Deleting texture: %s", name.c_str());
+        Log::Instance()->Info("TextureManager::Cleanup", "Deleting texture: %s", name.c_str());
         SDL_DestroyTexture(pointer);
     }
     textures.clear();
@@ -40,7 +40,7 @@ SDL_Texture *TextureManager::Add(const char *fileName)
         char *buffer = new char[512];
         sprintf(buffer, "Unable to load image: %s. SDL Error: %s", fileName, IMG_GetError());
 
-        Log::GetInstance()->Error("Image::Load", buffer);
+        Log::Instance()->Error("Image::Load", buffer);
         throw ResourceLoadException(buffer);
     }
 
@@ -50,7 +50,7 @@ SDL_Texture *TextureManager::Add(const char *fileName)
     {
         char *buffer = new char[512];
         sprintf(buffer, "Unable to create texture from image: %s. SDL Error: %s", fileName, IMG_GetError());
-        Log::GetInstance()->Error("Image::Load", buffer);
+        Log::Instance()->Error("Image::Load", buffer);
         throw ResourceLoadException(buffer);
     }
 

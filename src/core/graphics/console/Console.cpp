@@ -32,13 +32,13 @@ void Console::Init(SDL_Renderer *renderer)
              fontFileName.c_str(),
              Config::Instance()->config_data.console_font_size);
 
-        Log::GetInstance()->Info("Console::Init", "Console initialized");
+        Log::Instance()->Info("Console::Init", "Console initialized");
     }
 }
 
 void Console::Init(SDL_Renderer *renderer, int x, int y, int width, int height, const char *fileName, const int fontSize)
 {
-    Log::GetInstance()->Info("Console::Init", "Initializing");
+    Log::Instance()->Info("Console::Init", "Initializing");
 
     this->renderer = renderer;
 
@@ -61,7 +61,7 @@ void Console::Init(SDL_Renderer *renderer, int x, int y, int width, int height, 
 
 void Console::LoadFont(const char *fileName)
 {
-    Log::GetInstance()->Info("Console::LoadFont", "Loading font : %s", fileName);
+    Log::Instance()->Info("Console::LoadFont", "Loading font : %s", fileName);
     fontTexture = TextureManager::Instance()->Add(fileName);
     //  Get texture information
     SDL_QueryTexture(fontTexture, NULL, NULL, &textureRect.w, &textureRect.h);
@@ -69,7 +69,7 @@ void Console::LoadFont(const char *fileName)
 
 void Console::Cleanup()
 {
-    Log::GetInstance()->Info("Console::Cleanup", "Cleanup");
+    Log::Instance()->Info("Console::Cleanup", "Cleanup");
 
     if (consoleBuffer != NULL)
     {

@@ -9,8 +9,6 @@
 
 Image::Image(SDL_Renderer *renderer)
 {
-    Log::GetInstance()->Info("Image::Image", "Constructor");
-
     this->renderer = renderer;
     image = NULL;
 }
@@ -29,7 +27,6 @@ void Image::Update()
 
 void Image::Cleanup()
 {
-    Log::GetInstance()->Info("Image::Cleanup", "Cleanup");
 }
 
 void Image::Load(const char *fileName)

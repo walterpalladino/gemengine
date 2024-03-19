@@ -7,8 +7,6 @@
 
 Sprite::Sprite(SDL_Renderer *renderer)
 {
-    Log::GetInstance()->Info("Sprite::Sprite", "Constructor");
-
     this->renderer = renderer;
     image = NULL;
 }
@@ -27,7 +25,6 @@ void Sprite::Update()
 
 void Sprite::Cleanup()
 {
-    Log::GetInstance()->Info("Image::Cleanup", "Cleanup");
 }
 
 void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
@@ -96,16 +93,7 @@ void Sprite::Render(float time)
                      rotation.z,
                      NULL, //&center,
                      flip);
-    /*
-        if (colliderEnabled)
-        {
-            //  Draw collider
-            SDL_Rect colliderRect = GetColliderRect();
 
-            SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
-            SDL_RenderDrawRect(renderer, &colliderRect);
-        }
-        */
     RenderCollider(renderer, {255, 255, 0, 255});
 }
 

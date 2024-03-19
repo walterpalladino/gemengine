@@ -7,8 +7,6 @@
 
 Text::Text(SDL_Renderer *renderer)
 {
-    Log::GetInstance()->Info("Text::Text", "Constructor");
-
     this->renderer = renderer;
 
     text = "";
@@ -29,7 +27,6 @@ void Text::Update()
 
 void Text::Cleanup()
 {
-    Log::GetInstance()->Info("Text::Cleanup", "Cleanup");
 }
 
 void Text::Init(const string text, const char *fileName, const int fontSize)

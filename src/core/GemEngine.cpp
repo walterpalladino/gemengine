@@ -27,8 +27,8 @@ using namespace std;
  */
 GemEngine::GemEngine(string resourceFolder)
 {
-    Log::GetInstance()->Info("GemEngine::GemEngine", "GemEngine Constructor");
-    Log::GetInstance()->Info("GemEngine::GemEngine", "Resource Folder: %s", resourceFolder.c_str());
+    Log::Instance()->Info("GemEngine::GemEngine", "GemEngine Constructor");
+    Log::Instance()->Info("GemEngine::GemEngine", "Resource Folder: %s", resourceFolder.c_str());
 
     // scenes.reserve(MAX_SCENES_PER_APP);
     activeScene = NULL;
@@ -40,7 +40,7 @@ GemEngine::GemEngine(string resourceFolder)
 
 GemEngine::~GemEngine()
 {
-    Log::GetInstance()->Info("GemEngine::~GemEngine", "GemEngine Destructor");
+    Log::Instance()->Info("GemEngine::~GemEngine", "GemEngine Destructor");
 }
 
 //------------------------------------------------------------------------------
@@ -51,11 +51,11 @@ void GemEngine::OnEvent(SDL_Event *Event)
 //------------------------------------------------------------------------------
 bool GemEngine::Init()
 {
-    Log::GetInstance()->Info("GemEngine::Init", "Init Framework");
+    Log::Instance()->Info("GemEngine::Init", "Init Framework");
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
     {
-        Log::GetInstance()->Error("GemEngine::Init", "Unable to Init SDL: %s", SDL_GetError());
+        Log::Instance()->Error("GemEngine::Init", "Unable to Init SDL: %s", SDL_GetError());
         return false;
     }
 
@@ -68,7 +68,7 @@ bool GemEngine::Init()
     sprintf(scaleQualityValue, "%i", scaleQuality);
     if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, scaleQualityValue))
     {
-        Log::GetInstance()->Error("GemEngine::Init", "Unable to Init hinting: %s", SDL_GetError());
+        Log::Instance()->Error("GemEngine::Init", "Unable to Init hinting: %s", SDL_GetError());
     }
     delete scaleQualityValue;
 
@@ -81,14 +81,14 @@ bool GemEngine::Init()
              windowSize.x, windowSize.y,
              SDL_WINDOW_SHOWN)) == NULL)
     {
-        Log::GetInstance()->Error("GemEngine::Init", "Unable to create SDL Window: %s", SDL_GetError());
+        Log::Instance()->Error("GemEngine::Init", "Unable to create SDL Window: %s", SDL_GetError());
         return false;
     }
 
     if ((renderer = SDL_CreateRenderer(window, -1, SDL_RendererFlags::SDL_RENDERER_ACCELERATED)) == NULL)
     //| SDL_RENDERER_PRESENTVSYNC
     {
-        Log::GetInstance()->Error("GemEngine::Init", "Unable to create renderer: %s", SDL_GetError());
+        Log::Instance()->Error("GemEngine::Init", "Unable to create renderer: %s", SDL_GetError());
         return false;
     }
 
@@ -102,13 +102,13 @@ bool GemEngine::Init()
     TextureManager::Instance()->Init(renderer);
     SoundManager::Instance()->Init();
 
-    Log::GetInstance()->Info("GemEngine::Init", "Initialization Completed");
+    Log::Instance()->Info("GemEngine::Init", "Initialization Completed");
 
     Console::Instance()->Init(renderer);
-    Log::GetInstance()->Info("GemEngine::Init", "Console Configured");
+    Log::Instance()->Info("GemEngine::Init", "Console Configured");
 
     LoadScenes();
-    Log::GetInstance()->Info("GemEngine::Init", "Scenes Loaded");
+    Log::Instance()->Info("GemEngine::Init", "Scenes Loaded");
 
     return true;
 }
@@ -184,12 +184,12 @@ void GemEngine::Render(float time)
 //------------------------------------------------------------------------------
 void GemEngine::Cleanup()
 {
-    Log::GetInstance()->Info("GemEngine::Cleanup", "Cleanup");
+    Log::Instance()->Info("GemEngine::Cleanup", "Cleanup");
 
     //  Clean up scenes
     for (auto scene : scenes)
     {
-        Log::GetInstance()->Info("GemEngine::~App", "Deleting scene: %s", scene->name.c_str());
+        Log::Instance()->Info("GemEngine::~App", "Deleting scene: %s", scene->name.c_str());
         scene->Cleanup();
         delete scene;
     }
@@ -199,14 +199,14 @@ void GemEngine::Cleanup()
     {
         SDL_DestroyRenderer(renderer);
         renderer = NULL;
-        Log::GetInstance()->Info("GemEngine::Cleanup", "DestroyRenderer Completed");
+        Log::Instance()->Info("GemEngine::Cleanup", "DestroyRenderer Completed");
     }
 
     if (window)
     {
         SDL_DestroyWindow(window);
         window = NULL;
-        Log::GetInstance()->Info("GemEngine::Cleanup", "DestroyWindow Completed");
+        Log::Instance()->Info("GemEngine::Cleanup", "DestroyWindow Completed");
     }
 
     SDL_DestroyTexture(virtualWindowTexture);
@@ -220,14 +220,14 @@ void GemEngine::Cleanup()
 
     Console::Instance()->Cleanup();
 
-    Log::GetInstance()->Info("GemEngine::Cleanup", "SDL_Quit Completed");
+    Log::Instance()->Info("GemEngine::Cleanup", "SDL_Quit Completed");
 }
 
 //------------------------------------------------------------------------------
 
 int GemEngine::Start()
 {
-    Log::GetInstance()->Info("GemEngine::Start", "Start()");
+    Log::Instance()->Info("GemEngine::Start", "Start()");
 
     windowSize = Point2dInt(Config::Instance()->config_data.window_width, Config::Instance()->config_data.window_height);
 
@@ -248,7 +248,7 @@ int GemEngine::Start()
 
     if (!Init())
     {
-        Log::GetInstance()->Error("GemEngine::Start", "Initialization Failed");
+        Log::Instance()->Error("GemEngine::Start", "Initialization Failed");
         return 0;
     }
 
@@ -260,8 +260,22 @@ int GemEngine::Start()
     int eventCounter = 0;
     uint32_t targetFrameTime = (1000 / targetFPS);
 
+    LoopInit();
+
+    Log::Instance()->Info("GemEngine::Start", "Starting Game Loop");
+
+    Scene *newScene = activeScene;
+
     while (Running)
     {
+
+        if ((newScene != NULL) && (activeScene != newScene))
+        {
+            activeScene = newScene;
+            newScene = NULL;
+            cout << "Switching to scene: " << activeScene->name << endl;
+        }
+
         //  Get Time
         startFrameTick = SDL_GetTicks();
 
@@ -275,7 +289,7 @@ int GemEngine::Start()
         float elapsedTimeFromStart = startFrameTick - firstRenderTick;
 
         // Logic loop
-        Loop(elapsedTimeFromStart);
+        newScene = Loop(elapsedTimeFromStart);
 
         Physics(elapsedTimeFromStart);
 
@@ -300,11 +314,11 @@ int GemEngine::Start()
         lastFrameTime = endFrameTick - startFrameTick;
     }
 
-    Log::GetInstance()->Info("GemEngine::Execute", "Total Frames: %.0f FPS : %.2f", totalFrames, GetFPS());
+    Log::Instance()->Info("GemEngine::Execute", "Total Frames: %.0f FPS : %.2f", totalFrames, GetFPS());
 
     Cleanup();
 
-    Log::GetInstance()->Info("GemEngine::Execute", "Good Bye!");
+    Log::Instance()->Info("GemEngine::Execute", "Good Bye!");
 
     return 1;
 }
@@ -328,15 +342,25 @@ float GemEngine::GetFPS()
 void GemEngine::Physics(float time)
 {
 
-    Scene activeScene = *this->activeScene;
-    unordered_map<string, GemObject *> objects = activeScene.GetObjects();
+    unordered_map<string, GemObject *> objects = activeScene->GetObjects();
 
     vector<GemObject *> objects_vector = GetColliderEnabledObjects(objects);
 
+    if (objects_vector.size() == 0)
+    {
+        return;
+    }
+
+    //  Clear collisions
+    for (int i = 0; i < objects_vector.size(); i++)
+    {
+        objects_vector[i]->collisions.clear();
+    }
+
+    //  Check collisions
     for (int i = 0; i < objects_vector.size() - 1; i++)
     {
         // cout << "Checking collisions for gemobject: " << objects_vector[i]->name << endl;
-        objects_vector[i]->collisions.clear();
 
         for (int j = i + 1; j < objects_vector.size(); j++)
         {
@@ -382,18 +406,18 @@ vector<GemObject *> GemEngine::GetColliderEnabledObjects(unordered_map<string, G
 
 void GemEngine::LoadScenes()
 {
-    Log::GetInstance()->Info("GemEngine::LoadScenes", "Load Scenes");
+    Log::Instance()->Info("GemEngine::LoadScenes", "Load Scenes");
 
     string resourceFolder = Config::Instance()->config_data.resource_folder;
 
     for (auto &&scene_name : Config::Instance()->config_data.scenes)
     {
-        Log::GetInstance()->Info("GemEngine::LoadScenes", "Loading Scene: %s", scene_name.c_str());
+        Log::Instance()->Info("GemEngine::LoadScenes", "Loading Scene: %s", scene_name.c_str());
 
         //  Create & Load Scene
         Scene *newScene = new Scene();
         newScene->Load(StringPrintf("%s/%s", resourceFolder.c_str(), scene_name.c_str()).c_str(), renderer);
-        newScene->name = scene_name;
+        // newScene->name = scene_name;
 
         //  Add Scene to Scenes list
         scenes.push_back(newScene);
@@ -401,14 +425,13 @@ void GemEngine::LoadScenes()
 
     activeScene = scenes.front();
 
-    Log::GetInstance()->Info("GemEngine::LoadScenes", "Load Scenes Completed");
+    Log::Instance()->Info("GemEngine::LoadScenes", "Load Scenes Completed");
 }
 
 void GemEngine::DebugRender(float time)
 {
     // cout << "Render debug" << endl;
-    Scene activeScene = *this->activeScene;
-    unordered_map<string, GemObject *> objects = activeScene.GetObjects();
+    unordered_map<string, GemObject *> objects = activeScene->GetObjects();
 
     //  Render scene objects
     for (auto &[name, object] : objects)
@@ -427,4 +450,18 @@ void GemEngine::DebugRender(float time)
             }
         }
     }
+}
+
+Scene *GemEngine::GetScene(const string name)
+{
+    for (auto &&scene : scenes)
+    {
+        cout << "Checking scene: " << scene->name << endl;
+        if (scene->name == name)
+        {
+            cout << "Found scene: " << name << endl;
+            return scene;
+        }
+    }
+    return NULL;
 }
