@@ -14,6 +14,7 @@
 #include "core/Config.h"
 #include "core/scenes/SceneManager.h"
 #include "core/renderer/RenderManager.h"
+#include "core/Context.h"
 
 using namespace std;
 
@@ -76,7 +77,7 @@ int GemEngine::Start()
 {
     Log::Instance()->Info("GemEngine::Start", "Start()");
 
-    targetFPS = Config::Instance()->config_data.target_fps;
+    Context::Instance()->targetFPS = Config::Instance()->config_data.target_fps;
 
     renderer = RenderManager::Instance()->Init();
     if (renderer == NULL)
@@ -97,14 +98,10 @@ int GemEngine::Start()
 
     SceneManager::Instance()->LoadScenes(renderer);
 
-    //
-    firstRenderTick = SDL_GetTicks();
-    lastRenderTime = 0;
+    //  Init FPS Comter
+    Context::Instance()->InitFPSCounter();
 
-    totalFrames = 0;
-
-    int eventCounter = 0;
-    uint32_t targetFrameTime = (1000 / targetFPS);
+    // int eventCounter = 0;
 
     LoopInit();
 
@@ -122,17 +119,14 @@ int GemEngine::Start()
             // cout << "Switching to scene: " << SceneManager::Instance()->activeScene->name << endl;
         }
 
-        //  Get Time
-        startFrameTick = SDL_GetTicks();
-
         //   TODO : Check this hardcoded value to calculate it based on target fps
         // if (eventCounter % 10 == 0)
         {
             PollEvents();
         }
-        eventCounter++;
+        // eventCounter++;
 
-        float elapsedTimeFromStart = startFrameTick - firstRenderTick;
+        float elapsedTimeFromStart = Context::Instance()->StartFPSFrameCounter();
 
         // Logic loop
         newScene = Loop(elapsedTimeFromStart);
@@ -140,27 +134,17 @@ int GemEngine::Start()
         SceneManager::Instance()->Physics(elapsedTimeFromStart);
 
         RenderManager::Instance()->PreRender(elapsedTimeFromStart);
+
         Render(elapsedTimeFromStart);
 
         SceneManager::Instance()->DebugRender(renderer, elapsedTimeFromStart);
 
         RenderManager::Instance()->PostRender(elapsedTimeFromStart);
 
-        lastRenderTime = SDL_GetTicks() - startFrameTick;
-
-        if (lastRenderTime >= targetFrameTime)
-            SDL_Delay(1); // Breath
-        else
-            SDL_Delay(targetFrameTime - lastRenderTime); // Breath
-
-        totalFrames = totalFrames + 1;
-
-        endFrameTick = SDL_GetTicks();
-
-        lastFrameTime = endFrameTick - startFrameTick;
+        Context::Instance()->WaitForEndFrame();
     }
 
-    Log::Instance()->Info("GemEngine::Execute", "Total Frames: %.0f FPS : %.2f", totalFrames, GetFPS());
+    Log::Instance()->Info("GemEngine::Execute", "Total Frames: %.0f FPS : %.2f", Context::Instance()->totalFrames, Context::Instance()->GetFPS());
 
     Cleanup();
 
@@ -177,10 +161,4 @@ void GemEngine::PollEvents()
     {
         Running = false;
     }
-}
-
-float GemEngine::GetFPS()
-{
-    float elapsedTimeFromStart = endFrameTick - firstRenderTick;
-    return elapsedTimeFromStart > 0 ? (float)totalFrames / elapsedTimeFromStart * 1000.0f : 0.0;
 }
