@@ -15,6 +15,7 @@
 #include "core/scenes/SceneManager.h"
 #include "core/renderer/RenderManager.h"
 #include "core/Context.h"
+#include "core/scenes/SceneLogic.h"
 
 using namespace std;
 
@@ -108,18 +109,31 @@ int GemEngine::Start()
     Log::Instance()->Info("GemEngine::Start", "Starting Game Loop");
 
     Scene *newScene = SceneManager::Instance()->activeScene;
+    SceneLogic *activeSceneLogic = SceneManager::Instance()->GetActiveSceneLogic();
+    if (SceneManager::Instance()->activeScene != NULL)
+    {
+        activeSceneLogic->Init(SceneManager::Instance()->activeScene);
+    }
 
     while (Running)
     {
-
+        // Check if scene changed
         if ((newScene != NULL) && (SceneManager::Instance()->activeScene != newScene))
         {
+            if (SceneManager::Instance()->activeScene != NULL)
+            {
+                activeSceneLogic->Clean();
+            }
             SceneManager::Instance()->activeScene = newScene;
             newScene = NULL;
             // cout << "Switching to scene: " << SceneManager::Instance()->activeScene->name << endl;
+            activeSceneLogic = SceneManager::Instance()->GetActiveSceneLogic();
+            if (SceneManager::Instance()->activeScene != NULL)
+            {
+                activeSceneLogic->Init(SceneManager::Instance()->activeScene);
+            }
         }
 
-        //   TODO : Check this hardcoded value to calculate it based on target fps
         // if (eventCounter % 10 == 0)
         {
             PollEvents();
@@ -129,7 +143,10 @@ int GemEngine::Start()
         float elapsedTimeFromStart = Context::Instance()->StartFPSFrameCounter();
 
         // Logic loop
-        newScene = Loop(elapsedTimeFromStart);
+        if (activeSceneLogic != NULL)
+        {
+            newScene = activeSceneLogic->Loop(elapsedTimeFromStart);
+        }
 
         SceneManager::Instance()->Physics(elapsedTimeFromStart);
 

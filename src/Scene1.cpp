@@ -1,3 +1,5 @@
+#include "Scene1.h"
+
 #include "core/graphics/image/Image.h"
 #include "core/graphics/sprites/Sprite.h"
 #include "core/graphics/text/Text.h"
@@ -14,15 +16,26 @@
 #include "core/renderer/RenderManager.h"
 #include "core/Context.h"
 
-Scene *Scene1Loop(Scene *scene, SDL_Renderer *renderer)
+using namespace std;
+
+void Scene1::Init(Scene *scene)
 {
-    static int sound_channel = 0;
+    cout << "Scene1::Init" << endl;
 
-    static Image *ledArrow = (Image *)(scene->Get("led-arrow"));
+    this->scene = scene;
 
-    static Text *fpsText = (Text *)(scene->Get("text"));
+    int sound_channel = 0;
 
-    static Sprite *spriteWalk = (Sprite *)(scene->Get("spriteWalk"));
+    ledArrow = (Image *)(scene->Get("led-arrow"));
+
+    fpsText = (Text *)(scene->Get("text"));
+
+    spriteWalk = (Sprite *)(scene->Get("spriteWalk"));
+}
+
+Scene *Scene1::Loop(float time)
+{
+    // cout << "Scene1::Loop" << endl;
 
     //   Scale the image
     Vector3d scale = ledArrow->scale;
@@ -160,9 +173,14 @@ Scene *Scene1Loop(Scene *scene, SDL_Renderer *renderer)
     {
         //  Next Scene
         string newSceneName = "Second Scene";
-        cout << "Next Scene : " << newSceneName << endl;
+        // cout << "Next Scene : " << newSceneName << endl;
         return SceneManager::Instance()->GetScene(newSceneName);
     }
 
     return scene;
+}
+
+void Scene1::Clean()
+{
+    cout << "Scene1::Clean" << endl;
 }

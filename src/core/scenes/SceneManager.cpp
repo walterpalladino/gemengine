@@ -143,3 +143,17 @@ void SceneManager::RenderActiveScene(float time)
 {
     activeScene->Render(time);
 }
+
+void SceneManager::AddSceneLogic(const string sceneName, SceneLogic *sceneLogic)
+{
+    sceneLogicMap[sceneName] = sceneLogic;
+}
+
+SceneLogic *SceneManager::GetActiveSceneLogic()
+{
+    if (activeScene == NULL)
+    {
+        return NULL;
+    }
+    return sceneLogicMap[activeScene->name];
+}

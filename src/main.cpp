@@ -1,9 +1,14 @@
 #include <iostream>
-#include "App.h"
+#include <fstream> // File io header
+
+#include "core/GemEngine.h"
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
 #include "core/Config.h"
-#include <fstream> // File io header
+#include "core/scenes/SceneManager.h"
+#include "Scene1.h"
+#include "Scene2.h"
+#include "Scene3.h"
 
 using namespace std;
 
@@ -22,7 +27,11 @@ int main(int argc, char *argv[])
 	{
 		resource_folder = argv[1];
 	}
-	App app = App(resource_folder);
+	GemEngine app = GemEngine(resource_folder);
+
+	SceneManager::Instance()->AddSceneLogic("Start Scene", new Scene1());
+	SceneManager::Instance()->AddSceneLogic("Second Scene", new Scene2());
+	SceneManager::Instance()->AddSceneLogic("Third Scene", new Scene3());
 
 	int status = -1;
 	try

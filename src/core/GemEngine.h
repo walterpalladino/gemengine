@@ -18,9 +18,6 @@ protected:
     SDL_Renderer *renderer = NULL;
 
 protected:
-    GemEngine(string resourceFolder);
-    ~GemEngine();
-
     // Capture SDL Events
     void OnEvent(SDL_Event *Event);
 
@@ -35,6 +32,9 @@ protected:
     virtual void Render(float time);
 
 public:
+    GemEngine(string resourceFolder);
+    ~GemEngine();
+
     // Free up resources
     void Cleanup();
 
