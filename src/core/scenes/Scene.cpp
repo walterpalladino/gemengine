@@ -23,9 +23,9 @@
 using json = nlohmann::json;
 using namespace std;
 
-bool cmp_layer(GemObject *a, GemObject *b)
+bool cmp_z_order(GemObject *a, GemObject *b)
 {
-    return a->layer < b->layer;
+    return a->zOrder > b->zOrder;
 }
 
 // Scene::Scene(SDL_Renderer *renderer)
@@ -68,7 +68,7 @@ void Scene::Render(float time)
     {
         vector_objects.push_back(object);
     }
-    sort(vector_objects.begin(), vector_objects.end(), cmp_layer);
+    sort(vector_objects.begin(), vector_objects.end(), cmp_z_order);
     for (auto &object : vector_objects)
     {
         object->Render(time);
