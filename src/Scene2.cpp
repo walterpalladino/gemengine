@@ -13,10 +13,30 @@ void Scene2::Init(Scene *scene)
     cout << "Scene2::Init" << endl;
 
     this->scene = scene;
+
+    parallax = (Parallax *)(scene->Get("fantasy-world"));
 }
 
 Scene *Scene2::Loop(float time)
 {
+
+    //  Parallax Offset
+    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_LEFT))
+    {
+        parallax->offset.x -= 1;
+    }
+    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_RIGHT))
+    {
+        parallax->offset.x += 1;
+    }
+    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_UP))
+    {
+        parallax->offset.y -= 1;
+    }
+    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_DOWN))
+    {
+        parallax->offset.y += 1;
+    }
 
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_N))
     {

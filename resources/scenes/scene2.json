@@ -2,12 +2,12 @@
   "name": "Second Scene",
   "objects": [
     {
-      "type": "image",
-      "name": "1-fixed",
+      "type": "parallax",
+      "name": "fantasy-world",
       "enabled": true,
       "z_order": 0,
       "layer": 0,
-      "src": "images/ww/1-fixed.jpg",
+      "src": "images/fantasy-world.png",
       "position": {
         "x": 0,
         "y": 0,

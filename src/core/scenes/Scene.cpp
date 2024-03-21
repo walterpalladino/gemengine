@@ -16,6 +16,7 @@
 #include "core/graphics/image/Image.h"
 #include "core/graphics/sprites/Sprite.h"
 #include "core/graphics/text/Text.h"
+#include "core/graphics/parallax/Parallax.h"
 #include "core/sound/SoundManager.h"
 
 using json = nlohmann::json;
@@ -124,6 +125,12 @@ int Scene::Load(string fileName, SDL_Renderer *renderer)
                         Sprite *newSprite = new Sprite(renderer);
                         newSprite->JSONParse(scene_object);
                         Add(newSprite->name.c_str(), newSprite);
+                    }
+                    else if (type == "parallax")
+                    {
+                        Parallax *newParallax = new Parallax(renderer);
+                        newParallax->JSONParse(scene_object);
+                        Add(newParallax->name.c_str(), newParallax);
                     }
                     else if (type == "sound")
                     {
