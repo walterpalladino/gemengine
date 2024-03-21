@@ -15,10 +15,20 @@ void Scene2::Init(Scene *scene)
     this->scene = scene;
 
     parallax = (Parallax *)(scene->Get("fantasy-world"));
+
+    layer_0_offset = 0;
+    layer_0_speed = 20;
 }
 
 Scene *Scene2::Loop(float time)
 {
+
+    if (startTime < 0)
+    {
+        startTime = time;
+    }
+    layer_0_offset = (time - startTime) * layer_0_speed / 1000;
+    parallax->offset.x = layer_0_offset;
 
     //  Parallax Offset
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_LEFT))

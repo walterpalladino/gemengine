@@ -10,6 +10,10 @@ private:
     Scene *scene;
     Parallax *parallax;
 
+    int layer_0_offset = 0;
+    int layer_0_speed = 0;
+    float startTime = -1.0f;
+
 public:
     void Init(Scene *scene);
     Scene *Loop(float time);

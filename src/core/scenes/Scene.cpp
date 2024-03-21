@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
+#include <vector>
 #include <nlohmann/json.hpp>
 
 #include "core/scenes/Scene.h"
@@ -22,12 +23,15 @@
 using json = nlohmann::json;
 using namespace std;
 
+bool cmp_layer(GemObject *a, GemObject *b)
+{
+    return a->layer < b->layer;
+}
+
 // Scene::Scene(SDL_Renderer *renderer)
 Scene::Scene()
 {
     Log::Instance()->Info("Scene::Scene", "Constructor");
-    // this->renderer = renderer;
-    // objects.reserve(MAX_OBJECTS_PER_SCENE);
 }
 
 Scene::~Scene()
@@ -58,8 +62,14 @@ GemObject *Scene::Get(const char *name)
 
 void Scene::Render(float time)
 {
-    //  Render scene objects
+    //  To sort the objects by layer first we extract them into a vector
+    vector<GemObject *> vector_objects;
     for (auto &[name, object] : objects)
+    {
+        vector_objects.push_back(object);
+    }
+    sort(vector_objects.begin(), vector_objects.end(), cmp_layer);
+    for (auto &object : vector_objects)
     {
         object->Render(time);
     }
@@ -69,7 +79,7 @@ void Scene::Cleanup()
 {
     Log::Instance()->Info("Scene::Cleanup", "Cleanup");
 
-    //  Clean up scene objects
+    //   Clean up scene objects
     for (auto &[name, object] : objects)
     {
         Log::Instance()->Info("Scene::Cleanup", "Deleting object: %s", object->name.c_str());

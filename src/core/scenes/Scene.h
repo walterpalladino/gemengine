@@ -10,8 +10,6 @@
 
 using namespace std;
 
-#define MAX_OBJECTS_PER_SCENE 65536
-
 class Scene
 {
 
