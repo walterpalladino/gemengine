@@ -148,7 +148,13 @@ int GemEngine::Start()
         // Logic loop
         if (activeSceneLogic != NULL)
         {
-            newSceneTransition = activeSceneLogic->Loop(elapsedTimeFromStart);
+            // When paused do not update logic
+            // if (!newSceneTransition.isPaused)
+            if (!pausedPressed)
+            {
+                newSceneTransition = activeSceneLogic->Loop(elapsedTimeFromStart);
+                SceneManager::Instance()->UpdateActiveScene(elapsedTimeFromStart);
+            }
             newScene = newSceneTransition.scene;
         }
 
@@ -181,5 +187,13 @@ void GemEngine::PollEvents()
     if (quit)
     {
         Running = false;
+    }
+    else
+    {
+        if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_P))
+        {
+            // cout << "Pause Scene" << endl;
+            pausedPressed = !pausedPressed;
+        }
     }
 }

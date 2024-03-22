@@ -39,6 +39,7 @@ public:
     // Physics loop
     void Physics(float time);
     void DebugRender(SDL_Renderer *renderer, float time);
+    void UpdateActiveScene(float time);
     void RenderActiveScene(float time);
 
     void AddSceneLogic(const string name, SceneLogic *sceneLogic);

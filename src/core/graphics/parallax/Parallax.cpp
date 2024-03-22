@@ -21,7 +21,7 @@ void Parallax::Init()
 {
 }
 
-void Parallax::Update()
+void Parallax::Update(float time)
 {
 }
 

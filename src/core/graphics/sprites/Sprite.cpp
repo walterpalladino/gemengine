@@ -19,8 +19,22 @@ void Sprite::Init()
 {
 }
 
-void Sprite::Update()
+void Sprite::Update(float time)
 {
+    if (!enabled)
+        return;
+
+    if (animationStartTime == -1)
+    {
+        //  First call
+        animationStartTime = time;
+    }
+
+    //  Calculate the ctual frame based on speed of animation and number of frames
+    actualFrame = time - animationStartTime;
+    actualFrame *= animationSpeed;
+    actualFrame /= 1000;
+    actualFrame %= animationFrames;
 }
 
 void Sprite::Cleanup()
@@ -50,19 +64,19 @@ void Sprite::Render(float time)
 {
     if (!enabled)
         return;
+    /*
+        if (animationStartTime == -1)
+        {
+            //  First call
+            animationStartTime = time;
+        }
 
-    if (animationStartTime == -1)
-    {
-        //  First call
-        animationStartTime = time;
-    }
-
-    //  Calculate the ctual frame based on speed of animation and number of frames
-    actualFrame = time - animationStartTime;
-    actualFrame *= animationSpeed;
-    actualFrame /= 1000;
-    actualFrame %= animationFrames;
-
+        //  Calculate the ctual frame based on speed of animation and number of frames
+        actualFrame = time - animationStartTime;
+        actualFrame *= animationSpeed;
+        actualFrame /= 1000;
+        actualFrame %= animationFrames;
+    */
     //  Adjust source of the sprite to draw
     SDL_Rect spriteSourceRect = SDL_Rect();
     spriteSourceRect.x = offset.x + actualFrame * size.x;

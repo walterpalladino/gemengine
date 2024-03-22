@@ -179,7 +179,13 @@ SceneTransition Scene1::Loop(float time)
         sceneTransition.scene = SceneManager::Instance()->GetScene(newSceneName);
         return sceneTransition;
     }
-
+    /*
+        if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_P))
+        {
+            cout << "Pause Scene" << endl;
+            sceneTransition.isPaused = true;
+        }
+    */
     sceneTransition.scene = scene;
     return sceneTransition;
 }

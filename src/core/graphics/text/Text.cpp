@@ -21,7 +21,7 @@ void Text::Init()
 {
 }
 
-void Text::Update()
+void Text::Update(float time)
 {
 }
 

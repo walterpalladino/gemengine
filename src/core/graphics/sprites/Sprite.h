@@ -26,7 +26,7 @@ public:
     Sprite(SDL_Renderer *renderer);
     ~Sprite();
     virtual void Init();
-    virtual void Update();
+    virtual void Update(float time);
     virtual void Cleanup();
 
     virtual void Render(float time);

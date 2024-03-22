@@ -23,11 +23,10 @@ public:
     ~Scene();
 
     GemObject *Add(const char *name, GemObject *object);
-
     GemObject *Get(const char *name);
 
+    void Update(float time);
     void Render(float time);
-
     void Cleanup();
 
     int Load(string fileName, SDL_Renderer *renderer);

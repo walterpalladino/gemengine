@@ -21,7 +21,7 @@ void Image::Init()
 {
 }
 
-void Image::Update()
+void Image::Update(float time)
 {
 }
 

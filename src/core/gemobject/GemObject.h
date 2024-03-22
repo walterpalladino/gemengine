@@ -36,7 +36,7 @@ public:
     int layer = 0;
 
     virtual void Init() {}
-    virtual void Update() {}
+    virtual void Update(float time) {}
     virtual void Render(float time) {}
     virtual void Cleanup() {}
 

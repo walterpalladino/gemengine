@@ -155,7 +155,16 @@ bool InputHandler::WasKeyPressed(SDL_Scancode key)
     // std::cout << "keymapPrev.count(key) : " << keymapPrev.count(key) << std::endl;
     // std::cout << "keymap.count(key) : " << keymap.count(key) << std::endl;
 
-    return (keymapPrev.count(SDL_GetKeyFromScancode(key)) == 0) && (keymap.count(SDL_GetKeyFromScancode(key)) != 0);
+    // return (keymapPrev.count(SDL_GetKeyFromScancode(key)) == 0) && (keymap.count(SDL_GetKeyFromScancode(key)) != 0);
+
+    int keyCode = SDL_GetKeyFromScancode(key);
+    // std::cout << "WasKeyPressed : " << keyCode << " keymapPrev.count(key) : " << keymapPrev.count(keyCode) << " keymap.count(key) : " << keymap.count(keyCode) << std::endl;
+
+    bool wasPressed = ((keymapPrev.count(keyCode) == 0) || (keymapPrev[keyCode] == false)) && (keymap.count(keyCode) != 0) && (keymap[keyCode] == true);
+
+    keymapPrev[keyCode] = true;
+
+    return wasPressed;
 }
 
 bool InputHandler::WasKeyReleased(SDL_Scancode key)

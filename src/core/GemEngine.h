@@ -14,6 +14,7 @@ class GemEngine
 {
 protected:
     bool Running = true;
+    bool pausedPressed = false;
 
     SDL_Renderer *renderer = NULL;
 

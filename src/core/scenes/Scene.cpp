@@ -76,6 +76,14 @@ void Scene::Render(float time)
     }
 }
 
+void Scene::Update(float time)
+{
+    for (auto &[name, object] : objects)
+    {
+        object->Update(time);
+    }
+}
+
 void Scene::Cleanup()
 {
     Log::Instance()->Info("Scene::Cleanup", "Cleanup");

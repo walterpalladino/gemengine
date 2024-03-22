@@ -17,7 +17,7 @@ public:
     Parallax(SDL_Renderer *renderer);
     ~Parallax();
     virtual void Init();
-    virtual void Update();
+    virtual void Update(float time);
     virtual void Cleanup();
 
     virtual void Render(float time);
