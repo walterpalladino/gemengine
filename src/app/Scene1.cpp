@@ -20,7 +20,7 @@ using namespace std;
 
 void Scene1::Init(Scene *scene)
 {
-    cout << "Scene1::Init" << endl;
+    // cout << "Scene1::Init" << endl;
 
     this->scene = scene;
 
@@ -33,8 +33,10 @@ void Scene1::Init(Scene *scene)
     spriteWalk = (Sprite *)(scene->Get("spriteWalk"));
 }
 
-Scene *Scene1::Loop(float time)
+SceneTransition Scene1::Loop(float time)
 {
+
+    SceneTransition sceneTransition;
     // cout << "Scene1::Loop" << endl;
 
     //   Scale the image
@@ -174,13 +176,15 @@ Scene *Scene1::Loop(float time)
         //  Next Scene
         string newSceneName = "Second Scene";
         // cout << "Next Scene : " << newSceneName << endl;
-        return SceneManager::Instance()->GetScene(newSceneName);
+        sceneTransition.scene = SceneManager::Instance()->GetScene(newSceneName);
+        return sceneTransition;
     }
 
-    return scene;
+    sceneTransition.scene = scene;
+    return sceneTransition;
 }
 
 void Scene1::Clean()
 {
-    cout << "Scene1::Clean" << endl;
+    // cout << "Scene1::Clean" << endl;
 }

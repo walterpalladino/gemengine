@@ -16,6 +16,7 @@
 #include "core/renderer/RenderManager.h"
 #include "core/Context.h"
 #include "core/scenes/SceneLogic.h"
+#include "core/scenes/SceneTransition.h"
 
 using namespace std;
 
@@ -115,6 +116,8 @@ int GemEngine::Start()
         activeSceneLogic->Init(SceneManager::Instance()->activeScene);
     }
 
+    SceneTransition newSceneTransition;
+
     while (Running)
     {
         // Check if scene changed
@@ -145,7 +148,8 @@ int GemEngine::Start()
         // Logic loop
         if (activeSceneLogic != NULL)
         {
-            newScene = activeSceneLogic->Loop(elapsedTimeFromStart);
+            newSceneTransition = activeSceneLogic->Loop(elapsedTimeFromStart);
+            newScene = newSceneTransition.scene;
         }
 
         SceneManager::Instance()->Physics(elapsedTimeFromStart);

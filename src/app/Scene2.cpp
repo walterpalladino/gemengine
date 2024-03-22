@@ -10,7 +10,7 @@
 
 void Scene2::Init(Scene *scene)
 {
-    cout << "Scene2::Init" << endl;
+    // cout << "Scene2::Init" << endl;
 
     this->scene = scene;
 
@@ -29,8 +29,10 @@ void Scene2::Init(Scene *scene)
     layer_front_speed = 20;
 }
 
-Scene *Scene2::Loop(float time)
+SceneTransition Scene2::Loop(float time)
 {
+
+    SceneTransition sceneTransition;
 
     if (startTime < 0)
     {
@@ -71,12 +73,15 @@ Scene *Scene2::Loop(float time)
         //  Next Scene
         string newSceneName = "Third Scene";
         // cout << "Next Scene : " << newSceneName << endl;
-        return SceneManager::Instance()->GetScene(newSceneName);
+        sceneTransition.scene = SceneManager::Instance()->GetScene(newSceneName);
+        return sceneTransition;
     }
-    return scene;
+
+    sceneTransition.scene = scene;
+    return sceneTransition;
 }
 
 void Scene2::Clean()
 {
-    cout << "Scene2::Clean" << endl;
+    // cout << "Scene2::Clean" << endl;
 }

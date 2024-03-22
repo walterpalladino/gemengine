@@ -29,6 +29,8 @@ int main(int argc, char *argv[])
 	}
 	GemEngine app = GemEngine(resource_folder);
 
+	//	Add logic to the scenes
+	//	Every scen will handle its own logic
 	SceneManager::Instance()->AddSceneLogic("Start Scene", new Scene1());
 	SceneManager::Instance()->AddSceneLogic("Second Scene", new Scene2());
 	SceneManager::Instance()->AddSceneLogic("Third Scene", new Scene3());

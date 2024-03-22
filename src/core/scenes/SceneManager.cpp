@@ -49,10 +49,10 @@ Scene *SceneManager::GetScene(const string name)
 {
     for (auto &&scene : scenes)
     {
-        cout << "Checking scene: " << scene->name << endl;
+        // cout << "Checking scene: " << scene->name << endl;
         if (scene->name == name)
         {
-            cout << "Found scene: " << name << endl;
+            // cout << "Found scene: " << name << endl;
             return scene;
         }
     }

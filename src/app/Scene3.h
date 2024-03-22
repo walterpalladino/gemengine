@@ -9,6 +9,6 @@ private:
 
 public:
     void Init(Scene *scene);
-    Scene *Loop(float time);
+    SceneTransition Loop(float time);
     void Clean();
 };

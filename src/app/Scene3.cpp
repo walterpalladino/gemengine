@@ -10,24 +10,29 @@
 
 void Scene3::Init(Scene *scene)
 {
-    cout << "Scene3::Init" << endl;
+    // cout << "Scene3::Init" << endl;
 
     this->scene = scene;
 }
 
-Scene *Scene3::Loop(float time)
+SceneTransition Scene3::Loop(float time)
 {
+    SceneTransition sceneTransition;
+
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_N))
     {
         //  Next Scene
         string newSceneName = "Start Scene";
         // cout << "Next Scene : " << newSceneName << endl;
-        return SceneManager::Instance()->GetScene(newSceneName);
+        sceneTransition.scene = SceneManager::Instance()->GetScene(newSceneName);
+        return sceneTransition;
     }
-    return scene;
+
+    sceneTransition.scene = scene;
+    return sceneTransition;
 }
 
 void Scene3::Clean()
 {
-    cout << "Scene3::Clean" << endl;
+    // cout << "Scene3::Clean" << endl;
 }
