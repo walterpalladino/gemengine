@@ -6,9 +6,9 @@
 #include "utils/StringUtils.h"
 #include "core/Config.h"
 #include "core/scenes/SceneManager.h"
-#include "Scene1.h"
-#include "Scene2.h"
-#include "Scene3.h"
+#include "app/Scene1.h"
+#include "app/Scene2.h"
+#include "app/Scene3.h"
 
 using namespace std;
 

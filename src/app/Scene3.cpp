@@ -1,4 +1,4 @@
-#include "Scene3.h"
+#include "app/Scene3.h"
 
 #include "utils/Log.h"
 #include "core/input/InputHandler.h"

@@ -1,4 +1,4 @@
-#include "Scene1.h"
+#include "app/Scene1.h"
 
 #include "core/graphics/image/Image.h"
 #include "core/graphics/sprites/Sprite.h"
