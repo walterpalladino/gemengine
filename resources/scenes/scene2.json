@@ -3,11 +3,80 @@
   "objects": [
     {
       "type": "parallax",
-      "name": "fantasy-world",
+      "name": "parallax-forest-back-trees",
       "enabled": true,
-      "z_order": 0,
+      "z_order": 10,
       "layer": 0,
-      "src": "images/fantasy-world.png",
+      "src": "images/parallax_forest_pack/layers/parallax-forest-back-trees.png",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "type": "parallax",
+      "name": "parallax-forest-middle-trees",
+      "enabled": true,
+      "z_order": 8,
+      "layer": 0,
+      "src": "images/parallax_forest_pack/layers/parallax-forest-middle-trees.png",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "type": "parallax",
+      "name": "parallax-forest-lights",
+      "enabled": true,
+      "z_order": 9,
+      "layer": 0,
+      "src": "images/parallax_forest_pack/layers/parallax-forest-lights.png",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    },
+    {
+      "type": "parallax",
+      "name": "parallax-forest-front-trees",
+      "enabled": true,
+      "z_order": 7,
+      "layer": 0,
+      "src": "images/parallax_forest_pack/layers/parallax-forest-front-trees.png",
       "position": {
         "x": 0,
         "y": 0,

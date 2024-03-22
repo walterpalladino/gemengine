@@ -14,10 +14,19 @@ void Scene2::Init(Scene *scene)
 
     this->scene = scene;
 
-    parallax = (Parallax *)(scene->Get("fantasy-world"));
+    parallax_back = (Parallax *)(scene->Get("parallax-forest-back-trees"));
+    parallax_middle = (Parallax *)(scene->Get("parallax-forest-middle-trees"));
+    parallax_lights = (Parallax *)(scene->Get("parallax-forest-lights"));
+    parallax_front = (Parallax *)(scene->Get("parallax-forest-front-trees"));
 
-    layer_0_offset = 0;
-    layer_0_speed = 20;
+    layer_middle_offset = 0;
+    layer_middle_speed = 10;
+
+    layer_lights_offset = 0;
+    layer_lights_speed = -2;
+
+    layer_front_offset = 0;
+    layer_front_speed = 20;
 }
 
 Scene *Scene2::Loop(float time)
@@ -27,26 +36,35 @@ Scene *Scene2::Loop(float time)
     {
         startTime = time;
     }
-    layer_0_offset = (time - startTime) * layer_0_speed / 1000;
-    parallax->offset.x = layer_0_offset;
 
-    //  Parallax Offset
-    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_LEFT))
-    {
-        parallax->offset.x -= 1;
-    }
-    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_RIGHT))
-    {
-        parallax->offset.x += 1;
-    }
-    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_UP))
-    {
-        parallax->offset.y -= 1;
-    }
-    if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_DOWN))
-    {
-        parallax->offset.y += 1;
-    }
+    layer_middle_offset = (time - startTime) * layer_middle_speed / 1000;
+    parallax_middle->offset.x = layer_middle_offset;
+
+    layer_lights_offset = (time - startTime) * layer_lights_speed / 1000;
+    parallax_lights->offset.x = layer_lights_offset;
+
+    layer_front_offset = (time - startTime) * layer_front_speed / 1000;
+    parallax_front->offset.x = layer_front_offset;
+
+    /*
+        //  Parallax Offset
+        if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_LEFT))
+        {
+            parallax->offset.x -= 1;
+        }
+        if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_RIGHT))
+        {
+            parallax->offset.x += 1;
+        }
+        if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_UP))
+        {
+            parallax->offset.y -= 1;
+        }
+        if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_DOWN))
+        {
+            parallax->offset.y += 1;
+        }
+    */
 
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_N))
     {

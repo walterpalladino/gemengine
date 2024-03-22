@@ -28,7 +28,7 @@
       "type": "text",
       "name": "text",
       "enabled": true,
-      "z_order": 0,
+      "z_order": 4,
       "layer": 0,
       "src": "fonts/Commodore-64-v6.3.TTF",
       "position": {

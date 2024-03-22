@@ -62,13 +62,14 @@ GemObject *Scene::Get(const char *name)
 
 void Scene::Render(float time)
 {
-    //  To sort the objects by layer first we extract them into a vector
+    //  To sort the objects by z order first we extract them into a vector
     vector<GemObject *> vector_objects;
     for (auto &[name, object] : objects)
     {
         vector_objects.push_back(object);
     }
     sort(vector_objects.begin(), vector_objects.end(), cmp_z_order);
+    //  Render scene objects
     for (auto &object : vector_objects)
     {
         object->Render(time);
