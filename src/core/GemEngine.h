@@ -12,38 +12,32 @@ using namespace std;
 
 class GemEngine
 {
-protected:
+private:
     bool isRunning = true;
     bool isPaused = false;
 
     SDL_Renderer *renderer = NULL;
 
-protected:
-    // Capture SDL Events
-    void OnEvent(SDL_Event *Event);
-
-    // Poll Events
-    void PollEvents();
-
 private:
+    void PollEvents();
     // Timer
     SDL_TimerID processTimer;
     Uint32 ProcessTimer(Uint32 interval);
     static Uint32 ProcessTimerCallback(Uint32 interval, void *param);
 
-protected:
+    // Free up resources
+    void Cleanup();
+
     // Logic loop
     virtual void LoopInit() {}
     virtual Scene *Loop(float time) {}
+
     // Render loop (draw)
     virtual void Render(float time);
 
 public:
     GemEngine(string resourceFolder);
     ~GemEngine();
-
-    // Free up resources
-    void Cleanup();
 
     int Start();
 };

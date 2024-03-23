@@ -46,11 +46,6 @@ GemEngine::~GemEngine()
     Log::Instance()->Info("GemEngine::~GemEngine", "GemEngine Destructor");
 }
 
-//------------------------------------------------------------------------------
-void GemEngine::OnEvent(SDL_Event *Event)
-{
-}
-
 void GemEngine::Render(float time)
 {
     Console::Instance()->Render(time);
@@ -171,13 +166,9 @@ int GemEngine::Start()
         }
 
         SceneManager::Instance()->Physics(elapsedTimeFromStart);
-
         RenderManager::Instance()->PreRender(elapsedTimeFromStart);
-
         Render(elapsedTimeFromStart);
-
         SceneManager::Instance()->DebugRender(renderer, elapsedTimeFromStart);
-
         RenderManager::Instance()->PostRender(elapsedTimeFromStart);
 
         Context::Instance()->WaitForEndFrame();
