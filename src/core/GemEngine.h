@@ -13,8 +13,8 @@ using namespace std;
 class GemEngine
 {
 protected:
-    bool Running = true;
-    bool pausedPressed = false;
+    bool isRunning = true;
+    bool isPaused = false;
 
     SDL_Renderer *renderer = NULL;
 

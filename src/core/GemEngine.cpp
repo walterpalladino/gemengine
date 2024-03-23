@@ -112,8 +112,6 @@ int GemEngine::Start()
     //  Init FPS Comter
     Context::Instance()->InitFPSCounter();
 
-    // int eventCounter = 0;
-
     LoopInit();
 
     // Timer
@@ -121,6 +119,7 @@ int GemEngine::Start()
 
     Log::Instance()->Info("GemEngine::Start", "Starting Game Loop");
 
+    //  Set the default scene. Always needs to start with a scene
     Scene *newScene = SceneManager::Instance()->activeScene;
     SceneLogic *activeSceneLogic = SceneManager::Instance()->GetActiveSceneLogic();
     if (SceneManager::Instance()->activeScene != NULL)
@@ -130,30 +129,31 @@ int GemEngine::Start()
 
     SceneTransition newSceneTransition;
 
-    while (Running)
+    while (isRunning)
     {
         // Check if scene changed
         if ((newScene != NULL) && (SceneManager::Instance()->activeScene != newScene))
         {
+            // If switching to a new scene so first clean the actual one
             if (SceneManager::Instance()->activeScene != NULL)
             {
                 activeSceneLogic->Clean();
             }
+
+            // Set the new scene
             SceneManager::Instance()->activeScene = newScene;
             newScene = NULL;
             // cout << "Switching to scene: " << SceneManager::Instance()->activeScene->name << endl;
             activeSceneLogic = SceneManager::Instance()->GetActiveSceneLogic();
+
+            //  If it is a new scene then init the logic
             if (SceneManager::Instance()->activeScene != NULL)
             {
                 activeSceneLogic->Init(SceneManager::Instance()->activeScene);
             }
         }
 
-        // if (eventCounter % 10 == 0)
-        {
-            PollEvents();
-        }
-        // eventCounter++;
+        PollEvents();
 
         float elapsedTimeFromStart = Context::Instance()->StartFPSFrameCounter();
 
@@ -162,7 +162,7 @@ int GemEngine::Start()
         {
             // When paused do not update logic
             // if (!newSceneTransition.isPaused)
-            if (!pausedPressed)
+            if (!isPaused)
             {
                 newSceneTransition = activeSceneLogic->Loop(elapsedTimeFromStart);
                 SceneManager::Instance()->UpdateActiveScene(elapsedTimeFromStart);
@@ -204,20 +204,39 @@ void GemEngine::PollEvents()
     if (eventCounter > 0)
     {
         cout << "GemEngine::PollEvents : Get Custom Event Type : " << event.type << " user code : " << EventManager::GEMEventCodeToString(event.user.code) << endl;
+
+        if (event.user.code == EventManager::GEMEVENT_CODE_PAUSE)
+        {
+            isPaused = true;
+        }
+        else if (event.user.code == EventManager::GEMEVENT_CODE_RESUME)
+        {
+            isPaused = false;
+        }
     }
 
     //  Get the Standard Events
     bool quit = InputHandler::Instance()->Update();
     if (quit)
     {
-        Running = false;
+        isRunning = false;
     }
+    /*
     else
     {
         if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_P))
         {
             // cout << "Pause Scene" << endl;
-            pausedPressed = !pausedPressed;
+            isPaused = !isPaused;
+        }
+    }
+    */
+    else
+    {
+        //  Resume Scene
+        if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_R))
+        {
+            isPaused = false;
         }
     }
 }

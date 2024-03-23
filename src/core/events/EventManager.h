@@ -21,7 +21,8 @@ public:
     static const Sint32 GEMEVENT_CODE_KEEP_ALIVE = 0,
                         GEMEVENT_CODE_RUN = 1,
                         GEMEVENT_CODE_PAUSE = 2,
-                        GEMEVENT_CODE_QUIT = 3;
+                        GEMEVENT_CODE_RESUME = 3,
+                        GEMEVENT_CODE_QUIT = 4;
 
     static string GEMEventCodeToString(Sint32 code)
     {

@@ -181,13 +181,20 @@ SceneTransition Scene1::Loop(float time)
         sceneTransition.scene = SceneManager::Instance()->GetScene(newSceneName);
         return sceneTransition;
     }
-    /*
-        if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_P))
-        {
-            cout << "Pause Scene" << endl;
-            sceneTransition.isPaused = true;
-        }
-    */
+
+    if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_P))
+    {
+        cout << "Pause Scene" << endl;
+        // sceneTransition.isPaused = true;
+        SDL_Event event;
+        SDL_memset(&event, 0, sizeof(event)); // or SDL_zero(event)
+        event.type = EventManager::Instance()->GEMENGINE_EVENT_TYPE;
+        event.user.code = EventManager::GEMEVENT_CODE_PAUSE;
+        event.user.data1 = 0;
+        event.user.data2 = 0;
+
+        int status = SDL_PushEvent(&event);
+    }
 
     if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_O))
     {
