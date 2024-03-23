@@ -31,7 +31,7 @@ SDL_Renderer *RenderManager::Init()
         WindowManager::Instance()->boundaries = RectInt(0, 0, windowSize.x - 1, windowSize.y - 1);
     }
 
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0)
     {
         Log::Instance()->Error("RenderManager::Init", "Unable to Init SDL: %s", SDL_GetError());
         return NULL;

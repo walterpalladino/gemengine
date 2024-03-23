@@ -25,6 +25,12 @@ protected:
     // Poll Events
     void PollEvents();
 
+private:
+    // Timer
+    SDL_TimerID processTimer;
+    Uint32 ProcessTimer(Uint32 interval);
+    static Uint32 ProcessTimerCallback(Uint32 interval, void *param);
+
 protected:
     // Logic loop
     virtual void LoopInit() {}

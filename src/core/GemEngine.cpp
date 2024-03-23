@@ -70,6 +70,9 @@ void GemEngine::Cleanup()
 
     Console::Instance()->Cleanup();
 
+    //  Timer
+    SDL_RemoveTimer(processTimer);
+
     Log::Instance()->Info("GemEngine::Cleanup", "SDL_Quit Completed");
 }
 
@@ -106,6 +109,9 @@ int GemEngine::Start()
     // int eventCounter = 0;
 
     LoopInit();
+
+    // Timer
+    processTimer = SDL_AddTimer(10000, ProcessTimerCallback, this);
 
     Log::Instance()->Info("GemEngine::Start", "Starting Game Loop");
 
@@ -196,4 +202,16 @@ void GemEngine::PollEvents()
             pausedPressed = !pausedPressed;
         }
     }
+}
+
+Uint32 GemEngine::ProcessTimerCallback(Uint32 interval, void *param)
+{
+    return ((GemEngine *)param)->ProcessTimer(interval);
+}
+
+Uint32 GemEngine::ProcessTimer(Uint32 interval)
+{
+    cout << "ProcessTimer : " << interval << endl;
+
+    return (interval);
 }
