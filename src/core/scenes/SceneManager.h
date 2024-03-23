@@ -45,6 +45,8 @@ public:
     void AddSceneLogic(const string name, SceneLogic *sceneLogic);
     SceneLogic *GetActiveSceneLogic();
 
+    bool ValidateScenesLogic();
+
 public:
     vector<Scene *> scenes;
     Scene *activeScene;

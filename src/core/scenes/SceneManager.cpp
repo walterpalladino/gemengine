@@ -162,3 +162,19 @@ SceneLogic *SceneManager::GetActiveSceneLogic()
     }
     return sceneLogicMap[activeScene->name];
 }
+
+bool SceneManager::ValidateScenesLogic()
+{
+
+    for (auto &&scene : scenes)
+    {
+
+        if (sceneLogicMap.find(scene->name) == sceneLogicMap.end())
+        {
+            Log::Instance()->Error("SceneManager::ValidateScenesLogic", "SceneLogic not found: %s", scene->name.c_str());
+            return false;
+        }
+    }
+
+    return true;
+}

@@ -112,6 +112,12 @@ int GemEngine::Start()
     // Timer
     processTimer = SDL_AddTimer(10000, ProcessTimerCallback, this);
 
+    if (!SceneManager::Instance()->ValidateScenesLogic())
+    {
+        Log::Instance()->Error("GemEngine::Start", "ValidateScenesLogic Failed");
+        return 0;
+    }
+
     Log::Instance()->Info("GemEngine::Start", "Starting Game Loop");
 
     //  Set the default scene. Always needs to start with a scene
