@@ -196,7 +196,7 @@ SceneTransition Scene1::Loop(float time)
         SDL_Event event;
         SDL_memset(&event, 0, sizeof(event)); // or SDL_zero(event)
         event.type = EventManager::Instance()->GEMENGINE_EVENT_TYPE;
-        event.user.code = EventManager::Instance()->GEMENGINE_EVENT_CODE;
+        event.user.code = EventManager::GEMEVENT_CODE_KEEP_ALIVE;
         event.user.data1 = 0;
         event.user.data2 = 0;
 

@@ -203,7 +203,7 @@ void GemEngine::PollEvents()
                                       EventManager::Instance()->GEMENGINE_EVENT_TYPE);
     if (eventCounter > 0)
     {
-        cout << "GemEngine::PollEvents : Get Custom Event Type : " << event.type << " user code : " << event.user.code << endl;
+        cout << "GemEngine::PollEvents : Get Custom Event Type : " << event.type << " user code : " << EventManager::GEMEventCodeToString(event.user.code) << endl;
     }
 
     //  Get the Standard Events
