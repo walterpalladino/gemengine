@@ -15,6 +15,8 @@
 #include "core/scenes/SceneManager.h"
 #include "core/renderer/RenderManager.h"
 #include "core/Context.h"
+#include "core/GemEngine.h"
+#include "core/events/EventManager.h"
 
 using namespace std;
 
@@ -186,6 +188,22 @@ SceneTransition Scene1::Loop(float time)
             sceneTransition.isPaused = true;
         }
     */
+
+    if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_O))
+    {
+        cout << "Fire Custom Event" << endl;
+
+        SDL_Event event;
+        SDL_memset(&event, 0, sizeof(event)); // or SDL_zero(event)
+        event.type = EventManager::Instance()->GEMENGINE_EVENT_TYPE;
+        event.user.code = EventManager::Instance()->GEMENGINE_EVENT_CODE;
+        event.user.data1 = 0;
+        event.user.data2 = 0;
+
+        int status = SDL_PushEvent(&event);
+        cout << "SDL_PushEvent status : " << status << endl;
+    }
+
     sceneTransition.scene = scene;
     return sceneTransition;
 }

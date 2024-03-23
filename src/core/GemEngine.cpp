@@ -18,6 +18,8 @@
 #include "core/scenes/SceneLogic.h"
 #include "core/scenes/SceneTransition.h"
 
+#include "core/events/EventManager.h"
+
 using namespace std;
 
 //==============================================================================
@@ -70,6 +72,8 @@ void GemEngine::Cleanup()
 
     Console::Instance()->Cleanup();
 
+    EventManager::Instance()->Cleanup();
+
     //  Timer
     SDL_RemoveTimer(processTimer);
 
@@ -100,6 +104,8 @@ int GemEngine::Start()
 
     Console::Instance()->Init(renderer);
     Log::Instance()->Info("GemEngine::Init", "Console Configured");
+
+    EventManager::Instance()->Init();
 
     SceneManager::Instance()->LoadScenes(renderer);
 
@@ -189,6 +195,18 @@ int GemEngine::Start()
 void GemEngine::PollEvents()
 {
 
+    //  Get first the Custom Events
+    SDL_Event event;
+    int eventCounter = SDL_PeepEvents(&event, 1,
+                                      SDL_GETEVENT,
+                                      EventManager::Instance()->GEMENGINE_EVENT_TYPE,
+                                      EventManager::Instance()->GEMENGINE_EVENT_TYPE);
+    if (eventCounter > 0)
+    {
+        cout << "GemEngine::PollEvents : Get Custom Event Type : " << event.type << " user code : " << event.user.code << endl;
+    }
+
+    //  Get the Standard Events
     bool quit = InputHandler::Instance()->Update();
     if (quit)
     {
