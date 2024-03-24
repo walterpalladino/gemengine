@@ -120,56 +120,14 @@ int GemEngine::Start()
 
     Log::Instance()->Info("GemEngine::Start", "Starting Game Loop");
 
-    //  Set the default scene. Always needs to start with a scene
-    Scene *newScene = SceneManager::Instance()->activeScene;
-    SceneLogic *activeSceneLogic = SceneManager::Instance()->GetActiveSceneLogic();
-    if (SceneManager::Instance()->activeScene != NULL)
-    {
-        activeSceneLogic->Init(SceneManager::Instance()->activeScene);
-    }
-
-    SceneTransition newSceneTransition;
-
     while (isRunning)
     {
-        // Check if scene changed
-        if ((newScene != NULL) && (SceneManager::Instance()->activeScene != newScene))
-        {
-            // If switching to a new scene so first clean the actual one
-            if (SceneManager::Instance()->activeScene != NULL)
-            {
-                activeSceneLogic->Clean();
-            }
-
-            // Set the new scene
-            SceneManager::Instance()->activeScene = newScene;
-            newScene = NULL;
-            // cout << "Switching to scene: " << SceneManager::Instance()->activeScene->name << endl;
-            activeSceneLogic = SceneManager::Instance()->GetActiveSceneLogic();
-
-            //  If it is a new scene then init the logic
-            if (SceneManager::Instance()->activeScene != NULL)
-            {
-                activeSceneLogic->Init(SceneManager::Instance()->activeScene);
-            }
-        }
 
         PollEvents();
 
         float elapsedTimeFromStart = Context::Instance()->StartFPSFrameCounter();
 
-        // Logic loop
-        if (activeSceneLogic != NULL)
-        {
-            // When paused do not update logic
-            // if (!newSceneTransition.isPaused)
-            if (!isPaused)
-            {
-                newSceneTransition = activeSceneLogic->Loop(elapsedTimeFromStart);
-                SceneManager::Instance()->UpdateActiveScene(elapsedTimeFromStart);
-            }
-            newScene = newSceneTransition.scene;
-        }
+        SceneManager::Instance()->Loop(elapsedTimeFromStart, isPaused);
 
         SceneManager::Instance()->Physics(elapsedTimeFromStart);
         RenderManager::Instance()->PreRender(elapsedTimeFromStart);

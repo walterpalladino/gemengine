@@ -178,3 +178,52 @@ bool SceneManager::ValidateScenesLogic()
 
     return true;
 }
+
+void SceneManager::Loop(float time, bool isPaused)
+{
+
+    if (newScene == NULL)
+    {
+        newScene = activeScene;
+        activeSceneLogic = GetActiveSceneLogic();
+        if (activeScene != NULL)
+        {
+            activeSceneLogic->Init(activeScene);
+        }
+    }
+
+    // Check if scene changed
+    if ((newScene != NULL) && (activeScene != newScene))
+    {
+        // If switching to a new scene so first clean the actual one
+        if (activeScene != NULL)
+        {
+            activeSceneLogic->Clean();
+        }
+
+        // Set the new scene
+        activeScene = newScene;
+        newScene = NULL;
+        // cout << "Switching to scene: " << SceneManager::Instance()->activeScene->name << endl;
+        activeSceneLogic = GetActiveSceneLogic();
+
+        //  If it is a new scene then init the logic
+        if (activeScene != NULL)
+        {
+            activeSceneLogic->Init(activeScene);
+        }
+    }
+
+    // Logic loop
+    if (activeSceneLogic != NULL)
+    {
+        // When paused do not update logic
+        if (!isPaused)
+        {
+            SceneTransition newSceneTransition = activeSceneLogic->Loop(time);
+            UpdateActiveScene(time);
+
+            newScene = newSceneTransition.scene;
+        }
+    }
+}

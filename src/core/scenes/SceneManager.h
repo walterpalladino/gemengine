@@ -32,10 +32,14 @@ private:
 
     unordered_map<string, SceneLogic *> sceneLogicMap;
 
+    Scene *newScene;
+    SceneLogic *activeSceneLogic;
+
 public:
     virtual void LoadScenes(SDL_Renderer *renderer);
     Scene *GetScene(const string name);
     void Clean();
+    void Loop(float time, bool isPaused);
     // Physics loop
     void Physics(float time);
     void DebugRender(SDL_Renderer *renderer, float time);
