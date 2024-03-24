@@ -25,12 +25,10 @@ private:
     Uint32 ProcessTimer(Uint32 interval);
     static Uint32 ProcessTimerCallback(Uint32 interval, void *param);
 
+    void Init();
+
     // Free up resources
     void Cleanup();
-
-    // Logic loop
-    virtual void LoopInit() {}
-    virtual Scene *Loop(float time) {}
 
     // Render loop (draw)
     virtual void Render(float time);

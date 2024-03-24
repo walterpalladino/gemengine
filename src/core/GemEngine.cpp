@@ -8,17 +8,13 @@
 #include "core/graphics/textures/TextureManager.h"
 #include "core/graphics/console/Console.h"
 #include "core/graphics/WindowManager.h"
-#include "core/graphics/draw2d/Draw.h"
-#include "core/graphics/draw2d/Rect.h"
 #include "core/sound/SoundManager.h"
 #include "core/Config.h"
 #include "core/scenes/SceneManager.h"
 #include "core/renderer/RenderManager.h"
 #include "core/Context.h"
-#include "core/scenes/SceneLogic.h"
-#include "core/scenes/SceneTransition.h"
-
 #include "core/events/EventManager.h"
+#include "core/exceptions/CoreInitializationException.h"
 
 using namespace std;
 
@@ -52,6 +48,46 @@ void GemEngine::Render(float time)
     SceneManager::Instance()->RenderActiveScene(time);
 }
 
+void GemEngine::Init()
+{
+    Log::Instance()->Info("GemEngine::Init", "Init()");
+
+    Context::Instance()->targetFPS = Config::Instance()->config_data.target_fps;
+
+    renderer = RenderManager::Instance()->Init();
+    if (renderer == NULL)
+    {
+        Log::Instance()->Error("GemEngine::Start", "RenderManager failed to initialize");
+        throw CoreInitializationException("RenderManager failed to initialize");
+    }
+
+    InputHandler::Instance()->Init();
+    FontsManager::Instance()->Init();
+    TextureManager::Instance()->Init(renderer);
+    SoundManager::Instance()->Init();
+
+    Log::Instance()->Info("GemEngine::Init", "Initialization Completed");
+
+    Console::Instance()->Init(renderer);
+    Log::Instance()->Info("GemEngine::Init", "Console Configured");
+
+    EventManager::Instance()->Init();
+
+    SceneManager::Instance()->LoadScenes(renderer);
+
+    //  Init FPS Comter
+    Context::Instance()->InitFPSCounter();
+
+    // Timer
+    processTimer = SDL_AddTimer(10000, ProcessTimerCallback, this);
+
+    if (!SceneManager::Instance()->ValidateScenesLogic())
+    {
+        Log::Instance()->Error("GemEngine::Start", "ValidateScenesLogic Failed");
+        throw CoreInitializationException("ValidateScenesLogic Failed");
+    }
+}
+
 //------------------------------------------------------------------------------
 void GemEngine::Cleanup()
 {
@@ -81,42 +117,7 @@ int GemEngine::Start()
 {
     Log::Instance()->Info("GemEngine::Start", "Start()");
 
-    Context::Instance()->targetFPS = Config::Instance()->config_data.target_fps;
-
-    renderer = RenderManager::Instance()->Init();
-    if (renderer == NULL)
-    {
-        Log::Instance()->Error("GemEngine::Start", "Initialization Failed");
-        return 0;
-    }
-
-    InputHandler::Instance()->Init();
-    FontsManager::Instance()->Init();
-    TextureManager::Instance()->Init(renderer);
-    SoundManager::Instance()->Init();
-
-    Log::Instance()->Info("GemEngine::Init", "Initialization Completed");
-
-    Console::Instance()->Init(renderer);
-    Log::Instance()->Info("GemEngine::Init", "Console Configured");
-
-    EventManager::Instance()->Init();
-
-    SceneManager::Instance()->LoadScenes(renderer);
-
-    //  Init FPS Comter
-    Context::Instance()->InitFPSCounter();
-
-    LoopInit();
-
-    // Timer
-    processTimer = SDL_AddTimer(10000, ProcessTimerCallback, this);
-
-    if (!SceneManager::Instance()->ValidateScenesLogic())
-    {
-        Log::Instance()->Error("GemEngine::Start", "ValidateScenesLogic Failed");
-        return 0;
-    }
+    Init();
 
     Log::Instance()->Info("GemEngine::Start", "Starting Game Loop");
 
