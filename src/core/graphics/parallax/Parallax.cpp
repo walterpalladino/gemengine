@@ -1,4 +1,4 @@
-#include "core/Config.h"
+#include "core/config/Config.h"
 
 #include "core/graphics/parallax/Parallax.h"
 #include "core/graphics/textures/TextureManager.h"

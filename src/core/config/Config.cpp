@@ -3,9 +3,9 @@
 #include <nlohmann/json.hpp>
 
 #include "Config.h"
-#include "../utils/StringUtils.h"
-#include "exceptions/ResourceLoadException.h"
-#include "../utils/Log.h"
+#include "utils/StringUtils.h"
+#include "core/exceptions/ResourceLoadException.h"
+#include "utils/Log.h"
 
 using json = nlohmann::json;
 using namespace std;

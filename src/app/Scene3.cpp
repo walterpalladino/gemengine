@@ -1,8 +1,9 @@
+#include <iostream>
+
 #include "app/Scene3.h"
 
 #include "utils/Log.h"
 #include "core/input/InputHandler.h"
-#include "core/Config.h"
 #include "core/scenes/Scene.h"
 #include "core/scenes/SceneManager.h"
 #include "core/renderer/RenderManager.h"

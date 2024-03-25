@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "app/Scene1.h"
 
 #include "core/graphics/image/Image.h"
@@ -9,7 +11,6 @@
 #include "core/graphics/text/FontsManager.h"
 #include "core/graphics/console/Console.h"
 #include "core/graphics/draw2d/Draw.h"
-#include "core/Config.h"
 #include "core/sound/SoundManager.h"
 #include "core/scenes/Scene.h"
 #include "core/scenes/SceneManager.h"

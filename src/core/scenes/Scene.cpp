@@ -5,7 +5,6 @@
 #include <nlohmann/json.hpp>
 
 #include "core/scenes/Scene.h"
-#include "core/Config.h"
 
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
@@ -101,7 +100,6 @@ void Scene::Cleanup()
 int Scene::Load(string fileName, SDL_Renderer *renderer)
 {
 
-    string resourceFolder = Config::Instance()->config_data.resource_folder;
     try
     {
 

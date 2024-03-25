@@ -9,7 +9,7 @@
 #include "core/graphics/console/Console.h"
 #include "core/graphics/WindowManager.h"
 #include "core/sound/SoundManager.h"
-#include "core/Config.h"
+#include "core/config/Config.h"
 #include "core/scenes/SceneManager.h"
 #include "core/renderer/RenderManager.h"
 #include "core/Context.h"

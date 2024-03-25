@@ -3,7 +3,7 @@
 #include "core/scenes/Scene.h"
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
-#include "core/Config.h"
+#include "core/config/Config.h"
 
 SceneManager *SceneManager::instance = 0;
 

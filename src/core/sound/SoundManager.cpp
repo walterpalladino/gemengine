@@ -2,7 +2,7 @@
 
 #include "core/sound/SoundManager.h"
 #include "utils/Log.h"
-#include "core/Config.h"
+#include "core/config/Config.h"
 
 #include "core/exceptions/ResourceLoadException.h"
 #include "core/exceptions/CoreInitializationException.h"

@@ -4,7 +4,7 @@
 
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
-#include "core/Config.h"
+#include "core/config/Config.h"
 
 RenderManager *RenderManager::instance = 0;
 

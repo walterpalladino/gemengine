@@ -1,5 +1,5 @@
 
-#include "core/Config.h"
+#include "core/config/Config.h"
 
 #include "core/graphics/image/Image.h"
 #include "core/graphics/textures/TextureManager.h"

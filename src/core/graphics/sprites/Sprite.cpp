@@ -1,6 +1,6 @@
 #include "core/graphics/sprites/Sprite.h"
 #include "core/graphics/textures/TextureManager.h"
-#include "core/Config.h"
+#include "core/config/Config.h"
 
 #include "utils/Log.h"
 #include "math/Math.h"

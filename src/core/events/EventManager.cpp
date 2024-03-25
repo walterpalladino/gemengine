@@ -1,8 +1,11 @@
+#include <iostream>
+
 #include "core/events/EventManager.h"
 
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
-#include "core/Config.h"
+
+using namespace std;
 
 EventManager *EventManager::instance = 0;
 

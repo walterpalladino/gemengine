@@ -1,6 +1,6 @@
 #include "core/graphics/text/Text.h"
 #include "core/graphics/text/FontsManager.h"
-#include "core/Config.h"
+#include "core/config/Config.h"
 
 #include "utils/Log.h"
 #include "math/Math.h"

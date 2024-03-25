@@ -6,7 +6,7 @@
 #include "core/graphics/text/FontsManager.h"
 
 #include "utils/Log.h"
-#include "core/Config.h"
+#include "core/config/Config.h"
 #include "core/exceptions/ResourceLoadException.h"
 #include "math/Math.h"
 

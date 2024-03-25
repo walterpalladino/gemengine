@@ -4,7 +4,7 @@
 #include "core/GemEngine.h"
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
-#include "core/Config.h"
+#include "core/config/Config.h"
 #include "core/scenes/SceneManager.h"
 #include "app/Scene1.h"
 #include "app/Scene2.h"
