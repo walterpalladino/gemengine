@@ -2,7 +2,6 @@
 
 #include <string>
 #include <unordered_map>
-#include <vector>
 
 #include "core/scenes/Scene.h"
 #include "core/scenes/SceneLogic.h"
@@ -28,8 +27,6 @@ private:
 
     static SceneManager *instance;
 
-    vector<GemObject *> GetColliderEnabledObjects(unordered_map<string, GemObject *> objects);
-
     unordered_map<string, SceneLogic *> sceneLogicMap;
 
     Scene *newScene;
@@ -40,9 +37,6 @@ public:
     Scene *GetScene(const string name);
     void Clean();
     void Loop(float time, bool isPaused);
-    // Physics loop
-    void Physics(float time);
-    void DebugRender(SDL_Renderer *renderer, float time);
     void UpdateActiveScene(float time);
     void RenderActiveScene(float time);
 

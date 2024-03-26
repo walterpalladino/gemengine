@@ -45,4 +45,10 @@ public:
     SDL_Rect GetColliderRect();
     void RenderCollider(SDL_Renderer *renderer, SDL_Color color);
     void RenderCollisionRect(SDL_Renderer *renderer, string name, SDL_Color color);
+
+    //  Events
+    // virtual void OnCollide(GemObject *collider) {}
+    virtual void OnMouseOver(SDL_Event *event) {}
+    virtual void OnMouseClick(SDL_Event *event) {}
+    virtual void OnMouseRelease(SDL_Event *event) {}
 };
