@@ -7,19 +7,18 @@
 #include "core/scenes/Scene.h"
 #include "math/Point2dInt.h"
 #include "math/Point3dInt.h"
+#include "core/events/EventManager.h"
 
 using namespace std;
 
 class GemEngine
 {
 private:
-    bool isRunning = true;
-    bool isPaused = false;
+    EventManagerStatus engineStatus = {true, false};
 
     SDL_Renderer *renderer = NULL;
 
 private:
-    void PollEvents();
     // Timer
     SDL_TimerID processTimer;
     Uint32 ProcessTimer(Uint32 interval);

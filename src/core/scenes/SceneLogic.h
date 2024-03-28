@@ -9,4 +9,6 @@ public:
     virtual void Init(Scene *scene) = 0;
     virtual SceneTransition Loop(float time) = 0;
     virtual void Clean() = 0;
+
+    // virtual void OnMouseButtonDown(GemObject *gemObject, SDL_Event *event) {}
 };

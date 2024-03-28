@@ -63,8 +63,8 @@ private:
     // Keyboard //
     const Uint8 *keystates;
 
-    void OnKeyDown(SDL_Event *event);
-    void OnKeyUp(SDL_Event *event);
+    void OnKeyDown(SDL_Event &event);
+    void OnKeyUp(SDL_Event &event);
 
     // Mouse //
 
@@ -72,9 +72,9 @@ private:
 
     Vector2d *mousePosition;
 
-    void OnMouseMove(SDL_Event &e);
-    void OnMouseButtonDown(SDL_Event &e);
-    void OnMouseButtonUp(SDL_Event &e);
+    void OnMouseMove(SDL_Event &event);
+    void OnMouseButtonDown(SDL_Event &event);
+    void OnMouseButtonUp(SDL_Event &event);
 };
 
 // typedef InputHandler _InputHandler;

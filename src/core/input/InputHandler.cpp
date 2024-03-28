@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "core/input/InputHandler.h"
+#include "core/scenes/SceneManager.h"
 
 InputHandler *InputHandler::instance = 0;
 
@@ -34,11 +35,11 @@ bool InputHandler::Update()
             break;
 
         case SDL_KEYDOWN:
-            OnKeyDown(&event);
+            OnKeyDown(event);
             break;
 
         case SDL_KEYUP:
-            OnKeyUp(&event);
+            OnKeyUp(event);
             break;
 
         case SDL_MOUSEMOTION:
@@ -61,50 +62,54 @@ bool InputHandler::Update()
     return quit;
 }
 
-void InputHandler::OnMouseButtonDown(SDL_Event &e)
+void InputHandler::OnMouseButtonDown(SDL_Event &event)
 {
-    if (e.button.button == SDL_BUTTON_LEFT)
+    if (event.button.button == SDL_BUTTON_LEFT)
     {
         mouseButtonStates[LEFT] = true;
         // std::cout << "Left Mouse Button Pressed." << std::endl;
     }
-    else if (e.button.button == SDL_BUTTON_MIDDLE)
+    else if (event.button.button == SDL_BUTTON_MIDDLE)
     {
         mouseButtonStates[MIDDLE] = true;
         // std::cout << "Middle Mouse Button Pressed." << std::endl;
     }
-    else if (e.button.button == SDL_BUTTON_RIGHT)
+    else if (event.button.button == SDL_BUTTON_RIGHT)
     {
         mouseButtonStates[RIGHT] = true;
         // std::cout << "Right Mouse Button Pressed." << std::endl;
     }
+    SceneManager::Instance()->OnMouseButtonDown(event);
 }
 
-void InputHandler::OnMouseButtonUp(SDL_Event &e)
+void InputHandler::OnMouseButtonUp(SDL_Event &event)
 {
-    if (e.button.button == SDL_BUTTON_LEFT)
+    if (event.button.button == SDL_BUTTON_LEFT)
     {
         mouseButtonStates[LEFT] = false;
         // std::cout << "Left Mouse Button Released." << std::endl;
     }
-    else if (e.button.button == SDL_BUTTON_MIDDLE)
+    else if (event.button.button == SDL_BUTTON_MIDDLE)
     {
         mouseButtonStates[MIDDLE] = false;
         // std::cout << "Middle Mouse Button Released." << std::endl;
     }
-    else if (e.button.button == SDL_BUTTON_RIGHT)
+    else if (event.button.button == SDL_BUTTON_RIGHT)
     {
         mouseButtonStates[RIGHT] = false;
         // std::cout << "Right Mouse Button Released." << std::endl;
     }
+    SceneManager::Instance()->OnMouseButtonUp(event);
 }
 
-void InputHandler::OnMouseMove(SDL_Event &e)
+void InputHandler::OnMouseMove(SDL_Event &event)
 {
-    mousePosition->x = e.motion.x;
-    mousePosition->y = e.motion.y;
+    mousePosition->x = event.motion.x;
+    mousePosition->y = event.motion.y;
 
     // std::cout << "Mouse position = x: " << mousePosition->x << ", y:" << mousePosition->y << std::endl;
+
+    SceneManager::Instance()->OnMouseMove(event);
 }
 
 void InputHandler::Reset()
@@ -115,17 +120,17 @@ void InputHandler::Reset()
     }
 }
 
-void InputHandler::OnKeyDown(SDL_Event *event)
+void InputHandler::OnKeyDown(SDL_Event &event)
 {
-    keymap[event->key.keysym.sym] = true;
-    keymapPrev[event->key.keysym.sym] = false;
+    keymap[event.key.keysym.sym] = true;
+    keymapPrev[event.key.keysym.sym] = false;
     // std::cout << "Key Pressed: " << SDL_GetKeyName(event->key.keysym.sym) << " key : " << event->key.keysym.sym << " scancode : " << SDL_GetScancodeFromKey(event->key.keysym.sym) << std::endl;
 }
 
-void InputHandler::OnKeyUp(SDL_Event *event)
+void InputHandler::OnKeyUp(SDL_Event &event)
 {
-    keymapPrev[event->key.keysym.sym] = true;
-    keymap[event->key.keysym.sym] = false;
+    keymapPrev[event.key.keysym.sym] = true;
+    keymap[event.key.keysym.sym] = false;
     // std::cout << "Key Released: " << SDL_GetKeyName(event->key.keysym.sym) << " key : " << event->key.keysym.sym << " scancode : " << SDL_GetScancodeFromKey(event->key.keysym.sym) << std::endl;
 }
 

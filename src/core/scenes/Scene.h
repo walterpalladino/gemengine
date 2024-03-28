@@ -34,4 +34,8 @@ public:
     {
         return objects;
     }
+
+    void OnMouseButtonDown(SDL_Event &event);
+    void OnMouseButtonUp(SDL_Event &event);
+    void OnMouseMove(SDL_Event &event);
 };

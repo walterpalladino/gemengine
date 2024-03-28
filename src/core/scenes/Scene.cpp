@@ -187,3 +187,36 @@ int Scene::Load(string fileName, SDL_Renderer *renderer)
 
     return 0;
 }
+
+void Scene::OnMouseButtonDown(SDL_Event &event)
+{
+    for (auto &[name, object] : objects)
+    {
+        if (object->enabled)
+        {
+            object->OnMouseButtonDown(event);
+        }
+    }
+}
+
+void Scene::OnMouseButtonUp(SDL_Event &event)
+{
+    for (auto &[name, object] : objects)
+    {
+        if (object->enabled)
+        {
+            object->OnMouseButtonUp(event);
+        }
+    }
+}
+
+void Scene::OnMouseMove(SDL_Event &event)
+{
+    for (auto &[name, object] : objects)
+    {
+        if (object->enabled)
+        {
+            object->OnMouseMove(event);
+        }
+    }
+}

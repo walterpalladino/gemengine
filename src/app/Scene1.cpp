@@ -34,6 +34,10 @@ void Scene1::Init(Scene *scene)
     fpsText = (Text *)(scene->Get("text"));
 
     spriteWalk = (Sprite *)(scene->Get("spriteWalk"));
+    spriteWalk->AddOnMouseButtonDownEvent(this, (EventCallbackFunction *)&Scene1::OnMouseButtonDown);
+
+    spriteIdle = (Sprite *)(scene->Get("spriteIdle"));
+    spriteIdle->AddOnMouseButtonUpEvent(this, (EventCallbackFunction *)&Scene1::OnMouseButtonUp);
 }
 
 SceneTransition Scene1::Loop(float time)
@@ -219,4 +223,53 @@ SceneTransition Scene1::Loop(float time)
 void Scene1::Clean()
 {
     // cout << "Scene1::Clean" << endl;
+}
+
+void Scene1::OnMouseButtonDown(GemObject *object, SDL_Event *event)
+{
+    cout << "Scene1::OnMouseButtonDown" << endl;
+    cout << "object->name : " << object->name << endl;
+    cout << "event->type : " << event->type << endl;
+    // cout << "event->button.button : " << event->button.button << endl;
+
+    if (event->button.button == SDL_BUTTON_LEFT)
+    {
+        cout << "Left Mouse Button Pressed." << endl;
+    }
+    else if (event->button.button == SDL_BUTTON_MIDDLE)
+    {
+        cout << "Middle Mouse Button Pressed." << endl;
+    }
+    else if (event->button.button == SDL_BUTTON_RIGHT)
+    {
+        cout << "Right Mouse Button Pressed." << endl;
+    }
+}
+
+void Scene1::OnMouseButtonUp(GemObject *object, SDL_Event *event)
+{
+    cout << "Scene1::OnMouseButtonUp" << endl;
+    cout << "object->name : " << object->name << endl;
+    cout << "event->type : " << event->type << endl;
+    // cout << "event->button.button : " << event->button.button << endl;
+
+    if (event->button.button == SDL_BUTTON_LEFT)
+    {
+        cout << "Left Mouse Button Pressed." << endl;
+    }
+    else if (event->button.button == SDL_BUTTON_MIDDLE)
+    {
+        cout << "Middle Mouse Button Pressed." << endl;
+    }
+    else if (event->button.button == SDL_BUTTON_RIGHT)
+    {
+        cout << "Right Mouse Button Pressed." << endl;
+    }
+}
+
+void Scene1::OnMouseMove(GemObject *object, SDL_Event *event)
+{
+    cout << "Scene1::OnMouseMove" << endl;
+    cout << "object->name : " << object->name << endl;
+    cout << "event->type : " << event->type << endl;
 }

@@ -147,3 +147,27 @@ void SceneManager::Loop(float time, bool isPaused)
         }
     }
 }
+
+void SceneManager::OnMouseButtonDown(SDL_Event &event)
+{
+    if (activeScene != NULL)
+    {
+        activeScene->OnMouseButtonDown(event);
+    }
+}
+
+void SceneManager::OnMouseButtonUp(SDL_Event &event)
+{
+    if (activeScene != NULL)
+    {
+        activeScene->OnMouseButtonUp(event);
+    }
+}
+
+void SceneManager::OnMouseMove(SDL_Event &event)
+{
+    if (activeScene != NULL)
+    {
+        activeScene->OnMouseMove(event);
+    }
+}

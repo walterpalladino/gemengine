@@ -3,7 +3,16 @@
 #include <string>
 #include <SDL2/SDL.h>
 
+#include "core/gemobject/GemObject.h"
+#include "core/scenes/SceneLogic.h"
+
 using namespace std;
+
+struct EventManagerStatus
+{
+    bool isRunning = false;
+    bool isPaused = false;
+};
 
 class EventManager
 {
@@ -50,4 +59,5 @@ public:
 public:
     void Init();
     void Cleanup();
+    EventManagerStatus HandleEvents();
 };

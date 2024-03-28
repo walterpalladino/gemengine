@@ -7,13 +7,11 @@
 #include "core/graphics/text/FontsManager.h"
 #include "core/graphics/textures/TextureManager.h"
 #include "core/graphics/console/Console.h"
-#include "core/graphics/WindowManager.h"
 #include "core/sound/SoundManager.h"
 #include "core/config/Config.h"
 #include "core/scenes/SceneManager.h"
 #include "core/renderer/RenderManager.h"
 #include "core/Context.h"
-#include "core/events/EventManager.h"
 #include "core/exceptions/CoreInitializationException.h"
 #include "core/physics/PhysicsManager.h"
 
@@ -122,14 +120,14 @@ int GemEngine::Start()
 
     Log::Instance()->Info("GemEngine::Start", "Starting Game Loop");
 
-    while (isRunning)
+    while (engineStatus.isRunning)
     {
 
-        PollEvents();
+        engineStatus = EventManager::Instance()->HandleEvents();
 
         float elapsedTimeFromStart = Context::Instance()->StartFPSFrameCounter();
 
-        SceneManager::Instance()->Loop(elapsedTimeFromStart, isPaused);
+        SceneManager::Instance()->Loop(elapsedTimeFromStart, engineStatus.isPaused);
 
         PhysicsManager::Physics(elapsedTimeFromStart);
         RenderManager::Instance()->PreRender(elapsedTimeFromStart);
@@ -147,55 +145,6 @@ int GemEngine::Start()
     Log::Instance()->Info("GemEngine::Execute", "Good Bye!");
 
     return 1;
-}
-
-void GemEngine::PollEvents()
-{
-
-    //  Get first the Custom Events
-    SDL_Event event;
-    int eventCounter = SDL_PeepEvents(&event, 1,
-                                      SDL_GETEVENT,
-                                      EventManager::Instance()->GEMENGINE_EVENT_TYPE,
-                                      EventManager::Instance()->GEMENGINE_EVENT_TYPE);
-    if (eventCounter > 0)
-    {
-        cout << "GemEngine::PollEvents : Get Custom Event Type : " << event.type << " user code : " << EventManager::GEMEventCodeToString(event.user.code) << endl;
-
-        if (event.user.code == EventManager::GEMEVENT_CODE_PAUSE)
-        {
-            isPaused = true;
-        }
-        else if (event.user.code == EventManager::GEMEVENT_CODE_RESUME)
-        {
-            isPaused = false;
-        }
-    }
-
-    //  Get the Standard Events
-    bool quit = InputHandler::Instance()->Update();
-    if (quit)
-    {
-        isRunning = false;
-    }
-    /*
-    else
-    {
-        if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_P))
-        {
-            // cout << "Pause Scene" << endl;
-            isPaused = !isPaused;
-        }
-    }
-    */
-    else
-    {
-        //  Resume Scene
-        if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_R))
-        {
-            isPaused = false;
-        }
-    }
 }
 
 Uint32 GemEngine::ProcessTimerCallback(Uint32 interval, void *param)

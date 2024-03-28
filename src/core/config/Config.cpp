@@ -123,3 +123,16 @@ void Config::Load(const string fileName)
     }
     Log::Instance()->Info("Config::Load", "Config loaded");
 }
+
+SDL_FPoint Config::GetWindowScale()
+{
+
+    if (config_data.use_virtual_window)
+    {
+        return {(float)config_data.virtual_window_width / config_data.window_width, (float)config_data.virtual_window_height / config_data.window_height};
+    }
+    else
+    {
+        return {1.0, 1.0};
+    }
+}

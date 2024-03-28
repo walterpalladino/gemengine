@@ -15,9 +15,14 @@ private:
     Image *ledArrow;
     Text *fpsText;
     Sprite *spriteWalk;
+    Sprite *spriteIdle;
 
 public:
     void Init(Scene *scene);
     SceneTransition Loop(float time);
     void Clean();
+
+    static void OnMouseButtonDown(GemObject *gemObject, SDL_Event *event);
+    static void OnMouseButtonUp(GemObject *gemObject, SDL_Event *event);
+    static void OnMouseMove(GemObject *gemObject, SDL_Event *event);
 };

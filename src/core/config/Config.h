@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 
+#include <SDL2/SDL.h>
+
 using namespace std;
 
 struct Config_Data
@@ -49,4 +51,5 @@ public:
 
 public:
     void Load(const string fileName);
+    SDL_FPoint GetWindowScale();
 };
