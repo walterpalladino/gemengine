@@ -1,13 +1,13 @@
 
 #include <SDL2/SDL.h>
 
-#include "core/physics/PhysicsManager.h"
+#include "core/physics/PhysicsEngine.h"
 #include "core/scenes/Scene.h"
 #include "core/scenes/SceneManager.h"
 
 using namespace std;
 
-void PhysicsManager::Physics(float time)
+void PhysicsEngine::Physics(float time)
 {
     Scene *activeScene = SceneManager::Instance()->activeScene;
 
@@ -47,7 +47,7 @@ void PhysicsManager::Physics(float time)
     }
 }
 
-vector<GemObject *> PhysicsManager::GetColliderEnabledObjects(unordered_map<string, GemObject *> objects)
+vector<GemObject *> PhysicsEngine::GetColliderEnabledObjects(unordered_map<string, GemObject *> objects)
 {
 
     vector<GemObject *> objects_vector;
@@ -63,7 +63,7 @@ vector<GemObject *> PhysicsManager::GetColliderEnabledObjects(unordered_map<stri
     return objects_vector;
 }
 
-void PhysicsManager::DebugRender(SDL_Renderer *renderer, float time)
+void PhysicsEngine::DebugRender(SDL_Renderer *renderer, float time)
 {
     Scene *activeScene = SceneManager::Instance()->activeScene;
 

@@ -13,7 +13,7 @@
 #include "core/renderer/RenderManager.h"
 #include "core/Context.h"
 #include "core/exceptions/CoreInitializationException.h"
-#include "core/physics/PhysicsManager.h"
+#include "core/physics/PhysicsEngine.h"
 
 using namespace std;
 
@@ -129,10 +129,10 @@ int GemEngine::Start()
 
         SceneManager::Instance()->Loop(elapsedTimeFromStart, engineStatus.isPaused);
 
-        PhysicsManager::Physics(elapsedTimeFromStart);
+        PhysicsEngine::Physics(elapsedTimeFromStart);
         RenderManager::Instance()->PreRender(elapsedTimeFromStart);
         Render(elapsedTimeFromStart);
-        PhysicsManager::DebugRender(renderer, elapsedTimeFromStart);
+        PhysicsEngine::DebugRender(renderer, elapsedTimeFromStart);
         RenderManager::Instance()->PostRender(elapsedTimeFromStart);
 
         Context::Instance()->WaitForEndFrame();

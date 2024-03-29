@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class PhysicsManager
+class PhysicsEngine
 {
 public:
     static void Physics(float time);
