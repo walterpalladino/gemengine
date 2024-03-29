@@ -5,8 +5,6 @@
 
 #include <SDL2_image/SDL_image.h>
 
-#define MAX_TEXTURES_PER_APP 2048
-
 using namespace std;
 
 class TextureManager
