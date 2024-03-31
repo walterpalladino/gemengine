@@ -1,9 +1,25 @@
 #include "GemObject.h"
 
 #include <iostream>
+#include <random>
+
 #include "core/config/Config.h"
 
 using namespace std;
+
+GemObject::GemObject()
+{
+    //  Generate random id
+    random_device rd;
+    mt19937_64 gen(rd());
+    uniform_int_distribution<uint64_t> dis;
+
+    id = dis(gen);
+}
+
+GemObject::~GemObject()
+{
+}
 
 void GemObject::JSONParse(json data)
 {
@@ -56,11 +72,11 @@ void GemObject::RenderCollider(SDL_Renderer *renderer, SDL_Color color)
     }
 }
 
-void GemObject::RenderCollisionRect(SDL_Renderer *renderer, string name, SDL_Color color)
+void GemObject::RenderCollisionRect(SDL_Renderer *renderer, uint64_t id, SDL_Color color)
 {
-    if (collisions.count(name) > 0)
+    if (collisions.count(id) > 0)
     {
-        SDL_Rect collisionRect = collisions[name];
+        SDL_Rect collisionRect = collisions[id];
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
         SDL_RenderDrawRect(renderer, &collisionRect);
     }

@@ -27,6 +27,7 @@ private:
     unordered_map<SceneLogic *, EventCallbackFunction *> onMouseButtonUpSubscribers;
 
 public:
+    uint64_t id;
     std::string name;
 
     bool enabled;
@@ -42,10 +43,13 @@ public:
 
     unsigned int colliderMask = 0;
 
-    unordered_map<std::string, SDL_Rect> collisions;
+    unordered_map<uint64_t, SDL_Rect> collisions;
 
     int zOrder = 0;
     int layer = 0;
+
+    GemObject();
+    ~GemObject();
 
     virtual void Init() {}
     virtual void Update(float time) {}
@@ -56,7 +60,7 @@ public:
 
     SDL_Rect GetColliderRect();
     void RenderCollider(SDL_Renderer *renderer, SDL_Color color);
-    void RenderCollisionRect(SDL_Renderer *renderer, string name, SDL_Color color);
+    void RenderCollisionRect(SDL_Renderer *renderer, uint64_t id, SDL_Color color);
 
     //  Events
     void AddOnMouseMoveEvent(SceneLogic *scene, EventCallbackFunction *callback);

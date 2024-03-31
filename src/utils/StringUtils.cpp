@@ -1,6 +1,9 @@
 
 #include "utils/StringUtils.h"
 
+#include <algorithm> // for using transform
+#include <cctype>	 // for using toupper / tolower
+
 #include <stdarg.h>
 #include <stdio.h>
 
@@ -32,8 +35,10 @@ std::string StringPrintf(const char *format, ...)
 std::string UpperCase(const std::string &s)
 {
 	std::string upper(s);
-	for (size_t i = 0; i < s.length(); ++i)
-		upper[i] = toupper(upper[i]);
+	//	for (size_t i = 0; i < s.length(); ++i)
+	//		upper[i] = toupper(upper[i]);
+	transform(upper.begin(), upper.end(), upper.begin(),
+			  ::toupper);
 	return upper;
 }
 
@@ -41,8 +46,10 @@ std::string UpperCase(const std::string &s)
 std::string LowerCase(const std::string &s)
 {
 	string lower(s);
-	for (size_t i = 0; i < s.length(); ++i)
-		lower[i] = tolower(lower[i]);
+	//	for (size_t i = 0; i < s.length(); ++i)
+	//		lower[i] = tolower(lower[i]);
+	transform(lower.begin(), lower.end(), lower.begin(),
+			  ::tolower);
 	return lower;
 }
 

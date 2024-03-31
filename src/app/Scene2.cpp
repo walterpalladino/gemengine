@@ -15,10 +15,10 @@ void Scene2::Init(Scene *scene)
 
     this->scene = scene;
 
-    parallax_back = (Parallax *)(scene->Get("parallax-forest-back-trees"));
-    parallax_middle = (Parallax *)(scene->Get("parallax-forest-middle-trees"));
-    parallax_lights = (Parallax *)(scene->Get("parallax-forest-lights"));
-    parallax_front = (Parallax *)(scene->Get("parallax-forest-front-trees"));
+    parallax_back = (Parallax *)(scene->GetByName("parallax-forest-back-trees"));
+    parallax_middle = (Parallax *)(scene->GetByName("parallax-forest-middle-trees"));
+    parallax_lights = (Parallax *)(scene->GetByName("parallax-forest-lights"));
+    parallax_front = (Parallax *)(scene->GetByName("parallax-forest-front-trees"));
 
     layer_middle_offset = 0;
     layer_middle_speed = 10;

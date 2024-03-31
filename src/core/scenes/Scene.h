@@ -13,7 +13,7 @@ class Scene
 {
 
 private:
-    unordered_map<string, GemObject *> objects;
+    unordered_map<uint64_t, GemObject *> objects;
 
 public:
     string name;
@@ -21,8 +21,9 @@ public:
     Scene();
     ~Scene();
 
-    GemObject *Add(const char *name, GemObject *object);
-    GemObject *Get(const char *name);
+    GemObject *Add(GemObject *object);
+    GemObject *GetByName(const string name);
+    GemObject *GetById(const uint64_t id);
 
     void Update(float time);
     void Render(float time);
@@ -30,7 +31,7 @@ public:
 
     int Load(string fileName, SDL_Renderer *renderer);
 
-    const unordered_map<string, GemObject *> GetObjects()
+    const unordered_map<uint64_t, GemObject *> GetObjects()
     {
         return objects;
     }

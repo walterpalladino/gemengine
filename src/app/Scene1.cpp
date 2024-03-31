@@ -29,14 +29,14 @@ void Scene1::Init(Scene *scene)
 
     int sound_channel = 0;
 
-    ledArrow = (Image *)(scene->Get("led-arrow"));
+    ledArrow = (Image *)(scene->GetByName("led-arrow"));
 
-    fpsText = (Text *)(scene->Get("text"));
+    fpsText = (Text *)(scene->GetByName("text"));
 
-    spriteWalk = (Sprite *)(scene->Get("spriteWalk"));
+    spriteWalk = (Sprite *)(scene->GetByName("spriteWalk"));
     spriteWalk->AddOnMouseButtonDownEvent(this, (EventCallbackFunction *)&Scene1::OnMouseButtonDown);
 
-    spriteIdle = (Sprite *)(scene->Get("spriteIdle"));
+    spriteIdle = (Sprite *)(scene->GetByName("spriteIdle"));
     spriteIdle->AddOnMouseButtonUpEvent(this, (EventCallbackFunction *)&Scene1::OnMouseButtonUp);
 }
 

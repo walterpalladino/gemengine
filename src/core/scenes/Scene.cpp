@@ -38,25 +38,30 @@ Scene::~Scene()
     Log::Instance()->Info("Scene::~Scene", "Destructor");
 }
 
-GemObject *Scene::Add(const char *name, GemObject *object)
+GemObject *Scene::Add(GemObject *object)
 {
-    //  Check if there is an object with the same name
-    if (objects.count(name) != 0)
-    {
-        // printf("Scene::Add - Duplicate Identifier %s\n", name);
-        char *buffer = new char[512];
-        sprintf(buffer, "Duplicate Identifier: %s.", name);
-
-        Log::Instance()->Error("Scene::Add", buffer);
-        throw DuplicatedResourceIdentifier(buffer);
-    }
-
-    objects[name] = object;
+    objects[object->id] = object;
 }
 
-GemObject *Scene::Get(const char *name)
+GemObject *Scene::GetByName(const string name)
 {
-    return objects[name];
+    for (auto &[id, object] : objects)
+    {
+        if (object->name.compare(name) == 0)
+        {
+            return object;
+        }
+    }
+    return nullptr;
+}
+
+GemObject *Scene::GetById(const uint64_t id)
+{
+    if (objects.count(id) != 0)
+    {
+        return objects[id];
+    }
+    return nullptr;
 }
 
 void Scene::Render(float time)
@@ -129,25 +134,25 @@ int Scene::Load(string fileName, SDL_Renderer *renderer)
                     {
                         Image *newImage = new Image(renderer);
                         newImage->JSONParse(scene_object);
-                        Add(newImage->name.c_str(), newImage);
+                        Add(newImage);
                     }
                     else if (type == "text")
                     {
                         Text *newText = new Text(renderer);
                         newText->JSONParse(scene_object);
-                        Add(newText->name.c_str(), newText);
+                        Add(newText);
                     }
                     else if (type == "sprite")
                     {
                         Sprite *newSprite = new Sprite(renderer);
                         newSprite->JSONParse(scene_object);
-                        Add(newSprite->name.c_str(), newSprite);
+                        Add(newSprite);
                     }
                     else if (type == "parallax")
                     {
                         Parallax *newParallax = new Parallax(renderer);
                         newParallax->JSONParse(scene_object);
-                        Add(newParallax->name.c_str(), newParallax);
+                        Add(newParallax);
                     }
                     else if (type == "sound")
                     {
