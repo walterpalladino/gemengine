@@ -52,7 +52,7 @@
       "name": "spriteIdle",
       "enabled": true,
       "z_order": 0,
-      "layer": 0,
+      "layer": 1,
 
       "src": "Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png",
 
@@ -96,7 +96,7 @@
           "y": 42,
           "z": 0
         },
-        "mask": 0
+        "mask": 4294967295
       }
     },
     {
@@ -104,7 +104,7 @@
       "name": "spriteWalk",
       "enabled": true,
       "z_order": 0,
-      "layer": 0,
+      "layer": 1,
 
       "src": "Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png",
 
@@ -148,7 +148,7 @@
           "y": 42,
           "z": 0
         },
-        "mask": 0
+        "mask": 4294967295
       }
     },
     {

@@ -29,8 +29,19 @@ void PhysicsEngine::Physics(float time)
     //  Check collisions
     for (int i = 0; i < objects_vector.size() - 1; i++)
     {
+        if (!objects_vector[i]->enabled)
+        {
+            continue;
+        }
+
         for (int j = i + 1; j < objects_vector.size(); j++)
         {
+
+            if (!objects_vector[j]->enabled)
+            {
+                continue;
+            }
+
             SDL_Rect AABBi = objects_vector[i]->GetColliderRect();
             SDL_Rect AABBj = objects_vector[j]->GetColliderRect();
             SDL_Rect *AABBcollision = new SDL_Rect();
@@ -38,8 +49,14 @@ void PhysicsEngine::Physics(float time)
             bool status = SDL_IntersectRect(&AABBi, &AABBj, AABBcollision);
             if (status)
             {
-                objects_vector[i]->collisions[objects_vector[j]->id] = *AABBcollision;
-                objects_vector[j]->collisions[objects_vector[i]->id] = *AABBcollision;
+                if (objects_vector[i]->colliderMask & objects_vector[j]->layer)
+                {
+                    objects_vector[i]->collisions[objects_vector[j]->id] = *AABBcollision;
+                }
+                if (objects_vector[j]->colliderMask & objects_vector[i]->layer)
+                {
+                    objects_vector[j]->collisions[objects_vector[i]->id] = *AABBcollision;
+                }
             }
 
             delete AABBcollision;

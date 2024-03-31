@@ -41,12 +41,12 @@ public:
     Vector3d colliderOffset = Vector3d::Zero();
     Vector3d colliderSize = Vector3d::Zero();
 
-    unsigned int colliderMask = 0;
+    unsigned int colliderMask = UINT_MAX;
 
     unordered_map<uint64_t, SDL_Rect> collisions;
 
     int zOrder = 0;
-    int layer = 0;
+    unsigned int layer = 1;
 
     GemObject();
     ~GemObject();
