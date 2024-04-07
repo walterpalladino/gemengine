@@ -45,14 +45,14 @@ void Text::Render(float time)
     SDL_Surface *surface = TTF_RenderText_Solid(font, text.c_str(), color);
 
     //  Update Destination Rectangle based on Position and Scale
-    destRect.x = position.x;
-    destRect.y = position.y;
-    destRect.w = surface->w * scale.x;
-    destRect.h = surface->h * scale.y;
+    destRect.x = transform.position.x;
+    destRect.y = transform.position.y;
+    destRect.w = surface->w * transform.scale.x;
+    destRect.h = surface->h * transform.scale.y;
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 
-    if (Math::IsZero(rotation.z))
+    if (Math::IsZero(transform.rotation.z))
     {
         SDL_RenderCopy(renderer, texture, NULL, &destRect);
     }
@@ -63,7 +63,7 @@ void Text::Render(float time)
                          texture,
                          NULL,
                          &destRect,
-                         rotation.z,
+                         transform.rotation.z,
                          NULL, //&center,
                          flip);
     }

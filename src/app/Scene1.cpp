@@ -48,10 +48,10 @@ SceneTransition Scene1::Loop(float time)
     // cout << "Scene1::Loop" << endl;
 
     //   Scale the image
-    Vector3d scale = ledArrow->scale;
+    Vector3d scale = ledArrow->transform.scale;
     scale.x = 1.0f;
     scale.y = 1.0f;
-    ledArrow->scale = scale;
+    ledArrow->transform.scale = scale;
 
     //  Rotate logo image
     float rotationSpeed = 0.0f;
@@ -67,7 +67,7 @@ SceneTransition Scene1::Loop(float time)
         rotationSpeed = 5.0f;
     }
     // rotationSpeed = 10.0f;
-    Vector3d rotation = ledArrow->rotation;
+    Vector3d rotation = ledArrow->transform.rotation;
     // rotation.z = rotationSpeed * time / 1000.0f;
     rotation.z += rotationSpeed;
 
@@ -76,16 +76,16 @@ SceneTransition Scene1::Loop(float time)
     if (rotation.z < 0)
         rotation.z = rotation.z + 360;
 
-    ledArrow->rotation = rotation;
+    ledArrow->transform.rotation = rotation;
 
-    rotation = fpsText->rotation;
+    rotation = fpsText->transform.rotation;
     rotation.z += 1;
     if (rotation.z > 360)
         rotation.z = rotation.z - 360;
     if (rotation.z < 0)
         rotation.z = rotation.z + 360;
 
-    fpsText->rotation = rotation;
+    fpsText->transform.rotation = rotation;
 
     char *text = new char[64];
     sprintf(text, "%.2f FPS", Context::Instance()->GetFPS());
@@ -184,19 +184,19 @@ SceneTransition Scene1::Loop(float time)
     //  Sprite Movement
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_LEFT))
     {
-        sprite->position.x -= 1;
+        sprite->transform.position.x -= 1;
     }
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_RIGHT))
     {
-        sprite->position.x += 1;
+        sprite->transform.position.x += 1;
     }
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_UP))
     {
-        sprite->position.y -= 1;
+        sprite->transform.position.y -= 1;
     }
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_DOWN))
     {
-        sprite->position.y += 1;
+        sprite->transform.position.y += 1;
     }
 
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_N))

@@ -36,21 +36,7 @@ void Sprite::Update(float time)
 void Sprite::Cleanup()
 {
 }
-/*
-void Sprite::Load(const char *fileName, int frames, int speed)
-{
 
-    Animation animation;
-    animation.Load(fileName, frames, speed);
-
-    sourceRect.w = animation.textureWidth;
-    sourceRect.h = animation.textureHeight;
-
-    animations.push_back(animation);
-
-    actualAnimation = 0;
-}
-*/
 void Sprite::Render(float time)
 {
     if (!enabled)
@@ -64,17 +50,17 @@ void Sprite::Render(float time)
     spriteSourceRect.h = animations[actualAnimation].size.y;
 
     //  Update Destination Rectangle based on Position and Scale
-    destRect.x = position.x;
-    destRect.y = position.y;
-    destRect.w = animations[actualAnimation].size.x * abs(scale.x);
-    destRect.h = animations[actualAnimation].size.y * abs(scale.y);
+    destRect.x = transform.position.x;
+    destRect.y = transform.position.y;
+    destRect.w = animations[actualAnimation].size.x * abs(transform.scale.x);
+    destRect.h = animations[actualAnimation].size.y * abs(transform.scale.y);
 
     SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE;
-    if (scale.x < 0)
+    if (transform.scale.x < 0)
     {
         flip = (SDL_RendererFlip)(flip | SDL_RendererFlip::SDL_FLIP_HORIZONTAL);
     }
-    if (scale.y < 0)
+    if (transform.scale.y < 0)
     {
         flip = (SDL_RendererFlip)(flip | SDL_RendererFlip::SDL_FLIP_VERTICAL);
     }
@@ -83,7 +69,7 @@ void Sprite::Render(float time)
                      animations[actualAnimation].image,
                      &spriteSourceRect,
                      &destRect,
-                     rotation.z,
+                     transform.rotation.z,
                      NULL, //&center,
                      flip);
 

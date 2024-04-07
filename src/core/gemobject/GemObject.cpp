@@ -30,13 +30,13 @@ void GemObject::JSONParse(json data)
     layer = data["layer"];
 
     json json_position = data.at("position");
-    position = Vector3d(json_position.at("x"), json_position.at("y"), json_position.at("z"));
+    transform.position = Vector3d(json_position.at("x"), json_position.at("y"), json_position.at("z"));
 
     json json_rotation = data.at("rotation");
-    rotation = Vector3d(json_rotation.at("x"), json_rotation.at("y"), json_rotation.at("z"));
+    transform.rotation = Vector3d(json_rotation.at("x"), json_rotation.at("y"), json_rotation.at("z"));
 
     json json_scale = data.at("scale");
-    scale = Vector3d(json_scale.at("x"), json_scale.at("y"), json_scale.at("z"));
+    transform.scale = Vector3d(json_scale.at("x"), json_scale.at("y"), json_scale.at("z"));
 
     if (data.contains("collider"))
     {
@@ -53,10 +53,10 @@ SDL_Rect GemObject::GetColliderRect()
 {
     SDL_Rect colliderRect;
 
-    colliderRect.x = position.x + colliderOffset.x;
-    colliderRect.y = position.y + colliderOffset.y;
-    colliderRect.w = colliderSize.x * abs(scale.x);
-    colliderRect.h = colliderSize.y * abs(scale.y);
+    colliderRect.x = transform.position.x + colliderOffset.x;
+    colliderRect.y = transform.position.y + colliderOffset.y;
+    colliderRect.w = colliderSize.x * abs(transform.scale.x);
+    colliderRect.h = colliderSize.y * abs(transform.scale.y);
 
     return colliderRect;
 }

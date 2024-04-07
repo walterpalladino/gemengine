@@ -28,8 +28,6 @@ public:
 
     virtual void Render(float time);
 
-    // void Load(const char *fileName, int frames, int speed);
-
     virtual void JSONParse(json data);
 
     void AddAnimation(Animation animation);

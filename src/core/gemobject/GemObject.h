@@ -9,6 +9,8 @@
 
 #include "math/Vector3d.h"
 
+#include "core/gemobject/Transform.h"
+
 using namespace std;
 using json = nlohmann::json;
 
@@ -32,9 +34,7 @@ public:
 
     bool enabled;
 
-    Vector3d position = Vector3d::Zero();
-    Vector3d rotation = Vector3d::Zero();
-    Vector3d scale = Vector3d::One();
+    Transform transform;
 
     bool colliderEnabled;
 

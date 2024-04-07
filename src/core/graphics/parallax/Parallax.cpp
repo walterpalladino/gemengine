@@ -50,11 +50,11 @@ void Parallax::Render(float time)
 
     fromRect.w -= abs(offset.x);
 
-    destRect.x = position.x;
-    destRect.y = position.y;
-    destRect.w = sourceRect.w * abs(scale.x);
+    destRect.x = transform.position.x;
+    destRect.y = transform.position.y;
+    destRect.w = sourceRect.w * abs(transform.scale.x);
     destRect.w -= abs(offset.x);
-    destRect.h = sourceRect.h * abs(scale.y);
+    destRect.h = sourceRect.h * abs(transform.scale.y);
 
     if (offset.x >= 0)
     {
@@ -76,20 +76,20 @@ void Parallax::Render(float time)
 
         fromRect.w = abs(offset.x);
 
-        destRect.y = position.y;
-        destRect.h = sourceRect.h * abs(scale.y);
+        destRect.y = transform.position.y;
+        destRect.h = sourceRect.h * abs(transform.scale.y);
         destRect.w = abs(offset.x);
-        destRect.h = sourceRect.h * abs(scale.y);
+        destRect.h = sourceRect.h * abs(transform.scale.y);
 
         if (offset.x > 0)
         {
-            destRect.x = sourceRect.w * abs(scale.x) - offset.x;
+            destRect.x = sourceRect.w * abs(transform.scale.x) - offset.x;
         }
         else
         {
-            fromRect.x = sourceRect.w * abs(scale.x) + offset.x;
+            fromRect.x = sourceRect.w * abs(transform.scale.x) + offset.x;
 
-            destRect.x = position.x;
+            destRect.x = transform.position.x;
         }
 
         SDL_RenderCopy(renderer,
