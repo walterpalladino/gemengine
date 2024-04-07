@@ -49,43 +49,24 @@
     },
     {
       "type": "sprite",
-      "name": "knight",
+      "name": "spriteIdle",
       "enabled": true,
       "z_order": 0,
       "layer": 1,
 
-      "animations": [
-        {
-          "name": "idle",
-          "src": "Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png",
+      "src": "Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-idle.png",
 
-          "offset": {
-            "x": 0,
-            "y": 0
-          },
-          "size": {
-            "x": 38,
-            "y": 48
-          },
-          "frames": 4,
-          "speed": 4
-        },
-        {
-          "name": "walk",
-          "src": "Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png",
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "x": 38,
+        "y": 48
+      },
+      "frames": 4,
+      "speed": 4,
 
-          "offset": {
-            "x": 0,
-            "y": 0
-          },
-          "size": {
-            "x": 66,
-            "y": 48
-          },
-          "frames": 12,
-          "speed": 12
-        }
-      ],
       "position": {
         "x": 100,
         "y": 50,
@@ -107,6 +88,58 @@
         "type": "box",
         "offset": {
           "x": 6,
+          "y": 6,
+          "z": 0
+        },
+        "size": {
+          "x": 28,
+          "y": 42,
+          "z": 0
+        },
+        "mask": 4294967295
+      }
+    },
+    {
+      "type": "sprite",
+      "name": "spriteWalk",
+      "enabled": true,
+      "z_order": 0,
+      "layer": 1,
+
+      "src": "Gothicvania/ gothicvania patreon collection/Gothic-hero-Files/PNG/gothic-hero-run.png",
+
+      "offset": {
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "x": 66,
+        "y": 48
+      },
+      "frames": 12,
+      "speed": 12,
+
+      "position": {
+        "x": 200,
+        "y": 100,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": -1,
+        "y": 1,
+        "z": 1
+      },
+
+      "collider": {
+        "enabled": true,
+        "type": "box",
+        "offset": {
+          "x": 12,
           "y": 6,
           "z": 0
         },

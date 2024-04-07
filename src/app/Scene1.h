@@ -14,8 +14,7 @@ private:
 
     Image *ledArrow;
     Text *fpsText;
-    Sprite *spriteWalk;
-    Sprite *spriteIdle;
+    Sprite *sprite;
 
 public:
     void Init(Scene *scene);

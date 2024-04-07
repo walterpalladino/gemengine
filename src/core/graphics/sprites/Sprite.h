@@ -4,34 +4,39 @@
 
 #include "core/gemobject/GemObject.h"
 #include "math/Point2dInt.h"
+#include "core/graphics/animation/Animation.h"
+#include "core/graphics/textures/TextureManager.h"
 
 class Sprite : public GemObject
 {
 
 private:
-    SDL_Texture *image;
     SDL_Rect sourceRect;
     SDL_Rect destRect;
     SDL_Renderer *renderer;
 
-    Point2dInt offset = Point2dInt(0, 0);
-    Point2dInt size = Point2dInt(0, 0);
-    int animationFrames = 0;
-    int animationSpeed = 30; // FPS
-
-    int actualFrame;
-    int animationStartTime;
+    int actualAnimation = -1;
+    vector<Animation> animations;
 
 public:
     Sprite(SDL_Renderer *renderer);
     ~Sprite();
+
     virtual void Init();
     virtual void Update(float time);
     virtual void Cleanup();
 
     virtual void Render(float time);
 
-    void Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed);
+    // void Load(const char *fileName, int frames, int speed);
 
     virtual void JSONParse(json data);
+
+    void AddAnimation(Animation animation);
+    Animation GetAnimation(int index);
+
+    int GetActualAnimation();
+    void SetActualAnimation(int actualAnimation);
+
+    int GetAnimationsCount() { return animations.size(); }
 };

@@ -33,11 +33,12 @@ void Scene1::Init(Scene *scene)
 
     fpsText = (Text *)(scene->GetByName("text"));
 
-    spriteWalk = (Sprite *)(scene->GetByName("spriteWalk"));
-    spriteWalk->AddOnMouseButtonDownEvent(this, (EventCallbackFunction *)&Scene1::OnMouseButtonDown);
+    sprite = (Sprite *)(scene->GetByName("knight"));
+    // sprite->SetActualAnimation(0);
+    //  sprite->AddOnMouseButtonDownEvent(this, (EventCallbackFunction *)&Scene1::OnMouseButtonDown);
 
-    spriteIdle = (Sprite *)(scene->GetByName("spriteIdle"));
-    spriteIdle->AddOnMouseButtonUpEvent(this, (EventCallbackFunction *)&Scene1::OnMouseButtonUp);
+    //    spriteIdle = (Sprite *)(scene->GetByName("spriteIdle"));
+    //  spriteIdle->AddOnMouseButtonUpEvent(this, (EventCallbackFunction *)&Scene1::OnMouseButtonUp);
 }
 
 SceneTransition Scene1::Loop(float time)
@@ -160,22 +161,42 @@ SceneTransition Scene1::Loop(float time)
         // cout << "masterVolume = " << masterVolume << endl;
     }
 
+    //  Sprite Animations
+    if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_Z))
+    {
+        int actualAnimation = sprite->GetActualAnimation() - 1;
+        if (actualAnimation < 0)
+        {
+            actualAnimation = sprite->GetAnimationsCount() - 1;
+        }
+        sprite->SetActualAnimation(actualAnimation);
+    }
+    if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_X))
+    {
+        int actualAnimation = sprite->GetActualAnimation() + 1;
+        if (actualAnimation == sprite->GetAnimationsCount())
+        {
+            actualAnimation = 0;
+        }
+        sprite->SetActualAnimation(actualAnimation);
+    }
+
     //  Sprite Movement
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_LEFT))
     {
-        spriteWalk->position.x -= 1;
+        sprite->position.x -= 1;
     }
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_RIGHT))
     {
-        spriteWalk->position.x += 1;
+        sprite->position.x += 1;
     }
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_UP))
     {
-        spriteWalk->position.y -= 1;
+        sprite->position.y -= 1;
     }
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_DOWN))
     {
-        spriteWalk->position.y += 1;
+        sprite->position.y += 1;
     }
 
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_N))

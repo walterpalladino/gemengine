@@ -1,14 +1,14 @@
 #include "core/graphics/sprites/Sprite.h"
-#include "core/graphics/textures/TextureManager.h"
 #include "core/config/Config.h"
 
 #include "utils/Log.h"
 #include "math/Math.h"
 
+#include "core/exceptions/ResourceLoadException.h"
+
 Sprite::Sprite(SDL_Renderer *renderer)
 {
     this->renderer = renderer;
-    image = NULL;
 }
 
 Sprite::~Sprite()
@@ -24,71 +24,50 @@ void Sprite::Update(float time)
     if (!enabled)
         return;
 
-    if (animationStartTime == -1)
-    {
-        //  First call
-        animationStartTime = time;
-    }
+    if (animations.size() == 0)
+        return;
 
-    //  Calculate the ctual frame based on speed of animation and number of frames
-    actualFrame = time - animationStartTime;
-    actualFrame *= animationSpeed;
-    actualFrame /= 1000;
-    actualFrame %= animationFrames;
+    if ((actualAnimation < 0) || (actualAnimation >= animations.size()))
+        return;
+
+    animations[actualAnimation].Update(time);
 }
 
 void Sprite::Cleanup()
 {
 }
-
-void Sprite::Load(const char *fileName, int offsetX, int offsetY, int width, int height, int frames, int speed)
+/*
+void Sprite::Load(const char *fileName, int frames, int speed)
 {
-    offset.x = offsetX;
-    offset.y = offsetY;
 
-    size.x = width;
-    size.y = height;
+    Animation animation;
+    animation.Load(fileName, frames, speed);
 
-    animationFrames = frames;
-    animationSpeed = speed;
+    sourceRect.w = animation.textureWidth;
+    sourceRect.h = animation.textureHeight;
 
-    image = TextureManager::Instance()->Add(fileName);
-    //  Get texture information
-    SDL_QueryTexture(image, NULL, NULL, &sourceRect.w, &sourceRect.h);
+    animations.push_back(animation);
 
-    actualFrame = 0;
-    animationStartTime = -1;
+    actualAnimation = 0;
 }
-
+*/
 void Sprite::Render(float time)
 {
     if (!enabled)
         return;
-    /*
-        if (animationStartTime == -1)
-        {
-            //  First call
-            animationStartTime = time;
-        }
 
-        //  Calculate the ctual frame based on speed of animation and number of frames
-        actualFrame = time - animationStartTime;
-        actualFrame *= animationSpeed;
-        actualFrame /= 1000;
-        actualFrame %= animationFrames;
-    */
     //  Adjust source of the sprite to draw
     SDL_Rect spriteSourceRect = SDL_Rect();
-    spriteSourceRect.x = offset.x + actualFrame * size.x;
-    spriteSourceRect.y = offset.y;
-    spriteSourceRect.w = size.x;
-    spriteSourceRect.h = size.y;
+    spriteSourceRect.x = animations[actualAnimation].offset.x + animations[actualAnimation].actualFrame * animations[actualAnimation].size.x;
+    spriteSourceRect.y = animations[actualAnimation].offset.y;
+    spriteSourceRect.w = animations[actualAnimation].size.x;
+    spriteSourceRect.h = animations[actualAnimation].size.y;
 
     //  Update Destination Rectangle based on Position and Scale
     destRect.x = position.x;
     destRect.y = position.y;
-    destRect.w = size.x * abs(scale.x);
-    destRect.h = size.y * abs(scale.y);
+    destRect.w = animations[actualAnimation].size.x * abs(scale.x);
+    destRect.h = animations[actualAnimation].size.y * abs(scale.y);
 
     SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE;
     if (scale.x < 0)
@@ -101,7 +80,7 @@ void Sprite::Render(float time)
     }
 
     SDL_RenderCopyEx(renderer,
-                     image,
+                     animations[actualAnimation].image,
                      &spriteSourceRect,
                      &destRect,
                      rotation.z,
@@ -117,19 +96,55 @@ void Sprite::JSONParse(json data)
 
     Init();
 
-    string src = data.at("src");
-    string src_file = Config::Instance()->config_data.resource_folder + "/" + src;
+    if (data.contains("animations"))
+    {
+        json sprite_animations = data.at("animations");
 
-    json json_offset = data.at("offset");
-    int offsetX = json_offset.at("x");
-    int offsetY = json_offset.at("y");
+        if (sprite_animations.size() == 0)
+        {
+            Log::Instance()->Error("Sprite::JSONParse", "No animations found in JSON");
+            throw ResourceLoadException("Sprite: No animations found in JSON");
+        }
 
-    json json_size = data.at("size");
-    int width = json_size.at("x");
-    int height = json_size.at("y");
+        for (auto &[key, val] : sprite_animations.items())
+        {
+            json animation_data = val;
+            Animation animation;
+            animation.JSONParse(animation_data);
 
-    int frames = data.at("frames");
-    int speed = data.at("speed");
+            animations.push_back(animation);
+        }
 
-    Load(src_file.c_str(), offsetX, offsetY, width, height, frames, speed);
+        actualAnimation = 0;
+    }
+    else
+    {
+        Log::Instance()->Error("Sprite::JSONParse", "No animations found in JSON");
+        throw ResourceLoadException("Sprite: No animations found in JSON");
+    }
+}
+
+void Sprite::AddAnimation(Animation animation)
+{
+    animations.push_back(animation);
+}
+
+Animation Sprite::GetAnimation(int index)
+{
+    return animations[index];
+}
+
+int Sprite::GetActualAnimation()
+{
+    return actualAnimation;
+}
+
+void Sprite::SetActualAnimation(int actualAnimation)
+{
+    if ((actualAnimation < 0) || (actualAnimation >= animations.size()))
+        return;
+    this->actualAnimation = actualAnimation;
+
+    sourceRect.w = animations[actualAnimation].textureWidth;
+    sourceRect.h = animations[actualAnimation].textureHeight;
 }
