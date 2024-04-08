@@ -199,3 +199,129 @@ const Point3dInt Console::GetColor()
 {
     return color;
 }
+
+char Console::GetCharacterAt(int x, int y)
+{
+    if (x >= 0 && x < virtualConsoleSize.x && y >= 0 && y < virtualConsoleSize.y)
+    {
+        return consoleBuffer[x + y * virtualConsoleSize.x];
+    }
+    return ' '; //  Default character
+}
+
+void Console::Shift(int direction, bool rollContent = false)
+{
+    if (direction != 1 && direction != 2 && direction != 3 && direction != 4 && direction != 6 && direction != 8 && direction != 12 && direction != 9)
+    {
+        return;
+    }
+
+    //  UP && DOWN
+    if (direction & CONSOLE_SHIFT_UP)
+    {
+        char *buffer = new char[virtualConsoleSize.x];
+        for (int x = 0; x < virtualConsoleSize.x; x++)
+        {
+            if (rollContent)
+                buffer[x] = GetCharacterAt(x, 0);
+            else
+                buffer[x] = ' ';
+        }
+        for (int y = 1; y < virtualConsoleSize.y; y++)
+        {
+            for (int x = 0; x < virtualConsoleSize.x; x++)
+            {
+                SetCharacterAt(x, y - 1, GetCharacterAt(x, y));
+            }
+        }
+        for (int x = 0; x < virtualConsoleSize.x; x++)
+        {
+            SetCharacterAt(x, virtualConsoleSize.y - 1, buffer[x]);
+        }
+        delete buffer;
+    }
+    else if (direction & CONSOLE_SHIFT_DOWN)
+    {
+        char *buffer = new char[virtualConsoleSize.x];
+        for (int x = 0; x < virtualConsoleSize.x; x++)
+        {
+            if (rollContent)
+                buffer[x] = GetCharacterAt(x, virtualConsoleSize.y - 1);
+            else
+                buffer[x] = ' ';
+        }
+        for (int y = virtualConsoleSize.y - 2; y >= 0; y--)
+        {
+            for (int x = 0; x < virtualConsoleSize.x; x++)
+            {
+                SetCharacterAt(x, y + 1, GetCharacterAt(x, y));
+            }
+        }
+        for (int x = 0; x < virtualConsoleSize.x; x++)
+        {
+            SetCharacterAt(x, 0, buffer[x]);
+        }
+        delete buffer;
+    }
+
+    //  LEFT && RIGHT
+    if (direction & CONSOLE_SHIFT_LEFT)
+    {
+        char *buffer = new char[virtualConsoleSize.y];
+        for (int y = 0; y < virtualConsoleSize.y; y++)
+        {
+            if (rollContent)
+                buffer[y] = GetCharacterAt(0, y);
+            else
+                buffer[y] = ' ';
+        }
+        for (int x = 1; x < virtualConsoleSize.x; x++)
+        {
+            for (int y = 0; y < virtualConsoleSize.y; y++)
+            {
+                SetCharacterAt(x - 1, y, GetCharacterAt(x, y));
+            }
+        }
+        for (int y = 0; y < virtualConsoleSize.y; y++)
+        {
+            SetCharacterAt(virtualConsoleSize.x - 1, y, buffer[y]);
+        }
+        delete buffer;
+    }
+    else if (direction & CONSOLE_SHIFT_RIGHT)
+    {
+        char *buffer = new char[virtualConsoleSize.y];
+        for (int y = 0; y < virtualConsoleSize.y; y++)
+        {
+            if (rollContent)
+                buffer[y] = GetCharacterAt(virtualConsoleSize.x - 1, y);
+            else
+                buffer[y] = ' ';
+        }
+        for (int x = virtualConsoleSize.x - 2; x >= 0; x--)
+        {
+            for (int y = 0; y < virtualConsoleSize.y; y++)
+            {
+                SetCharacterAt(x + 1, y, GetCharacterAt(x, y));
+            }
+        }
+        for (int y = 0; y < virtualConsoleSize.y; y++)
+        {
+            SetCharacterAt(0, y, buffer[y]);
+        }
+        delete buffer;
+    }
+}
+
+void Console::SetBuffer(const char *text)
+{
+    int len = strlen(text);
+    if (len > virtualConsoleSize.x * virtualConsoleSize.y)
+    {
+        len = virtualConsoleSize.x * virtualConsoleSize.y;
+    }
+    for (int i = 0; i < len; i++)
+    {
+        consoleBuffer[i] = text[i];
+    }
+}

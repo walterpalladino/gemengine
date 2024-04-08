@@ -39,6 +39,37 @@ void Scene1::Init(Scene *scene)
 
     //    spriteIdle = (Sprite *)(scene->GetByName("spriteIdle"));
     //  spriteIdle->AddOnMouseButtonUpEvent(this, (EventCallbackFunction *)&Scene1::OnMouseButtonUp);
+
+    string console_text =
+        "                                                "
+        "                                                "
+        "                                                "
+        "                                                "
+        "                                                "
+        "    HAAAAAAAAAAAAJ                              "
+        "   AAA   AAAAAAAAAAAAA                          "
+        " AA  AAAAAAAAAAAAAAAAAAAAAAQ     A A            "
+        "      AAAAAAAAAAAAAAA     BAAAA AAAAAAAAA       "
+        "    AAA     A  JA             AAA  A    A       "
+        "   A                          B  D AA  AU       "
+        "                            A A  W AA A OA      "
+        "                            A UWW        A      "
+        "                              AAAA AAAAAAW      "
+        "                          W     AAAA    A       "
+        "                        AAAAAAAAAAAAAAAAAAAA    "
+        "                 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA "
+        "                                                "
+        "                                                "
+        "                                                "
+        "                                                "
+        "                                                "
+        "                                                "
+        "                                                "
+        "                                                "
+        "                                                "
+        "                                                ";
+
+    Console::Instance()->SetBuffer(console_text.c_str());
 }
 
 SceneTransition Scene1::Loop(float time)
@@ -99,10 +130,11 @@ SceneTransition Scene1::Loop(float time)
     RenderManager::Instance()->backgroundColor = Point3dInt(80, 69, 155);
     Console::Instance()->SetColor(0, 0, 0);
     Console::Instance()->SetColor(136, 126, 203);
-    Console::Instance()->SetCursorAt(0, 0);
-    Console::Instance()->Print("GemEngine running...");
-    Console::Instance()->SetCursorAt(25, 0);
-    Console::Instance()->Print("still running...");
+
+    //    Console::Instance()->SetCursorAt(0, 0);
+    //    Console::Instance()->Print("GemEngine running...");
+    //    Console::Instance()->SetCursorAt(25, 0);
+    //    Console::Instance()->Print("still running...");
     // Console::Instance()->Print(text);
 
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_1))
@@ -235,6 +267,24 @@ SceneTransition Scene1::Loop(float time)
 
         int status = SDL_PushEvent(&event);
         cout << "SDL_PushEvent status : " << status << endl;
+    }
+
+    //  Console Scroll
+    if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_I))
+    {
+        Console::Instance()->Shift(CONSOLE_SHIFT_UP, true);
+    }
+    else if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_K))
+    {
+        Console::Instance()->Shift(CONSOLE_SHIFT_DOWN, true);
+    }
+    if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_J))
+    {
+        Console::Instance()->Shift(CONSOLE_SHIFT_LEFT, true);
+    }
+    else if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_L))
+    {
+        Console::Instance()->Shift(CONSOLE_SHIFT_RIGHT, true);
     }
 
     sceneTransition.scene = scene;

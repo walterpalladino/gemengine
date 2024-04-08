@@ -8,6 +8,12 @@
 #include "math/Point2dInt.h"
 #include "math/Point3dInt.h"
 
+//  Shift Directions
+const int CONSOLE_SHIFT_LEFT = 8;
+const int CONSOLE_SHIFT_RIGHT = 2;
+const int CONSOLE_SHIFT_UP = 1;
+const int CONSOLE_SHIFT_DOWN = 4;
+
 class Console
 {
 public:
@@ -52,6 +58,7 @@ public:
     void Render(float time);
     void Clear();
     void PutCharacterAt(int x, int y, char c);
+    char GetCharacterAt(int x, int y);
     void Print(const char *text);
     void SetCursorAt(int x, int y);
     const Point2dInt GetCursorPosition();
@@ -60,6 +67,10 @@ public:
     const Point3dInt GetColor();
 
     bool enabled;
+
+    void Shift(int direction, bool rollContent);
+
+    void SetBuffer(const char *text);
 
     static Console *instance;
 };
