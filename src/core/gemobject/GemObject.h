@@ -37,16 +37,7 @@ public:
     bool enabled;
 
     Transform transform;
-    /*
-        bool colliderEnabled;
 
-        Vector3d colliderOffset = Vector3d::Zero();
-        Vector3d colliderSize = Vector3d::Zero();
-
-        unsigned int colliderMask = UINT_MAX;
-
-        unordered_map<uint64_t, SDL_Rect> collisions;
-    */
     Collider collider;
 
     int zOrder = 0;
