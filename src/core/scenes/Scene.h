@@ -26,7 +26,7 @@ public:
     GemObject *GetById(const uint64_t id);
 
     void Update(float time);
-    void Render(float time);
+    void Render(SDL_Renderer *renderer, float time);
     void Cleanup();
 
     int Load(string fileName, SDL_Renderer *renderer);

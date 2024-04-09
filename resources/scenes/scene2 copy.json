@@ -2,11 +2,12 @@
   "name": "Second Scene",
   "objects": [
     {
+      "type": "parallax",
       "name": "parallax-forest-back-trees",
       "enabled": true,
       "z_order": 10,
       "layer": 0,
-
+      "src": "images/parallax_forest_pack/layers/parallax-forest-back-trees.png",
       "position": {
         "x": 0,
         "y": 0,
@@ -21,23 +22,15 @@
         "x": 1,
         "y": 1,
         "z": 1
-      },
-
-      "components": [
-        {
-          "type": "parallax",
-          "enabled": true,
-          "src": "images/parallax_forest_pack/layers/parallax-forest-back-trees.png"
-        }
-      ]
+      }
     },
-
     {
+      "type": "parallax",
       "name": "parallax-forest-middle-trees",
       "enabled": true,
       "z_order": 8,
       "layer": 0,
-
+      "src": "images/parallax_forest_pack/layers/parallax-forest-middle-trees.png",
       "position": {
         "x": 0,
         "y": 0,
@@ -52,23 +45,15 @@
         "x": 1,
         "y": 1,
         "z": 1
-      },
-
-      "components": [
-        {
-          "type": "parallax",
-          "enabled": true,
-          "src": "images/parallax_forest_pack/layers/parallax-forest-middle-trees.png"
-        }
-      ]
+      }
     },
-
     {
+      "type": "parallax",
       "name": "parallax-forest-lights",
       "enabled": true,
       "z_order": 9,
       "layer": 0,
-
+      "src": "images/parallax_forest_pack/layers/parallax-forest-lights.png",
       "position": {
         "x": 0,
         "y": 0,
@@ -83,23 +68,15 @@
         "x": 1,
         "y": 1,
         "z": 1
-      },
-
-      "components": [
-        {
-          "type": "parallax",
-          "enabled": true,
-          "src": "images/parallax_forest_pack/layers/parallax-forest-lights.png"
-        }
-      ]
+      }
     },
-
     {
+      "type": "parallax",
       "name": "parallax-forest-front-trees",
       "enabled": true,
       "z_order": 7,
       "layer": 0,
-
+      "src": "images/parallax_forest_pack/layers/parallax-forest-front-trees.png",
       "position": {
         "x": 0,
         "y": 0,
@@ -114,15 +91,7 @@
         "x": 1,
         "y": 1,
         "z": 1
-      },
-
-      "components": [
-        {
-          "type": "parallax",
-          "enabled": true,
-          "src": "images/parallax_forest_pack/layers/parallax-forest-front-trees.png"
-        }
-      ]
+      }
     }
   ]
 }

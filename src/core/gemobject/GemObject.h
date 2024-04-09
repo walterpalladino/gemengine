@@ -2,6 +2,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 #include <SDL2/SDL.h>
 
@@ -38,7 +39,9 @@ public:
 
     Transform transform;
 
-    Collider collider;
+    // Collider collider;
+
+    unordered_map<ComponentType, vector<Component *>> components;
 
     int zOrder = 0;
     unsigned int layer = 1;
@@ -47,16 +50,16 @@ public:
     ~GemObject();
 
     virtual void Init() {}
-    virtual void Update(float time) {}
-    virtual void Render(float time) {}
+    virtual void Update(float time);
+    void Render(SDL_Renderer *renderer, float time);
     virtual void Cleanup() {}
 
-    virtual void JSONParse(json data);
-
-    SDL_Rect GetColliderRect();
-    void RenderCollider(SDL_Renderer *renderer, SDL_Color color);
-    void RenderCollisionRect(SDL_Renderer *renderer, uint64_t id, SDL_Color color);
-
+    // virtual void JSONParse(json data);
+    /*
+        SDL_Rect GetColliderRect();
+        void RenderCollider(SDL_Renderer *renderer, SDL_Color color);
+        void RenderCollisionRect(SDL_Renderer *renderer, uint64_t id, SDL_Color color);
+    */
     //  Events
     void AddOnMouseMoveEvent(SceneLogic *scene, EventCallbackFunction *callback);
     void AddOnMouseButtonDownEvent(SceneLogic *scene, EventCallbackFunction *callback);
@@ -69,4 +72,10 @@ public:
     void OnMouseButtonDown(SDL_Event &event);
     void OnMouseButtonUp(SDL_Event &event);
     void OnMouseMove(SDL_Event &event);
+
+    //  Components
+    void AddComponent(Component *component);
+    void RemoveComponent(Component *component);
+    void RemoveAllComponents();
+    vector<Component *> GetComponentsByType(ComponentType type);
 };

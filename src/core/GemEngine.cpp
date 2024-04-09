@@ -44,7 +44,7 @@ GemEngine::~GemEngine()
 void GemEngine::Render(float time)
 {
     Console::Instance()->Render(time);
-    SceneManager::Instance()->RenderActiveScene(time);
+    SceneManager::Instance()->RenderActiveScene(renderer, time);
 }
 
 void GemEngine::Init()

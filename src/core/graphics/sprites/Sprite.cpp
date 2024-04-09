@@ -6,9 +6,8 @@
 
 #include "core/exceptions/ResourceLoadException.h"
 
-Sprite::Sprite(SDL_Renderer *renderer)
+Sprite::Sprite()
 {
-    this->renderer = renderer;
 }
 
 Sprite::~Sprite()
@@ -37,7 +36,8 @@ void Sprite::Cleanup()
 {
 }
 
-void Sprite::Render(float time)
+void Sprite::Render(SDL_Renderer *renderer, Transform parentTransform, float time)
+
 {
     if (!enabled)
         return;
@@ -50,32 +50,32 @@ void Sprite::Render(float time)
     spriteSourceRect.h = animations[actualAnimation].size.y;
 
     //  Update Destination Rectangle based on Position and Scale
-    destRect.x = transform.position.x;
-    destRect.y = transform.position.y;
-    destRect.w = animations[actualAnimation].size.x * abs(transform.scale.x);
-    destRect.h = animations[actualAnimation].size.y * abs(transform.scale.y);
+    destRect.x = parentTransform.position.x;
+    destRect.y = parentTransform.position.y;
+    destRect.w = animations[actualAnimation].size.x * abs(parentTransform.scale.x);
+    destRect.h = animations[actualAnimation].size.y * abs(parentTransform.scale.y);
 
     SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE;
-    if (transform.scale.x < 0)
+    if (parentTransform.scale.x < 0)
     {
         flip = (SDL_RendererFlip)(flip | SDL_RendererFlip::SDL_FLIP_HORIZONTAL);
     }
-    if (transform.scale.y < 0)
+    if (parentTransform.scale.y < 0)
     {
         flip = (SDL_RendererFlip)(flip | SDL_RendererFlip::SDL_FLIP_VERTICAL);
     }
 
     SDL_RenderCopyEx(renderer,
-                     animations[actualAnimation].image,
+                     animations[actualAnimation].texture,
                      &spriteSourceRect,
                      &destRect,
-                     transform.rotation.z,
+                     parentTransform.rotation.z,
                      NULL, //&center,
                      flip);
 
-    RenderCollider(renderer, {255, 255, 0, 255});
+    // RenderCollider(renderer, {255, 255, 0, 255});
 }
-
+/*
 void Sprite::JSONParse(json data)
 {
     GemObject::JSONParse(data);
@@ -109,7 +109,7 @@ void Sprite::JSONParse(json data)
         throw ResourceLoadException("Sprite: No animations found in JSON");
     }
 }
-
+*/
 void Sprite::AddAnimation(Animation animation)
 {
     animations.push_back(animation);

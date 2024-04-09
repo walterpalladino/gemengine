@@ -9,6 +9,11 @@ class Scene2 : public SceneLogic
 private:
     Scene *scene;
 
+    GemObject *parallax_back_go;
+    GemObject *parallax_middle_go;
+    GemObject *parallax_lights_go;
+    GemObject *parallax_front_go;
+
     Parallax *parallax_back;
     Parallax *parallax_middle;
     Parallax *parallax_lights;

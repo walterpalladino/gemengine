@@ -4,11 +4,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2_ttf/SDL_ttf.h>
 
-#include "core/gemobject/GemObject.h"
+#include "core/gemobject/Component.h"
 
 using namespace std;
 
-class Text : public GemObject
+class Text : public Component
 {
 private:
     string text;
@@ -16,19 +16,22 @@ private:
 
     SDL_Rect sourceRect;
     SDL_Rect destRect;
-    SDL_Renderer *renderer;
 
 public:
-    Text(SDL_Renderer *renderer);
+    Text();
     ~Text();
+
     virtual void Init();
     virtual void Update(float time);
     virtual void Cleanup();
 
-    virtual void Render(float time);
+    void Render(SDL_Renderer *renderer, Transform parentTransform, float time);
 
     void Init(const string, const char *fileName, const int fontSize);
     void SetText(string text) { this->text = text; }
 
-    virtual void JSONParse(json data);
+    ComponentType GetType()
+    {
+        return ComponentType::Text;
+    }
 };

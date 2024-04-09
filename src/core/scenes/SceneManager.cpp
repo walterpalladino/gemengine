@@ -59,9 +59,9 @@ Scene *SceneManager::GetScene(const string name)
     return NULL;
 }
 
-void SceneManager::RenderActiveScene(float time)
+void SceneManager::RenderActiveScene(SDL_Renderer *renderer, float time)
 {
-    activeScene->Render(time);
+    activeScene->Render(renderer, time);
 }
 
 void SceneManager::UpdateActiveScene(float time)

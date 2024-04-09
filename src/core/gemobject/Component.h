@@ -1,5 +1,9 @@
 #pragma once
 
+#include <SDL2/SDL.h>
+
+#include "core/gemobject/Transform.h"
+
 enum class ComponentType : int
 {
     Image = 1,
@@ -16,6 +20,11 @@ public:
     bool enabled = true;
 
 public:
+    Component() {}
+    ~Component() {}
+
     virtual ComponentType GetType() = 0;
     virtual void Update(float time) = 0;
+
+    virtual void Render(SDL_Renderer *renderer, Transform parentTransform, float time) {}
 };

@@ -6,10 +6,9 @@
 #include "utils/Log.h"
 #include "math/Math.h"
 
-Parallax::Parallax(SDL_Renderer *renderer)
+Parallax::Parallax()
 {
-    this->renderer = renderer;
-    image = NULL;
+    texture = NULL;
     offset = Point2dInt(0, 0);
 }
 
@@ -29,14 +28,14 @@ void Parallax::Cleanup()
 {
 }
 
-void Parallax::Load(const char *fileName)
-{
-    image = TextureManager::Instance()->Add(fileName);
-    //  Get texture information
-    SDL_QueryTexture(image, NULL, NULL, &sourceRect.w, &sourceRect.h);
-}
+// void Parallax::Load(const char *fileName)
+// {
+//     image = TextureManager::Instance()->Add(fileName);
+//     //  Get texture information
+//     SDL_QueryTexture(image, NULL, NULL, &sourceRect.w, &sourceRect.h);
+// }
 
-void Parallax::Render(float time)
+void Parallax::Render(SDL_Renderer *renderer, Transform parentTransform, float time)
 {
     if (!enabled)
         return;
@@ -50,11 +49,11 @@ void Parallax::Render(float time)
 
     fromRect.w -= abs(offset.x);
 
-    destRect.x = transform.position.x;
-    destRect.y = transform.position.y;
-    destRect.w = sourceRect.w * abs(transform.scale.x);
+    destRect.x = parentTransform.position.x;
+    destRect.y = parentTransform.position.y;
+    destRect.w = sourceRect.w * abs(parentTransform.scale.x);
     destRect.w -= abs(offset.x);
-    destRect.h = sourceRect.h * abs(transform.scale.y);
+    destRect.h = sourceRect.h * abs(parentTransform.scale.y);
 
     if (offset.x >= 0)
     {
@@ -66,7 +65,7 @@ void Parallax::Render(float time)
     }
 
     SDL_RenderCopy(renderer,
-                   image,
+                   texture,
                    &fromRect,
                    &destRect);
 
@@ -76,29 +75,29 @@ void Parallax::Render(float time)
 
         fromRect.w = abs(offset.x);
 
-        destRect.y = transform.position.y;
-        destRect.h = sourceRect.h * abs(transform.scale.y);
+        destRect.y = parentTransform.position.y;
+        destRect.h = sourceRect.h * abs(parentTransform.scale.y);
         destRect.w = abs(offset.x);
-        destRect.h = sourceRect.h * abs(transform.scale.y);
+        destRect.h = sourceRect.h * abs(parentTransform.scale.y);
 
         if (offset.x > 0)
         {
-            destRect.x = sourceRect.w * abs(transform.scale.x) - offset.x;
+            destRect.x = sourceRect.w * abs(parentTransform.scale.x) - offset.x;
         }
         else
         {
-            fromRect.x = sourceRect.w * abs(transform.scale.x) + offset.x;
+            fromRect.x = sourceRect.w * abs(parentTransform.scale.x) + offset.x;
 
-            destRect.x = transform.position.x;
+            destRect.x = parentTransform.position.x;
         }
 
         SDL_RenderCopy(renderer,
-                       image,
+                       texture,
                        &fromRect,
                        &destRect);
     }
 }
-
+/*
 void Parallax::JSONParse(json data)
 {
     GemObject::JSONParse(data);
@@ -112,4 +111,17 @@ void Parallax::JSONParse(json data)
 
     // json json_speed = data.at("speed");
     // speed = Point2dInt(json_speed.at("x"), json_speed.at("y"));
+}*/
+
+void Parallax::SetTexture(SDL_Texture *texture)
+{
+    this->texture = texture;
+
+    //  Get texture information
+    SDL_QueryTexture(this->texture, NULL, NULL, &sourceRect.w, &sourceRect.h);
+}
+
+SDL_Texture *Parallax::GetTexture()
+{
+    return texture;
 }

@@ -5,10 +5,8 @@
 #include "utils/Log.h"
 #include "math/Math.h"
 
-Text::Text(SDL_Renderer *renderer)
+Text::Text()
 {
-    this->renderer = renderer;
-
     text = "";
     font = NULL;
 }
@@ -35,7 +33,7 @@ void Text::Init(const string text, const char *fileName, const int fontSize)
     this->text = text;
 }
 
-void Text::Render(float time)
+void Text::Render(SDL_Renderer *renderer, Transform parentTransform, float time)
 {
 
     if (!enabled)
@@ -45,14 +43,14 @@ void Text::Render(float time)
     SDL_Surface *surface = TTF_RenderText_Solid(font, text.c_str(), color);
 
     //  Update Destination Rectangle based on Position and Scale
-    destRect.x = transform.position.x;
-    destRect.y = transform.position.y;
-    destRect.w = surface->w * transform.scale.x;
-    destRect.h = surface->h * transform.scale.y;
+    destRect.x = parentTransform.position.x;
+    destRect.y = parentTransform.position.y;
+    destRect.w = surface->w * parentTransform.scale.x;
+    destRect.h = surface->h * parentTransform.scale.y;
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
 
-    if (Math::IsZero(transform.rotation.z))
+    if (Math::IsZero(parentTransform.rotation.z))
     {
         SDL_RenderCopy(renderer, texture, NULL, &destRect);
     }
@@ -63,7 +61,7 @@ void Text::Render(float time)
                          texture,
                          NULL,
                          &destRect,
-                         transform.rotation.z,
+                         parentTransform.rotation.z,
                          NULL, //&center,
                          flip);
     }
@@ -71,7 +69,7 @@ void Text::Render(float time)
     SDL_DestroyTexture(texture);
     SDL_FreeSurface(surface);
 }
-
+/*
 void Text::JSONParse(json data)
 {
     GemObject::JSONParse(data);
@@ -83,3 +81,4 @@ void Text::JSONParse(json data)
 
     Init("SDL2 text", src_file.c_str(), 24);
 }
+*/

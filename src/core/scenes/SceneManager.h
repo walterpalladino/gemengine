@@ -38,7 +38,7 @@ public:
     void Clean();
     void Loop(float time, bool isPaused);
     void UpdateActiveScene(float time);
-    void RenderActiveScene(float time);
+    void RenderActiveScene(SDL_Renderer *renderer, float time);
 
     void AddSceneLogic(const string name, SceneLogic *sceneLogic);
     SceneLogic *GetActiveSceneLogic();

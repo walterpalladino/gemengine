@@ -10,5 +10,5 @@ class ColliderParser
 {
 
 public:
-    static Collider JSONParse(json data);
+    static Collider *JSONParse(json data);
 };

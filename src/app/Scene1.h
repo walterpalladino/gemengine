@@ -2,6 +2,7 @@
 
 #include "core/scenes/SceneLogic.h"
 
+#include "core/gemobject/GemObject.h"
 #include "core/graphics/image/Image.h"
 #include "core/graphics/sprites/Sprite.h"
 #include "core/graphics/text/Text.h"
@@ -12,9 +13,12 @@ private:
     Scene *scene;
     int sound_channel = 0;
 
-    Image *ledArrow;
+    GemObject *ledArrow;
+    GemObject *knight;
+    Sprite *knightSprite;
+
+    GemObject *text;
     Text *fpsText;
-    Sprite *sprite;
 
 public:
     void Init(Scene *scene);

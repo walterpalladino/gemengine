@@ -20,19 +20,25 @@
 #include "core/events/EventManager.h"
 
 using namespace std;
-
+/*
 void Scene1::Init(Scene *scene)
 {
+    // cout << "Scene1::Init" << endl;
 
     this->scene = scene;
 
-    ledArrow = scene->GetByName("led-arrow");
+    int sound_channel = 0;
 
-    knight = scene->GetByName("knight");
-    knightSprite = (Sprite *)(knight->GetComponentsByType(ComponentType::Sprite)[0]);
+    ledArrow = (Image *)(scene->GetByName("led-arrow"));
 
-    text = scene->GetByName("text");
-    fpsText = (Text *)(text->GetComponentsByType(ComponentType::Text)[0]);
+    fpsText = (Text *)(scene->GetByName("text"));
+
+    sprite = (Sprite *)(scene->GetByName("knight"));
+    // sprite->SetActualAnimation(0);
+    //  sprite->AddOnMouseButtonDownEvent(this, (EventCallbackFunction *)&Scene1::OnMouseButtonDown);
+
+    //    spriteIdle = (Sprite *)(scene->GetByName("spriteIdle"));
+    //  spriteIdle->AddOnMouseButtonUpEvent(this, (EventCallbackFunction *)&Scene1::OnMouseButtonUp);
 
     string console_text =
         "                                                "
@@ -62,6 +68,7 @@ void Scene1::Init(Scene *scene)
         "                                                "
         "                                                "
         "                                                ";
+
     Console::Instance()->SetBuffer(console_text.c_str());
 }
 
@@ -102,21 +109,21 @@ SceneTransition Scene1::Loop(float time)
 
     ledArrow->transform.rotation = rotation;
 
-    rotation = text->transform.rotation;
+    rotation = fpsText->transform.rotation;
     rotation.z += 1;
     if (rotation.z > 360)
         rotation.z = rotation.z - 360;
     if (rotation.z < 0)
         rotation.z = rotation.z + 360;
 
-    text->transform.rotation = rotation;
+    fpsText->transform.rotation = rotation;
 
-    char *text_info = new char[64];
-    sprintf(text_info, "%.2f FPS", Context::Instance()->GetFPS());
+    char *text = new char[64];
+    sprintf(text, "%.2f FPS", Context::Instance()->GetFPS());
     // sprintf(text, "%04d LFT", GetLastFrameTime());
     // sprintf(text, "%.2f FPS", 1000.0f / GetLastFrameTime());
-    fpsText->SetText(text_info);
-    delete[] text_info;
+    fpsText->SetText(text);
+    delete[] text;
 
     // cout << "App::Loop Console operation here..." << endl;
     RenderManager::Instance()->backgroundColor = Point3dInt(216, 216, 216);
@@ -189,39 +196,39 @@ SceneTransition Scene1::Loop(float time)
     //  Sprite Animations
     if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_Z))
     {
-        int actualAnimation = knightSprite->GetActualAnimation() - 1;
+        int actualAnimation = sprite->GetActualAnimation() - 1;
         if (actualAnimation < 0)
         {
-            actualAnimation = knightSprite->GetAnimationsCount() - 1;
+            actualAnimation = sprite->GetAnimationsCount() - 1;
         }
-        knightSprite->SetActualAnimation(actualAnimation);
+        sprite->SetActualAnimation(actualAnimation);
     }
     if (InputHandler::Instance()->WasKeyPressed(SDL_SCANCODE_X))
     {
-        int actualAnimation = knightSprite->GetActualAnimation() + 1;
-        if (actualAnimation == knightSprite->GetAnimationsCount())
+        int actualAnimation = sprite->GetActualAnimation() + 1;
+        if (actualAnimation == sprite->GetAnimationsCount())
         {
             actualAnimation = 0;
         }
-        knightSprite->SetActualAnimation(actualAnimation);
+        sprite->SetActualAnimation(actualAnimation);
     }
 
     //  Sprite Movement
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_LEFT))
     {
-        knight->transform.position.x -= 1;
+        sprite->transform.position.x -= 1;
     }
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_RIGHT))
     {
-        knight->transform.position.x += 1;
+        sprite->transform.position.x += 1;
     }
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_UP))
     {
-        knight->transform.position.y -= 1;
+        sprite->transform.position.y -= 1;
     }
     if (InputHandler::Instance()->IsKeyDown(SDL_SCANCODE_DOWN))
     {
-        knight->transform.position.y += 1;
+        sprite->transform.position.y += 1;
     }
 
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_N))
@@ -337,3 +344,4 @@ void Scene1::OnMouseMove(GemObject *object, SDL_Event *event)
     cout << "object->name : " << object->name << endl;
     cout << "event->type : " << event->type << endl;
 }
+*/

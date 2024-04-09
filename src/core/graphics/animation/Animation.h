@@ -20,7 +20,7 @@ struct Animation
     int actualFrame = -1;
     int animationStartTime = 0;
 
-    SDL_Texture *image = NULL;
+    SDL_Texture *texture = NULL;
     int textureWidth = 0;
     int textureHeight = 0;
 
@@ -78,9 +78,9 @@ struct Animation
         animationFrames = data.at("frames");
         animationSpeed = data.at("speed");
 
-        image = TextureManager::Instance()->Add(src_file.c_str());
+        texture = TextureManager::Instance()->Add(src_file.c_str());
         //  Get texture information
-        SDL_QueryTexture(image, NULL, NULL, &textureWidth, &textureHeight);
+        SDL_QueryTexture(texture, NULL, NULL, &textureWidth, &textureHeight);
 
         actualFrame = 0;
         animationStartTime = -1;
