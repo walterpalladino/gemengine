@@ -23,7 +23,7 @@ public:
     }
 
     void Init();
-    void Clean();
+    void Cleanup();
 
     TTF_Font *Add(string fontFileName, int size);
 

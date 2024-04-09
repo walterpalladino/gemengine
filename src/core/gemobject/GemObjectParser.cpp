@@ -9,6 +9,9 @@
 #include "core/graphics/text/TextParser.h"
 #include "core/graphics/parallax/Parallax.h"
 #include "core/graphics/parallax/ParallaxParser.h"
+#include "core/sound/SoundManager.h"
+#include "core/physics/collider/Collider.h"
+#include "core/physics/collider/ColliderParser.h"
 
 #include "utils/Log.h"
 #include "core/exceptions/JSONParseException.h"
@@ -65,6 +68,28 @@ GemObject *GemObjectParser::JSONParse(json data)
                 {
                     Parallax *newParallax = ParallaxParser::JSONParse(json_component);
                     object->AddComponent(newParallax);
+                }
+                else if (type == "collider")
+                {
+                    Collider *newCollider = ColliderParser::JSONParse(json_component);
+                    object->AddComponent(newCollider);
+                }
+                else if (type == "sound")
+                {
+                    // SoundManager::Instance()->JSONParseSound(scene_object);
+                }
+                else if (type == "track")
+                {
+                    // SoundManager::Instance()->JSONParseTrack(scene_object);
+                }
+                else
+                {
+                    //  Unknown type
+                    char *buffer = new char[512];
+                    sprintf(buffer, "Unknown component type: %s.", type.c_str());
+
+                    Log::Instance()->Error("GemObjectParser::JSONParse", buffer);
+                    throw JSONParseException(buffer);
                 }
             }
             else

@@ -1,6 +1,11 @@
 
 #include "core/physics/collider/Collider.h"
 
+void Collider::Cleanup()
+{
+    collisions.clear();
+}
+
 void Collider::Update(float time)
 {
     if (!enabled)
@@ -61,5 +66,20 @@ void Collider::RenderCollisions(SDL_Renderer *renderer, SDL_Color color)
         {
             RenderCollisionRect(renderer, id, color);
         }
+    }
+}
+
+void Collider::Render(SDL_Renderer *renderer, Transform parentTransform, float time)
+{
+
+    if (!enabled)
+        return;
+    if (renderCollider)
+    {
+        RenderCollider(renderer, {0, 255, 0, 255}, parentTransform);
+    }
+    if (renderCollisions)
+    {
+        RenderCollisions(renderer, {255, 0, 0, 255});
     }
 }

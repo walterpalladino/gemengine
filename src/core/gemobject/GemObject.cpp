@@ -21,31 +21,13 @@ GemObject::GemObject()
 GemObject::~GemObject()
 {
 }
-/*
-void GemObject::JSONParse(json data)
+
+void GemObject::Init()
 {
-
-    name = data["name"];
-    enabled = data["enabled"];
-    zOrder = data["z_order"];
-    layer = data["layer"];
-
-    json json_position = data.at("position");
-    transform.position = Vector3d(json_position.at("x"), json_position.at("y"), json_position.at("z"));
-
-    json json_rotation = data.at("rotation");
-    transform.rotation = Vector3d(json_rotation.at("x"), json_rotation.at("y"), json_rotation.at("z"));
-
-    json json_scale = data.at("scale");
-    transform.scale = Vector3d(json_scale.at("x"), json_scale.at("y"), json_scale.at("z"));
-
-    if (data.contains("collider"))
-    {
-        json json_collider = data.at("collider");
-
-        collider = ColliderParser::JSONParse(json_collider);
-    }
 }
+
+/*
+
 
 SDL_Rect GemObject::GetColliderRect()
 {
@@ -261,4 +243,18 @@ void GemObject::Update(float time)
             component->Update(time);
         }
     }
+}
+
+void GemObject::Cleanup()
+{
+
+    for (auto &[key, value] : components)
+    {
+        for (auto component : value)
+        {
+            component->Cleanup();
+            delete component;
+        }
+    }
+    components.clear();
 }

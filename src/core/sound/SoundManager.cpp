@@ -28,7 +28,7 @@ void SoundManager::Init()
     }
 }
 
-void SoundManager::Clean()
+void SoundManager::Cleanup()
 {
     Log::Instance()->Info("SoundManager::Clean", "SoundManager Shutting Down");
 

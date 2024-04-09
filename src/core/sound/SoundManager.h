@@ -24,7 +24,7 @@ public:
     }
 
     void Init();
-    void Clean();
+    void Cleanup();
 
     Mix_Music *AddTrack(string name, string sampleFileName);
     Mix_Chunk *AddSound(string name, string sampleFileName);

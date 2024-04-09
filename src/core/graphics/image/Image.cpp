@@ -27,14 +27,6 @@ void Image::Update(float time)
 void Image::Cleanup()
 {
 }
-/*
-void Image::Load(const char *fileName)
-{
-    texture = TextureManager::Instance()->Add(fileName);
-    //  Get texture information
-    SDL_QueryTexture(texture, NULL, NULL, &sourceRect.w, &sourceRect.h);
-}
-*/
 
 void Image::Render(SDL_Renderer *renderer, Transform parentTransform, float time)
 {
@@ -65,19 +57,7 @@ void Image::Render(SDL_Renderer *renderer, Transform parentTransform, float time
                      NULL, //&center,
                      flip);
 }
-/*
-void Image::JSONParse(json data)
-{
-    GemObject::JSONParse(data);
 
-    Init();
-
-    string src = data.at("src");
-    string src_file = Config::Instance()->config_data.resource_folder + "/" + src;
-
-    Load(src_file.c_str());
-}
-*/
 void Image::SetTexture(SDL_Texture *texture)
 {
     this->texture = texture;

@@ -25,6 +25,7 @@ public:
 
     virtual ComponentType GetType() = 0;
     virtual void Update(float time) = 0;
+    virtual void Cleanup() = 0;
 
     virtual void Render(SDL_Renderer *renderer, Transform parentTransform, float time) {}
 };

@@ -30,6 +30,9 @@ void Scene1::Init(Scene *scene)
 
     knight = scene->GetByName("knight");
     knightSprite = (Sprite *)(knight->GetComponentsByType(ComponentType::Sprite)[0]);
+    knightCollider = (Collider *)(knight->GetComponentsByType(ComponentType::Collider)[0]);
+    knightCollider->SetRenderCollider(true);
+    knightCollider->SetRenderCollisions(true);
 
     text = scene->GetByName("text");
     fpsText = (Text *)(text->GetComponentsByType(ComponentType::Text)[0]);

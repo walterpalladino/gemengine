@@ -14,7 +14,7 @@ void FontsManager::Init()
     TTF_Init();
 }
 
-void FontsManager::Clean()
+void FontsManager::Cleanup()
 {
     Log::Instance()->Info("FontsManager::Clean", "FontsManager Shutting Down");
 

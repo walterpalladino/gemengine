@@ -92,13 +92,13 @@ void GemEngine::Cleanup()
 {
     Log::Instance()->Info("GemEngine::Cleanup", "Cleanup");
 
-    SceneManager::Instance()->Clean();
+    SceneManager::Instance()->Cleanup();
 
     RenderManager::Instance()->Cleanup();
 
-    FontsManager::Instance()->Clean();
-    TextureManager::Instance()->Clean();
-    SoundManager::Instance()->Clean();
+    FontsManager::Instance()->Cleanup();
+    TextureManager::Instance()->Cleanup();
+    SoundManager::Instance()->Cleanup();
 
     Console::Instance()->Cleanup();
 

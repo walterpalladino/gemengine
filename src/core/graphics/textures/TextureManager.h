@@ -21,7 +21,7 @@ public:
     }
 
     void Init(SDL_Renderer *renderer);
-    void Clean();
+    void Cleanup();
 
     SDL_Texture *Add(const char *fileName);
 

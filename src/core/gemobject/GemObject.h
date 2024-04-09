@@ -39,8 +39,6 @@ public:
 
     Transform transform;
 
-    // Collider collider;
-
     unordered_map<ComponentType, vector<Component *>> components;
 
     int zOrder = 0;
@@ -49,17 +47,11 @@ public:
     GemObject();
     ~GemObject();
 
-    virtual void Init() {}
-    virtual void Update(float time);
+    void Init();
+    void Update(float time);
     void Render(SDL_Renderer *renderer, float time);
-    virtual void Cleanup() {}
+    void Cleanup();
 
-    // virtual void JSONParse(json data);
-    /*
-        SDL_Rect GetColliderRect();
-        void RenderCollider(SDL_Renderer *renderer, SDL_Color color);
-        void RenderCollisionRect(SDL_Renderer *renderer, uint64_t id, SDL_Color color);
-    */
     //  Events
     void AddOnMouseMoveEvent(SceneLogic *scene, EventCallbackFunction *callback);
     void AddOnMouseButtonDownEvent(SceneLogic *scene, EventCallbackFunction *callback);

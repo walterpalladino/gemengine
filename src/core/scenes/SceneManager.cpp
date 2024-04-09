@@ -31,7 +31,7 @@ void SceneManager::LoadScenes(SDL_Renderer *renderer)
     Log::Instance()->Info("GemEngine::LoadScenes", "Load Scenes Completed");
 }
 
-void SceneManager::Clean()
+void SceneManager::Cleanup()
 {
     Log::Instance()->Info("SceneManager::Clean", "SceneManager Shutting Down");
 

@@ -35,7 +35,7 @@ private:
 public:
     virtual void LoadScenes(SDL_Renderer *renderer);
     Scene *GetScene(const string name);
-    void Clean();
+    void Cleanup();
     void Loop(float time, bool isPaused);
     void UpdateActiveScene(float time);
     void RenderActiveScene(SDL_Renderer *renderer, float time);

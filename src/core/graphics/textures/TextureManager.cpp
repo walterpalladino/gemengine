@@ -12,7 +12,7 @@ void TextureManager::Init(SDL_Renderer *renderer)
     this->renderer = renderer;
 }
 
-void TextureManager::Clean()
+void TextureManager::Cleanup()
 {
     Log::Instance()->Info("TextureManager::Clean", "TextureManager Shutting Down");
 

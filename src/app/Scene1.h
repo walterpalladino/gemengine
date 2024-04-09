@@ -6,6 +6,7 @@
 #include "core/graphics/image/Image.h"
 #include "core/graphics/sprites/Sprite.h"
 #include "core/graphics/text/Text.h"
+#include "core/physics/collider/Collider.h"
 
 class Scene1 : public SceneLogic
 {
@@ -14,8 +15,10 @@ private:
     int sound_channel = 0;
 
     GemObject *ledArrow;
+
     GemObject *knight;
     Sprite *knightSprite;
+    Collider *knightCollider;
 
     GemObject *text;
     Text *fpsText;
