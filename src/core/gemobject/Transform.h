@@ -1,4 +1,6 @@
 
+#pragma once
+
 #include "math/Vector3d.h"
 
 struct Transform

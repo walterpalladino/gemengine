@@ -4,6 +4,7 @@
 #include <random>
 
 #include "core/config/Config.h"
+#include "core/physics/collider/ColliderParser.h"
 
 using namespace std;
 
@@ -42,15 +43,19 @@ void GemObject::JSONParse(json data)
     {
         json json_collider = data.at("collider");
 
-        colliderEnabled = json_collider.at("enabled");
-        colliderOffset = Vector3d(json_collider.at("offset").at("x"), json_collider.at("offset").at("y"), json_collider.at("offset").at("z"));
-        colliderSize = Vector3d(json_collider.at("size").at("x"), json_collider.at("size").at("y"), json_collider.at("size").at("z"));
-        colliderMask = json_collider.at("mask");
+        collider = ColliderParser::JSONParse(json_collider);
+        /*
+                colliderEnabled = json_collider.at("enabled");
+                colliderOffset = Vector3d(json_collider.at("offset").at("x"), json_collider.at("offset").at("y"), json_collider.at("offset").at("z"));
+                colliderSize = Vector3d(json_collider.at("size").at("x"), json_collider.at("size").at("y"), json_collider.at("size").at("z"));
+                colliderMask = json_collider.at("mask");
+                */
     }
 }
 
 SDL_Rect GemObject::GetColliderRect()
 {
+    /*
     SDL_Rect colliderRect;
 
     colliderRect.x = transform.position.x + colliderOffset.x;
@@ -59,10 +64,13 @@ SDL_Rect GemObject::GetColliderRect()
     colliderRect.h = colliderSize.y * abs(transform.scale.y);
 
     return colliderRect;
+    */
+    return collider.GetRect(transform);
 }
 
 void GemObject::RenderCollider(SDL_Renderer *renderer, SDL_Color color)
 {
+    /*
     if (colliderEnabled)
     {
         //  Draw collider
@@ -70,16 +78,21 @@ void GemObject::RenderCollider(SDL_Renderer *renderer, SDL_Color color)
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
         SDL_RenderDrawRect(renderer, &colliderRect);
     }
+    */
+    collider.RenderCollider(renderer, color, transform);
 }
 
 void GemObject::RenderCollisionRect(SDL_Renderer *renderer, uint64_t id, SDL_Color color)
 {
+    /*
     if (collisions.count(id) > 0)
     {
         SDL_Rect collisionRect = collisions[id];
         SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
         SDL_RenderDrawRect(renderer, &collisionRect);
     }
+    */
+    collider.RenderCollisionRect(renderer, id, color);
 }
 
 void GemObject::AddOnMouseMoveEvent(SceneLogic *scene, EventCallbackFunction *callback)

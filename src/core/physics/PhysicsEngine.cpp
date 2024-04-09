@@ -23,7 +23,7 @@ void PhysicsEngine::Physics(float time)
     //  Clear collisions
     for (int i = 0; i < objects_vector.size(); i++)
     {
-        objects_vector[i]->collisions.clear();
+        objects_vector[i]->collider.collisions.clear();
     }
 
     //  Check collisions
@@ -49,13 +49,13 @@ void PhysicsEngine::Physics(float time)
             bool status = SDL_IntersectRect(&AABBi, &AABBj, AABBcollision);
             if (status)
             {
-                if (objects_vector[i]->colliderMask & objects_vector[j]->layer)
+                if (objects_vector[i]->collider.mask & objects_vector[j]->layer)
                 {
-                    objects_vector[i]->collisions[objects_vector[j]->id] = *AABBcollision;
+                    objects_vector[i]->collider.collisions[objects_vector[j]->id] = *AABBcollision;
                 }
-                if (objects_vector[j]->colliderMask & objects_vector[i]->layer)
+                if (objects_vector[j]->collider.mask & objects_vector[i]->layer)
                 {
-                    objects_vector[j]->collisions[objects_vector[i]->id] = *AABBcollision;
+                    objects_vector[j]->collider.collisions[objects_vector[i]->id] = *AABBcollision;
                 }
             }
 
@@ -71,7 +71,7 @@ vector<GemObject *> PhysicsEngine::GetColliderEnabledObjects(unordered_map<uint6
 
     for (auto &[id, object] : objects)
     {
-        if (object->enabled && object->colliderEnabled)
+        if (object->enabled && object->collider.enabled)
         {
             objects_vector.push_back(object);
         }
@@ -90,14 +90,14 @@ void PhysicsEngine::DebugRender(SDL_Renderer *renderer, float time)
     //  Render scene objects
     for (auto &[id, object] : objects)
     {
-        if (object->enabled && object->colliderEnabled)
+        if (object->enabled && object->collider.enabled)
         {
             // cout << "Checking : " << object->collisions.size() << " collisions for gemobject: " << object->name << endl;
-            if (object->collisions.size() > 0)
+            if (object->collider.collisions.size() > 0)
             {
                 // cout << "Drawing collisions for gemobject: " << object->name << endl;
                 //   Render collisions
-                for (auto &[id, collision] : object->collisions)
+                for (auto &[id, collision] : object->collider.collisions)
                 {
                     object->RenderCollisionRect(renderer, id, {255, 0, 0, 255});
                 }

@@ -10,6 +10,8 @@
 #include "math/Vector3d.h"
 
 #include "core/gemobject/Transform.h"
+#include "core/gemobject/Component.h"
+#include "core/physics/collider/Collider.h"
 
 using namespace std;
 using json = nlohmann::json;
@@ -35,15 +37,17 @@ public:
     bool enabled;
 
     Transform transform;
+    /*
+        bool colliderEnabled;
 
-    bool colliderEnabled;
+        Vector3d colliderOffset = Vector3d::Zero();
+        Vector3d colliderSize = Vector3d::Zero();
 
-    Vector3d colliderOffset = Vector3d::Zero();
-    Vector3d colliderSize = Vector3d::Zero();
+        unsigned int colliderMask = UINT_MAX;
 
-    unsigned int colliderMask = UINT_MAX;
-
-    unordered_map<uint64_t, SDL_Rect> collisions;
+        unordered_map<uint64_t, SDL_Rect> collisions;
+    */
+    Collider collider;
 
     int zOrder = 0;
     unsigned int layer = 1;
