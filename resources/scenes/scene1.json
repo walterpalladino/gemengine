@@ -2,6 +2,42 @@
   "name": "Start Scene",
   "objects": [
     {
+      "name": "audio_tracks",
+      "enabled": true,
+      "z_order": 0,
+      "layer": 0,
+
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "components": [
+        {
+          "type": "sound",
+          "name": "ScussesSound1",
+
+          "src": "soundfx/ScussesSound1.mp3"
+        },
+        {
+          "type": "track",
+          "name": "SlingerSwaggerLoop",
+
+          "src": "tracks/Slinger Swagger (loop).mp3"
+        }
+      ]
+    },
+    {
       "name": "led-arrow",
       "enabled": true,
       "z_order": 5,

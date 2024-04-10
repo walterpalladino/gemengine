@@ -8,6 +8,9 @@
 #include "core/graphics/text/Text.h"
 #include "core/physics/collider/Collider.h"
 
+#include "core/sound/Sound.h"
+#include "core/sound/Track.h"
+
 class Scene1 : public SceneLogic
 {
 private:
@@ -22,6 +25,9 @@ private:
 
     GemObject *text;
     Text *fpsText;
+
+    Sound *sound;
+    Track *track;
 
 public:
     void Init(Scene *scene);

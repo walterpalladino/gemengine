@@ -9,7 +9,10 @@
 #include "core/graphics/text/TextParser.h"
 #include "core/graphics/parallax/Parallax.h"
 #include "core/graphics/parallax/ParallaxParser.h"
-#include "core/sound/SoundManager.h"
+#include "core/sound/Sound.h"
+#include "core/sound/SoundParser.h"
+#include "core/sound/Track.h"
+#include "core/sound/TrackParser.h"
 #include "core/physics/collider/Collider.h"
 #include "core/physics/collider/ColliderParser.h"
 
@@ -76,11 +79,13 @@ GemObject *GemObjectParser::JSONParse(json data)
                 }
                 else if (type == "sound")
                 {
-                    // SoundManager::Instance()->JSONParseSound(scene_object);
+                    Sound *newSound = SoundParser::JSONParse(json_component);
+                    object->AddComponent(newSound);
                 }
                 else if (type == "track")
                 {
-                    // SoundManager::Instance()->JSONParseTrack(scene_object);
+                    Track *newTrack = TrackParser::JSONParse(json_component);
+                    object->AddComponent(newTrack);
                 }
                 else
                 {

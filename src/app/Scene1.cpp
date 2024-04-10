@@ -66,6 +66,10 @@ void Scene1::Init(Scene *scene)
         "                                                "
         "                                                ";
     Console::Instance()->SetBuffer(console_text.c_str());
+
+    GemObject *audio_tracks = scene->GetByName("audio_tracks");
+    sound = (Sound *)(audio_tracks->GetComponentsByType(ComponentType::Sound)[0]);
+    track = (Track *)(audio_tracks->GetComponentsByType(ComponentType::Track)[0]);
 }
 
 SceneTransition Scene1::Loop(float time)
@@ -136,23 +140,27 @@ SceneTransition Scene1::Loop(float time)
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_1))
     {
         // cout << "Play Music Track" << endl;
-        SoundManager::Instance()->PlayTrack("SlingerSwaggerLoop");
+        // SoundManager::Instance()->PlayTrack("SlingerSwaggerLoop");
+        track->Play();
     }
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_2))
     {
         // cout << "Stop Music Track" << endl;
-        SoundManager::Instance()->StopTrack();
+        // SoundManager::Instance()->StopTrack();
+        track->Stop();
     }
 
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_3))
     {
-        sound_channel = SoundManager::Instance()->PlaySound("ScussesSound1");
-        // cout << "Playing Sound : " << sound_channel << endl;
+        // sound_channel = SoundManager::Instance()->PlaySound("ScussesSound1");
+        //  cout << "Playing Sound : " << sound_channel << endl;
+        sound->Play();
     }
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_4))
     {
         // cout << "Stop Sound : " << sound_channel << endl;
-        SoundManager::Instance()->StopSound(sound_channel);
+        // SoundManager::Instance()->StopSound(sound_channel);
+        sound->Stop();
     }
 
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_7))

@@ -4,8 +4,6 @@
 
 #include <SDL2/SDL.h>
 
-#include <nlohmann/json.hpp>
-
 #include "math/Vector3d.h"
 
 #include "core/gemobject/Component.h"
@@ -13,7 +11,6 @@
 #include "core/gemobject/Transform.h"
 
 using namespace std;
-using json = nlohmann::json;
 
 class Collider : public Component
 {

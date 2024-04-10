@@ -11,7 +11,8 @@ enum class ComponentType : int
     Sprite = 3,
     Parallax = 4,
     Sound = 5,
-    Collider = 6
+    Track = 6,
+    Collider = 7
 };
 
 class Component
@@ -24,7 +25,7 @@ public:
     ~Component() {}
 
     virtual ComponentType GetType() = 0;
-    virtual void Update(float time) = 0;
+    virtual void Update(float time){};
     virtual void Cleanup() = 0;
 
     virtual void Render(SDL_Renderer *renderer, Transform parentTransform, float time) {}
