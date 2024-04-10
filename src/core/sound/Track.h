@@ -27,4 +27,6 @@ public:
 
     void Play();
     void Stop();
+
+    int SetVolume(int volume);
 };

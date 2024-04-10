@@ -19,3 +19,8 @@ void Sound::Cleanup()
 {
     Stop();
 }
+
+int Sound::SetVolume(int volume)
+{
+    return SoundManager::Instance()->SetSoundChannelVolume(channel, volume);
+}

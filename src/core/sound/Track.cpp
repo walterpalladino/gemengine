@@ -15,3 +15,8 @@ void Track::Cleanup()
 {
     Stop();
 }
+
+int Track::SetVolume(int volume)
+{
+    return SoundManager::Instance()->SetTrackVolume(volume);
+}

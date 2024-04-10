@@ -166,17 +166,21 @@ SceneTransition Scene1::Loop(float time)
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_7))
     {
         // cout << "Reduce Music Track Volume" << endl;
-        int musicVolume = SoundManager::Instance()->SetTrackVolume(-1);
+        // int musicVolume = SoundManager::Instance()->SetTrackVolume(-1);
+        int musicVolume = track->SetVolume(-1);
         // cout << "musicVolume = " << musicVolume << endl;
-        musicVolume = SoundManager::Instance()->SetTrackVolume(musicVolume - 1);
+        // musicVolume = SoundManager::Instance()->SetTrackVolume(musicVolume - 1);
+        musicVolume = track->SetVolume(musicVolume - 1);
         // cout << "musicVolume = " << musicVolume << endl;
     }
     if (InputHandler::Instance()->WasKeyReleased(SDL_SCANCODE_8))
     {
         // cout << "Increase Music Track Volume" << endl;
-        int musicVolume = SoundManager::Instance()->SetTrackVolume(-1);
+        // int musicVolume = SoundManager::Instance()->SetTrackVolume(-1);
+        int musicVolume = track->SetVolume(-1);
         // cout << "musicVolume = " << musicVolume << endl;
-        musicVolume = SoundManager::Instance()->SetTrackVolume(musicVolume + 1);
+        // musicVolume = SoundManager::Instance()->SetTrackVolume(musicVolume + 1);
+        musicVolume = track->SetVolume(musicVolume + 1);
         // cout << "musicVolume = " << musicVolume << endl;
     }
 

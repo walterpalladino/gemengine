@@ -28,4 +28,6 @@ public:
 
     void Play(int loops = 0);
     void Stop();
+
+    int SetVolume(int volume);
 };
