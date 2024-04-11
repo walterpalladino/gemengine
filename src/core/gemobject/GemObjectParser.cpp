@@ -31,14 +31,16 @@ GemObject *GemObjectParser::JSONParse(json data)
     object->zOrder = data["z_order"];
     object->layer = data["layer"];
 
-    json json_position = data.at("position");
-    object->transform.position = Vector3d(json_position.at("x"), json_position.at("y"), json_position.at("z"));
-
-    json json_rotation = data.at("rotation");
-    object->transform.rotation = Vector3d(json_rotation.at("x"), json_rotation.at("y"), json_rotation.at("z"));
-
-    json json_scale = data.at("scale");
-    object->transform.scale = Vector3d(json_scale.at("x"), json_scale.at("y"), json_scale.at("z"));
+    //  Get Transform
+    if (!data.contains("transform"))
+    {
+        Log::Instance()->Error("GemObjectParser::JSONParse", "Malformed gemobject definition. Missing 'transform' tag.");
+        throw JSONParseException("Malformed gemobject definition. Missing 'transform' tag.");
+    }
+    else
+    {
+        object->transform = ParseTransform(data.at("transform"));
+    }
 
     //  Get All components
     if (data.contains("components"))
@@ -99,23 +101,28 @@ GemObject *GemObjectParser::JSONParse(json data)
             }
             else
             {
-
                 Log::Instance()->Error("GemObjectParser::JSONParse", "Malformed component definition. Missing 'type' tag.");
                 throw JSONParseException("Malformed component definition. Missing 'type' tag.");
             }
-            // Component *component = ComponentParser::JSONParse(json_component);
-            // object->AddComponent(component);
         }
     }
-    /*
-        if (data.contains("collider"))
-        {
-            json json_collider = data.at("collider");
 
-            Collider *collider = new Collider();
-
-            collider = ColliderParser::JSONParse(json_collider);
-        }
-    */
     return object;
+}
+
+Transform GemObjectParser::ParseTransform(json data)
+{
+
+    Transform transform;
+
+    json json_position = data.at("position");
+    transform.position = Vector3d(json_position.at("x"), json_position.at("y"), json_position.at("z"));
+
+    json json_rotation = data.at("rotation");
+    transform.rotation = Vector3d(json_rotation.at("x"), json_rotation.at("y"), json_rotation.at("z"));
+
+    json json_scale = data.at("scale");
+    transform.scale = Vector3d(json_scale.at("x"), json_scale.at("y"), json_scale.at("z"));
+
+    return transform;
 }

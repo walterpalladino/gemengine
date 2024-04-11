@@ -7,21 +7,24 @@
       "z_order": 0,
       "layer": 0,
 
-      "position": {
-        "x": 0,
-        "y": 0,
-        "z": 0
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
       },
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "scale": {
-        "x": 1,
-        "y": 1,
-        "z": 1
-      },
+
       "components": [
         {
           "type": "sound",
@@ -43,20 +46,22 @@
       "z_order": 5,
       "layer": 0,
 
-      "position": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "scale": {
-        "x": 1,
-        "y": 1,
-        "z": 1
+      "transform": {
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
       },
 
       "components": [
@@ -73,20 +78,22 @@
       "z_order": 0,
       "layer": 1,
 
-      "position": {
-        "x": 100,
-        "y": 50,
-        "z": 0
-      },
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "scale": {
-        "x": 1,
-        "y": 1,
-        "z": 1
+      "transform": {
+        "position": {
+          "x": 100,
+          "y": 50,
+          "z": 0
+        },
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
       },
 
       "components": [
@@ -149,20 +156,22 @@
       "z_order": 4,
       "layer": 0,
 
-      "position": {
-        "x": 100,
-        "y": 100,
-        "z": 0
-      },
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "scale": {
-        "x": 1,
-        "y": 1,
-        "z": 1
+      "transform": {
+        "position": {
+          "x": 100,
+          "y": 100,
+          "z": 0
+        },
+        "rotation": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
       },
 
       "components": [
