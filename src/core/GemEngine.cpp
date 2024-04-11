@@ -94,8 +94,6 @@ void GemEngine::Cleanup()
 
     SceneManager::Instance()->Cleanup();
 
-    RenderManager::Instance()->Cleanup();
-
     FontsManager::Instance()->Cleanup();
     TextureManager::Instance()->Cleanup();
     SoundManager::Instance()->Cleanup();
@@ -106,6 +104,8 @@ void GemEngine::Cleanup()
 
     //  Timer
     SDL_RemoveTimer(processTimer);
+
+    RenderManager::Instance()->Cleanup();
 
     Log::Instance()->Info("GemEngine::Cleanup", "SDL_Quit Completed");
 }
