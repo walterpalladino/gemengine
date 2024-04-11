@@ -8,6 +8,7 @@
 
 #include "math/Point2dInt.h"
 #include "math/Point3dInt.h"
+#include "math/RectInt.h"
 
 using namespace std;
 
@@ -37,6 +38,7 @@ private:
     SDL_Texture *windowTexture = NULL;
 
     Point2dInt windowSize = Point2dInt(1280, 720);
+    RectInt boundaries;
 
     // Virtual Screen Dimensions (pixels)
     Point2dInt virtualWindowSize = Point2dInt(384, 216);
@@ -53,4 +55,5 @@ public:
     void PreRender(float time);
     void PostRender(float time);
     Point2dInt GetWindowSize() { return windowSize; }
+    RectInt GetBoundaries() { return boundaries; }
 };

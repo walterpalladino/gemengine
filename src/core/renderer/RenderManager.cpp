@@ -1,6 +1,5 @@
 
 #include "core/renderer/RenderManager.h"
-#include "core/graphics/WindowManager.h"
 
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
@@ -24,11 +23,11 @@ SDL_Renderer *RenderManager::Init()
 
     if (renderToVirtualWindow)
     {
-        WindowManager::Instance()->boundaries = RectInt(0, 0, virtualWindowSize.x - 1, virtualWindowSize.y - 1);
+        boundaries = RectInt(0, 0, virtualWindowSize.x - 1, virtualWindowSize.y - 1);
     }
     else
     {
-        WindowManager::Instance()->boundaries = RectInt(0, 0, windowSize.x - 1, windowSize.y - 1);
+        boundaries = RectInt(0, 0, windowSize.x - 1, windowSize.y - 1);
     }
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) < 0)

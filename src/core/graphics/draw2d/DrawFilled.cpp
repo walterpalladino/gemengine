@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "core/graphics/draw2d/Draw.h"
-#include "core/graphics/WindowManager.h"
+#include "core/renderer/RenderManager.h"
 
 void Draw::PolygonFilled(SDL_Renderer *renderer, std::vector<Point2dInt> points)
 {
@@ -437,7 +437,7 @@ void Draw::GenerateScanlinesForEdge(Point2dInt p1, Point2dInt p2, std::vector<Po
 
 void Draw::RenderScanlines(SDL_Renderer *renderer, std::vector<Point2dInt> edges)
 {
-    RectInt boundaries = WindowManager::Instance()->boundaries;
+    RectInt boundaries = RenderManager::Instance()->GetBoundaries();
 
     //  Print scanlines verifying run from left to right
     for (int n = 0; n < edges.size() - 1; n += 2)
@@ -452,22 +452,22 @@ void Draw::RenderScanlines(SDL_Renderer *renderer, std::vector<Point2dInt> edges
             xr = edges[n].x;
         }
         //  Clip against the window boundaries
-        if ((y < boundaries.top) || (y > boundaries.bottom))
+        if ((y < boundaries.y) || (y > boundaries.y + boundaries.h))
         {
             continue;
         }
 
-        if ((xr < boundaries.left) || (xl > boundaries.right))
+        if ((xr < boundaries.x) || (xl > boundaries.x + boundaries.w))
         {
             continue;
         }
-        if (xl < boundaries.left)
+        if (xl < boundaries.x)
         {
-            xl = boundaries.left;
+            xl = boundaries.x;
         }
-        if (xr > boundaries.right)
+        if (xr > boundaries.x + boundaries.w)
         {
-            xr = boundaries.right;
+            xr = boundaries.x + boundaries.w;
         }
 
         // Draw the horizontal line from xl to xr at y
