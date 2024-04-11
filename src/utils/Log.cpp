@@ -99,7 +99,7 @@ void Log::Info(const char *moduleName, const char *text, ...)
 	// Compile string to output
 	va_list argList;
 	va_start(argList, text);
-	vsprintf(logData, text, argList);
+	vsnprintf(logData, LOG_MESSAGE_SIZE, text, argList);
 
 	Write(moduleName, logData);
 
@@ -113,7 +113,7 @@ void Log::Error(const char *moduleName, const char *text, ...)
 	// Compile string to output
 	va_list argList;
 	va_start(argList, text);
-	vsprintf(logData, text, argList);
+	vsnprintf(logData, LOG_MESSAGE_SIZE, text, argList);
 
 	Write(moduleName, logData);
 
@@ -130,7 +130,7 @@ void Log::Debug(const char *moduleName, const char *text, ...)
 	// Compile string to output
 	va_list argList;
 	va_start(argList, text);
-	vsprintf(logData, text, argList);
+	vsnprintf(logData, LOG_MESSAGE_SIZE, text, argList);
 
 	Write(moduleName, logData);
 

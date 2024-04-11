@@ -1,5 +1,8 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <format>
+
 #include <nlohmann/json.hpp>
 
 #include "Config.h"
@@ -115,11 +118,10 @@ void Config::Load(const string fileName)
     }
     catch (std::exception &e)
     {
-        char *buffer = new char[512];
-        sprintf(buffer, "Unable to load configuration file: %s.", fileName.c_str());
+        string error_message = format("Unable to load configuration file: {}.", fileName);
 
-        Log::Instance()->Error("Config::Load", buffer);
-        throw ResourceLoadException(buffer);
+        Log::Instance()->Error("Config::Load", error_message.c_str());
+        throw ResourceLoadException(error_message);
     }
     Log::Instance()->Info("Config::Load", "Config loaded");
 }

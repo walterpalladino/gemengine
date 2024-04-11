@@ -22,7 +22,7 @@ public:
 
 public:
     Component() {}
-    ~Component() {}
+    virtual ~Component(){};
 
     virtual ComponentType GetType() = 0;
     virtual void Update(float time){};

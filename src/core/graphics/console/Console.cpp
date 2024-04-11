@@ -238,7 +238,7 @@ void Console::Shift(int direction, bool rollContent = false)
         {
             SetCharacterAt(x, virtualConsoleSize.y - 1, buffer[x]);
         }
-        delete buffer;
+        delete[] buffer;
     }
     else if (direction & CONSOLE_SHIFT_DOWN)
     {
@@ -261,7 +261,7 @@ void Console::Shift(int direction, bool rollContent = false)
         {
             SetCharacterAt(x, 0, buffer[x]);
         }
-        delete buffer;
+        delete[] buffer;
     }
 
     //  LEFT && RIGHT
@@ -286,7 +286,7 @@ void Console::Shift(int direction, bool rollContent = false)
         {
             SetCharacterAt(virtualConsoleSize.x - 1, y, buffer[y]);
         }
-        delete buffer;
+        delete[] buffer;
     }
     else if (direction & CONSOLE_SHIFT_RIGHT)
     {
@@ -309,7 +309,7 @@ void Console::Shift(int direction, bool rollContent = false)
         {
             SetCharacterAt(0, y, buffer[y]);
         }
-        delete buffer;
+        delete[] buffer;
     }
 }
 

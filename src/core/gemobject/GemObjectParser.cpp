@@ -1,3 +1,6 @@
+#include <string>
+#include <format>
+
 #include "core/gemobject/GemObjectParser.h"
 #include "core/physics/collider/ColliderParser.h"
 
@@ -18,6 +21,8 @@
 
 #include "utils/Log.h"
 #include "core/exceptions/JSONParseException.h"
+
+using namespace std;
 
 GemObject *GemObjectParser::JSONParse(json data)
 {
@@ -92,11 +97,9 @@ GemObject *GemObjectParser::JSONParse(json data)
                 else
                 {
                     //  Unknown type
-                    char *buffer = new char[512];
-                    sprintf(buffer, "Unknown component type: %s.", type.c_str());
-
-                    Log::Instance()->Error("GemObjectParser::JSONParse", buffer);
-                    throw JSONParseException(buffer);
+                    string error_message = format("Unknown component type: {}.", type);
+                    Log::Instance()->Error("GemObjectParser::JSONParse", error_message.c_str());
+                    throw JSONParseException(error_message);
                 }
             }
             else
