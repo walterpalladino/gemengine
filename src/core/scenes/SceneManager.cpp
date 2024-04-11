@@ -1,9 +1,14 @@
 
+#include <string>
+#include <format>
+
 #include "core/scenes/SceneManager.h"
 #include "core/scenes/Scene.h"
 #include "utils/Log.h"
 #include "utils/StringUtils.h"
 #include "core/config/Config.h"
+
+using namespace std;
 
 SceneManager *SceneManager::instance = 0;
 
@@ -19,8 +24,8 @@ void SceneManager::LoadScenes(SDL_Renderer *renderer)
 
         //  Create & Load Scene
         Scene *newScene = new Scene();
-        newScene->Load(StringPrintf("%s/%s", resourceFolder.c_str(), scene_name.c_str()).c_str(), renderer);
-        // newScene->name = scene_name;
+        string scene_file_name = format("{}/{}", resourceFolder, scene_name);
+        newScene->Load(scene_file_name, renderer);
 
         //  Add Scene to Scenes list
         scenes.push_back(newScene);
@@ -41,6 +46,7 @@ void SceneManager::Cleanup()
         Log::Instance()->Info("GemEngine::~App", "Deleting scene: %s", scene->name.c_str());
         scene->Cleanup();
         delete scene;
+        scene = NULL;
     }
     scenes.clear();
 }
@@ -49,10 +55,8 @@ Scene *SceneManager::GetScene(const string name)
 {
     for (auto &&scene : scenes)
     {
-        // cout << "Checking scene: " << scene->name << endl;
         if (scene->name == name)
         {
-            // cout << "Found scene: " << name << endl;
             return scene;
         }
     }

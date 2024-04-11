@@ -105,16 +105,16 @@ void Scene::Cleanup()
         Log::Instance()->Info("Scene::Cleanup", "Deleting object: %s", object->name.c_str());
         object->Cleanup();
         delete object;
+        object = nullptr;
     }
     objects.clear();
 }
 
-int Scene::Load(string fileName, SDL_Renderer *renderer)
+int Scene::Load(const string fileName, SDL_Renderer *renderer)
 {
 
     try
     {
-
         json data = json::parse(ifstream(fileName.c_str()));
 
         //  name is required
@@ -136,18 +136,12 @@ int Scene::Load(string fileName, SDL_Renderer *renderer)
             {
                 json scene_object = val;
 
-                GemObject *newObject = new GemObject();
+                GemObject *newObject = nullptr;
                 newObject = GemObjectParser::JSONParse(scene_object);
 
                 Add(newObject);
             }
         }
-        /*
-        else
-        {
-            Log::Instance()->Error("Scene::Load", "Malformed scene file definition. Missing 'objects' tag.");
-            throw JSONParseException("Malformed scene file definition. Missing 'objects' tag.");
-        }*/
     }
     catch (std::exception &e)
     {

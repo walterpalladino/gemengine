@@ -49,6 +49,7 @@ SDL_Renderer *RenderManager::Init()
         Log::Instance()->Error("RenderManager::Init", "Unable to Init hinting: %s", SDL_GetError());
     }
     delete[] scaleQualityValue;
+    scaleQualityValue = NULL;
 
     // SDL_WindowFlags::SDL_WINDOW_RESIZABLE
     //  SDL_WINDOW_OPENGL

@@ -29,7 +29,7 @@ public:
     void Render(SDL_Renderer *renderer, float time);
     void Cleanup();
 
-    int Load(string fileName, SDL_Renderer *renderer);
+    int Load(const string fileName, SDL_Renderer *renderer);
 
     const unordered_map<uint64_t, GemObject *> GetObjects()
     {
