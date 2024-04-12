@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <SDL2_mixer/SDL_mixer.h>
 
 #include "core/gemobject/Component.h"
 
@@ -10,18 +11,14 @@ class Track : public Component
 {
 private:
     string trackName;
+    Mix_Music *track = NULL;
 
 public:
-    ComponentType GetType()
-    {
-        return ComponentType::Track;
-    }
+    Track(string trackName, Mix_Music *track) : trackName(trackName), track(track) {}
+    ComponentType GetType() { return ComponentType::Track; }
 
-    void SetName(string trackName)
-    {
-        this->trackName = trackName;
-    }
     string GetName() { return trackName; }
+    Mix_Music *GetTrack() { return track; }
 
     void Cleanup();
 

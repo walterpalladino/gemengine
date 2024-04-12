@@ -50,22 +50,11 @@ void SoundManager::Cleanup()
     Mix_Quit();
 }
 
-string SoundManager::GetTrackKey(string sampleFileName)
+Mix_Chunk *SoundManager::AddSound(string sampleFileName)
 {
-    return sampleFileName;
-}
-
-string SoundManager::GetSoundKey(string sampleFileName)
-{
-    return sampleFileName;
-}
-
-Mix_Chunk *SoundManager::AddSound(string name, string sampleFileName)
-{
-    string key = GetSoundKey(name);
-    if (sounds.count(key) != 0)
+    if (sounds.count(sampleFileName) != 0)
     {
-        return sounds[key];
+        return sounds[sampleFileName];
     }
     Mix_Chunk *sound = Mix_LoadWAV(sampleFileName.c_str());
     if (sound == NULL)
@@ -74,16 +63,15 @@ Mix_Chunk *SoundManager::AddSound(string name, string sampleFileName)
         Log::Instance()->Error("SoundManager::AddSound", error_message.c_str());
         throw ResourceLoadException(error_message.c_str());
     }
-    sounds[key] = sound;
+    sounds[sampleFileName] = sound;
     return sound;
 }
 
-Mix_Music *SoundManager::AddTrack(string name, string sampleFileName)
+Mix_Music *SoundManager::AddTrack(string sampleFileName)
 {
-    string key = GetTrackKey(name);
-    if (tracks.count(key) != 0)
+    if (tracks.count(sampleFileName) != 0)
     {
-        return tracks[key];
+        return tracks[sampleFileName];
     }
     Mix_Music *track = Mix_LoadMUS(sampleFileName.c_str());
     if (track == NULL)
@@ -92,34 +80,21 @@ Mix_Music *SoundManager::AddTrack(string name, string sampleFileName)
         Log::Instance()->Error("SoundManager::AddTrack", error_message.c_str());
         throw ResourceLoadException(error_message.c_str());
     }
-    tracks[key] = track;
+    tracks[sampleFileName] = track;
     return track;
 }
 
-void SoundManager::PlayTrack(string trackName, int loops)
+void SoundManager::PlayTrack(Mix_Music *track, int loops)
 {
-    string key = GetTrackKey(trackName);
-    if (tracks.count(key) == 0)
+    if (Mix_PlayMusic(track, loops) == -1)
     {
-        Log::Instance()->Error("SoundManager::PlayTrack", "Track [%s] not found", trackName.c_str());
-        return;
-    }
-
-    if (Mix_PlayMusic(tracks[key], loops) == -1)
-    {
-        Log::Instance()->Error("SoundManager::PlayTrack", "Unable to play track: %s. SDL2_mixer Error: %s", trackName.c_str(), SDL_GetError());
+        Log::Instance()->Error("SoundManager::PlayTrack", "Unable to play track. SDL2_mixer Error: %s", SDL_GetError());
     }
 }
 
-int SoundManager::PlaySound(string soundName, int loops)
+int SoundManager::PlaySound(Mix_Chunk *sound, int loops)
 {
-    string key = GetSoundKey(soundName);
-    if (sounds.count(key) == 0)
-    {
-        Log::Instance()->Error("SoundManager::PlaySound", "Sound [%s] not found", soundName.c_str());
-        return -1;
-    }
-    return Mix_PlayChannel(-1, sounds[key], loops);
+    return Mix_PlayChannel(-1, sound, loops);
 }
 
 void SoundManager::StopSound(int channel)
@@ -133,22 +108,6 @@ void SoundManager::StopTrack()
     {
         Mix_HaltMusic();
     }
-}
-
-void SoundManager::JSONParseSound(json data)
-{
-    string name = data["name"];
-    string src = data["src"];
-    string sampleFileName = Config::Instance()->config_data.resource_folder + "/" + src;
-    AddSound(name, sampleFileName);
-}
-
-void SoundManager::JSONParseTrack(json data)
-{
-    string name = data["name"];
-    string src = data["src"];
-    string sampleFileName = Config::Instance()->config_data.resource_folder + "/" + src;
-    AddTrack(name, sampleFileName);
 }
 
 int SoundManager::SetMasterVolume(int volume)

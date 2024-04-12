@@ -26,14 +26,11 @@ public:
     void Init();
     void Cleanup();
 
-    Mix_Music *AddTrack(string name, string sampleFileName);
-    Mix_Chunk *AddSound(string name, string sampleFileName);
+    Mix_Music *AddTrack(string sampleFileName);
+    Mix_Chunk *AddSound(string sampleFileName);
 
-    void JSONParseSound(json data);
-    void JSONParseTrack(json data);
-
-    void PlayTrack(string trackName, int loops = -1);
-    int PlaySound(string soundName, int loops = 0);
+    void PlayTrack(Mix_Music *track, int loops = -1);
+    int PlaySound(Mix_Chunk *sound, int loops = 0);
 
     void StopTrack();
     void StopSound(int channel);
@@ -50,7 +47,4 @@ private:
 
     unordered_map<string, Mix_Music *> tracks;
     unordered_map<string, Mix_Chunk *> sounds;
-
-    string GetTrackKey(string sampleFileName);
-    string GetSoundKey(string sampleFileName);
 };

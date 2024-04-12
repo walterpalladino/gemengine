@@ -5,15 +5,13 @@
 
 Sound *SoundParser::JSONParse(json data)
 {
-    Sound *sound = new Sound();
-
     string name = data["name"];
     string src = data["src"];
     string sampleFileName = Config::Instance()->config_data.resource_folder + "/" + src;
 
-    SoundManager::Instance()->AddSound(name, sampleFileName);
+    Mix_Chunk *chunk = SoundManager::Instance()->AddSound(sampleFileName);
 
-    sound->SetName(name);
+    Sound *sound = new Sound(name, chunk);
 
     return sound;
 }

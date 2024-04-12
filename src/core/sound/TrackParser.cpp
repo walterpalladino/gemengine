@@ -5,15 +5,13 @@
 
 Track *TrackParser::JSONParse(json data)
 {
-    Track *track = new Track();
-
     string name = data["name"];
     string src = data["src"];
     string sampleFileName = Config::Instance()->config_data.resource_folder + "/" + src;
 
-    SoundManager::Instance()->AddTrack(name, sampleFileName);
+    Mix_Music *music = SoundManager::Instance()->AddTrack(sampleFileName);
 
-    track->SetName(name);
+    Track *track = new Track(name, music);
 
     return track;
 }

@@ -3,7 +3,7 @@
 
 void Sound::Play(int loops)
 {
-    channel = SoundManager::Instance()->PlaySound(GetName(), loops);
+    channel = SoundManager::Instance()->PlaySound(sound, loops);
 }
 
 void Sound::Stop()

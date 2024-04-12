@@ -3,7 +3,7 @@
 
 void Track::Play()
 {
-    SoundManager::Instance()->PlayTrack(GetName());
+    SoundManager::Instance()->PlayTrack(track);
 }
 
 void Track::Stop()
